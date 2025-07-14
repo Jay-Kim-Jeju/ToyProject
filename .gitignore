@@ -2,10 +2,11 @@
 # Java & Maven 프로젝트용
 # ========================
 
-# Maven
+# Maven Tomcat 관련
 /target/
 *.war
 *.jar
+*.ear
 
 # IDE: IntelliJ
 .idea/
@@ -27,6 +28,8 @@ Thumbs.db
 out/
 
 # 빌드 도구 관련
+/out/
+target/
 .gradle/
 build/
 
@@ -37,3 +40,10 @@ build/
 # DB 파일, 백업 등
 *.sql
 *.dump
+
+# Java
+*.class
+
+# 설정파일 백업
+*.bak
+*.swp

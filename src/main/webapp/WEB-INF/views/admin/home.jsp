@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>기본</title>
+    <title>관리자 홈</title>
 </head>
 <body>
-<h2>index.jsp 환영합니다.</h2>
+<h2>관리자 사이트에 오신 것을 환영합니다.</h2>
 </body>
 </html>
