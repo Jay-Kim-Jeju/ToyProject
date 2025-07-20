@@ -28,7 +28,7 @@
     <!-- Spring Context 설정 파일 위치 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring/applicationContext.xml</param-value>
+        <param-value>classpath*:egovframework/spring/context-*.xml</param-value>
     </context-param>
 
     <!-- Spring Context 로딩 리스너 -->
