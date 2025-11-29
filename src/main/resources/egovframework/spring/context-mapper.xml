@@ -7,7 +7,6 @@
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:/egovframework/sqlmap/sql-mapper-config.xml" />
         <property name="mapperLocations" value="classpath:/egovframework/sqlmap/mappers/${jdbc.dbType}/**/*.xml" />
-        <!-- <property name="mapperLocations" value="classpath:/egovframework/sqlmap/mappers/ORACLE/**/*.xml" /> -->
         <property name="plugins">
             <list>
                 <bean class="toy.com.interceptor.MybatisInterceptor" />

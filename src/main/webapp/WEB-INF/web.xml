@@ -32,9 +32,9 @@
     </context-param>
 
     <!-- Spring Context 로딩 리스너 -->
-    <!--<listener>
+    <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>-->
+    </listener>
 
     <!-- DispatcherServlet 등록 -->
     <servlet>
