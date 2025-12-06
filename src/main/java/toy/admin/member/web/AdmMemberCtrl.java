@@ -1,30 +1,43 @@
 package toy.admin.member.web;
 
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.annotation.Resource;
-import java.util.List;
-
+import org.springframework.web.servlet.ModelAndView;
 import toy.admin.member.service.AdmMemberService;
 import toy.com.vo.MemberVO;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RequiredArgsConstructor
 @Controller
 public class AdmMemberCtrl {
 
-    @Resource(name = "admMemberService")
-    private AdmMemberService admMemberService;
+    // inject AdmMemberService (member list, detail, etc.)
+    private final AdmMemberService admMemberService;
 
-    @RequestMapping("/index.do")
-    public String index(Model model) throws Exception {
+    private static final Logger LOG_DEBUG = LoggerFactory.getLogger(AdmMemberCtrl.class);
 
-        MemberVO searchVO = new MemberVO();   // 지금은 검색조건 없음
+    @RequestMapping("/toy/admin/member/list.ac")
+    public ModelAndView list(HttpServletRequest request) throws Exception {
+
+        LOG_DEBUG.debug("/toy/admin/member/list.ac");
+
+        MemberVO searchVO = new MemberVO(); // TODO: bind real search condition later
+
         List<MemberVO> memberList = admMemberService.selectMemberList(searchVO);
 
-        model.addAttribute("memberList", memberList);
+        Map<String, Object> resultMap = new HashMap<>();
+        // same attribute name as main page to reuse JSP if needed
+        resultMap.put("memberList", memberList);
 
-        // webapp 루트의 index.jsp로 forward (ViewResolver 안 타고 직접 JSP로 감)
-        return "forward:/index.jsp";
+        // ex) /WEB-INF/jsp/toy/admin/member/memberList.jsp
+        return new ModelAndView("toy/admin/member/memberList", resultMap);
     }
 }

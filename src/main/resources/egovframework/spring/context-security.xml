@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <sec:authentication-manager alias="authenticationManager" />
+
+    <!-- 인증예외처리 -->
+    <sec:http pattern="/comp/**" security="none" />
+    <sec:http pattern="/css/**" security="none" />
+    <sec:http pattern="/htmls/**" security="none" />
+    <sec:http pattern="/images/**" security="none" />
+    <sec:http pattern="/js/**" security="none" />
+    <sec:http pattern="/data/**" security="none" />
+
+    <!--<sec:http pattern="/user/returnIniPay.ac" security="none" />	&lt;!&ndash; 이니시스 결제 Return 처리 &ndash;&gt;
+
+
+    <sec:http pattern="/toyadmin/actionLogin.doax" security="none" /> &lt;!&ndash; 통합관리자 로그인 처리 (개발) &ndash;&gt;
+    <sec:http pattern="/toyuser/actionLogin.doax" security="none" /> &lt;!&ndash; 사용자 로그인 처리 (개발) &ndash;&gt;
+-->
+    <!-- ToyProject: simple main security config -->
+    <sec:http use-expressions="true">
+        <!-- Enable CSRF -->
+        <sec:csrf disabled="false" />
+
+        <!-- For now, allow everything (no login required) -->
+        <sec:intercept-url pattern="/**" access="permitAll" />
+
+        <!-- IMPORTANT: configure login entry point to avoid AuthenticationEntryPoint error -->
+        <sec:form-login />
+        <!-- You can later configure form-login here -->
+        <!-- 
+        <sec:csrf disabled="false" /> -->
+    </sec:http>
+</beans>

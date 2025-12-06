@@ -1,0 +1,1611 @@
+/* ---------------------------------------------- Not Content ---------------------------------------------- */
+/* 콘텐츠 없을 시 */
+.not-content {
+	border: solid #dbdfee; border-width: 1px 0;
+    padding: 90px 0;
+    text-align: center;
+}
+
+table tr td .not-content {border-width: 0; min-height: 400px;}
+.not-content .icon {display: block; margin-bottom: 10px;}
+.not-content .icon::after {
+    content: url("/images/admin/other/no_item3.png");
+    display: inline-block;
+}
+.not-content .text {font-size: 20px; color: #626984;}
+
+/* 콘텐츠 로딩바 - 개발자 김보검 */
+table tr td .loding-content {border-width: 0; min-height: 400px; padding: 100px 0;}
+.loding-content .icon {display: block; margin-bottom: 10px;}
+.loding-content .icon::after {
+    content: url("/images/admin/other/loding_bar.gif");
+    display: inline-block;
+}
+
+/* Not Message */
+.not-msg {
+    padding-left: 20px;
+    font-size: 0.812rem; line-height: 1.25rem; color: red;
+    position: relative;
+    word-break: keep-all;
+}
+.not-msg:not(:first-child) {margin-top: 6px;}
+.not-msg::before {
+    font-family: 'Material Icons';
+    content: "info";
+    display: inline-block; vertical-align: middle;
+    position: absolute; left: 0; top: 0;
+    font-size: 15px;
+}
+
+
+
+/* Message */
+.msg-wrap {padding: 90px 0; text-align: center;}
+.msg-wrap .msg {position: relative; padding-left: 195px;}
+.msg-wrap .msg::before {
+    font-family: 'Material Icons';
+    content: url("/images/admin/icon/basic/message.png");
+    display: inline-block; vertical-align: middle;
+    position: absolute; left: 0; top: -10px;
+    font-size: 15px;
+}
+.msg-wrap .msg {display: inline-block; text-align: left;}
+.msg-wrap .msg h2 {font-size: 1.5rem; font-weight: 500; margin-bottom: 15px;}
+.msg-wrap .msg .msg-text {font-size: 1.125rem; color: #626984;}
+.msg-wrap .btn-center {margin-top: 50px;}
+.msg-wrap .btn-center .btn {min-width: 100px !important; line-height: 45px !important;}
+
+
+
+/* Loading Bar */
+.loading-bar {
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 101;
+    width: 100%; height: 100vh;
+    background: rgba(40,40,40,0.80);
+	line-height: 100vh;
+	text-align: center; margin: 0 auto;;
+}
+/* ---------------------------------------------- //Not Content ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 에러페이지(Error Page) ---------------------------------------------- */
+/* Error Page (404 error) */
+.error-wrap {min-width: 280px; max-width: 500px; margin: auto; padding: 15vh 20px; text-align: center;}
+.error-wrap img.icon {display: inline-block;}
+.error-wrap .error-msg {font-size: 24px; font-size: 1.5rem; font-weight: 700; color: #161c2f; margin-top: 30px;}
+.error-wrap .error-text {font-size: 18px; font-size: 1.125rem; font-weight: 500; color: #626984; border-top: 1px solid #dbdfee; margin-top: 15px; padding-top: 15px;}
+.error-wrap .button {margin-top: 50px;}
+.error-wrap .button a {display: inline-block; background: #161c2f; border-radius: 3px; color: #fff; font-size: 16px; line-height: 45px; padding: 0 15px; font-weight: 500;}
+.error-wrap .button a:hover {background: #3f3f3f; text-decoration: none;}
+/* ---------------------------------------------- //에러페이지(Error Page) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 컬러(color) ---------------------------------------------- */
+/* 폰트 */
+.point-color {color: #da2a2a !important;}
+
+.text-black {color: #161c2f !important;}
+.text-gray {color: #9298d1 !important;}
+.text-red {color: #da2a2a !important;}
+.text-pink {color: #e5555e !important;}
+.text-purple {color: #eb05dd !important;}
+.text-purple2 {color: #b200d1 !important;}
+.text-blue {color: #00b4fc !important;}
+.text-green {color: #038e1d !important;}
+.text-yellow {color: #f4db09 !important;}
+.text-orange {color: #ff4e00 !important;}
+
+
+/* hr Line */
+hr.black {border-color: #161c2f;}
+
+
+
+/* Background */
+.bg-white {background-color: #fff;}
+.bg-gray {background-color: gray;}
+.bg-red {background-color: red;}
+.bg-blue {background-color: blue;}
+.bg-green {background-color: green;}
+
+
+
+/* Border */
+.border-red {border: 1px solid #fa394b;}
+
+.focus-line {border: 1px dashed #fa394b; padding: 3px !important;}
+/* ---------------------------------------------- //컬러(color) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 리스트 스타일 ---------------------------------------------- */
+/* Common */
+ul.bullet li,
+ul.hyphen li,
+ul.decimal li,
+ol.decimal li {
+    font-size: 13px;
+    line-height: 20px;
+    margin-top: 3px;
+    position: relative;
+    word-break: keep-all;
+}
+ul.bullet li:first-child,
+ul.hyphen li:first-child,
+ul.decimal li:first-child,
+ol.decimal li:first-child {
+    margin-top: 0;
+}
+
+ul.bullet.size13 li,
+ul.hyphen.size13 li,
+ul.decimal.size13 li,
+ol.decimal.size13 li {
+    font-size: 0.812rem;
+    line-height: 1.25rem;
+}
+
+ul.bullet.size14 li,
+ul.hyphen.size14 li,
+ul.decimal.size14 li,
+ol.decimal.size14 li {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+}
+
+ul.bullet.size15 li,
+ul.hyphen.size15 li,
+ul.decimal.size15 li,
+ol.decimal.size15 li {
+    font-size: 0.937rem;
+    line-height: 1.625rem;
+}
+
+
+
+/* Bullet */
+ul.bullet > li {padding-left: 12px;}
+ul.bullet > li::before {
+    content: "";
+    display: inline-block;
+    position: absolute; left: 0; top: 9px;
+    width: 3px; height: 3px;
+    background: #333;
+    border-radius: 50%;
+}
+ul.bullet .depth2 {margin: 5px 0 10px; padding-left: 0 !important;}
+ul.bullet .depth2 li {padding-left: 15px;}
+ul.bullet .depth2 li::before {
+    content: "-";
+    position: absolute; top: 0; left: 0;
+}
+
+ul.bullet.size13 > li::before {top: 8px;}
+
+p.bullet {position: relative; padding-left: 12px;}
+p.bullet::before {
+    content: "";
+    display: inline-block;
+    position: absolute; left: 0; top: 8px;
+    width: 3px; height: 3px;
+    background: #333;
+    border-radius: 50%;
+}
+
+
+
+/* Hyphen */
+ul.hyphen > li {padding-left: 15px;}
+ul.hyphen > li::before {
+    content: "-";
+    position: absolute; top: 0; left: 0;
+}
+
+
+
+/* Decimal */
+ul.decimal,
+ol.decimal {
+    padding-left: 18px;
+}
+ul.decimal > li,
+ol.decimal > li {
+    list-style-type: decimal;
+}
+
+
+
+/* Check List */
+.check li {
+    font-size: 15px; line-height: 26px;
+    background: url("/images/list/check.png") no-repeat left 6px;
+    padding-left: 28px;
+    position: relative;
+    margin-top: 5px;
+}
+.check li:first-child,
+.check.line2 li:first-child {margin-top: 0;}
+
+.check.line2 li {margin-top: 10px;}
+
+
+
+/* Warning */
+ul.warning li {
+    padding-left: 20px;
+    font-size: 15px; line-height: 22px;
+    color: #797474;
+    position: relative;
+    margin-top: 6px;
+}
+ul.warning li:first-child {margin-top: 0;}
+ul.warning li::before {
+    content: url("/images/list/warning.png");
+    display: inline-block;
+    position: absolute; left: 0; top: 1px;
+}
+ul.warning.lineB {
+    border-bottom: 1px solid #e7e8e9;
+    padding: 0 20px 20px;
+    margin-bottom: 40px;
+}
+ul.warning.lineB.pd-5 {padding: 0 5px 20px;}
+
+ul.warning.sm,
+ul.bullet.sm {padding: 0 10px;}
+ul.warning.sm li,
+ul.bullet.sm li {font-size: 13px; margin-top: 5px;}
+ul.warning.sm li::before {top: 2px;}
+
+ul.warning.top,
+ul.bullet.top {
+    margin: 0 0 10px;
+}
+ul.warning.bottom,
+ul.bullet.bottom {
+    margin: 10px 0 0;
+}
+/* ---------------------------------------------- //리스트 스타일 ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 페이징(paging) ---------------------------------------------- */
+.paging-group {position: relative; min-height: 40px; margin-top: 20px;}
+.paging-group .paging-wrap {margin: 0;}
+
+/* 기본옵션 */
+.paging-wrap,
+.jsgrid-pager-container {
+	text-align: center;
+	margin: 20px 0 0;
+}
+.paging-wrap ul,
+.jsgrid-pager-container .jsgrid-pager {
+	display: inline-block;
+}
+.paging-wrap ul li,
+.jsgrid-pager-container .jsgrid-pager span {
+    float: left; margin: 2px; margin-left: 2px;
+    font-size: 13px;
+    color: #161c2f;;
+    background: #fff;
+    border: 1px solid #9298b1;
+    border-radius: 3px;
+    padding: 0;
+}
+.paging-wrap ul li,
+.paging-wrap ul li a,
+.jsgrid-pager-container .jsgrid-pager span,
+.jsgrid-pager-container .jsgrid-pager span a {
+	text-align: center;
+    min-width: 30px;
+    height: 30px;
+    line-height: 28px;
+    transition: all .3s ease-out;
+}
+
+.paging-wrap ul li:first-child,
+.jsgrid-pager-container .jsgrid-pager span:first-child {
+	margin-left: 0;
+}
+
+.paging-wrap ul li.active,
+.jsgrid-pager-container .jsgrid-pager span.jsgrid-pager-current-page {
+	font-weight: bold;
+	background: #00b4fc;
+	border-color: #00b4fc;
+	color: #fff;
+}
+.paging-wrap ul li:not(.active):hover {
+    font-weight: bold;
+}
+.paging-wrap ul li a,
+.jsgrid-pager-container .jsgrid-pager span a {
+	position: relative; top: -1px;
+	display: table-cell;
+	vertical-align: middle;
+	color: #30364d;
+	text-decoration: none;
+}
+.paging-wrap ul li a:hover,
+.jsgrid-pager-container .jsgrid-pager span a:hover {
+	color: #161c2f;;
+}
+
+.paging-wrap ul li.first,
+.paging-wrap ul li.prev,
+.paging-wrap ul li.next,
+.paging-wrap ul li.last,
+.jsgrid-pager-container .jsgrid-pager span.jsgrid-pager-nav-button {
+	line-height: normal;
+	background-color: #161c2f;;
+	border-color: #161c2f;
+}
+.paging-wrap ul li.first a::after,
+.paging-wrap ul li.prev a::after,
+.paging-wrap ul li.next a::after,
+.paging-wrap ul li.last a::after {
+    display: inline-block;
+}
+
+.paging-wrap ul li.first a::after {content: url("/images/admin/paging/first.png");}
+.paging-wrap ul li.prev a::after {content: url("/images/admin/paging/prev.png");}
+.paging-wrap ul li.next a::after {content: url("/images/admin/paging/next.png");}
+.paging-wrap ul li.last a::after {content: url("/images/admin/paging/last.png");}
+
+.paging-wrap ul li a img {display: inline-block; position: relative; top: -1px;}
+/* ---------------------------------------------- //페이징(paging) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 테이블(table) ---------------------------------------------- */
+/* Table 컨텐츠 박스 */
+.table-content-wrapper {border: solid 1px #dbdfee; background: #fff; border-radius: 10px; padding: 40px 40px 25px;}
+
+/* Table > Basic */
+table.tr-pointer tbody tr,
+table tr.link {
+    cursor: pointer;
+}
+table th.left,
+table td.left {
+    text-align: left !important;
+    padding-left: 25px !important;
+}
+table th.center,
+table td.center {text-align: center !important;}
+table th.right,
+table td.right {text-align: right !important;}
+
+table caption.left {text-align: left;}
+table caption.center {text-align: center;}
+table caption.right {text-align: right;}
+
+table .bd-left-none {border-left: none !important;}
+table .bd-right-none {border-right: none !important;}
+
+table.basic {
+    width: 100%; border-spacing: 0px; border-collapse: collapse; table-layout: fixed;
+    background: #fff;
+}
+table.basic th,
+table.basic td {
+    font-size: 0.875rem; line-height: 1.375rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+table.basic.size13 th,
+table.basic.size13 td {
+    font-size: 0.812rem; line-height: 1.25rem;
+}
+
+
+
+/* Table > Caption */
+table caption {width: 0px; height: 0px; font-size: 0; line-height: 0; overflow: hidden; text-indent: -9999px;}
+
+
+
+/* Table > slash(사선) */
+table .backslash {
+    background-image: url("/images/adm/table/backslash.png");
+    background-size: 100% 100%;
+    text-align: left !important;
+    padding: 5px 10px !important;
+    line-height: 20px;
+}
+table .slash div,
+table .backslash div {text-align: right; font-weight: 700; color: #2b1c1c;}
+
+
+
+/* 테이블 옵션 (col) */
+table.col {
+    width: 100%; border-spacing: 0px; border-collapse: collapse; table-layout: fixed;
+    background: #fff;
+    border-top: 1px solid #000;
+}
+table.col > thead > tr > th,
+table.col > tbody > tr > th,
+table.col > tbody > tr > td,
+table.col > tfoot > tr > th,
+table.col > tfoot > tr > td {
+    height: 40px;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 3px 2px;
+    text-align: center;
+    word-break: break-all;
+}
+table.col > thead > tr > th {
+    font-weight: 500; text-align: center;
+    color: #fff;
+    background-color: #30364d;
+    border: solid #161c2f; border-width: 1px 0 0 1px;
+}
+table.col > thead > tr > th small {font-weight: normal;}
+table.col > tbody > tr > th {background-color: #f3f3f3;}
+table.col > tbody > tr > th,
+table.col > tbody > tr > td,
+table.col > tfoot > tr > th,
+table.col > tfoot > tr > td {
+	color: #626984;
+    min-height: 25px;
+	border-bottom: 1px solid #dbdfee;
+}
+table.col > tbody > tr > th:not(:first-child),
+table.col > tbody > tr > td:not(:first-child),
+table.col > tfoot > tr > th:not(:first-child),
+table.col > tfoot > tr > td:not(:first-child) {
+	border-left: 1px solid #dbdfee;
+}
+table.col > tbody > tr > th:not(:last-child),
+table.col > tbody > tr > td:not(:last-child),
+table.col > tfoot > tr > th:not(:last-child),
+table.col > tfoot > tr > td:not(:last-child) {
+	border-right: 1px solid #dbdfee;
+}
+table.col > tbody > tr:nth-child(even) > th,
+table.col > tbody > tr:nth-child(even) > td {
+	background-color: #f6f7fb;
+}
+table.col > tbody > tr > td a {color: #161c2f;}
+table.col > tbody > tr > td a.title,
+table.col > tbody > tr > td button.title {
+    display: block;
+    width: 100%;
+    text-align: left;
+    text-decoration: underline;
+    color: #00b4fc;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+table.col > tbody > tr > td button.title {
+    background: none;
+    border: none;
+}
+table.col > tbody > tr > td a.center {text-align: center;}
+table.col > tbody > tr > td a.btn-right {text-align: right;}
+table.col > tbody > tr > td.price,
+table.col > tbody > tr > td.priceR {text-align: right !important; padding-right: 80px;}
+table.col > tbody > tr > td.priceL {text-align: left !important; padding-left: 75px;}
+
+table.col > tfoot > tr > th,
+table.col > tfoot > tr > td {background-color: #f7f7f7;}
+
+table.col.left > tbody > tr > td {text-align: left;}
+table.col.center > tbody > tr > td {text-align: center;}
+table.col.right > tbody > tr > td {text-align: right;}
+
+table.col.sm > thead > tr > th {height: 30px;}
+table.col.sm > thead > tr > th,
+table.col.sm > tbody > tr > th,
+table.col.sm > tbody > tr > td {
+    font-size: 12px;
+    line-height: 16px;
+    padding: 3px 2px;
+}
+
+table.col.sm-pd > tbody > tr > th,
+table.col.sm-pd > tbody > tr > td {
+    padding: 5px;
+}
+table.col.sm-pd td input[type="text"],
+table.col.sm-pd td input[type="password"],
+table.col.sm-pd td input[type="number"] {
+    height: 32px;
+}
+
+table.col.py5 > tbody > tr > td {padding-top: 5px; padding-bottom: 5px;}
+
+table.col.scroll {border-collapse: collapse; margin: 0 auto; overflow:hidden; border:1px solid #ccc;}
+table.col.scroll thead {float: left; width: 1080px; border-bottom: 1px solid #ccc;}
+table.col.scroll thead tr {display: table; width: 1080px;}
+table.col.scroll tbody {float: left; width: 1080px; height: 100px; overflow-y:auto; overflow-x:hidden;}
+table.col.scroll tbody tr {display: table; width: 1080px; border-bottom: 1px solid #ccc;}
+table.col.scroll tbody tr:last-child {border-bottom:none;}
+table.col.scroll tbody td {text-align:center;}
+
+table.col tr th,
+table.col tr td {
+    transition: background-color .3s ease;
+}
+table.col thead + tbody tr:hover th,
+table.col thead + tbody tr:hover td {
+    background-color: rgba(22,28,47,0.10);
+}
+
+
+
+/* 테이블 옵션 (row) */
+table.row {
+    width: 100%; border-spacing: 0px; border-collapse: collapse; table-layout: fixed;
+    margin: 0;
+    word-break: break-all;
+    border-top: 1px solid #bac0d6;
+	border-bottom: 1px solid #bac0d6;
+}
+table.row > thead > tr > th,
+table.row > tbody > tr > th,
+table.row > tbody > tr > td {
+    height: 50px;
+    font-size: 14px;
+    line-height: 18px;
+}
+table.row > thead > tr > th,
+table.row > tbody > tr > th {
+    text-align: left;
+    color: #fff;
+    font-weight: 500;
+    background: #30364d;
+    border-bottom: 1px solid #b9bac0;
+    padding: 8px 10px 8px 30px;
+}
+table.row > thead > tr > th + th {border-left: 1px solid #b9bac0;}
+table.row > thead + tbody > tr > th {background-color: #f3f3f3; color: #626984;}
+table.row > tbody > tr > td {
+    text-align: left;
+    /* color: #787676; */
+	background: #fff;
+    padding: 8px 20px;
+    border-bottom: 1px solid #e7e8ea;
+}
+table.row > tbody > tr > td + td,
+table.row > tfoot > tr > td + td {border-left: 1px solid #e7e8ea;}
+/* table.row > tbody > tr > td:nth-child(3n + 1 ) {background-color: #f6f7fb;} */
+table.row > tbody > tr > th.not-line,
+table.row > tbody > tr > td.not-line {border: none;}
+table.row > tbody > tr > th.top {vertical-align: top;}
+table.row > tbody > tr.align-top > th,
+table.row > tbody > tr.align-top > td {
+    vertical-align: top;
+}
+table.row > tbody > tr.align-top > th {padding-top: 18px;}
+
+table.row.left th,
+table.row.left td {text-align: left;}
+table.row.left th {padding: 3px 15px;}
+table.row.center th,
+table.row.center td {text-align: center;}
+table.row th.center {text-align: center; padding: 3px 5px;}
+
+table.row.h-auto > tbody > tr > td {height: auto; padding: 3px 15px;}
+
+
+
+/* jsGrid 테이블 옵션 */
+table.jsgrid-table .jsgrid-header-row > th {
+    font-weight: 500; text-align: center;
+    color: #fff;
+    background-color: #30364d;
+    border: solid #161c2f; border-width: 1px 0 0 1px;
+}
+table.jsgrid-table tbody > tr > td {
+	color: #626984;
+    min-height: 25px;
+	border-bottom: 1px solid #dbdfee;
+	word-break: break-all;
+}
+table.jsgrid-table tbody > tr:nth-child(even) > th,
+table.jsgrid-table tbody > tr:nth-child(even) > td,
+table.jsgrid-table .jsgrid-filter-row > td {
+	background-color: #f6f7fb;
+}
+
+
+
+/* 필수표시 제목 */
+table.row th .tit.required {position: relative;}
+table.row th .tit.required::before {
+    content: url(/images/admin/icon/basic/asterisk-red.png);
+    font-size: 16px; color: #da2a2a;
+    display: inline-block;
+    vertical-align: top;
+	margin-right: 4px;
+	position: absolute; top: -3px; left: -12px;
+}
+/* ---------------------------------------------- //테이블(table) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 버튼(button) ---------------------------------------------- */
+.btn,
+.label {
+	display: inline-block; vertical-align: middle; cursor: pointer;
+    text-align: center;
+    font-size: 14px; line-height: 35px;
+    font-weight: 500;
+    background-color: #161c2f;;
+	color: #fff !important;
+	border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    padding: 0px 7px;
+    margin: 2px 4px;
+    white-space: nowrap;
+    position: relative;
+    transition: all .3s ease-out;
+}
+span.btn,
+.label {cursor: auto;}
+
+.btn:hover:not(:disabled, span.btn) {background-color: #626984; color: #fff; text-decoration: none;}
+.btn:active {background-color: #626984;}
+.btn img,
+.label img {position: relative; top: -1px; vertical-align: middle; margin-right: 3px;}
+.btn.material-icons-outlined,
+.btn i.material-icons-outlined,
+.label.material-icons-outlined,
+.label i.material-icons-outlined {font-size: 20px; position: relative; top: -2px;}
+
+
+/* Button Color */
+.btn.point {background-color: #00b4fc; color: #fff;}
+.btn.point:hover:not(:disabled, span.btn) {background-color: #00a3e3;}
+.btn.point:active {background-color: #00a3e3;}
+
+.btn.white,
+.label.white {background-color: #fff; border: solid 1px #9298b1; color: #161c2f !important;}
+.btn.white:hover:not(:disabled, span.btn),
+.btn.white.active,
+.btn[data-type="on"] {background-color: #9298b1; border-color: #9298b1; color: #fff !important;}
+
+.btn.gray,
+.label.gray {background-color: #9298b1; color: #fff;}
+.btn.gray:hover:not(:disabled, span.btn) {background-color: #bac0d6;}
+.btn.gray:active {background-color: #bac0d6;}
+
+.btn.light-gray,
+.label.light-gray {background-color: #8f8e8e; color: #fff;}
+.btn.light-gray:hover:not(:disabled, span.btn) {background-color: #797979;}
+.btn.light-gray:active {background-color: #646464;}
+
+.btn.dark-gray,
+.label.dark-gray {background-color: #61605f; color: #fff;}
+.btn.dark-gray:hover:not(:disabled, span.btn) {background-color: #464646;}
+.btn.dark-gray:active {background-color: #313131;}
+
+.btn.black,
+.label.black {background-color: #161c2f;; color: #fff !important;}
+.btn.black:hover:not(:disabled, span.btn) {background-color: #30364d;}
+.btn.black:active {background-color: #30364d;}
+
+.btn.blue,
+.label.blue {background-color: #00b4fc; color: #fff;}
+.btn.blue:hover:not(:disabled, span.btn) {background-color: #00a3e3;}
+.btn.blue:active {background-color: #00a3e3;}
+
+.btn.blueGreen,
+.label.blueGreen {background-color: #1fadd0; color: #fff;}
+.btn.blueGreen:hover:not(:disabled, span.btn) {background-color: #1d9cbb;}
+.btn.blueGreen:active {background-color: #1986a1;}
+
+.btn.red,
+.label.red {background-color: #da2a2a; color: #fff;}
+.btn.red:hover:not(:disabled, span.btn) {background-color: #b30000;}
+.btn.red:active {background-color: #b30000;}
+
+.btn.green,
+.label.green {background-color: #16a027; color: #fff;}
+.btn.green:hover:not(:disabled, span.btn) {background-color: #117d1e;}
+.btn.green:active {background-color: #116f1c;}
+
+.btn.pink,
+.label.pink {background-color: #e76f6f; color: #fff;}
+.btn.pink:hover:not(:disabled, span.btn) {background-color: #d56767;}
+.btn.pink:active {background-color: #bf5c5c;}
+
+.btn.purple,
+.label.purple {background-color: #b200d1; color: #fff;}
+.btn.purple:hover:not(:disabled, span.btn) {background-color: #a200be;}
+.btn.purple:active {background-color: #8d00a6;}
+
+.btn.orange,
+.label.orange {background-color: #ff4e00; color: #fff;}
+.btn.orange:hover:not(:disabled, span.btn) {background-color: #ff7b41;}
+.btn.orange:active {background-color: #ff7b41;}
+
+.btn.transparent {background-color: transparent; border: none;}
+
+
+
+/* 버튼 크기 */
+.btn.vsm,
+.label.vsm {font-size: 14px; padding: 0 7px;}
+.btn.xs,
+.label.xs {font-size: 13px !important; line-height: 25px !important; min-width: 0px !important; height: auto !important; padding: 0 7px !important;}
+.btn.xs.material-icons,
+.btn.xs .material-icons,
+.btn.xs.material-icons-outlined,
+.btn.xs .material-icons-outlined,
+.label.xs.material-icons,
+.label.xs .material-icons,
+.label.xs.material-icons-outlined,
+.label.xs .material-icons-outlined {font-size: 17px; line-height: 22px; margin-right: -2px;}
+.btn.sm,
+.label.sm {font-size: 14px !important; line-height: 30px !important;  min-width: 0px !important; height: auto !important; padding: 0 10px !important;}
+.btn.sm.material-icons,
+.btn.sm .material-icons,
+.btn.sm.material-icons-outlined,
+.btn.sm .material-icons-outlined,
+.label.sm.material-icons,
+.label.sm .material-icons,
+.label.sm.material-icons-outlined,
+.label.sm .material-icons-outlined {font-size: 17px; line-height: 27px; margin-right: -2px; top: -1px}
+.button-align .btn.sm {padding: 0 5px;}
+.btn.lg,
+.label.lg {font-size: 16px !important; line-height: 45px !important; padding: 0 15px !important; min-width: 100px !important;}
+
+
+/* 비활성화 */
+button:disabled,
+.btn.disabled {
+    opacity: .3; cursor: not-allowed;
+}
+
+
+/* Btn Area */
+.btn-wrap.left,
+.btn-left {text-align: left; margin: 20px 0 20px; min-height: 40px;}
+.btn-wrap.center,
+.btn-center {text-align: center; margin: 20px 0 20px;}
+.btn-wrap.right,
+.btn-right {text-align: right; margin: 20px 0 20px;}
+.paging-group .btn-right {position: absolute; top: 0; right: 0; margin: 0;}
+
+.btn-left .btn,
+.btn-center .btn,
+.btn-right .btn,
+.btn-wrap .btn {
+    font-size: 14px; line-height: 35px;
+    min-width: 80px;
+    padding: 0 10px;
+}
+
+
+.btn-right.center {text-align: center;}
+.btn-right.top {margin: 10px 0 10px;}
+
+.btn-center.st1 {text-align: center; margin: 30px 0;}
+.btn-center.st1 .btn {font-size: 14px; font-weight: 500; line-height: 35px; min-width: 80px;}
+.btn-center.st1 .btn:not(:first-child) {margin-left: 15px;}
+
+
+/* 사용자 점검상태 모달에 따른 추가 */
+.btn-areaC1 {text-align: center; margin-top: 60px; margin-bottom: 40px;}
+.btn-areaC1 .btn {font-size: 18px; line-height: 58px; min-width: 260px;}
+.btn-areaC1 .btn.next::after {
+    font-size: 14px; font-weight: bold; line-height: 16px; top: -1px;
+    position: relative; left: 30px;
+    margin: 0;
+}
+
+
+
+/* Button Style */
+.remove-btn,
+.remove-btn-all button {
+    display: inline-block; vertical-align: middle;
+    text-align: center;
+    font-size: 12px; line-height: 28px;
+    font-weight: normal;
+    background-color: #f4f4f4; color: #323232;
+    border: 1px solid #e1e3e4;
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin-right: 5px;
+    white-space: nowrap;
+    position: relative;
+    cursor: pointer;
+}
+.remove-btn::after,
+.remove-btn-all button::after {
+    font-family: 'Material Icons';
+    content: "close";
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -2px;
+    position: relative; top: -1px;
+}
+
+.remove-btn-all button {margin: 8px 0 2px;}
+/* ---------------------------------------------- //버튼(button) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 폼(form) ---------------------------------------------- */
+/* Input Placeholder All */
+::-webkit-input-placeholder {color: #b9b9b9 !important;}
+::-moz-placeholder {color: #b9b9b9 !important;} /* Firefox 19+ */
+:-ms-input-placeholder {color: #b9b9b9 !important;} /* IE */
+:-moz-placeholder {color: #b9b9b9 !important;} /* Firefox 18- */
+
+input:focus,
+textarea:focus,
+select:focus {border: 1px solid #0e77df !important;}
+
+input.on,
+select.on {border-color: #0e77df !important;}
+
+select.transparent {background-color: transparent; border: none; color: #fff;}
+select.transparent option {color: #626984;}
+
+
+
+/* Default (Reset) */
+input[type="text"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="email"],
+input[type="search"],
+select,
+.text-box,
+.text-box-not {
+    height: 35px; vertical-align: middle; min-width: 100px; margin: 2px 0;
+    font-size: 14px; color: #626984;
+    border: 1px solid #c9cbd2 !important;
+    border-radius: 5px;
+    padding: 0 10px; overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: none;
+    transition: border .5s ease-out;
+}
+.text-box {
+    width: 100%;
+    line-height: 40px;
+    background-color: #fff;
+    border-color: #dadada;
+}
+.text-box-not {
+    width: 100%;
+    line-height: 30px;
+    background-color: #fff;
+    border-color: #dadada;
+    cursor: not-allowed;
+}
+.text-box.not-msg {text-align: center;}
+.text-box.not-msg::before {position: relative; top: -2px;}
+
+.remove-input-min-width input[type="text"],
+.remove-input-min-width input[type="password"],
+.remove-input-min-width input[type="tel"],
+.remove-input-min-width input[type="number"],
+.remove-input-min-width input[type="email"],
+.remove-input-min-width input[type="search"] {
+	min-width: 0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="email"],
+input[type="search"],
+textarea {-webkit-appearance: none; /* iPhone 그림자 제거 */}
+
+input[type="file"] {
+    height: auto; font-size: 13px; vertical-align: middle;
+    margin: 2px 0; padding: 5px;
+    border: 1px solid #e1e3e4;
+    background: #f2f2f2;
+    border-radius: 5px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+input.sm {font-size: 12px; height: 30px;}
+
+select {padding-right: 30px !important;}
+select + select {margin-left: 10px;}
+select:first-child {margin-left: 0;}
+select.year,
+select.people {min-width: 100px;}
+select.month {min-width: 85px;}
+select.area {min-width: 105px;}
+select.mini {min-width: 85px;}
+select.sm {font-size: 12px; height: 32px;}
+
+textarea {
+    font-size: 14px;
+    line-height: 24px;
+    color: #161c2f;
+    border: 1px solid #c9cbd2 !important;
+    background: #fff;
+    border-radius: 5px;
+    padding: 12px;
+    transition: border .5s ease-out;
+}
+
+
+
+/* 기본 예제 */
+.form-group {position: relative;}
+.form-group .tit,
+.form-tit {
+    display: block;
+    font-size: 16px; color: #161c2f;
+    font-weight: 500;
+    margin: 0 5px 5px 0;
+}
+.form-group .tit small,
+.form-tit small {
+    font-size: 11px;
+    font-weight: normal;
+    color: #aaa;
+}
+.form-group .unit {
+    display: inline-block; vertical-align: middle;
+    font-size: 13px; line-height: 18px;
+}
+.form-group .unit.right {position: absolute; right: 10px; top: auto; bottom: 15px;}
+.form-group .inline {display: inline-block; position: relative;}
+.form-group .lb-ch {top: 1px;}
+
+input + small.unit {
+    position: relative; top: 4px;
+    font-size: 11px;
+}
+
+
+
+/* Inline Form */
+.form-inline .form-group {display: inline-block;}
+.form-inline .form-group:not(:last-child) {margin-right: 20px;}
+
+
+/* Inline Form2 */
+.form-inline2 .form-group {display: inline-block; vertical-align: top;}
+.form-inline2 .form-group:not(:last-child) {margin-right: 20px;}
+.form-inline2 .form-group + .btn {margin-left: -15px;}
+.form-inline2 .form-group .tit {display: inline-block; color: #161c2f;}
+.form-inline2 .form-group .tit.disabled {color: #bac0d6;}
+
+
+/* Inline Form3 */
+.form-inline3 .form-group {display: block;}
+.form-inline3 .form-group:not(:last-child) {margin-bottom: 10px;}
+.form-inline3 .form-group .tit,
+.form-inline3 .form-group .text-box,
+.form-inline3 .form-group .text-box-not {display: inline-block;}
+
+
+
+/* Direct Inline Form (span) */
+.inline-form:not(:last-child) {margin-right: 10px;}
+.inline-form,
+.inline-form > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+.inline-form .tit {font-size: 14px; margin-right: 8px;}
+.inline-form .tit.disabled {color: #bac0d6;}
+
+.inline-tit {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px; line-height: 18px; color: #161c2f;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+
+
+/* 체크박스, 라디오 Default */
+label.basic,
+label.basic > *,
+.lb-basic,
+.lb-basic > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+label.basic,
+.lb-basic {
+    line-height: 14px;
+    margin-right: 10px;
+}
+label.basic:last-child,
+.lb-basic:last-child {
+    margin-right: 0;
+}
+label.basic input,
+label.basic .txt,
+.lb-basic label {
+    cursor: pointer;
+}
+label.basic .txt,
+.lb-basic label {
+    font-size: 13px;
+    line-height: 18px;
+}
+
+label.st1 {cursor: pointer;}
+label.st1:not(:last-child) {margin-right: 10px;}
+label.st1 * {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+}
+label.st1 .txt {font-size: 14px; line-height: 21px; cursor: pointer;}
+
+
+
+/* Label Input Checkbox, Radio Design */
+.label-block .lb-ch {display: block; margin-top: 10px;}
+.label-block .lb-ch:first-child {margin-top: 0;}
+
+.lb-ch {
+    display: inline-block; vertical-align: middle;
+    margin: 8px 0; margin-right: 25px;
+    position: relative; top: 2px;
+}
+.lb-ch:last-child {margin-right: 0;}
+.lb-ch label {display: inline-block; vertical-align: middle; cursor: pointer;}
+.lb-ch input[type="checkbox"],
+.lb-ch input[type="radio"] {
+	width: 0; height: 0; line-height: 0;
+    visibility: hidden;
+    position: absolute;
+}
+.lb-ch .text {font-size: 14px;}
+.lb-ch .text::before {
+    font-family: 'Material Icons';
+    content: "";
+    display: inline-block; vertical-align: middle;
+    width: 18px; height: 18px; line-height: 18px;
+    /*background-color: #fff;
+    border: 1px solid #bac0d6;
+    border-radius: 50%;*/
+    margin: 0 8px 0 0;
+    cursor: pointer;
+    position: relative;
+    top: -2px;
+    font-size: 16px; font-weight: 700; color: #bac0d6; text-align: center;
+}
+.lb-ch input[type="checkbox"]:checked + .text::before,
+.lb-ch input[type="radio"]:checked + .text::before {
+    background-color: #00b4fc;
+    border-color: #00b4fc;
+    color: #fff;
+}
+.lb-ch  input[type="checkbox"] + .text::before {
+    content: "check";
+	background-color: #fff;
+    border: 1px solid #bac0d6;
+	border-radius: 3px;
+}
+.lb-ch input[type="radio"] + .text::before {
+    content: url("/images/admin/icon/basic/radio.png");
+	width: 20px; height: 20px; line-height: 20px;
+    border-radius: 50%;
+}
+.lb-ch input[type="radio"]:checked + .text::before {
+    content: url("/images/admin/icon/basic/radio-checked.png");
+}
+
+.lb-ch input[type="checkbox"]:disabled + .text,
+.lb-ch input[type="radio"]:disabled + .text{
+    color: #bac0d6;
+}
+.lb-ch input[type="checkbox"]:disabled + .text::before,
+.lb-ch input[type="radio"]:disabled + .text::before {
+	background: none;
+    opacity: .5;
+}
+
+
+
+/* Select Box Style */
+.select-style {position: relative;}
+.select-style .select-btn {
+    font-size: 13px; line-height: 32px; color: #161c2f;
+    text-align: left;
+    background: url("/images/admin/icon/basic/select-arrow.png") no-repeat right 10px center #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin: 2px 0;
+    position: relative;
+    box-sizing: border-box;
+}
+.select-style .select-btn.active {
+    background-image: url("/images/admin/icon/basic/select-close.png");
+    background-size: auto 18px;
+}
+.select-style .select-options {
+    display: none;
+    position: absolute; top: 34px; left: 0; right: 0; z-index: 3;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 15px 10px;
+}
+.select-style .select-options.active {display: block;}
+.select-style .select-options .lb-ch {margin-top: 6px;}
+.select-style .select-options .lb-ch .text {font-size: 13px; line-height: 18px;}
+
+.select-fixed {
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 2;
+    width: 100%; height: 100%;
+    background: #fff;
+}
+
+
+
+
+
+/* Allim On/Off */
+.lb-allim {display: inline-block; vertical-align: middle;}
+.lb-allim input[type="checkbox"],
+.lb-allim input[type="radio"] {
+    width: 0; height: 0; line-height: 0;
+    visibility: hidden; position: absolute;
+}
+.lb-allim input[type="checkbox"] + label,
+.lb-allim input[type="radio"] + label {
+    display: inline-block;
+    width: 50px; height: 28px;
+    background: url("/images/icon/btn/allim.png") no-repeat;
+    background-size: 50px auto;
+    background-position: 0 0;
+    cursor: pointer;
+}
+.lb-allim input[type="checkbox"]:checked + label,
+.lb-allim input[type="radio"]:checked + label {
+    background-position: 0 -28px;
+}
+
+
+
+
+
+
+/* 비활성화 */
+select:disabled,
+input[type="text"]:disabled,
+input[type="password"]:disabled,
+textarea:disabled{
+    cursor: not-allowed;
+    border: 1px solid #e1e3e4;
+    background: #f2f2f2;
+}
+
+input[type="radio"]:disabled,
+input[type="radio"]:disabled + .text,
+input[type="radio"]:disabled + .text::before,
+input[type="checkbox"]:disabled,
+input[type="checkbox"]:disabled + .text,
+input[type="checkbox"]:disabled + .text::before {
+	cursor: not-allowed;
+}
+
+input[type="password"]:disabled,
+input.not {
+    background: none;
+    border-color: #dbdfee;
+}
+
+select:disabled {background-color: transparent; border-color: #dbdfee; color: #bac0d6; opacity: .5;}
+select.disabled-text {
+    background-color: transparent;
+    opacity: 1;
+}
+
+input.disabled,
+select.disabled,
+textarea.disabled {
+    background: none !important;
+	border-color: #dbdfee;
+	color: #bac0d6; opacity: .5;
+}
+input.disabled:hover,
+select.disabled:hover,
+textarea.disabled:hover {
+    cursor: not-allowed;
+}
+
+
+
+/* 읽기전용 */
+input[type="text"]:read-only,
+input[type="password"]:read-only {cursor: not-allowed;}
+input[type="text"].datepicker:read-only {cursor: auto;}
+
+
+/* input clear button */
+input[type="text"]::-ms-clear {display: none;} /* ie 닫기버튼 삭제 */
+
+
+
+
+
+
+
+
+/* File Form Area */
+.file-del-area {margin: 5px 0;}
+.file-del-area .btn-file,
+.file-del-area .file-name {
+    display: inline; vertical-align: middle;
+}
+.file-del-area .file-name {color: #787878; text-decoration: none;}
+.file-del-area .btn-file {background: none; border: none; margin-right: 4px;}
+.file-del-area .btn-file img {height: 25px;}
+
+
+
+
+
+
+
+
+/* Input File Wrapper */
+.file-wrapper {margin-top: 20px;}
+.file-wrapper .file-area {margin-top: 4px;}
+.file-area dl.group {margin-top: 10px;}
+.file-area dl.group:first-child {margin-top: 0;}
+.file-area dl.group dt {font-size: 14px; font-size: 0.875rem; font-weight: bold;}
+
+
+
+
+
+
+
+/* Text Form Area */
+.input-text {
+    display: inline-block; vertical-align: middle;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 10px 11px;
+    font-size: 14px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+
+
+/* 가이드 안내선 */
+.guide-line {
+    font-size: 11px; line-height: 18px;
+    color: #999;
+    margin: 0 10px;
+}
+/* ---------------------------------------------- //폼(form) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Modal (Layer Popup) ---------------------------------------------- */
+/* 레이어팝업 */
+.modal {
+    display: none;
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100;
+    width: 100%; height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.modal-bg {
+    display: none;
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 101;
+    width: 100%; height: 100vh;
+    background: #282828;
+    opacity: 0.7;
+}
+.modal-content {
+    position: absolute; top: 30%; left: 50%; z-index: 102;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    max-width: 100%;
+    margin: auto;
+    opacity: 0;
+    transition: all .3s ease;
+}
+.modal-content.transition {
+    opacity: 1;
+    top: 50%;
+}
+.modal .content {
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+}
+.modal .head {
+    position: relative;
+    background-color: #fff;
+    height: 60px;
+    padding-top: 20px;
+}
+.modal .head .title {
+    font-size: 1.25rem; color: #161c2f;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap;
+    text-align: left; padding-left: 20px;
+}
+.modal .head .close {
+    position: absolute; bottom: 5px; right: 5px;
+    background: none;
+    border: none;
+    padding: 10px;
+}
+.modal .head .close img {display: none;}
+.modal .head .close::after {
+    content: "";
+    display: block;
+    width: 30px; height: 30px;
+    background: url("/images/admin/btn/popup-close.png") no-repeat center;
+    background-size: 30px auto;
+}
+.modal .head .close strong {display: none;}
+
+
+.modal .head .remove {
+    position: absolute;
+    top: 25px;
+    right: 15px;
+    background: none;
+    border: none;
+}
+
+.modal .head .remove::after {
+    position: relative;
+    content: "";
+    display: block;
+    background: url("/images/admin/btn/popup-close.png") no-repeat center;
+    width: 20px;
+    height: 20px;
+    background-size: 20px auto;
+}
+
+.modal .main {
+    min-height: 120px;
+    font-size: 0.937rem; line-height: 1.5rem;
+    padding:25px 30px 20px;
+    background-color: #fff;
+}
+
+.modal .modal-content.img .main img {
+    width: 440px;
+    height: 440px;
+    object-fit: cover;
+}
+
+.modal .foot {padding-bottom: 20px; text-align: center;}
+.modal .foot .btn {
+    font-size: 16px; line-height: 45px;
+    font-weight: 500;
+    min-width: 100px;
+	margin: 0 5px;
+}
+
+.modal.scroll .modal-content {top: 20px; transform: translate(-50%, 0);}
+.modal.scroll .content {margin-bottom: 20px;}
+
+
+
+/* 레이어팝업 > 크기 */
+.modal-content.sm {width: 400px;}
+.modal-content.lg {width: 1200px;}
+.modal-content.lg {width: 1200px;}
+.modal-content.img {width: 500px;}
+
+.modal .modal-content.sm .head .title {font-size: 1rem; line-height: 1.5rem;}
+.modal .modal-content.sm .head .close {bottom: 10px;}
+.modal .modal-content.sm .head .close::after {
+    width: 22px; height: 22px;
+    background-size: 22px;
+}
+.modal .modal-content.sm .main {
+    min-height: 100px;
+    font-size: 0.875rem; line-height: 1.5rem;
+}
+.modal .modal-content.sm .foot {padding: 20px;}
+.modal .modal-content.sm .foot .btn {
+    font-size: 0.812rem; line-height: 38px;
+    min-width: 80px;
+}
+
+.modal .modal-content.lg .main {min-height: 200px;}
+/* ---------------------------------------------- //Modal (Layer Popup) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 타이포그래피(Typography) ---------------------------------------------- */
+/* 캡션 */
+.sec-caption {display: none;} /* Section Title */
+
+.top-caption {
+    font-size: 0.812rem; font-weight: 500; line-height: 1.25rem; color: #da2a2a;
+    text-align: right;
+    margin-bottom: 5px;
+    position: relative;
+}
+.top-caption i.required::after {
+    font-family: 'Material Icons';
+    content: url(/images/admin/icon/basic/asterisk-red.png);
+    font-size: 16px; color: #da2a2a;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -4px;
+    position: relative; top: -4px;
+}
+.top-caption .txt {font-weight: 400;}
+
+.bottom-caption {
+    font-size: 0.812rem; line-height: 1.25rem; color: #777;
+    margin-top: 10px;
+}
+.bottom-caption.warning {position: relative; padding-left: 18px;}
+.bottom-caption.warning::before {
+    content: "※";
+    display: inline-block;
+    position: absolute; left: 2px; top: 0;
+}
+
+.top-caption.left,
+.bottom-caption.left {text-align: left;}
+.top-caption.center,
+.bottom-caption.center {text-align: center;}
+.top-caption.right,
+.bottom-caption.right {text-align: right;}
+
+
+
+.form-caption {
+    font-size: 14px; line-height: 14px; color: #da2a2a;
+    margin: 8px 0 2px;
+    padding-left: 2px;
+    padding-right: 10px;
+    position: relative;
+}
+/*.form-caption::before {content: "*"; position: absolute; left: 5px; top: 1px;}*/
+/* ---------------------------------------------- //타이포그래피(Typography) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Photo(Image) Style : 이미지 ---------------------------------------------- */
+/* Effect */
+img.del {opacity: 0.3; filter: grayscale(90%);}
+
+
+
+/* Fit 16:9 */
+.img-fit169 {
+    position: relative;
+    padding-bottom: 56.2%;
+}
+.img-fit169 img {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* Figure Default Style */
+figure.basic {text-align: center; margin: 10px 0;}
+figure.basic img {max-width: 100%; border: 1px solid #ddd;}
+figure.basic figcaption {font-size: 0.812rem; color: #161c2f; margin-top: 5px;}
+/* ---------------------------------------------- //Photo(Image) Style : 이미지 ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Card Style ---------------------------------------------- */
+/* Default */
+.card {
+    font-size: 0.875rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.15), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+.card2 {
+    background: #f2f2f2;
+    padding: 18px 30px;
+}
+.card3 {
+    background: #f2f2f2;
+    border: 1px solid #e0e0e0;
+    padding: 10px 15px;
+}
+.card3-tit {
+    font-size: 15px;
+}
+
+.card4 {
+    border: solid 1px #dbdfee;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 40px;
+    margin-bottom: 20px;
+}
+/* ---------------------------------------------- //Card Style ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Jquery Ui ---------------------------------------------- */
+/* Datepicker > Input */
+.date-wrap {width: 130px;}
+.date-wrap .datepicker {height: 35px; line-height: 35px;}
+/* ---------------------------------------------- //Jquery Ui ---------------------------------------------- */
+
+
+
+/* ---------------------------------------------- Loading Bar ---------------------------------------------- */
+/* Fixed Loading */
+.fixed-loading {
+    display: none;
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 999;
+    background-color: rgba(255,255,255,.7);
+    text-align: center;
+}
+.fixed-loading::after {
+    content: "";
+    position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+    display: block;
+    width: 70px; height: 70px;
+    background: url("/images/comm/loading2.gif");
+    background-size: 70px;
+    margin: auto;
+}
+/* ---------------------------------------------- //Loading Bar ---------------------------------------------- */

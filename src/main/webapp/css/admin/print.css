@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+
+@media print {
+	/* Default */
+    * {box-sizing: border-box;}
+    html,
+    body,
+    #wrap,
+    .print-preview,
+    .certificate-area {
+        border: 0; margin: 0; padding: 0;
+        width: 210mm; height: auto;
+        /* 배경이미지 반영되지않고 출력될때 */
+        webkit-print-color-adjust: exact;
+    }
+    .print-preview .paper {
+        margin: 0;
+        border: initial;
+        border-radius: initial;
+        width: initial;
+        min-height: initial;
+        box-shadow: initial;
+        page-break-after: always;
+    }
+    
+    .calendar-header {text-align: center;}
+    .calendar-header .month-control {float: none; display: inline-block;}
+    
+    /* Hide Content */
+    #header, 
+    #footer,
+    .search-form, 
+    .button-align, 
+    .add-btn {display: none !important;}
+    
+	
+    
+}

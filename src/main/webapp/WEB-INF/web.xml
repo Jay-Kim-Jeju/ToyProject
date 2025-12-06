@@ -25,11 +25,24 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+
     <!-- Spring Context 설정 파일 위치 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:egovframework/spring/context-*.xml</param-value>
     </context-param>
+
+    <!-- spring security -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>*.ac</url-pattern>
+        <url-pattern>*.do</url-pattern>
+        <url-pattern>*.doax</url-pattern>
+    </filter-mapping>
 
     <!-- Spring Context 로딩 리스너 -->
     <listener>
@@ -70,11 +83,11 @@
     <!-- 기본 에러 페이지 설정 -->
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/views/common/error.jsp</location>
+        <location>/WEB-INF/jsp/toy/com/error.jsp</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/WEB-INF/views/common/error.jsp</location>
+        <location>/WEB-INF/jsp/toy/com/error.jsp</location>
     </error-page>
 
 

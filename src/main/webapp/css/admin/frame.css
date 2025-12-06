@@ -1,0 +1,496 @@
+/* ---------------------------------------------- Wrap/Container ---------------------------------------------- */
+/* common width wrap */
+body {background: #f6f7fb;}
+#wrapper {overflow: hidden; position: relative; min-width: 1480px;}
+#header, #main, #footer {min-width: 1080px;}
+
+/* window popup */
+.win-popup,
+.popup-wrapper,
+.print-preview {padding: 20px;}
+.win-popup {background-color: #fff; /* height: 100vh; */}
+
+/* header fixed에 따른 추가 */
+#main {margin: 40px; min-height: 100vh; min-height: calc(100vh - 80px);}
+#header + #side-wrapper + #main {min-height: calc(100vh - 140px);}
+#header + #main {min-height: calc(100vh - 170px);}
+#side-wrapper + #main {margin-left: 240px;}
+
+#main > .contents-wrap {margin: 0 auto; transition: color .10s ease;}
+/*#main section.search-form,*/
+#main nav.depth3-menu,
+#main nav.depth4-menu {
+	margin-right: 40px;
+}
+
+
+/* ---------------------------------------------- //Wrap/Container ---------------------------------------------- */
+
+
+
+/* ---------------------------------------------- Html Header ---------------------------------------------- */
+/* Common */
+#header > .global,
+#header .gnb-wrapper {}
+#header > .global {padding: 0 20px;}
+
+
+/* LOGO */
+.logo {min-width: 200px; text-align: center;}
+.logo a, 
+.logo-close a {display: block;}
+.logo img {max-width: none; vertical-align: middle;}
+
+
+/* Top Menu */
+#header {width: 100%;}
+#header > .global {background: #161c2f; text-align: right;}
+#header > .global nav a {
+    display: inline-block;
+    font-size: 12px; color: #9298b1; line-height: 30px;
+    white-space: nowrap;
+    margin-left: 20px;
+    transition: color .3s ease;
+}
+#header > .global a {color: #9298b1;}
+#header > .global a i {
+    display: inline-block;
+    vertical-align: middle; margin-right: 2px;
+    font-size: 22px; line-height: 22px; color: #9298b1;
+    position: relative; top: -1px;
+    transition: color .3s ease;
+}
+#header > .global a:hover,
+#header > .global a:hover i {color: #fff;}
+
+#header > .global .info, 
+#header > .global .login-info, 
+#header > .global nav {display: inline-block; vertical-align: middle;}
+#header > .global .login-info .user-info li {
+	display: inline-block;
+    font-size: 12px; color: #9298b1;
+    white-space: nowrap;
+    margin-left: 20px;
+}
+#header > .global .login-info .user-info li.user {font-size: 14px; color: #fff;}
+
+
+/* GNB */
+#header .gnb-wrapper {
+    display: flex;
+    align-items: center; 
+    height: 60px; padding-right: 15px;
+    background: #30364d;
+}
+#header .gnb-wrapper .gnb {width: 100%;}
+#header .gnb-wrapper .gnb ul.depth1 {display: inline-flex; justify-content: space-between; vertical-align: bottom; width: 100%; margin-top: 5px;}
+#header .gnb-wrapper .gnb ul.depth1 > li {position: relative;}
+#header .gnb-wrapper .gnb ul.depth1 > li > a {
+	display: block;
+    white-space: nowrap;
+    font-size: 18px; color: #fff; font-weight: 500; 
+    padding: 12px 25px 0; text-align: center;
+    min-height: 55px;
+	border-top-left-radius: 10px; border-top-right-radius: 10px;
+}
+#header .gnb-wrapper .gnb ul.depth1 > li.active > a,
+#header .gnb-wrapper .gnb ul.depth1 > li > a.active {
+    background: #f6f7fb;
+	color: #161c2f;
+	border-top: solid 5px #ff4e00;
+}
+#header .gnb-wrapper .gnb ul.depth1 > li.active ul.depth2 {display: none !important;}
+#header .gnb-wrapper .gnb ul.depth1 > li > a:hover {text-decoration: none;}
+#header .gnb-wrapper .gnb ul.depth1 > li:hover ul.depth2 {display: block;}
+#header .gnb-wrapper .gnb ul.depth1 > li:not(.active):hover > a {
+	color: #fff; 
+	background: #161c2f; 
+	padding: 7px 25px 0; margin-top: 5px; 
+	min-height: 50px;
+	border-top-left-radius: 5px; border-top-right-radius: 5px;
+}
+#header .gnb-wrapper .gnb ul.depth1 > li:not(.active):hover > a.drop {min-height: 39px;}
+#header .gnb-wrapper .gnb ul.depth1 > li.logo:hover {background: transparent; color: #333;}
+
+#header .gnb-wrapper .gnb ul.depth2 {
+    position: absolute; z-index: 99; left: 50%; margin-left: -80px;
+	background: #161c2f; border: solid 1px #161c2f; min-width: 160px;
+	border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; overflow: hidden;
+    display: none; 
+}
+#header .gnb-wrapper .gnb ul.depth2 > li {background: #fff; margin-top: 1px;}
+#header .gnb-wrapper .gnb ul.depth2 > li:first-child {margin-top: 0; border-top-left-radius: 4px; border-top-right-radius: 4px; overflow: hidden;}
+#header .gnb-wrapper .gnb ul.depth2 > li > a {display: block; white-space: nowrap; padding: 10px 20px; font-size: 16px; color: #626984;}
+#header .gnb-wrapper .gnb ul.depth2 > li > a:hover {color: #2e2e2e;}
+/* ---------------------------------------------- //Html Header ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Page header ---------------------------------------------- */
+/* Side GNB */
+#side-wrapper {
+	position: absolute; left: 0; top: 0; bottom: 0;
+	background: #30364d;
+	width: 200px;
+}
+#header + #side-wrapper {top: 60px;}
+
+
+/* LOGO */
+#side-wrapper .logo a,
+#side-wrapper .logo-close a {/*padding: 10px 0 10px;*/}
+#side-wrapper.close .logo, 
+#header + #side-wrapper .logo-close, 
+#side-wrapper.open .logo-close  {display: none !important;}
+.logo-close {display: block !important; text-align: center;}
+
+
+#side-wrapper .sideGnb-btn {
+	float: right; margin-top: 40px;
+	display: inline-block;
+	width: 40px; height: 30px;
+	background: url("/images/admin/frame/side-navi-close.png") no-repeat left top;
+	font-size: 0;
+}
+#side-wrapper .sideGnb-btn button {
+	background: none; border: none;
+	font-size: 0; line-height: 30px;
+	width: 40px; height: 30px;
+}
+#side-wrapper .sideGnb-btn.open {
+	background-image: url("/images/admin/frame/side-navi-close.png");
+}
+#side-wrapper.close .sideGnb-btn {
+	background-image: url("/images/admin/frame/side-navi-open.png");
+}
+
+#side-wrapper .global {text-align: center;}
+#side-wrapper .global .login-info {margin-top: 30px;}
+#side-wrapper .global .login-info .user-info {margin-top: 10px;}
+#side-wrapper .global .login-info .user-info li {
+	margin-top: 3px;
+    font-size: 12px; color: #bac0d6;
+    white-space: nowrap;
+}
+#side-wrapper .global .login-info .user-info li:first-child {margin-top: 0;}
+#side-wrapper .global .login-info .user-info li.user {font-size: 14px; color: #fff;}
+#side-wrapper .global .login-info .profile {position: relative; display: inline-block;}
+#side-wrapper .global .login-info .profile a {display: block;}
+#side-wrapper .global .login-info .profile a:hover i {color: #fff;}
+#side-wrapper .global .login-info .profile .photo {
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 60px; height: 60px;
+}
+#side-wrapper .global .login-info .profile .setting {
+	position: absolute; right: -5px; bottom: 2px;
+	display: inline-block; 
+	font-size: 0; color: #30364d; line-height: 22px;
+	background: #161c2f; border: solid 2px #30364d;
+	width: 24px; height: 24px;
+	border-radius: 50px;
+}
+
+#side-wrapper .global nav {display: inline-flex; margin-top: 20px;}
+#side-wrapper .global nav a {
+    display: inline-block;
+	margin: 0 3px;
+    font-size: 12px; color: rgba(255,255,255,0.50); line-height: 30px;
+    white-space: nowrap;
+	min-width: 80px;
+	border-radius: 3px;
+    transition: color .3s ease;
+}
+#side-wrapper .global nav a.site {
+	background: #00b4fc;
+}
+#side-wrapper .global nav a.logout {
+	background: #ff4e00;
+}
+#side-wrapper .global a i {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px; line-height: 20px;
+    position: relative; top: -1px;
+    transition: color .3s ease;
+}
+#side-wrapper .global a:hover,
+#side-wrapper .global a:hover i {color: #fff; text-decoration: none;}
+
+#side-wrapper .gnb {
+	margin-top: 20px;
+	background: #262b40;
+}
+#side-wrapper .gnb .depth2 > li {position: relative;}
+#side-wrapper .gnb .depth2 > li > a {
+	display: block;
+    white-space: nowrap;
+    font-size: 16px; color: #9298b1; font-weight: 500;
+    padding: 6px 10px 0;
+    min-height: 40px;
+}
+#side-wrapper .gnb .depth2 > li > a::before {
+	position: absolute; top: 40px; left: 10px; right: 10px;
+	content: "";
+	background: #30364d;
+	height: 1px;
+}
+#side-wrapper .gnb .depth2 > li > a i {
+    display: inline-block;
+    vertical-align: middle; margin-right: 12px;
+    font-size: 22px; line-height: 22px; color: #9298b1;
+    position: relative; top: -1px;
+}
+#side-wrapper.open .gnb .depth2 > li > a.drop {
+	background: url("/images/admin/frame/side-arrow-close.png") no-repeat right 15px top 11px;
+}
+#side-wrapper.open .gnb .depth2 > li > a.drop.active {
+	background-image: url("/images/admin/frame/side-arrow-open.png");
+}
+#side-wrapper.open .gnb .depth2 > li > a.active {
+	background-color: #161c2f; color: #fff;
+}
+#side-wrapper.open .gnb .depth2 > li > a.active i {color: #fff;}
+
+#side-wrapper.open .gnb .depth3 {display: none; padding-bottom: 5px;}
+#side-wrapper.open .gnb .depth2 > li > a.active + .depth3 {display: block;}
+#side-wrapper.open .gnb .depth3 > strong {display: none;}
+#side-wrapper.open .gnb .depth3 > ul > li > a {
+	display: block; white-space: nowrap; 
+	padding: 5px 20px 5px 40px;
+	font-size: 14px; color: #626984;
+}
+#side-wrapper.open .gnb .depth2 > li > a.drop.active + .depth3 {background-color: #161c2f;}
+#side-wrapper.open .gnb .depth2 > li > a.drop + .depth3 > li > a {color: #9298b1;}
+
+#side-wrapper.open .gnb .depth3 > ul > li.active > a {
+	background: url("/images/admin/frame/side-3depth-active.png") no-repeat left 24px top 11px;
+	color: #fff !important;
+}
+#side-wrapper.open .gnb .depth2 > li > a:hover,
+#side-wrapper.open .gnb .depth2 > li > a:hover i, 
+#side-wrapper.open .gnb .depth3 > ul > li > a:hover {color: #fff !important; text-decoration: none;}
+
+
+/* 접었을 때 */
+#side-wrapper.close {width: 80px;}
+#side-wrapper.close + #main {margin-left: 120px;}
+#side-wrapper.close .global nav {margin-top: 10px;}
+#side-wrapper.close .global nav a {min-width: 30px;}
+#side-wrapper.close .global nav a .text, 
+#side-wrapper.close .global .user-info {display: none;}
+#side-wrapper.close .global .profile:hover + .user-info {
+	display: block;
+	position: absolute; z-index: 2; top: 95px; left: 83px;
+	background: #161c2f; padding: 5px 10px;
+	border-radius: 5px;
+}
+#header + #side-wrapper.close .global .profile:hover + .user-info {
+	top: 25px;
+}
+#side-wrapper.close .global .profile:hover + .user-info::after {
+	content: "";
+	position: absolute; left: -10px; top: 50%; margin-top: -10px;
+	width: 10px; height: 20px;
+	background: url(/images/admin/frame/side-user-arrow.png) no-repeat left top;
+}
+#side-wrapper.close .gnb .depth2 > li > a {
+	font-size: 0; 
+	background: none; 
+	text-align: center;
+}
+#side-wrapper.close .gnb .depth2 > li > a i {
+	top: 5px; 
+	margin-right: 0;
+}
+#side-wrapper.close .gnb .depth3 {display: none !important; min-width: 140px; padding-bottom: 10px;}
+#side-wrapper.close .gnb .depth3 > strong {
+	display: block;
+	white-space: nowrap;
+    font-size: 16px; color: #9298b1; font-weight: 500;
+    padding: 6px 10px 0; text-align: center;
+    min-height: 40px;
+}
+#side-wrapper.close .gnb .depth2 > li:hover > a {background: #161c2f;}
+#side-wrapper.close .gnb .depth2 > li:hover .depth3 {
+	display: block !important;
+	position: absolute; z-index: 2; top: 0; left: 80px;
+	background: #161c2f;
+}
+#side-wrapper.close .gnb .depth2 > li:hover .depth3 > strong {color: #fff;}
+#side-wrapper.close .gnb .depth2 > li:hover .depth3 > strong::before {
+	position: absolute; top: 40px; left: -10px; right: 10px;
+	content: "";
+	background: #30364d;
+	height: 1px;
+}
+#side-wrapper.close .gnb .depth3 > ul > li > a {
+	display: block; white-space: nowrap; 
+	padding: 5px 20px 5px 30px;
+	font-size: 14px; color: #626984;
+}
+#side-wrapper.close .gnb .depth2 > li > a.drop.active + .depth3 {background-color: #161c2f;}
+#side-wrapper.close .gnb .depth2 > li > a.drop + .depth3 > ul > li > a {color: #9298b1;}
+
+#side-wrapper.close .gnb .depth3 > ul > li.active > a {
+	background: url("/images/admin/frame/side-3depth-active.png") no-repeat left 14px top 11px;
+	color: #fff !important;
+}
+#side-wrapper.close .gnb .depth2 > li > a:hover,
+#side-wrapper.close .gnb .depth2 > li > a:hover i, 
+#side-wrapper.close .gnb .depth3 > ul > li > a:hover {color: #fff !important; text-decoration: none;}
+
+
+
+.title-area {display: flex;}
+.title-area .memo {margin: 0 13px; margin-top: 4px; font-size: 16px; color: #9298b1;}
+.depth-title {
+	margin-left: 5px; margin-bottom: 40px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #161c2f;
+}
+.depth-title2 {
+	margin-left: 5px; margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #161c2f;
+}
+
+
+/* 4Depth Menu */
+.depth4-menu {margin-bottom: 20px;}
+.depth4-menu.flex,
+.depth4-menu ul {
+	display: flex;
+	border-bottom: 1px solid #ff4e00;
+}
+.depth4-menu.flex ul {border: none;}
+.depth4-menu ul li {
+    border: 1px solid #bac0d6;
+    border-width: 1px 1px 0 1px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-right: 5px;
+    position: relative;
+    min-width: 100px;
+    opacity: 0.8;
+    transition: all .5s ease;
+}
+.depth4-menu ul li a {
+    display: block;
+    text-align: center;
+    height: 45px;
+    line-height: 45px;
+    font-size: 15px;
+    color: #5f5f60;
+    padding: 0 25px;
+    text-decoration: none;
+    transition: all .5s ease;
+}
+.depth4-menu ul li.active {
+	background: #fff;
+	border-color: #ff4e00;
+	opacity: 1;
+}
+.depth4-menu ul li.active::after {
+	content: "";
+	position: absolute;
+	left: 0; right: 0; bottom: -2px;
+	width: 100%;
+	height: 2px;
+	background: #f6f7fb;
+	transition: all .5s ease;
+}
+.win-popup .depth4-menu ul li.active::after {background: #fff;}
+
+.depth4-menu ul li.active a {
+	font-weight: bold;
+	color: #ff4e00;
+}
+.depth4-menu ul li:hover {background-color: #ff4e00; opacity: 1;}
+.depth4-menu ul li:hover a {color: #fff;}
+.depth4-menu ul li:hover::after {background: #ff4e00 !important; bottom: -1px}
+
+/*
+.depth4-menu ul li {
+    background: #fff;
+    position: relative;
+    width: 100%; max-width: 13%; height: 60px; line-height: 60px;
+	border: 1px solid #bac0d6;
+    transition: all .5s ease;
+    overflow: hidden;
+}
+.depth4-menu ul li:not(:last-child) {border-width: 1px 0 1px 1px;}
+.depth4-menu ul li:first-child {border-top-left-radius: 10px; border-bottom-left-radius: 10px;}
+.depth4-menu ul li:last-child {border-top-right-radius: 10px; border-bottom-right-radius: 10px;}
+.depth4-menu ul li.active,
+.depth4-menu ul li a.active {
+    color: #fff;
+    background: #ff4e00;
+}
+.depth4-menu ul li button, 
+.depth4-menu ul li a {
+	display: block;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px; color: #9298b1;
+    background: none;
+    padding: 0 25px;
+}
+.depth4-menu ul li.active a,
+.depth4-menu ul li button.active {color: #fff;}
+.depth4-menu ul li:hover {background-color: rgba(22,28,47,0.05);}
+.depth4-menu ul li:hover a,
+.depth4-menu ul li:hover button {text-decoration: none;}
+
+.win-popup .depth4-menu ul li, 
+.win-popup .depth4-menu ul li button, 
+.win-popup .depth4-menu ul li a {
+    height: 50px;
+    line-height: 50px;
+}
+*/
+
+
+
+/* 3Depth Menu2 */
+.depth3-menu2 {margin-bottom: 35px;}
+.depth3-menu2 ul {display: flex; flex-wrap: wrap; padding-left: 2px;}
+.depth3-menu2 ul li {
+    border: 1px solid #e1e3e4;
+    margin: 0 0 -1px -1px;
+}
+.depth3-menu2 ul li a,
+.depth3-menu2 ul li button {
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    font-size: 14px; color: #5f5f60;
+    background: none;
+    white-space: nowrap;
+    transition: color .3s ease;
+}
+.depth3-menu2 ul li .count {color: #e74c3c; font-weight: normal;}
+.depth3-menu2 ul li .count::before {content: "(";}
+.depth3-menu2 ul li .count::after {content: ")";}
+.depth3-menu2 ul li a:hover,
+.depth3-menu2 ul li button:hover {
+    color: #3090d6;
+}
+
+.depth3-menu2.col7 ul li {width: calc(100% / 7);}
+/* ---------------------------------------------- //Page header ---------------------------------------------- */
+
+
+/* 컨텐츠 박스 */
+.content-box {border: solid 1px #dbdfee; background: #fff; border-radius: 10px; padding: 40px 30px 25px;}
+.content-box.not-box {border: none; background: none; border-radius: 0; padding: 0;}
