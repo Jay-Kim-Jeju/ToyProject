@@ -15,8 +15,8 @@
 
   <title> TOY_Project 관리자 </title>
   <!-- css -->
-  <link rel="icon" href="${pageContext.request.contextPath}/favicon.ico">
-  <link rel="icon" href="${pageContext.request.contextPath}/images/com/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/com/favicon.ico">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/com/jquery-ui-1.12.1.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/com/swiper-4.5.0.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/font.css?jsCssVer=${jsCssVer}">

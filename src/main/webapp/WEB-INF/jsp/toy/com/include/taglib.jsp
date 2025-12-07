@@ -14,7 +14,7 @@
 
 <c:set var="curURL" value="${requestScope['javax.servlet.forward.request_uri']}" />
 
-<c:set var="jsCssVer" value="20251207" />
+<c:set var="jsCssVer" value="20251208" />
 
 <%-- 이미지 사이즈 --%>
 <c:set var="sizeImageProfl" value="400px * 400px" />        <%-- 프로필 사진 --%>
