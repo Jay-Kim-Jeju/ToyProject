@@ -64,7 +64,7 @@ public class AdmMainCtrl {
         return new ModelAndView("toy/admin/adminHome", resultMap);
 
         // 추후 제대로된 메인페이지 만들면 그쪽으로 리다이렉트 예정
-        //return new ModelAndView("redirect:/miniadm/today/listToday.ac", resultMap);
+        //return new ModelAndView("redirect:/toy/listMngr.ac", resultMap);
     }
 
 }

@@ -33,71 +33,59 @@
             <ul id="depth1" class="depth1">
 
                 <li id="cctv_menu">
-                    <a href="<c:url value="/miniadm/cctv/listCctv.ac" />" >CCTV</a>
+                    <a href="<c:url value="" />" >CCTV</a>
                 </li>
                 <li id="place_menu">
-                    <a href="<c:url value="/miniadm/place/mngr/listPlace.ac" />">장소 관리</a>
+                    <a href="<c:url value="" />">장소 관리</a>
                 </li>
                 <li id="today_menu">
-                    <a href="<c:url value="/miniadm/today/listToday.ac" />">오늘제주 관리</a>
+                    <a href="<c:url value="" />">오늘제주 관리</a>
                 </li>
                 <li id="rcmm_menu">
-                    <a href="<c:url value="/miniadm/rcmm/listRcmm.ac" />">추천장소 관리</a>
+                    <a href="<c:url value="" />">추천장소 관리</a>
                 </li>
 
                 <li id="jejunews_menu">
-                    <a href="<c:url value="/miniadm/jejunews/listJejunews.ac" />">제주소식</a>
+                    <a href="<c:url value="" />">제주소식</a>
                 </li>
 
                 <li id="influencer_menu">
-                    <a href="<c:url value='/miniadm/influencer/listInfluencer.ac' />" class="drop">인플루언서 관리</a>
+                    <a href="<c:url value='' />" class="drop">인플루언서 관리</a>
                     <ul class="depth2">
-                        <li><a href="<c:url value='/miniadm/influencer/listInfluencer.ac' />">인플루언서 관리</a></li>
-                        <li><a href="<c:url value='/miniadm/influencer/listGoods.ac' />">상품관리</a></li>
-                        <li><a href="<c:url value='/miniadm/influencer/listGoodsSale.ac' />">주문관리</a></li>
+                        <li><a href="<c:url value='' />">인플루언서 관리</a></li>
+                        <li><a href="<c:url value='' />">상품관리</a></li>
+                        <li><a href="<c:url value='' />">주문관리</a></li>
                     </ul>
                 </li>
 
                 <li id="excclc_menu">
-                    <a href="<c:url value="/miniadm/excclc/listExcclc.ac" />" class="drop">정산</a>
+                    <a href="<c:url value="" />" class="drop">정산</a>
                 </li>
 
                 <li id="member_menu">
-                    <a href="<c:url value='/miniadm/member/listMember.ac' />">회원관리</a>
+                    <a href="<c:url value='' />">회원관리</a>
                 </li>
 
 
 
                 <li id="system_menu">
-                    <a href="<c:url value="/miniadm/sys/listMngr.ac" />" class="drop">시스템설정</a>
+                    <a href="<c:url value="" />" class="drop">시스템설정</a>
                     <ul class="depth2">
-                        <li><a href="<c:url value="/miniadm/sys/listMngr.ac" />">관리자관리</a></li>
-                        <li><a href="<c:url value="/miniadm/sys/listAuth.ac" />">권한관리</a></li>
-                        <li><a href="<c:url value="/miniadm/sys/listCdGrp.ac" />">코드관리</a></li>
-                        <li><a href="<c:url value="/miniadm/sys/listPopup.ac" />">팝업관리</a></li>
-                        <%--<li><a href="<c:url value="/miniadm/sys/listConectIp.ac" />">접속 허용 IP</a></li>--%>
-                        <li><a href="<c:url value="/miniadm/sys/listConectLog.ac" />">로그조회</a></li>
+                        <li><a href="<c:url value="" />">관리자관리</a></li>
+                        <li><a href="<c:url value="" />">권한관리</a></li>
+                        <li><a href="<c:url value="" />">코드관리</a></li>
+                        <li><a href="<c:url value="" />">접속 허용 IP</a></li>-
+                        <li><a href="<c:url value="" />">로그조회</a></li>
                     </ul>
                 </li>
 
                 <%--<li id="config_menu">
-                    <a href="<c:url value='/miniadm/config/detailLogo.ac' />" class="drop">환경설정</a>
+                    <a href="<c:url value='/toy/config/detailLogo.ac' />" class="drop">환경설정</a>
                     <ul class="depth2">
-                        <li><a href="<c:url value='/miniadm/config/detailLogo.ac' />">로고설정</a></li>
+                        <li><a href="<c:url value='/toy/config/detailLogo.ac' />">로고설정</a></li>
                     </ul>
                 </li>--%>
 
-
-                <%--<li id="stats_menu">
-                    <a href="<c:url value="/miniadm/stats/clientStats/listClientStats.ac" />" class="drop">통계</a>
-                    <ul class="depth2">
-                        <li><a href="<c:url value="/miniadm/stats/clientStats/listClientStats.ac" />">고객통계</a></li>
-                        <li><a href="<c:url value="/miniadm/stats/useStats/listUseStats.ac" />">고객이용통계</a></li>
-                        <li><a href="<c:url value="/miniadm/stats/compStats/listCompStats.ac" />">입점업체통계</a></li>
-                        <li><a href="<c:url value="/miniadm/stats/saleStats/listSaleStats.ac" />">매출통계</a></li>
-                        <li><a href="/miniadm/statis/listVisitLog.ac">방문통계</a></li>
-                    </ul>
-                </li>--%>
             </ul>
         </nav>
     </div>
@@ -109,7 +97,7 @@
     <div class="global">
         <div class="login-info">
             <div class="profile">
-                <a href="javascript:window.open('<c:url value="/toy/sys/detailMngrPop.ac" />','detailMber', 'width=1000,height=440');">
+                <a href="javascript:window.open('<c:url value="" />','detailMber', 'width=1000,height=440');">
                     <div class="photo" style="background-image: url('${pageContext.request.contextPath}/images/admin/frame/profile.png')"></div>
                     <span class="setting"><i class="material-icons-outlined">settings</i>계정관리</span>
                 </a>
@@ -121,77 +109,75 @@
         </div>
         <nav class="flex wp100 px-10">
             <a href="/" class="site wp100" target="_blank"><i class="material-icons-outlined">home</i><span class="text">사이트열기</span></a>
-            <a href="<c:url value='/toy/logout.ac' />" class="logout wp100">
+            <a href="<c:url value='' />" class="logout wp100">
                 <i class="material-icons-outlined">logout</i><span class="text">로그아웃</span>
             </a>
         </nav>
-        <%-- <nav class="flex wp100 px-10 mt-10">
-            <a class="btn green wp100" href="${CONTEXT_PATH }/manuals/aaa.pdf"><i class="material-icons-outlined">save_alt</i> <span class="text">매뉴얼 다운로드</span></a>
-        </nav> --%>
+
     </div>
     <nav class="gnb" id="side-menu">
         <ul class="depth2">
 
             <c:if test="${menuActiveMap.adminMenu1 eq 'cctv'}">	<%-- 날씨Live : 2depth 메뉴 --%>
                 <li>
-                    <a href="<c:url value="/miniadm/cctv/listCctv.ac" />" id="cctv_cctv_menu"><i class="material-icons-outlined">video_camera_front</i>CCTV 관리</a>
+                    <a href="<c:url value="" />" id="cctv_cctv_menu"><i class="material-icons-outlined">video_camera_front</i>CCTV 관리</a>
                 </li>
             </c:if>
 
             <c:if test="${menuActiveMap.adminMenu1 eq 'rcmm'}">	<%-- 추천장소 관리 : 2depth 메뉴 --%>
                 <li>
-                    <a href="<c:url value="/miniadm/rcmm/listRcmm.ac" />" id="rcmm_place_menu"><i class="material-icons-outlined">place</i>추천장소 관리</a>
+                    <a href="<c:url value="" />" id="rcmm_place_menu"><i class="material-icons-outlined">place</i>추천장소 관리</a>
                 </li>
             </c:if>
 
             <c:if test="${menuActiveMap.adminMenu1 eq 'today'}">	<%-- 오늘제주 관리 : 2depth 메뉴 --%>
                 <li>
-                    <a href="<c:url value="/miniadm/today/listToday.ac" />" id="today_mngr_menu"><i class="material-icons-outlined">wb_sunny</i>오늘제주 관리</a>
+                    <a href="<c:url value="" />" id="today_mngr_menu"><i class="material-icons-outlined">wb_sunny</i>오늘제주 관리</a>
                 </li>
             </c:if>
 
             <c:if test="${menuActiveMap.adminMenu1 eq 'place'}">	<%-- 장소 관리 : 2depth 메뉴 --%>
                 <li>
-                    <a href="<c:url value="/miniadm/place/mngr/listPlace.ac" />" id="place_mngr_menu"><i class="material-icons-outlined">place</i>장소관리</a>
+                    <a href="<c:url value="" />" id="place_mngr_menu"><i class="material-icons-outlined">place</i>장소관리</a>
                 </li>
             </c:if>
 
             <c:if test="${menuActiveMap.adminMenu1 eq 'jejunews'}">	<%-- 제주소식 : 2depth 메뉴 --%>
                 <li>
-                    <a href="<c:url value="/miniadm/jejunews/listJejunews.ac" />" id="jeju_news_menu"><i class="material-icons-outlined">feed</i>제주소식</a>
+                    <a href="<c:url value="" />" id="jeju_news_menu"><i class="material-icons-outlined">feed</i>제주소식</a>
                 </li>
             </c:if>
 
             <c:if test="${menuActiveMap.adminMenu1 eq 'influencer'}">	<%-- 인플루언서 관리 : 2depth 메뉴 --%>
                 <li>
-                    <a href="<c:url value='/miniadm/influencer/listInfluencer.ac' />" id="influencer_manage_menu"><i class="material-icons-outlined">settings</i>인플루언서 관리</a>
+                    <a href="<c:url value='' />" id="influencer_manage_menu"><i class="material-icons-outlined">settings</i>인플루언서 관리</a>
                 </li>
                 <li>
-                    <a href="<c:url value='/miniadm/influencer/listGoods.ac' />" id="influencer_goods_menu"><i class="material-icons-outlined">inventory_2</i>상품관리</a>
+                    <a href="<c:url value='' />" id="influencer_goods_menu"><i class="material-icons-outlined">inventory_2</i>상품관리</a>
                 </li>
                 <li>
-                    <a href="<c:url value='/miniadm/influencer/listGoodsSale.ac' />" id="influencer_sale_menu"><i class="material-icons-outlined">assignment</i>주문관리</a>
+                    <a href="<c:url value='' />" id="influencer_sale_menu"><i class="material-icons-outlined">assignment</i>주문관리</a>
                 </li>
             </c:if>
 
             <c:if test="${menuActiveMap.adminMenu1 eq 'client'}">	<%-- 고객관리 : 2depth 메뉴 --%>
                 <li>
-                    <a href="<c:url value='/miniadm/client/user/listUser.ac' />" id="client_user_menu"><i class="material-icons-outlined">people</i>사용자관리</a>
+                    <a href="<c:url value='' />" id="client_user_menu"><i class="material-icons-outlined">people</i>사용자관리</a>
                 </li>
                 <li>
-                    <a href="<c:url value='/miniadm/client/dropUser/listDropUser.ac' />" id="client_dropUser_menu"><i class="material-icons-outlined">person_remove</i>탈퇴사용자</a>
+                    <a href="<c:url value='' />" id="client_dropUser_menu"><i class="material-icons-outlined">person_remove</i>탈퇴사용자</a>
                 </li>
             </c:if>
 
             <c:if test="${menuActiveMap.adminMenu1 eq 'excclc'}">	<%--정산 : 2depth 메뉴--%>
                 <li>
-                    <a href="<c:url value="/miniadm/excclc/listExcclc.ac" />" id="excclc_excclc_menu" <%--class="drop"--%>><i class="material-icons-outlined">request_quote</i>정산</a>
+                    <a href="<c:url value="" />" id="excclc_excclc_menu" <%--class="drop"--%>><i class="material-icons-outlined">request_quote</i>정산</a>
                     <div class="depth3">
                         <strong>정산</strong>
 
                             <%--<ul>
-                                <li id="excclc_excclc_calendar_menu"><a href="<c:url value="/miniadm/excclc/listExcclcCalendar.ac" />">달력 보기</a></li>
-                                <li id="excclc_excclc_list_menu"><a href="<c:url value="/miniadm/excclc/listExcclc.ac" />">목록 보기</a></li>
+                                <li id="excclc_excclc_calendar_menu"><a href="<c:url value="/toy/excclc/listExcclcCalendar.ac" />">달력 보기</a></li>
+                                <li id="excclc_excclc_list_menu"><a href="<c:url value="/toy/excclc/listExcclc.ac" />">목록 보기</a></li>
                             </ul>--%>
 
                     </div>
@@ -200,31 +186,31 @@
 
             <c:if test="${menuActiveMap.adminMenu1 eq 'system'}">	<%-- 시스템설정 : 2depth 메뉴 --%>
                 <li>
-                    <a href="<c:url value="/miniadm/sys/listMngr.ac" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>
+                    <a href="<c:url value="" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/miniadm/sys/listAuth.ac" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i>권한관리</a>
+                    <a href="<c:url value="" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i>권한관리</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/miniadm/sys/listCdGrp.ac" />" id="system_code_menu"><i class="material-icons-outlined">apps</i>코드관리</a>
+                    <a href="<c:url value="" />" id="system_code_menu"><i class="material-icons-outlined">apps</i>코드관리</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/miniadm/sys/listPopup.ac" />" id="system_popup_menu"><i class="material-icons-outlined">apps</i>팝업관리</a>
+                    <a href="<c:url value="" />" id="system_popup_menu"><i class="material-icons-outlined">apps</i>팝업관리</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/miniadm/sys/listConectLog.ac" />" id="system_mngrLog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a>
+                    <a href="<c:url value="" />" id="system_mngrLog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a>
                 </li>
             </c:if>
 
             <%--<c:if test="${menuActiveMap.adminMenu1 eq 'config'}">	&lt;%&ndash; 환경설정 : 2depth 메뉴 &ndash;%&gt;
                <li>
-                   <a href="<c:url value="/miniadm/config/detailLogo.ac" />" id="config_logo_menu"><i class="material-icons-outlined">apps</i>로고설정</a>
+                   <a href="<c:url value="/toy/config/detailLogo.ac" />" id="config_logo_menu"><i class="material-icons-outlined">apps</i>로고설정</a>
                </li>
                <li>
-                   <a href="<c:url value="/miniadm/config/detailOperation.ac" />" id="config_operation_menu"><i class="material-icons-outlined">apps</i>운영설정</a>
+                   <a href="<c:url value="/toy/config/detailOperation.ac" />" id="config_operation_menu"><i class="material-icons-outlined">apps</i>운영설정</a>
                </li>
                <li>
-                   <a href="<c:url value="/miniadm/config/listFee.ac" />" id="config_fee_menu"><i class="material-icons-outlined">apps</i>수수료관리</a>
+                   <a href="<c:url value="/toy/config/listFee.ac" />" id="config_fee_menu"><i class="material-icons-outlined">apps</i>수수료관리</a>
                </li>
              </c:if>--%>
 
@@ -233,24 +219,24 @@
 
             <%--<c:if test="${menuActiveMap.adminMenu1 eq 'stats'}">	&lt;%&ndash; 통계 : 2depth 메뉴 &ndash;%&gt;
               <li>
-                  <a href="<c:url value="/miniadm/stats/clientStats/listClientStats.ac" />" id="stats_clientStats_menu"><i class="material-icons-outlined">apps</i>고객통계</a>
+                  <a href="<c:url value="/toy/stats/clientStats/listClientStats.ac" />" id="stats_clientStats_menu"><i class="material-icons-outlined">apps</i>고객통계</a>
               </li>
               <li>
-                  <a href="<c:url value="/miniadm/stats/useStats/listUseStats.ac" />" id="stats_useStats_menu"><i class="material-icons-outlined">apps</i>고객이용통계</a>
+                  <a href="<c:url value="/toy/stats/useStats/listUseStats.ac" />" id="stats_useStats_menu"><i class="material-icons-outlined">apps</i>고객이용통계</a>
               </li>
               <li>
-                  <a href="<c:url value="/miniadm/stats/compStats/listCompStats.ac" />" id="stats_compStats_menu"><i class="material-icons-outlined">apps</i>입점업체통계</a>
+                  <a href="<c:url value="/toy/stats/compStats/listCompStats.ac" />" id="stats_compStats_menu"><i class="material-icons-outlined">apps</i>입점업체통계</a>
               </li>
               <li>
-                  <a href="<c:url value="/miniadm/stats/saleStats/listSaleStats.ac" />" id="stats_saleStats_menu"><i class="material-icons-outlined">apps</i>매출통계</a>
+                  <a href="<c:url value="/toy/stats/saleStats/listSaleStats.ac" />" id="stats_saleStats_menu"><i class="material-icons-outlined">apps</i>매출통계</a>
               </li>
               <li>
-                  <a href="<c:url value="/miniadm/statis/listVisitLog.ac" />" id="stats_visitLog_menu" class="drop"><i class="material-icons-outlined">apps</i>방문통계</a>
+                  <a href="<c:url value="/toy/statis/listVisitLog.ac" />" id="stats_visitLog_menu" class="drop"><i class="material-icons-outlined">apps</i>방문통계</a>
                   <div class="depth3">
                       <strong>접속통계</strong>
                       <ul>
-                          <li id="stats_visitLog_normal_menu"><a href="/miniadm/statis/listVisitLog.ac">일반통계</a></li>
-                          <li id="stats_visitLog_device_menu"><a href="/miniadm/statis/listVisitLogDevice.ac">기기별통계</a></li>
+                          <li id="stats_visitLog_normal_menu"><a href="/toy/statis/listVisitLog.ac">일반통계</a></li>
+                          <li id="stats_visitLog_device_menu"><a href="/toy/statis/listVisitLogDevice.ac">기기별통계</a></li>
                       </ul>
                   </div>
               </li>

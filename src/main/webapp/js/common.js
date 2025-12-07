@@ -875,6 +875,7 @@ function gfn_formatPhoneNumber(obj) {
  * 상품관리 > 추천상품 등록|해제
  * 상품 목록에서 추천상품 여부 checkbox 선택으로 등록|해제 설정
  */
+/*
 function gfn_changeRcmmGoodsStatus(chk, goodsUuid, goodsSe){
 
     var isChecked = $(chk).is(':checked');
@@ -883,7 +884,7 @@ function gfn_changeRcmmGoodsStatus(chk, goodsUuid, goodsSe){
     console.log(goodsSe);
 
     // 추천 상품 상태변경
-    var url = CONTEXT_PATH + "/miniadm/rcmm/goods/updateGoodsRcmmStatusAjax.doax";
+    var url = CONTEXT_PATH + "/toy/goods/updateGoodsRcmmStatusAjax.doax";
 
     $.ajax({
         type: 'GET',
@@ -902,6 +903,7 @@ function gfn_changeRcmmGoodsStatus(chk, goodsUuid, goodsSe){
         error: fn_AjaxError
     });
 }
+*/
 
 
 /****************************

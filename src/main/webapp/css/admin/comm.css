@@ -14,7 +14,6 @@ table tr td .not-content {border-width: 0; min-height: 400px;}
 }
 .not-content .text {font-size: 20px; color: #626984;}
 
-/* 콘텐츠 로딩바 - 개발자 김보검 */
 table tr td .loding-content {border-width: 0; min-height: 400px; padding: 100px 0;}
 .loding-content .icon {display: block; margin-bottom: 10px;}
 .loding-content .icon::after {
