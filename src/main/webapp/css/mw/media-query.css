@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+
+
+/* Device 390↓ */
+@media only screen and (max-width: 389px) {
+
+    
+
+}
+
+
+
+/* Device 375↓ (iPhone SE2) */
+@media only screen and (max-width: 375px) {
+
+    /* 추천장소 */
+    .label-card-group .label-card .txt {
+        min-width: 50px;
+    }
+
+
+    /* 주문조회 */
+    .order-list .img-fit {
+        flex: 0 0 85px;
+        width: 85px;
+        height: 100px;
+    }
+
+    .order-info .purchaser .r {flex: 0 0 100px;}
+
+}
+/* //Device 375↓ */
+
+
+
+/* Device 360↓ (iPhone5, SE1) */
+@media only screen and (max-width: 359px) {
+
+	/* Reset */
+    html {font-size: 60%;}
+
+
+    /* 추천장소 */
+    .label-card-group .label-card .txt {
+        min-width: 0;
+    }
+
+
+    /* 날씨 */
+    .weather-info .icon {
+        flex: 0 0 70px;
+    }
+
+}
+/* //Device 360↓ */
+
+
+
+/* Device 320↓ (Galaxy Fold) */
+@media only screen and (max-width: 320px) {
+
+	/* Reset */
+    html {font-size: 58%;}
+
+
+    /* 주문조회 */
+    .order-info .purchaser .r {flex: 0 0 75px;}
+
+}
+/* //Device 320↓ */

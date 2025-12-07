@@ -1,0 +1,307 @@
+@charset "UTF-8";
+
+
+
+/* ------------------------------------------ Wrap/Container ------------------------------------------ */
+/* Container */
+#wrapper {
+    min-width: 320px;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#main,
+.container,
+.inner {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.container,
+.inner {
+    padding: 0 1.5rem;
+    position: relative;
+}
+.inner {
+    padding-top: 20px;
+    padding-bottom: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.page-lock-bg {
+    display: none;
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 99;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    opacity: 0.5;
+}
+
+.reservation {padding-bottom: 5rem;}
+/* ------------------------------------------ //Wrap/Container ------------------------------------------ */
+
+
+
+
+
+/* ------------------------------------------ Header ------------------------------------------ */
+/* Common */
+#header {padding-top: 5px;}
+#header > .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#header .view-tit {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    font-size: 2.5rem;
+}
+#header .view-tit .ico {
+    height: 26px;
+    margin-left: 4px;
+}
+#header .view-tit .logo {height: 40px;}
+
+#header .side-btn {
+    position: absolute;
+    left: 0;
+    padding-left: inherit;
+}
+#header .side-btn strong {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: url("/images/mw/layout/head/menu.png") no-repeat center;
+    background-size: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#header .home {
+    position: absolute;
+    right: 0;
+    padding-right: inherit;
+}
+#header .home::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "home";
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+#header .home span {display: none;}
+
+#header.fixed {
+    position: fixed; z-index: 3;
+    top: 0; left: 0; right: 0;
+    background-color: transparent;
+}
+#header.fixed .side-btn strong {
+    background-image: url("/images/mw/layout/head/menu-white.png");
+}
+#header.fixed .home {display: none;}
+
+
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    width: 100%;
+    left: -3000px;
+    top: 0;
+    bottom: 0;
+    z-index: 98;
+    background: #fff;
+    overflow-y: auto;
+    padding-top: 5px;
+    padding-bottom: 30px;
+    transition: all .5s ease;
+}
+.side-menu.open {left: 0;}
+
+.side-menu .container {position: relative;}
+.side-menu .close {
+    position: absolute; z-index: 99;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: url("/images/mw/layout/head/close.png") no-repeat center;
+    background-size: 40px;
+}
+.side-menu .close strong {display: none;}
+.side-menu .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    font-size: 2.5rem;
+}
+.side-menu .title img {height: 40px;}
+
+.side-menu .bottom-menu {margin-top: 25px;}
+.side-menu .bottom-menu nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.side-menu .bottom-menu nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: calc(50% - 5px);
+    max-width: 135px;
+    height: 135px;
+    border: 5px solid #d4dade;
+    border-radius: 30px;
+    font-size: 2rem;
+    line-height: 2.1rem;
+}
+.side-menu .bottom-menu nav a .ico {height: 20px;}
+
+.side-menu .login-info {
+    font-size: 1.6rem;
+    color: #868e92;
+    margin-bottom: 15px;
+}
+.side-menu .login-info > div {
+    display: flex;
+    align-items: center;
+}
+.side-menu .login-info .user {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #d1d8dc;
+    border-radius: 50%;
+    margin-right: 10px;
+    overflow: hidden;
+}
+.side-menu .login-info .user::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: url("/images/mw/icon/user.png") no-repeat center;
+    background-size: 40px;
+}
+.side-menu .login-info .in .user {background-color: #0d1833;}
+.side-menu .login-info .in .user-fit {
+    width: 40px;
+    height: 40px;
+    margin: 0 10px 0 0;
+}
+.side-menu .login-info .in strong {color: #282828;}
+.side-menu .login-info .in .btn-round {
+    font-size: 12px;
+    font-weight: 700;
+    background-color: #4772dd;
+}
+
+.gnb-menu {padding-left: 6px;}
+.gnb-menu nav a {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+}
+.gnb-menu nav a::before {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url("/images/mw/layout/head/arrow.png") no-repeat center;
+    background-size: 16px;
+}
+.gnb-menu nav li.drop > a::before {
+    background-image: url("/images/mw/layout/head/drop.png");
+}
+
+.gnb-menu nav > ul > li:not(:last-child) {margin-bottom: 12px;}
+.gnb-menu nav > ul > li > a {font-size: 2rem;}
+.gnb-menu nav > ul > li > a::before {margin-right: 8px;}
+.gnb-menu nav > ul > li > ul > li > a {
+    font-size: 1.6rem;
+    padding-left: 22px;
+}
+.gnb-menu nav > ul > li > ul > li > a::before {margin-right: 6px;}
+/* ------------------------------------------ //Header ------------------------------------------ */
+
+
+
+
+
+/* ------------------------------------------ Footer ------------------------------------------ */
+/* 상단으로가기 */
+.go-top {
+    display: none;
+    position: fixed; z-index: 49;
+    right: 10px;
+    bottom: 70px;
+}
+.go-top a {display: block;}
+.go-top img {display: block; height: 42px;}
+
+
+
+/* COPYRIGHT */
+#footer {
+    position: relative; z-index: 3;
+    top: -30px;
+    height: 0;
+    color: #c3c1ca;
+}
+#footer .copy {font-size: 12px; text-align: center;}
+#footer::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -30px;
+    left: 0; right: 0;
+    height: 75px;
+    background: #000;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+/*
+#footer.bg3::before {background: #a4e1b8;}
+#footer.bg4::before {background: #ffeadd;}
+#footer.bg5::before {background: #aae6ff;}
+#footer.bg6::before {background: #e0e7ed;}
+*/
+
+#footer.fixed {
+    position: fixed; z-index: 2;
+    bottom: 0; left: 0; right: 0;
+    top: auto;
+    height: auto;
+    padding: 10px 0;
+}
+#footer.fixed .copy {color: #fce9b6;}
+#footer.fixed::before {display: none;}
+/* ------------------------------------------ //Footer ------------------------------------------ */
+
+
+
+
+
+/* ------------------------------------------ Contents ------------------------------------------ */
+#main {
+    min-height: calc(100vh - 40px);
+    padding-bottom: 100px;
+}
+
+#header.fixed + #main {
+    padding-bottom: 0;
+}
+/* ------------------------------------------ //Contents ------------------------------------------ */

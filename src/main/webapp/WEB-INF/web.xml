@@ -5,7 +5,7 @@
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <display-name>AdminProject</display-name>
+    <display-name>ToyProject</display-name>
 
     <!-- 인코딩 필터: 요청/응답 UTF-8 설정 -->
     <filter>
@@ -15,22 +15,27 @@
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
         </init-param>
-        <init-param>
-            <param-name>forceEncoding</param-name>
-            <param-value>true</param-value>
-        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.do</url-pattern>
+        <url-pattern>*.doax</url-pattern>
+        <url-pattern>*.ac</url-pattern>
+        <url-pattern>*.acax</url-pattern>
     </filter-mapping>
 
 
-    <!-- Spring Context 설정 파일 위치 -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:egovframework/spring/context-*.xml</param-value>
-    </context-param>
+    <!-- This filter can be removed when using StandardServletMultipartResolver -->
+    <!--<filter>
+        <filter-name>MultipartFilter</filter-name>
+        <filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>MultipartFilter</filter-name>
+        <url-pattern>*.ac</url-pattern>
+        <url-pattern>*.do</url-pattern>
+        <url-pattern>*.doax</url-pattern>
+    </filter-mapping>-->
 
     <!-- spring security -->
     <filter>
@@ -44,18 +49,44 @@
         <url-pattern>*.doax</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>HTMLTagFilter</filter-name>
+        <filter-class>org.egovframe.rte.ptl.mvc.filter.HTMLTagFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HTMLTagFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+        <url-pattern>*.ac</url-pattern>
+        <url-pattern>*.doax</url-pattern>
+    </filter-mapping>
+
+    <!-- Spring Context 설정 파일 위치 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:egovframework/spring/context-*.xml</param-value>
+    </context-param>
+
     <!-- Spring Context 로딩 리스너 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <!-- 추후 구현 -->
+    <!--<listener>
+        <listener-class>toy.com.listener.SessionListener</listener-class>
+    </listener>-->
+
     <!-- DispatcherServlet 등록 -->
     <servlet>
-        <servlet-name>admin</servlet-name>
+        <servlet-name>action</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/spring/dispatcher-servlet.xml</param-value>
+            <param-value>/WEB-INF/config/egovframework/springmvc/dispatcher-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
 
@@ -65,29 +96,58 @@
             <max-request-size>52428800</max-request-size>     <!-- 50MB -->
             <file-size-threshold>0</file-size-threshold>
         </multipart-config>
+
     </servlet>
 
+
     <servlet-mapping>
-        <servlet-name>admin</servlet-name>
+        <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
         <url-pattern>*.doax</url-pattern>
         <url-pattern>*.ac</url-pattern>
         <url-pattern>*.acax</url-pattern>
+        <!--<url-pattern>/</url-pattern>-->
     </servlet-mapping>
+
+
 
     <!-- 초기 접속 페이지 -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <session-config>
+        <session-timeout>60</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <!--<secure>true</secure>-->
+            <!-- Set to true if using HTTPS -->
 
-    <!-- 기본 에러 페이지 설정 -->
+        </cookie-config>
+    </session-config>
+
+    <!-- Error Page for WAS/Servlet Container Layer -->
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error.jsp?errCode=ERROR_SERVER</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error.jsp?errCode=ERROR_SERVER</location>
+    </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/jsp/toy/com/error.jsp</location>
+        <location>/error.jsp?errCode=NOT_FIND_PAGE</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/WEB-INF/jsp/toy/com/error.jsp</location>
+        <location>/error.jsp?errCode=ERROR_SERVER</location>
     </error-page>
 
 

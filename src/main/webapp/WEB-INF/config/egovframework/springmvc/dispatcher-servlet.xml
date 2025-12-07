@@ -12,6 +12,8 @@
     <!-- @Controller, @RequestMapping 이 있는 클래스 스캔 (관리자 전용 경로만 포함) -->
     <context:component-scan base-package="toy">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>-->
     </context:component-scan>
 
     <!-- Spring MVC 설정 활성화 (기본 설정 포함: @RequestMapping 등) -->
@@ -23,10 +25,10 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <!-- Multipart 파일 업로드 설정 -->
-    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="10485760" /> &lt;!&ndash; 10MB &ndash;&gt;
-    </bean>-->
+    <!-- From external Spring docs style -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+
 
     <!-- 예외 처리 기본 뷰 설정 -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">

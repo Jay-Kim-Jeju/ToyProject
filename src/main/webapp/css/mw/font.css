@@ -1,0 +1,184 @@
+/* 웹폰트 사용범위 */
+/*
+WOFF2 >> 경량화 폰트 (크롬 지원)
+WOFF >> 전체지원 (ie9부터 지원)
+eot >> ie6~ie9 지원
+*/
+
+
+
+/* ------------------------------------------ 임시 ------------------------------------------ */
+/*포인트체 Montserrat*/
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap'); */
+
+
+
+
+
+/* ------------------------------------------ 웹폰트 (Local) ------------------------------------------ */
+/* GmarketSans */
+@font-face {
+    font-family: 'GmarketSans';
+    font-weight: 300;
+    font-style: normal;
+    src: url('/font/GmarketSansLight.eot');
+    src: url('/font/GmarketSansLight.eot?#iefix') format('embedded-opentype'),
+         url('/font/GmarketSansLight.woff2') format('woff2'),
+         url('/font/GmarketSansLight.woff') format('woff'),
+         url('/font/GmarketSansLight.ttf') format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GmarketSans';
+    font-weight: 500;
+    font-style: normal;
+    src: url('/font/GmarketSansMedium.eot');
+    src: url('/font/GmarketSansMedium.eot?#iefix') format('embedded-opentype'),
+         url('/font/GmarketSansMedium.woff2') format('woff2'),
+         url('/font/GmarketSansMedium.woff') format('woff'),
+         url('/font/GmarketSansMedium.ttf') format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GmarketSans';
+    font-weight: 700;
+    font-style: normal;
+    src: url('/font/GmarketSansBold.eot');
+    src: url('/font/GmarketSansBold.eot?#iefix') format('embedded-opentype'),
+         url('/font/GmarketSansBold.woff2') format('woff2'),
+         url('/font/GmarketSansBold.woff') format('woff'),
+         url('/font/GmarketSansBold.ttf') format("truetype");
+    font-display: swap;
+}
+
+
+
+/* Noto Sans */
+/*
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url("/font/NotoSansKR-Thin.woff2") format('woff2'),
+         url("/font/NotoSansKR-Thin.woff") format('woff'),
+         url("/font/NotoSansKR-Thin.ttf") format('truetype'),
+         url("/font/NotoSansKR-Thin.eot");
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/font/NotoSansKR-Light.woff2") format('woff2'),
+         url("/font/NotoSansKR-Light.woff") format('woff'),
+         url("/font/NotoSansKR-Light.ttf") format('truetype'),
+         url("/font/NotoSansKR-Light.eot");
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/font/NotoSansKR-Regular.woff2") format('woff2'),
+         url("/font/NotoSansKR-Regular.woff") format('woff'),
+         url("/font/NotoSansKR-Regular.ttf") format('truetype'),
+         url("/font/NotoSansKR-Regular.eot");
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/font/NotoSansKR-Medium.woff2") format('woff2'),
+         url("/font/NotoSansKR-Medium.woff") format('woff'),
+         url("/font/NotoSansKR-Medium.ttf") format('truetype'),
+         url("/font/NotoSansKR-Medium.eot");
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/font/NotoSansKR-Bold.woff2") format('woff2'),
+         url("/font/NotoSansKR-Bold.woff") format('woff'),
+         url("/font/NotoSansKR-Bold.ttf") format('truetype'),
+         url("/font/NotoSansKR-Bold.eot");
+}
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("/font/NotoSansKR-Black.woff2") format('woff2'),
+         url("/font/NotoSansKR-Black.woff") format('woff'),
+         url("/font/NotoSansKR-Black.ttf") format('truetype'),
+         url("/font/NotoSansKR-Black.eot");
+}
+*/
+/* ------------------------------------------ //웹폰트 (Local) ------------------------------------------ */
+
+
+
+
+
+/* ------------------------------------------ Material Icons (구글폰트아이콘) ------------------------------------------ */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url("/font/MaterialIcons-Regular.eot");	/* For IE6-8 */
+    src: local('Material Icons'),
+         local('MaterialIcons-Regular'),
+         url("/font/MaterialIcons-Regular.woff2") format('woff2'),
+         url("/font/MaterialIcons-Regular.woff") format('woff'),
+         url("/font/MaterialIcons-Regular.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "Material Icons Outlined";
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url("/font/material-icons-outlined.woff2") format("woff2"),
+         url("/font/material-icons-outlined.woff") format("woff");
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+}
+
+.material-icons-outlined {
+    font-family: "Material Icons Outlined";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga";
+}
+/* ------------------------------------------ //Material Icons (구글폰트아이콘) ------------------------------------------ */

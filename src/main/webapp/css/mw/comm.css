@@ -1,0 +1,2882 @@
+@charset "UTF-8";
+
+/* ---------------------------------------------- Browser ---------------------------------------------- */
+/* IE 하위 브라우저용 */
+.not-browser {width: 600px; margin: auto; padding: 150px 20px; text-align: center;}
+.not-browser img.icon {display: inline-block;}
+
+.not-browser .warning {text-align: center;}
+.not-browser .warning span {
+    display: inline-block; width: 82px; height: 71px;
+    background-image: url("/images/mw/not/error.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.not-browser .error-title {
+    font-size: 24px; line-height: 34px; font-weight: bold; color: #3f3f3f; margin-top: 30px;
+    border-bottom: 1px solid #e1e3e4; margin-bottom: 20px; padding-bottom: 20px;
+}
+.not-browser .error-title .sub {display: block; text-align: center; font-size: 18px; line-height: 28px; color: #5f5f60;}
+
+.not-browser .error-text {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 24px;
+    color: #5f5f60;
+    padding: 0 40px;
+}
+.not-browser .button {margin-top: 70px;}
+.not-browser .button a {
+    display: inline-block;
+    background: #5f5f60; color: #fff;
+    font-size: 14px; line-height: 35px;
+    font-weight: bold;
+    padding: 0 15px;
+}
+.not-browser .button a:hover {background: #3f3f3f;}
+/* ---------------------------------------------- //Browser ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 서버점검 ---------------------------------------------- */
+.server-work {max-width: 600px; margin: auto;}
+.server-work img {width: 100%;}
+/* ---------------------------------------------- //서버점검 ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 에러페이지(Error Page) ---------------------------------------------- */
+/* Error Page (404 error) */
+.error-wrap {
+    max-width: 500px;
+    margin: auto;
+    padding: 15vh 20px;
+    text-align: center;
+}
+.error-wrap img.icon {display: inline-block;}
+.error-wrap .error-msg {
+    font-size: 2.0rem;
+    font-weight: bold;
+    color: #3f3f3f;
+    margin-top: 30px;
+}
+.error-wrap .error-text {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #5f5f60;
+    border-top: 1px solid #e1e3e4;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+.error-wrap .button {margin-top: 70px;}
+.error-wrap .button a {
+    display: inline-block;
+    background: #5f5f60;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 3.6rem;
+    padding: 0 1.8rem;
+}
+.error-wrap .button a:hover {background: #3f3f3f;}
+/* ---------------------------------------------- //에러페이지(Error Page) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Not Content ---------------------------------------------- */
+/* 콘텐츠 없을 시 */
+.not-content {
+    text-align: center;
+    padding: 5rem 0;
+}
+.not-content .icon {margin-bottom: 1.5rem;}
+.not-content .icon img {display: inline-block; height: 50px;}
+.not-content .icon.lg img {height: 130px;}
+.not-content .txt {font-size: 1.3rem; line-height: 1.8rem; color: var(--txt-read2);}
+.not-content .lg-txt {font-size: 2rem; line-height: 3rem;}
+
+
+
+/* Not Message */
+.not-msg {
+    padding-left: 20px;
+    font-size: 0.812rem; line-height: 1.25rem; color: red;
+    position: relative;
+    word-break: keep-all;
+}
+.not-msg:not(:first-child) {margin-top: 6px;}
+.not-msg::before {
+    font-family: 'Material Icons';
+    content: "info";
+    display: inline-block; vertical-align: middle;
+    position: absolute; left: 0; top: 0;
+    font-size: 15px;
+}
+/* ---------------------------------------------- //Not Content ---------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+/* ---------------------------------------------- 컬러(color) ---------------------------------------------- */
+/* 폰트 */
+.point-color {color: var(--point-color) !important;}
+
+.text-white {color: #fff !important;}
+.text-black {color: #272222 !important;}
+.text-gray {color: #b7b8b7 !important;}
+.text-red {color: #f12b2b !important;}
+.text-pink {color: #e5555e !important;}
+.text-purple {color: #eb05dd !important;}
+.text-purple2 {color: #b200d1 !important;}
+.text-blue {color: #303ef8 !important;}
+.text-green {color: #16a027 !important;}
+.text-yellow {color: #f4db09 !important;}
+
+.color-red2 {color: var(--txt-read2);}
+
+
+
+/* hr Line */
+hr.black {border-color: #333;}
+
+
+
+/* Background */
+.bg-white {background-color: #fff;}
+.bg-gray {background-color: #b0afaf; color: #fff !important;}
+.bg-red {background-color: #dc2c2c; color: #fff !important;}
+.bg-blue {background-color: #3366ff; color: #fff !important;}
+.bg-green {background-color: green; color: #fff !important;}
+.bg-yellow {background-color: #f9c031; color: #fff !important;}
+.bg-orange {background-color: #fb822f; color: #fff !important;}
+/* ---------------------------------------------- //컬러(color) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 리스트 스타일 ---------------------------------------------- */
+/* Common */
+ul.bullet li,
+ul.hyphen li,
+ul.decimal li,
+ol.decimal li {
+    font-size: 1.3rem;
+    line-height: 2.0rem;
+    color: #808080;
+    margin-top: 2px;
+    position: relative;
+    word-break: keep-all;
+}
+ul.bullet li:first-child,
+ul.hyphen li:first-child,
+ul.decimal li:first-child,
+ol.decimal li:first-child {
+    margin-top: 0 !important;
+}
+
+ul.bullet.size13 li,
+ul.hyphen.size13 li,
+ul.decimal.size13 li,
+ol.decimal.size13 li {
+    font-size: 0.812rem;
+    line-height: 1.25rem;
+}
+
+ul.bullet.size14 li,
+ul.hyphen.size14 li,
+ul.decimal.size14 li,
+ol.decimal.size14 li {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+}
+
+ul.bullet.size15 li,
+ul.hyphen.size15 li,
+ul.decimal.size15 li,
+ol.decimal.size15 li {
+    font-size: 0.937rem;
+    line-height: 1.625rem;
+}
+
+
+
+/* Bullet */
+ul.bullet > li {padding-left: 18px;}
+ul.bullet > li::before {
+    content: "";
+    display: inline-block;
+    position: absolute; left: 5px; top: 11px;
+    width: 4px; height: 4px;
+    background: #333;
+    border-radius: 50%; 
+}
+ul.bullet .depth2 {margin: 4px 0 10px; padding-left: 0 !important;}
+ul.bullet .depth2 li {padding-left: 10px;}
+ul.bullet .depth2 li::before {
+    content: "-";
+    position: absolute; top: -1px; left: 0;
+}
+ul.bullet > li:last-child .depth2 {margin-bottom: 0;}
+
+ul.bullet > li > ol.decimal {margin: 4px 0 10px;}
+
+ul.bullet .depth3 {margin: 4px 0 10px; padding-left: 0 !important;}
+ul.bullet .depth3 li {padding-left: 10px;}
+ul.bullet .depth3 li::before {
+    content: "";
+    position: absolute; top: 0.75rem; left: 0;
+    width: 3px;
+    height: 3px;
+    background: #777;
+    border-radius: 50%;
+}
+
+ul.bullet.size13 > li::before {top: 8px;}
+
+p.bullet {position: relative; padding-left: 12px;}
+p.bullet::before {
+    content: "";
+    display: inline-block;
+    position: absolute; left: 0; top: 8px;
+    width: 3px; height: 3px;
+    background: #333;
+    border-radius: 50%;
+}
+
+
+
+/* Hyphen */
+ul.hyphen > li {padding-left: 10px;}
+ul.hyphen > li::before {
+    content: "-";
+    position: absolute; top: -1px; left: 0;
+}
+
+
+
+/* Decimal */
+ul.decimal,
+ol.decimal {
+    padding-left: 18px;
+}
+ul.decimal > li,
+ol.decimal > li {
+    list-style-type: decimal;
+}
+
+
+
+/* Ol > Number */
+ol.number li {list-style: decimal}
+
+
+
+
+
+
+/* Warning */
+ul.warning li {
+    padding-left: 20px;
+    font-size: 15px; line-height: 22px;
+    color: #797474;
+    position: relative;
+    margin-top: 6px;
+}
+ul.warning li:first-child {margin-top: 0;}
+
+ul.warning.lineB {
+    border-bottom: 1px solid #e7e8e9;
+    padding: 0 20px 20px;
+    margin-bottom: 40px;
+}
+ul.warning.lineB.pd-5 {padding: 0 5px 20px;}
+
+ul.warning.sm,
+ul.bullet.sm {padding: 0 10px;}
+ul.warning.sm li,
+ul.bullet.sm li {font-size: 13px; margin-top: 5px;}
+ul.warning.sm li::before {top: 2px;}
+
+ul.warning.top,
+ul.bullet.top {
+    margin: 0 0 10px;
+}
+ul.warning.bottom,
+ul.bullet.bottom {
+    margin: 10px 0 0;
+}
+
+
+
+/* List Style */
+ul.list-st1 li {
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    position: relative;
+    padding-left: 10px;
+}
+ul.list-st1 li:not(:last-child) {margin-bottom: 0.5rem;}
+ul.list-st1 li::before {
+    content: "";
+    display: block;
+    position: absolute; top: 2px; left: 0;
+    width: 3px;
+    height: 14px;
+    background: var(--point-color);
+}
+/* ---------------------------------------------- //리스트 스타일 ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 페이징(paging) ---------------------------------------------- */
+/* 기본옵션 */
+.paging-wrap {text-align: center; margin: 30px 0 0;}
+.paging-wrap ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    overflow-x: auto;
+    padding: 0 10px;
+    gap: 0 8px;
+}
+.paging-wrap ul li {
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid #fb9d9d;
+    border-radius: 4px;
+}
+.paging-wrap ul li,
+.paging-wrap ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    text-align: center;
+    color: #d3ad95;
+    font-weight: 700;
+}
+
+.paging-wrap ul li.active {
+    background: #f15858;
+    border-color: #f15858;
+    color: #fff;
+}
+
+.paging-wrap ul li.first a::after {content: url("/images/mw/paging/first.png");}
+.paging-wrap ul li.prev a::after {content: url("/images/mw/paging/prev.png");}
+.paging-wrap ul li.next a::after {content: url("/images/mw/paging/next.png");}
+.paging-wrap ul li.last a::after {content: url("/images/mw/paging/last.png");}
+
+.paging-wrap ul li a img {display: inline-block; position: relative; top: -1px;}
+
+
+
+/* Bottom More */
+.bottom-more {
+    text-align: center;
+    margin: 20px 0;
+}
+.bottom-more button {
+    width: 80px;
+    height: 30px;
+    background: url("/images/mw/icon/btn/more.png") no-repeat center;
+    background-size: auto 30px;
+}
+.bottom-more button strong {
+    display: none;
+}
+/*
+.bottom-more .btn {
+    font-size: 14px;
+    line-height: 35px;
+    padding: 0 15px;
+}
+.bottom-more .btn::after {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "expand_more";
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    left: 5px;
+}
+*/
+/* ---------------------------------------------- //페이징(paging) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 테이블(table) ---------------------------------------------- */
+/* Table > Reset */
+table tr.link {cursor: pointer;}
+table th.left,
+table td.left {
+    text-align: left !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+table th.center,
+table td.center {text-align: center !important;}
+table th.right,
+table td.right {
+    text-align: right !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+table th.top,
+table td.top {vertical-align: top !important;}
+table td.lock {position: relative;}
+
+table caption.left {text-align: left;}
+table caption.center {text-align: center;}
+table caption.right {text-align: right;}
+
+table .line-left {border-left-width: 1px !important;}
+table .line-right {border-right-width: 1px !important;}
+table .line-top {border-top-width: 1px !important;}
+table .line-bottom {border-bottom-width: 1px !important;}
+
+table tr.line-bold-bottom th,
+table tr.line-bold-bottom td,
+table th.line-bold-bottom,
+table td.line-bold-bottom {
+    border-bottom: 1px solid #000 !important;
+}
+table .xs-tit {display: none;}
+
+
+
+/* Table > Basic */
+table.basic {
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    background: #fff;
+}
+table.basic th,
+table.basic td {
+    font-size: 1.3rem;
+    line-height: 2rem;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+table.basic.size13 th,
+table.basic.size13 td {
+    font-size: 1.3rem;
+    line-height: 2rem;
+}
+
+
+
+/* Table > Caption */
+table caption {
+    width: 0px;
+    height: 0px;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+table caption.st1 {
+    text-align: left;
+    width: auto;
+    height: auto;
+    font-size: 0.875rem;
+    line-height: normal;
+    text-indent: 0;
+    overflow: visible;
+    margin: 5px 0;
+}
+
+
+
+
+
+
+
+/* 테이블 옵션 (col) */
+.table-wrapper.line {
+    border: 1px solid #919191;
+    border-width: 1px 0 1px 0;
+}
+
+table.col {
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    background: #fff;
+}
+table.col > thead > tr > th,
+table.col > tbody > tr > th,
+table.col > tbody > tr > td {
+    text-align: center;
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    padding: 6px 2px;
+    border: 1px solid #eee;
+}
+table.col > thead > tr > th {
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.6rem;
+    color: #292929;
+    background: #f9f9f9;
+}
+table.col > tbody > tr > th {background: #f9f9f9;}
+table.col > tbody > tr > th,
+table.col > tbody > tr > td {
+    color: #434141;
+    min-height: 25px;
+    word-break: break-all;
+}
+table.col > tbody > tr > td > p:not(:last-child) {margin-bottom: 4px;}
+
+table.col > tbody > tr > td a:not(.btn) {color: #333;}
+table.col > tbody > tr > td a.title {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+table.col > tbody > tr > td a.tit {
+    font-weight: 500;
+    color: #333;
+    transition: color .3s ease;
+}
+table.col > tbody > tr > td a.tit:hover {color: #1c62d9;}
+
+table.col.left > tbody > tr > td {text-align: left; padding-left: 10px; padding-right: 10px;}
+table.col.center > tbody > tr > td {text-align: center;}
+table.col.right > tbody > tr > td {text-align: right; padding-left: 10px; padding-right: 10px;}
+
+table.col.not-line > thead > tr > th,
+table.col.not-line > tbody > tr > th,
+table.col.not-line > tbody > tr > td {
+    border-width: 0 0 1px 0;
+}
+table.col.not-line > thead > tr > th {border-width: 0;}
+
+table.col.not-line2 > thead > tr > th,
+table.col.not-line2 > tbody > tr > th,
+table.col.not-line2 > tbody > tr > td, 
+table.col.not-line2 > thead > tr > th {
+    border-width: 0;
+}
+
+table.col .btn {
+    font-size: 0.875rem;
+    line-height: 36px;
+    padding: 0 10px;
+    min-width: 60px;
+}
+
+table.col.sm > thead > tr > th,
+table.col.sm > tbody > tr > th,
+table.col.sm > tbody > tr > td {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    padding: 5px 2px;
+}
+
+table.col.st2 > thead > tr > th {
+    font-size: 1.5rem;
+    color: var(--point-color);
+    background: var(--sub-color);
+}
+table.col.st2 > thead > tr > th,
+table.col.st2 > tbody > tr > th,
+table.col.st2 > tbody > tr > td {
+    padding: 10px 2px;
+}
+
+table.col.st3 > thead > tr > th {
+    font-weight: 500;
+    color: var(--txt-read2);
+    background: transparent;
+}
+table.col.st3 > thead > tr > th,
+table.col.st3 > tbody > tr > th,
+table.col.st3 > tbody > tr > td {
+    padding: 6px 2px;
+}
+table.col.st3 > tbody > tr > td {font-weight: 700;}
+
+table.col.fee > thead > tr > th {font-size: 1.5rem;}
+table.col.fee > thead > tr > th,
+table.col.fee > tbody > tr > th,
+table.col.fee > tbody > tr > td {
+    font-size: 1.5rem;
+    padding: 15px 8px;
+}
+table.col.fee > tbody > tr > td:first-child {
+    border-left: none;
+}
+table.col.fee > tbody > tr > td:last-child {
+    border-right: none;
+}
+table.col.fee td strong,
+table.col.fee td span,
+table.col.fee td small {
+    display: inline-block;
+    vertical-align: middle;
+}
+table.col.fee td .lg {font-size: 2rem;}
+table.col.fee td small {
+    font-size: 12px !important;
+    color: var(--txt-read2);
+}
+
+
+
+/* 테이블 옵션 (row) */
+table.row {
+    width: 100%;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    word-break: break-all;
+}
+table.row > thead > tr > th,
+table.row > tbody > tr > th,
+table.row > tbody > tr > td {
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    border: 1px solid #ededed;
+}
+table.row > thead > tr > th,
+table.row > tbody > tr > th {
+    font-weight: 700;
+    text-align: left;
+    padding: 0.8rem 2px;
+}
+
+table.row > thead > tr > th,
+table.row > tbody > tr > th {
+    background-color: #f9f9f9;
+}
+
+table.row > tbody > tr > th {
+    padding: 6px 10px 6px 12px;
+}
+table.row > tbody > tr > td {
+    text-align: left;
+    padding: 6px 10px 6px 20px;
+}
+
+table.row > tbody > tr > th.not-line,
+table.row > tbody > tr > td.not-line {border: none;}
+
+table.row > tbody > tr > th.top {vertical-align: top;}
+
+table.row > tbody > tr.align-top > th,
+table.row > tbody > tr.align-top > td {
+    vertical-align: top;
+}
+table.row > tbody > tr.align-top > th {padding-top: 18px;}
+
+table.row.left th,
+table.row.left td {text-align: left;}
+table.row.left th {padding: 10px 15px;}
+table.row.center th, 
+table.row.center td {text-align: center;}
+
+table.row.depth {border: 1px solid #ddd; margin: 0;}
+
+
+
+/* 필수표시 제목 */
+table.row th .tit {position: relative; padding-left: 20px;}
+table.row th .tit.required::before {
+    content: "";
+    display: block;
+    position: absolute; left: 0; top: 4px;
+    width: 14px; height: 14px;
+    background: url("/images/mw/icon/basic/checked.png") no-repeat center;
+    background-size: 14px;
+}
+
+
+
+/* Table Row White Style */
+table.row.white > thead > tr > th,
+table.row.white > tbody > tr > th {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+/* ---------------------------------------------- //테이블(table) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 버튼(button) ---------------------------------------------- */
+.btn {
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.4rem;
+    line-height: 4rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: var(--point-color);
+    border: 1px solid var(--point-color);
+    border-radius: 20px;
+    padding: 0px 1rem;
+    margin: 1px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    min-width: 130px;
+    position: relative;
+    z-index: 2;
+}
+span.btn {cursor: auto;}
+
+.btn.line {
+    background-color: white;
+    border-color: #007bc7;
+    color: #007bc7;
+}
+.btn.multiline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: normal !important;
+}
+
+
+
+/* Button Color */
+.btn.light {
+    background-color: #ecf5ff;
+    border-color: #ecf5ff;
+    color: var(--point-color);
+}
+.btn.soft {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background-color: #f9f9f9;
+    border-color: #f9f9f9;
+    color: var(--point-color);
+}
+.btn.soft.active {
+    background-image: linear-gradient(66.2505055071332deg, rgba(97, 85, 209,1) 48.46%,rgba(96, 85, 208,1) 48.46%,rgba(26, 117, 204,1) 81.79333333333332%);
+    color: #fff;
+}
+.btn.white {
+    background-color: #fff;
+    border-color: var(--point-color);
+    color: var(--point-color);
+}
+.btn.white:disabled {
+	filter: grayscale(1);
+    opacity: 0.3;
+}
+.btn.light-gray {
+    font-weight: 500;
+    background-color: #f9f9f9;
+    border-color: #f9f9f9;
+    color: var(--point-color);
+}
+
+.btn.active {
+    background-color: var(--point-color);
+    border-color: var(--point-color);
+    color: #fff;
+}
+
+
+.btn.gray {background-color: #838383; border-color: #838383; color: #fff;}
+.btn.dark {background-color: #61605f; border-color: #61605f; color: #fff;}
+.btn.black {background-color: #000; border-color: #000; color: #fff;}
+.btn.black.line {background-color: transparent; color: #000;}
+
+.btn.blue {background-color: #0074b9; border-color: #0074b9; color: #fff;}
+.btn.blue:active {background-color: #2774ac;}
+
+.btn.blueGreen {background-color: #1fadd0; border-color: #1fadd0; color: #fff;}
+.btn.blueGreen:hover:not(:disabled) {background-color: #1d9cbb;}
+.btn.blueGreen:active {background-color: #1986a1;}
+
+.btn.red {background-color: #ff202b; border-color: #ff202b; color: #fff;}
+.btn.red.line {
+    background-color: #fff;
+    color: #ff202b;
+}
+
+.btn.green {background-color: #009e75; border-color: #009e75; color: #fff;}
+.btn.green:hover:not(:disabled) {background-color: #138a22; border-color: #138a22;}
+.btn.green:active {background-color: #116f1c;}
+.btn.green.line {background-color: transparent; color: #16a027;}
+.btn.green.line:hover {color: #fff;}
+
+.btn.pink {background-color: #e76f6f; border-color: #e76f6f; color: #fff;}
+.btn.pink:hover:not(:disabled) {background-color: #d56767;}
+.btn.pink:active {background-color: #bf5c5c;}
+
+.btn.purple {background-color: #b200d1; border-color: #b200d1; color: #fff;}
+.btn.purple:hover:not(:disabled) {background-color: #a200be;}
+.btn.purple:active {background-color: #8d00a6;}
+.btn.purple.line {background-color: transparent; color: #b200d1;}
+
+.btn.transparent {background-color: transparent; border: none;}
+
+.btn.cancel {
+    background-color: #ff5021;
+    border-color: #ff5021;
+    color: #fff;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+}
+
+
+
+/* 버튼 크기 */
+.btn.xs {font-size: 11px; line-height: 18px; padding: 0 4px;}
+.btn.xs2 {
+    font-size: 13px;
+    line-height: 20px;
+    padding: 0 12px;
+    border-radius: 14px;
+    min-width: 65px;
+}
+
+.btn.sm {
+    font-size: 13px !important;
+    font-weight: 500;
+    line-height: 20px !important;
+    height: auto !important;
+    padding: 0 5px;
+    border-radius: 5px;
+    min-width: 0;
+}
+.btn.sm.wide {min-width: 115px;}
+
+.btn.sm-round {
+    line-height: 30px !important;
+    border-radius: 15px !important;
+    padding: 0 15px;
+    min-width: 0;
+}
+.btn.sm-round.ico-login,
+.btn.sm-round.ico-out {
+    padding-left: 30px;
+}
+.btn.sm-round.ico-login::before,
+.btn.sm-round.ico-out::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: url("/images/mw/icon/btn/key.png") no-repeat center;
+    background-size: 20px;
+}
+.btn.sm-round.ico-out::before {
+    background-image: url("/images/mw/icon/btn/key.png");
+}
+
+.btn.sm-round.ico-out {min-width: 90px;}
+
+.btn.md {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0 10px;
+    border-radius: 10px;
+    min-width: 76px;
+}
+.btn.lg {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 5.5rem;
+    height: auto !important;
+    padding: 0 2.5rem;
+}
+.btn .block {line-height: 2.2rem;}
+
+.btn.md-wide {
+    font-size: 1.5rem;
+    line-height: 3.5rem;
+    min-width: 110px;
+    border-radius: 2px;
+}
+
+
+
+/* Btn Round */
+.btn.round {border-radius: 10px;}
+
+.btn-round {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff4b21;
+    color: #fff;
+    border-radius: 50px;
+    padding: 2px 8px;
+}
+
+
+
+/* Btn Icon */
+.btn.ico-home {
+    padding-left: 35px;
+}
+.btn.ico-home::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background: url("/images/mw/icon/btn/home.png") no-repeat center;
+    background-size: 30px;
+}
+
+
+
+/* Btn Style */
+button[type="reset"],
+.form-search .btn.all {
+    width: 130px;
+    height: 30px;
+    line-height: 28px;
+    background: #333;
+    border: none;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    padding-left: 12px;
+}
+button[type="reset"]::before,
+.form-search .btn.all::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: url("/images/mw/icon/btn/reset.png") no-repeat center;
+    background-size: 20px;
+}
+.form-search .btn.all::before {background-image: url("/images/mw/icon/btn/all.png")}
+
+.search-btn {
+    width: 130px;
+    height: 40px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--point-color);
+    border-radius: 20px;
+    position: relative;
+    padding-left: 12px;
+}
+.search-btn::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background: url("/images/mw/icon/btn/search.png") no-repeat center;
+    background-size: 30px;
+}
+
+button.delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+}
+button.delete::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "close";
+    font-size: 18px;
+}
+
+.btn-more {
+    width: 100%;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    line-height: 4.0rem;
+    color: #999;
+    border-top: 1px solid #ededed;
+}
+
+.btn-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    color: var(--point-color);
+    background: var(--sub-color);
+    border: none;
+    border-radius: 50%;
+}
+.btn-add::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "add";
+    font-size: 18px;
+}
+.btn-add strong {display: none;}
+
+.help-btn {
+    min-width: 70px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 30px;
+    background: #ecf5ff;
+    color: var(--point-color);
+    border-radius: 15px;
+    padding: 0 5px;
+}
+.help-btn i::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "help";
+    font-size: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+}
+
+button.copy {padding: 3px 6px;}
+button.copy::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "content_copy";
+    font-size: 18px;
+    color: var(--point-color);
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+}
+button.copy strong {display: none;}
+
+.side-edit,
+.side-save {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    background: var(--point-color);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 12px;
+}
+.side-edit::before,
+.side-save::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "edit";
+    font-size: 18px;
+}
+.side-save::before {content: "save";}
+.side-edit strong,
+.side-save strong {
+    display: none;
+}
+
+.circle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    background: var(--point-color);
+    border-radius: 50%;
+    position: relative;
+}
+
+.circle-btn .num {
+    position: absolute;
+    top: -8px;
+    right: 0;
+    display: block;
+    min-width: 22px;
+    height: 22px;
+    line-height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid var(--point-color);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--point-color);
+}
+
+
+
+/* Button Group */
+.btn-center {text-align: center;}
+.btn-right {text-align: right;}
+
+.btn-group,
+.btn-group2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.0rem;
+}
+.btn-group .btn {width: 100%;}
+.btn-group .btn:not(:last-child) {margin-right: 1rem;}
+.btn-group .btn.auto {
+    width: auto;
+    min-width: 110px;
+}
+
+.btn-group.sm {margin-top: 10px;}
+.btn-group.sm .btn {
+    font-size: 12px;
+    line-height: 32px;
+}
+.btn-group.sm .btn i {font-size: 15px;}
+
+.btn-group.md {margin-top: 1.5rem;}
+.btn-group.md .btn {
+    font-size: 1.5rem;
+    line-height: 4.0rem;
+}
+
+.btn-group.md2 {margin-top: 1.5rem;}
+.btn-group.md2 .btn {
+    font-size: 1.5rem;
+    line-height: 4.5rem;
+}
+
+.btn-group.end {margin-top: 4.0rem;}
+.btn-group.end .btn {font-size: 1.6rem;}
+
+.btn-group.bottom {margin-top: 1.0rem;}
+.btn-group.bottom .btn {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 4.2rem;
+}
+
+.btn-group.wrap {flex-wrap: wrap;}
+.btn-group.wrap .btn {width: 100%; margin: 0;}
+.btn-group.wrap .btn:not(:last-child) {margin-bottom: 10px;}
+
+.btn-group.st2 {margin: 12px 0 0 0;}
+.btn-group.st2 .btn {
+    border-radius: 0;
+    font-size: 1.4rem;
+    line-height: 3.4rem;
+    margin: 0 0 0 -1px;
+}
+.btn-group.st2 .btn:first-child {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    margin-left: 0;
+}
+.btn-group.st2 .btn:last-child {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+.btn-group.st2 .btn i {font-size: 18px;}
+.btn-group.st2 .btn i::before {font-size: 18px;}
+
+.btn-group2 {margin-top: 3rem;}
+
+.modal .btn-group {margin-top: 2.0rem;}
+.modal .btn-group .btn {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 3.8rem;
+    border-radius: 4px;
+}
+.modal .btn-group span.block {font-size: 1.6rem;}
+.modal .btn-group small.block {font-size: 12px;}
+
+.left-btn-group .btn {
+    font-size: 1.3rem;
+    line-height: 3.0rem;
+    padding: 0 1.5rem;
+    min-width: 100px;
+}
+.left-btn-group .btn .ico::before {font-size: 14px;}
+.left-btn-group .btn:not(:last-child) {margin-right: 5px;}
+
+
+
+/*  Foot Button */
+.foot-btn {
+    display: flex;
+    align-items: center;
+    position: fixed; z-index: 50;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 0 10px 2px rgba(0,0,0,0.1);
+    padding: 12px 10px;
+}
+.foot-btn .btn {
+    width: 100%;
+    font-size: 1.4rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.foot-btn .btn:not(:last-child) {margin-right: 1.0rem;}
+
+.foot-btn.transparent {
+    background: none;
+    box-shadow: none;
+}
+/* ---------------------------------------------- //버튼(button) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 폼(form) ---------------------------------------------- */
+/* Input Placeholder All */
+::-webkit-input-placeholder {color: #707070 !important;}
+::-moz-placeholder {color: #707070 !important;} /* firefox 19+ */
+:-ms-input-placeholder {color: #707070 !important;} /* ie */
+input:-moz-placeholder {color: #707070 !important;}
+
+input:focus,
+textarea:focus {
+    border: 1px solid #0e77df !important;
+}
+
+input.on,
+select.on {
+    border-color: #0e77df !important;
+}
+
+input.center,
+select.center {text-align: center;}
+input.right,
+select.right {text-align: right;}
+
+
+
+/* Default (Reset) */
+input[type="text"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="email"],
+input[type="search"],
+input[type="date"],
+select,
+.text-box,
+.text-box-not {
+    font-size: 1.4rem;
+    color: #333;
+    height: 4.5rem;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid var(--input-color);
+    border-radius: var(--input-radius);
+    margin: 1px 0;
+    padding: 0 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.text-box {
+    width: 100%;
+    line-height: 2.75rem;
+    background-color: #fff;
+    border-color: #dadada;
+}
+.text-box-not {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #e0e7ed;
+    border-color: #3d3c41;
+    cursor: not-allowed;
+}
+.text-box.not-msg {text-align: center;}
+.text-box.not-msg::before {position: relative; top: -2px;}
+
+.text-box .lb-ch + button.right {
+    padding: 12px;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.text-box.light {
+    background: #f9f9f9;
+    border: none;
+}
+.text-box.light .lb-ch .txt {color: #222;}
+
+input[type="text"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="email"],
+input[type="search"],
+input[type="date"],
+textarea {
+    /* iPhone 그림자 제거 */
+    -webkit-appearance: none;
+}
+
+input::-webkit-date-and-time-value {
+    text-align: left;
+  }
+
+input[type="file"] {
+    height: auto; font-size: 13px; vertical-align: middle;
+    margin: 2px 0; padding: 10px 5px;
+    border: 1px solid #e1e3e4; background: #f2f2f2;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+input.sm {
+    font-size: 1.4rem;
+    height: 3.5rem;
+}
+
+select {padding-right: 25px !important;}
+select.year,
+select.people {min-width: 100px;}
+select.month {min-width: 85px;}
+select.area {min-width: 105px;}
+select.mini {min-width: 85px;}
+
+select.st2 {
+    height: 35px;
+    background: url("/images/mw/icon/basic/select2.png") no-repeat right 10px center #f9f9f9;
+    background-size: 8px auto;
+    border: none;
+}
+
+textarea {
+    font-size: 1.3rem;
+    line-height: 2rem;
+    color: #222;
+    border: 1px solid var(--input-color);
+    border-radius: var(--input-radius);
+    padding: 15px 10px;
+    overflow: hidden;
+}
+textarea.wp100 {display: block;}
+.text-area textarea {font-size: 16px; line-height: 26px; padding: 20px;}
+
+input.text,
+select.text {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #222 !important;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+}
+select.text-arr {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #222 !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 30px 0 0 !important;
+}
+
+
+
+/* 기본 예제 */
+.form.center {text-align: center;}
+
+.form-group {position: relative;}
+.form-group:not(:last-child) {margin-bottom: 10px;}
+
+.form-group input,
+.form-group select,
+.form-group .btn {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.form-group .tit,
+.form-tit {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 5px 8px 5px;
+}
+.form-group .tit.required::after {
+    content: "*";
+    font-size: 15px;
+    color: #fa2828;
+    display: inline-block; vertical-align: middle;
+    position: relative; top: 2px;
+    margin-left: 5px;
+}
+.form-group .tit small,
+.form-tit small {
+    font-size: 11px;
+    font-weight: normal;
+    color: #aaa;
+}
+.form-group .unit,
+.form-group .time {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    position: relative;
+    top: 6px;
+}
+.form-group .time {color: #333333;}
+.form-group .unit.right,
+.form-group .time.right {
+    position: absolute;
+    right: 12px;
+    top: auto;
+    bottom: 13px;
+}
+.form-group .inline {display: inline-block; position: relative;}
+.form-group .lb-ch {top: 1px;}
+
+.form-group .email {position: relative;}
+.form-group .email input {min-width: 0;}
+.form-group .email input.int1 {width: 100%; padding-right: 35px;}
+.form-group .email input.int2 {width: calc(100% - 144px);}
+.form-group .email select {width: 140px;}
+.form-group .email .at {position: absolute; right: 11px; top: 8px;}
+
+.form-group .birth {display: flex; align-items: baseline;}
+.form-group .birth select {width: 100%; min-width: 0;}
+.form-group .birth select:not(:first-child) {margin-left: 10px;}
+.form-group .birth .unit {margin-left: 3px;}
+
+.form-group .addr .int1 {width: 150px;}
+.form-group .addr .int2,
+.form-group .addr .int3 {width: 100%;}
+
+.form-group .btn.right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    line-height: 4.0rem;
+}
+
+small.unit {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    margin-left: 2px;
+}
+small.unit.bottom {position: relative; top: 6px;}
+
+
+
+/* Inline Form */
+.form-inline .form-group {display: inline-block;}
+.form-inline .form-group:not(:last-child) {margin-right: 10px;}
+
+
+/* Inline Form2 */
+.form-inline2 .form-group {display: inline-block;}
+.form-inline2 .form-group:not(:last-child) {margin-right: 10px;}
+.form-inline2 .form-group .tit {display: inline-block;}
+
+
+/* Inline Form3 */
+.form-inline3 .form-group {
+    display: flex;
+    align-items: center;
+}
+.form-inline3 .form-group:not(:last-child) {margin-bottom: 10px;}
+.form-inline3 .form-group .tit {
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    white-space: nowrap;
+    margin: 0;
+}
+.form-inline3 .form-group input {
+    width: 100%;
+    margin: 0;
+}
+
+
+
+/* 체크박스, 라디오 Default */
+.lb-basic,
+.lb-basic label,
+.lb-basic input {
+    display: inline-block;
+    vertical-align: middle;
+}
+.lb-basic {
+    font-size: 1.3rem;
+    line-height: 2rem;
+    font-weight: 400;
+    margin-right: 10px;
+}
+.lb-basic label {margin-left: 2px; cursor: pointer;}
+
+.lb-basic.other .int {width: 100%; margin-top: 5px;}
+
+
+/* label > input, txt */
+label.basic,
+label.basic input,
+label.basic .txt {
+    display: inline-block;
+    vertical-align: middle;
+}
+label.basic {
+    font-size: 0.875rem;
+    line-height: 21px;
+    font-weight: 400;
+    margin-right: 10px;
+}
+label.basic .txt {margin-left: 2px; cursor: pointer;}
+label.basic .txt strong {font-weight: 400;}
+
+
+
+/* Label Input Checkbox, Radio Design */
+.label-block .lb-ch {display: block; margin-top: 10px;}
+.label-block .lb-ch:first-child {margin-top: 0;}
+
+.lb-card {
+	text-align: center;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 10px 0;
+	margin: 0;
+}
+.lb-card .lb-ch:not(:last-child) {margin-right: 10px;}
+
+.lb-ch {
+    display: inline-block; vertical-align: middle;
+    margin-right: 10px;
+    position: relative;
+}
+.lb-ch label {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.lb-ch input[type="checkbox"],
+.lb-ch input[type="radio"],
+label.basic input[type="checkbox"],
+label.basic input[type="radio"] {
+    width: 0; height: 0; line-height: 0;
+    visibility: hidden;
+    position: absolute;
+}
+.lb-ch .txt,
+label.basic .txt {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1rem;
+    color: #b8b8b8;
+    white-space: nowrap;
+}
+.lb-ch .txt::before,
+label.basic .txt::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "check";
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    cursor: pointer;
+    position: relative;
+    top: -1px;
+    font-size: 18px;
+    color: #b8b8b8;
+    text-align: center;
+    margin-right: 8px;
+}
+.lb-ch input[type="radio"] + .txt::before,
+label.basic input[type="radio"] + .txt::before {
+    border-radius: 50%;
+}
+.lb-ch input[type="checkbox"]:checked + .txt::before,
+.lb-ch input[type="radio"]:checked + .txt::before,
+label.basic input[type="checkbox"]:checked + .txt::before,
+label.basic input[type="radio"]:checked + .txt::before {
+    color: #0873ea;
+}
+
+.lb-ch input[type="checkbox"]:checked + .txt,
+.lb-ch input[type="radio"]:checked + .txt,
+label.basic input[type="checkbox"]:checked + .txt,
+label.basic input[type="radio"]:checked + .txt {
+    color: #0873ea;
+}
+
+.lb-ch .txt .ico,
+label.basic .txt .ico {
+	height: 22px;
+	vertical-align: middle;
+	position: relative; top: -2px;
+	margin: 0 2px 0 4px;
+}
+
+.lb-ch input[type="checkbox"]:disabled + .txt::before,
+label.basic input[type="checkbox"]:disabled + .txt::before {
+    color: #dcdcdc;
+    background-color: #f4f4f4 !important;
+    border: 1px solid #dedede !important;
+    cursor: not-allowed;
+}
+.lb-ch input[type="checkbox"]:disabled + .txt,
+label.basic input[type="checkbox"]:disabled + .txt {
+    cursor: not-allowed;
+}
+
+.lb-ch2 {display: inline-block; vertical-align: middle;}
+.lb-ch2 input[type="radio"] {
+    width: 0; height: 0; line-height: 0;
+    visibility: hidden;
+    text-indent: -9999px;
+    position: absolute;
+}
+.lb-ch2 input[type="radio"] + label {
+    display: inline-block;
+    text-align: center;
+    font-size: 1.4rem;
+    color: #808080;
+    min-width: 6.2rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.lb-ch2 input[type="radio"]:checked + label {
+    background: #337bd1;
+    color: #fff;
+}
+
+.lb-ch2.wp100 label {width: 100%;}
+
+.lb-ch2.sm input[type="radio"] + label {
+	font-size: 1.2rem;
+	min-width: 4rem;
+	height: 3.5rem;
+    line-height: 3.5rem;
+}
+
+.in-label-group {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + 8px);
+    margin-bottom: -8px;
+}
+.in-label-group .in-label {
+    margin: 0 8px 8px 0;
+}
+.in-label-group.col2,
+.in-label-group.col3 {display: flex; flex-wrap: wrap; gap: 5px;}
+.in-label-group.col2 .in-label {width: calc(50% - 5px); margin: 0;}
+.in-label-group.col3 .in-label {width: calc(33% - 5px); margin: 0;}
+
+.in-label {display: inline-block; vertical-align: middle;}
+.in-label input[type="radio"],
+.in-label input[type="checkbox"] {
+    width: 0; height: 0; line-height: 0;
+    visibility: hidden;
+    text-indent: -9999px;
+    position: absolute;
+}
+.in-label input[type="radio"] + .txt,
+.in-label input[type="checkbox"] + .txt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #999;
+    min-width: 6.2rem;
+    height: 3.0rem;
+    background: #fff;
+    border: 1px solid #9c9c9c;
+    border-radius: 15px;
+    padding: 0 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.in-label input[type="radio"]:checked + .txt,
+.in-label input[type="checkbox"]:checked + .txt {
+    background: var(--point-color);
+    border-color: var(--point-color);
+    color: #fff;
+}
+.in-label.st2 input[type="radio"] + .txt,
+.in-label.st2 input[type="checkbox"] + .txt {
+    height: 32px;
+    background: #f9f9f9;
+    border: none;
+    color: #222;
+    padding: 0 12px;
+}
+.in-label.st2 input[type="radio"]:checked + .txt,
+.in-label.st2 input[type="checkbox"]:checked + .txt {
+    font-weight: 700;
+    background: var(--sub-color);
+    color: var(--point-color);
+}
+.in-label.st3 input[type="radio"] + .txt,
+.in-label.st3 input[type="checkbox"] + .txt {
+    height: 32px;
+    background: #fff;
+    border-radius: 0.8rem;
+    color: #222;
+    padding: 0 12px;
+}
+.in-label.st3 input[type="radio"]:checked + .txt,
+.in-label.st3 input[type="checkbox"]:checked + .txt {
+    font-weight: 700;
+    color: var(--point-color);
+}
+
+
+
+/* Label Text Box */
+.label-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    border-radius: 1rem;
+    height: 4.5rem;
+    padding: 0 1.2rem;
+    position: relative;
+    overflow: hidden;
+}
+.label-box:not(:last-child) {margin-bottom: 10px;}
+
+.label-box label.basic input[type="checkbox"]:checked + .txt::after,
+.label-box label.basic input[type="radio"]:checked + .txt::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ecf5ff;
+}
+.label-box label.basic input[type="checkbox"]:disabled + .txt,
+.label-box label.basic input[type="radio"]:disabled + .txt {
+    opacity: 0.5;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+.label-box label.basic input[type="checkbox"]:disabled + .txt::before,
+.label-box label.basic input[type="radio"]:disabled + .txt::before {
+    cursor: not-allowed;
+}
+
+.label-box .txt::before,
+.label-box .txt strong,
+.label-box .price {
+    position: relative;
+    z-index: 3;
+}
+.label-box .txt-btn {
+    font-size: 1.3rem;
+    padding: 10px;
+    position: relative;
+    right: -10px;
+}
+.label-box .price {
+    font-size: 1.3rem;
+    color: var(--point-color);
+}
+
+.label-box.full {
+    padding: 0;
+    height: auto;
+}
+.label-box.full label.basic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 4.5rem;
+    padding: 0 1.2rem;
+    margin: 0;
+    cursor: pointer;
+}
+
+
+.label-card-group {
+    display: flex;
+    gap: 0 5px;
+    width: 100%;
+}
+.label-card-group:not(:last-child) {margin-bottom: 5px;}
+.label-card-group .label-card {width: 100%;}
+
+.label-card {
+    display: inline-block;
+    vertical-align: middle;
+}
+.label-card input[type="radio"],
+.label-card input[type="checkbox"] {
+    width: 0; height: 0; line-height: 0;
+    visibility: hidden;
+    text-indent: -9999px;
+    position: absolute;
+}
+.label-card .txt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    font-size: 1.4rem;
+    color: #737677;
+    background: #d4dade;
+    border-radius: 1.2rem;
+    padding: 0 5px;
+    min-width: 60px;
+    position: relative;
+    white-space: nowrap;
+}
+.label-card .txt::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "check";
+    font-size: 20px;
+    display: none;
+    position: absolute; z-index: 1;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #1466f9;
+}
+.label-card .txt strong {position: relative; z-index: 2;}
+.label-card input[type="radio"]:checked + .txt,
+.label-card input[type="checkbox"]:checked + .txt,
+.label-card.check .txt {
+    background: var(--point-color) !important;
+    color: #fff !important;
+}
+.label-card input[type="radio"]:checked + .txt::before,
+.label-card input[type="checkbox"]:checked + .txt::before,
+.label-card.check .txt::before {
+    display: block;
+}
+
+
+
+
+
+
+
+/* */
+.lb1-group {
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #ccc;
+}
+.lb-underline {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+}
+.lb-underline label {cursor: pointer;}
+.lb-underline input[type="checkbox"],
+.lb-underline input[type="radio"] {
+    width: 0; height: 0; line-height: 0;
+    visibility: hidden;
+    position: absolute;
+}
+.lb-underline .text {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 2.5rem;
+    padding: 0 10px;
+    position: relative;
+    white-space: nowrap;
+    transition: all .3s ease;
+}
+.lb-underline input[type="checkbox"]:checked + .text,
+.lb-underline input[type="radio"]:checked + .text {
+    font-weight: 700;
+    color: #3174e5;
+}
+.lb-underline input[type="checkbox"]:checked + .text::after,
+.lb-underline input[type="radio"]:checked + .text::after {
+    content: "";
+    display: block;
+    position: absolute; left: 0; bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: #3174e5;
+}
+
+
+.check-box {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.check-box input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.check-mark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 28px;
+    width: 28px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 3px solid #eeeeee;
+}
+.check-box:hover input ~ .check-mark {
+    background-color: #fff;
+}
+.check-box input:checked ~ .check-mark {
+    background-color: var(--point-color);
+    border: 3px solid var(--point-color);
+}
+.check-mark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.check-box input:checked ~ .check-mark:after {
+    display: block;
+}
+.check-box .check-mark:after {
+    left: 8px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.check-box .txt,
+.check-box a {
+    font-size: 1.4rem;
+}
+.check-box a {font-weight: 500;}
+.check-box a::after {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "navigate_next";
+    font-size: 18px;
+    color: #333;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+/* Label Block Style */
+.label-block > * {display: block;}
+.label-block > *:not(:last-child) {margin-bottom: 5px;}
+.label-block input,
+.label-block label {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 17px;
+}
+.label-block label {font-size: 0.875rem; margin-left: 5px; cursor: pointer;}
+
+
+
+
+
+/* Select Box Style */
+.select-style {position: relative;}
+.select-style .select-btn {
+    font-size: 14px; line-height: 43px; color: #555;
+    text-align: left;
+    background: url("/images/mw/icon/basic/select.png") no-repeat right 10px center #fff;
+    background-size: auto 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin: 2px 0;
+    position: relative;
+    box-sizing: border-box;
+}
+.select-style .select-options {
+    display: none;
+    position: absolute; top: 44px; left: 0; right: 0; z-index: 3;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 15px 10px;
+}
+.select-style .select-options.active {display: block;}
+.select-style .select-options .lb-ch {margin-top: 6px;}
+.select-style .select-options .lb-ch .text {font-size: 13px; line-height: 18px;}
+
+.select-fixed {
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 2;
+    width: 100%; height: 100%;
+    background: #fff;
+}
+
+
+
+/* Allim On/Off */
+.lb-allim {display: inline-block; vertical-align: middle;}
+.lb-allim input[type="checkbox"],
+.lb-allim input[type="radio"] {
+	width: 0; height: 0; line-height: 0;
+	visibility: hidden; position: absolute;
+}	
+.lb-allim input[type="checkbox"] + label,
+
+.lb-allim input[type="checkbox"]:checked + label,
+.lb-allim input[type="radio"]:checked + label {
+    background-position: 0 -28px;
+}
+
+
+
+/* input clear button */
+input[type="text"]::-ms-clear {display: none;} /* ie 닫기버튼 삭제 */
+
+
+
+
+
+
+
+
+/* File Form Area */
+.file-del-area {margin: 5px 0;}
+.file-del-area .btn-file,
+.file-del-area .file-name {
+    display: inline; vertical-align: middle;
+}
+.file-del-area .file-name {color: #787878; text-decoration: none;}
+.file-del-area .btn-file {background: none; border: none; margin-right: 4px;}
+.file-del-area .btn-file img {height: 25px;}
+
+
+
+
+
+
+
+
+/* Input File Wrapper */
+.file-wrapper {margin-top: 20px;}
+.file-wrapper .file-area {margin-top: 4px;}
+.file-area dl.group {margin-top: 10px;}
+.file-area dl.group:first-child {margin-top: 0;}
+.file-area dl.group dt {font-size: 14px; font-size: 0.875rem; font-weight: bold;}
+
+
+
+
+
+
+
+/* Text Form Area */
+.input-text {
+    display: inline-block; vertical-align: middle;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 10px 11px;
+    font-size: 14px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+
+
+/* Form Caption */
+.form-caption {
+    text-align: left;
+    font-size: 1.1rem;
+    line-height: 1rem;
+    color: var(--txt-read);
+    font-weight: normal;
+    margin: 10px 0 10px;
+    padding-left: 12px;
+    position: relative;
+}
+
+
+
+/* Error or Warning Message */
+.error-msg {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--txt-red);
+    padding: 0 10px;
+    margin: 5px 0 10px;
+}
+
+.warning-msg {
+    font-size: 1.4rem !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+}
+
+
+
+
+
+/* Alert */
+.alert {
+    font-size: 0.812rem; color: #fa2828;
+    margin: 0.312rem 0;
+    padding: 0 0.312rem;
+}
+
+
+
+/* Count */
+.count {
+    display: inline-block;
+    height: 35px;
+    overflow: hidden;
+    padding-right: 1px;
+    background: #f9f9f9;
+    border-radius: 0.8rem;
+}
+.count .number {outline: none;}
+.count .number:focus {border-color: #d6d6d6 !important;}
+.count .number,
+.count button {
+    float: left;
+	width: 35px;
+    height: 35px;
+    line-height: 35px;
+    min-width: 0;
+    font-size: 13px;
+	text-align: center;
+    background: none;
+	border: none;
+	border-radius: 0;
+    padding: 0;
+    margin: 0 -1px 0 0;
+}
+.count .subtract::before {content: "-";}
+.count .addition::before {content: "+";}
+
+
+
+/* Switch Toggle */
+.switch-toggle {
+    position: relative;
+    display: inline-block;
+    width: 64px;
+    height: 34px;
+}
+.switch-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.switch-toggle .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: .4s;
+}
+.switch-toggle .slider:before {
+    position: absolute; z-index: 3;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .4s;
+}
+.switch-toggle .txt::before {
+    content: "OFF";
+    position: absolute; right: 8px; top: 50%;
+    transform: translate(0, -50%);
+    font-size: 10px;
+    color: #000;
+    opacity: 0.4;
+    transition: all .4s ease;
+}
+
+.switch-toggle input:checked + .slider {background-color: var(--point-color);}
+.switch-toggle input:focus + .slider {box-shadow: 0 0 1px var(--point-color);}
+.switch-toggle input:checked + .slider:before {transform: translateX(30px);}
+.switch-toggle input:checked + .slider + .txt::before {
+    content: "ON";
+    color: #fff;
+    opacity: 1;
+    transform: translate(-30px, -50%);
+}
+
+
+
+/* input Select(readonly) */
+.inp-select {position: relative;}
+.inp-select i {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: var(--point-color);
+}
+.inp-select input {
+    font-size: 1.3rem;
+    padding-left: 15px;
+}
+
+
+.date-select-box {
+    position: relative;
+    cursor: pointer;
+}
+.date-select-box .ico {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+.date-select-box input[type="text"] {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #222;
+    background: none !important;
+    border: none !important;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+
+
+/* 멀티 업로드 */
+.addFile-wrap {padding-bottom: 10px;}
+.addFile-wrap .drop-input .btn-left label {
+	width: 50%;
+	cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.5rem;
+    line-height: 4.5rem;
+    font-weight: 500;
+    color: var(--point-color);
+	background: var(--sub-color);
+    border-radius: 1.0rem;
+    padding: 0px 1.0rem;
+    margin: 1px;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+.addFile-wrap .drop-zone {
+	display: flex;
+	overflow-x: auto;
+}
+.addFile-wrap .drop-zone .drop-zone-box {
+	flex: 0 0 70px;
+	height: 70px;
+	display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    margin-right: 10px;
+}
+.addFile-wrap .drop-zone .drop-zone-box img {
+	position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.addFile-wrap #detailImagesSpan {display: none;}
+/* ---------------------------------------------- //폼(form) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- 타이포그래피(Typography) ---------------------------------------------- */
+/* Caption */
+.caption {
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    color: #999;
+}
+
+.caption.left {text-align: left;}
+.caption.center {text-align: center;}
+.caption.right {text-align: right;}
+
+.caption.top {margin-bottom: 5px;}
+.caption.bottom {margin-top: 5px;}
+
+.caption .material-icons-outlined {
+    vertical-align: middle;
+    font-size: 1.125rem;
+    position: relative; top: -1px;
+}
+
+i.required::after {
+    content: "*";
+    font-size: 18px;
+    color: #fa2828;
+    display: inline-block; vertical-align: middle;
+    position: relative; top: 2px;
+    margin-right: 5px;
+}
+
+
+
+/* Caption Style */
+.caption.info::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "info";
+    font-size: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    margin-right: 2px;
+}
+/* ---------------------------------------------- //타이포그래피(Typography) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Modal (Layer Popup) ---------------------------------------------- */
+/* 레이어팝업 */
+.modal {
+	display: none;
+    position: fixed; top: 0;  bottom: 0; z-index: 100;
+    left: 0;
+    right: 0;
+    width: 100%; height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.modal-bg {
+    display: none;
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 101;
+    width: 100%; height: 100vh;
+    background-color: rgba(25, 25, 25, 0.9);
+}
+.modal-content {
+    position: absolute; top: 30%; left: 50%; z-index: 102;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    opacity: 0;
+    transition: all .3s ease;
+}
+.modal-content.transition {
+    opacity: 1;
+    top: 50%;
+}
+.modal .content {
+    background: #fff;
+    box-shadow: 0px 0 25px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    margin: 0 10px;
+}
+.modal .head {
+    position: relative;
+    padding: 0 15px;
+}
+.modal .head .title {
+    font-size: 1.6rem;
+    line-height: 50px;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 40px;
+}
+.modal .head .title img {display: inline-block; vertical-align: middle;}
+.modal .head .close,
+.modal .head .close2 {
+    position: absolute; top: 50%; right: 0;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 10px;
+}
+.modal .head .close img,
+.modal .head .close2 img {display: none;}
+.modal .head .close::after,
+.modal .head .close2::after {
+    font-family: 'Material Icons';
+    content: "close";
+    font-size: 25px;
+    display: block;
+}
+.modal .head .close strong,
+.modal .head .close2 strong {display: none;}
+
+.modal .main {
+    padding: 10px 15px 20px;
+    min-height: 120px;
+    font-size: 15px; line-height: 28px;
+}
+.modal .main::before {display: none;}
+
+.modal .main .top-tit {
+    position: relative;
+    border-bottom: 1px solid #eae7e7;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.modal .main .top-tit .tit {
+    font-size: 1rem; line-height: 1.5rem; color: #333;
+    font-weight: 500;
+}
+.modal .main .top-tit .tit img {display: inline-block; vertical-align: middle;}
+
+.modal .main .close,
+.modal .main .close2 {
+    position: absolute; top: 0; right: 6px; z-index: 9;
+    background: none;
+    border: none;
+    padding: 12px;
+}
+.modal .main .close::after,
+.modal .main .close2::after {
+    font-family: 'Material Icons';
+    content: "close";
+    font-size: 25px;
+    display: block;
+}
+.modal .main .close strong,
+.modal .main .close2 strong {display: none;}
+
+.modal .close3 {
+    position: fixed; z-index: 199;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+}
+.modal .close3::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "close";
+    font-size: 26px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -4px;
+    position: relative;
+    top: -1px;
+}
+.modal .close3 strong {
+    display: none;
+}
+
+.modal .wrapper {
+    padding-top: 5px;
+    margin-top: 5px;
+}
+.modal .wrapper.left {text-align: left;}
+.modal .wrapper.center {text-align: center;}
+.modal .wrapper.right {text-align: right;}
+
+.modal .basic .t-ico {height: 4.2rem;}
+.modal .basic .txt {font-size: 1.6rem; font-weight: 700;}
+.modal .basic .txt.sm {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: var(--txt-read);
+}
+.modal .basic .txt.lg {font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;}
+.modal .basic .lg-txt {
+    font-size: 2.0rem;
+    font-weight: 700;
+    line-height: 2.8rem;
+}
+
+.modal .foot {padding: 25px 20px 30px; text-align: center;}
+.modal .foot .btn {
+    font-size: 0.875rem; line-height: 38px;
+    font-weight: 700;
+    min-width: 80px;
+}
+
+.modal.scroll .modal-content {top: 20px; transform: translate(-50%, 0);}
+.modal.scroll .content {margin-bottom: 20px;}
+
+.modal.full {top: 10px}
+.modal.full .modal-content {
+    width: 100%;
+    max-width: 800px;
+}
+.modal.full .modal-content.transition {top: 0; transform: translate(-50%, 0);}
+.modal.full .main {
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+}
+
+.modal.bottom {height: auto;}
+.modal.bottom .modal-bg {background: #222;}
+.modal.bottom .modal-content {
+    top: auto;
+    bottom: -500px;
+    transform: translate(-50%, 0);
+}
+.modal.bottom .modal-content.transition {bottom: 0;}
+.modal.bottom .content {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
+
+/* 모달 크기 */
+.modal-content.sm {max-width: 400px;}
+.modal-content.lg {max-width: 1000px;}
+
+
+
+/* 모달 콘텐츠 */
+.modal-text {
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 2rem;
+}
+
+.modal.vod .content {
+    background: none;
+}
+
+.modal .rule-wrap {
+    min-height: 150px;
+    max-height: calc(100vh - 110px);
+    font-size: 1.3rem;
+    line-height: 2rem;
+    border: 1px solid #3d3c41;
+    border-radius: 5px;
+    padding: 1.2rem;
+    overflow-y: auto;
+}
+
+
+
+/* main popup */
+.popup-wrap {
+	position: absolute; z-index: 999;
+	left: 0;
+	top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+}
+.main-popup {
+	display: none;
+	width: 100%;
+    max-width: 500px;
+	text-align: center;
+	margin: 0;
+	background: #fff;
+    border: 1px solid #eee;
+}
+
+.main-popup .ct-body img {
+	display: block;
+	width: 100%;
+}
+
+.main-popup .today-close {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-top: 1px solid #eee;
+    padding: 10px;
+    position: relative;
+}
+.main-popup .today-close label {font-size: 12px;}
+.main-popup .today-close label span {margin-left: 4px;}
+.main-popup .today-close .close {
+    font-size: 12px;
+    color: #333;
+}
+.main-popup .today-close .close::after {
+	font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "close";
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+}
+/* ---------------------------------------------- //Modal (Layer Popup) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Photo(Image) Style : 이미지 ---------------------------------------------- */
+/* Effect */
+img.del {opacity: 0.3; filter: grayscale(90%);}
+
+
+
+/* Image Fit (가로*세로 style 입력) */
+.img-fit {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background-color: #f2f2f2;
+}
+.img-fit img {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.img-fit2 {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background-color: #f2f2f2;
+}
+.img-fit2 img {
+    position: absolute;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.img-fit.circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+
+
+/* User(profile) Fit */
+.user-fit {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+}
+.user-fit img {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+/* ---------------------------------------------- //Photo(Image) Style : 이미지 ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Progress ---------------------------------------------- */
+
+.progress-bar {
+    font-family: roboto, sans-serif;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 10px;
+}
+.progress-bar .bar {
+    display: block;
+    float: left;
+    width: 0%;
+    height: 100%;
+    background: #3798d9;
+    box-shadow: inset 0 -1px 2px rgba(0,0,0,.1);
+    -webkit-transition: width .8s ease-in-out;
+    transition: width .8s ease-in-out;
+}
+.progress-bar .info {background-color:#9575cd !important}
+.progress-bar .danger {background-color:#ef5350 !important}
+.progress-bar .success {background-color:#66bb6a !important}
+.progress-bar .warning {background-color:#ffb74d !important}
+
+.progress-bar .active {
+    background-image: -webkit-linear-gradient(135deg,rgba(255,255,255,0.125) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.125) 50%,rgba(255,255,255,0.125) 75%,transparent 75%,transparent);
+    background-image: linear-gradient(-45deg,rgba(255,255,255,0.125) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.125) 50%,rgba(255,255,255,0.125) 75%,transparent 75%,transparent);
+    background-size: 35px 35px;
+    animation: cssProgressActive 2s linear infinite;
+}
+@keyframes cssProgressActive {
+    0% {background-position: 0 0}
+    100% {background-position: 35px 35px}
+}
+
+.progress-bar {
+    background-color: #eee;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+}
+.progress-bar .bar {height: 20px}
+/* ---------------------------------------------- //Progress ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Icons ---------------------------------------------- */
+/* Material Icons */
+.material-icons {vertical-align: middle;}
+/* ---------------------------------------------- //Icons ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Card Style ---------------------------------------------- */
+/* Default */
+.card {
+    font-size: 1.4rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.15),
+                0 2px 2px 0 rgba(0,0,0,.14),
+                0 1px 5px 0 rgba(0,0,0,.12);
+}
+/* ---------------------------------------------- //Card Style ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Sortable (Draggable List) ---------------------------------------------- */
+.sortable li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: -1px;
+    cursor: move;
+    position: relative;
+}
+.sortable li::after {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "drag_handle";
+    font-size: 18px;
+    position: absolute; top: 50%; right: 1rem; z-index: 2;
+    transform: translateY(-50%);
+}
+/* ---------------------------------------------- //Sortable (Draggable List) ---------------------------------------------- */
+
+
+
+
+
+/* ---------------------------------------------- Accordion/Toggle(아코디언/토글) ---------------------------------------------- */
+/* Basic (스타일 미처리) */
+.tog-head {position: relative;}
+.tog-head::before {
+    font-family: 'Material Icons Outlined';
+    font-feature-settings: 'liga';
+    content: "expand_more";
+    font-size: 22px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.tog-head.active::before {
+    content: "expand_less";
+}
+.tog-body {display: none;}
+/* ---------------------------------------------- //Accordion/Toggle(아코디언/토글) ---------------------------------------------- */
