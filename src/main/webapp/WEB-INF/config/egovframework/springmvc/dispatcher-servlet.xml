@@ -16,13 +16,88 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>-->
     </context:component-scan>
 
-    <!-- Spring MVC 설정 활성화 (기본 설정 포함: @RequestMapping 등) -->
-    <mvc:annotation-driven />
+    <bean id="jsonConverter"  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="webBindingInitializer">
+            <bean class="toy.com.egov.EgovBindingInitializer"/>
+        </property>
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonConverter" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="lang" />
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="localeChangeInterceptor" />
+            </list>
+        </property>
+    </bean>
+
+    <!-- 세션 기반 Locale 설정 -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="ko" />
+    </bean>
+
+    <!-- 예외 처리 뷰 설정 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="com/error/egovError"/>
+        <property name="exceptionMappings">
+            <props>
+                <!-- Case : dataAccess / transaction / egovError-->
+                <prop key="org.springframework.dao.DataAccessException">com/error/dataAccessFailure</prop>
+                <prop key="org.springframework.transaction.TransactionException">com/error/transactionFailure</prop>
+                <prop key="org.egovframe.rte.fdl.cmmn.exception.EgovBizException">com/error/egovError</prop>
+                <prop key="org.springframework.security.AccessDeniedException">com/error/egovError</prop>
+                <!-- Case : Invalid Parameter / Type Error -->
+                <prop key="org.springframework.web.bind.MissingServletRequestParameterException">
+                    com/error/missingParameterError
+                </prop>
+                <prop key="org.springframework.beans.TypeMismatchException">
+                    com/error/typeMismatchError
+                </prop>
+                <prop key="org.springframework.validation.BindException">
+                    com/error/bindError
+                </prop>
+                <!-- Case : Not Supported Method(Get/Post)-->
+                <prop key="org.springframework.web.HttpRequestMethodNotSupportedException">
+                    com/error/methodNotSupportedError
+                </prop>
+                <!-- Case : AccessDeniedException for security -->
+                <prop key="org.springframework.security.access.AccessDeniedException">
+                    com/error/accessDenied
+                </prop>
+            </props>
+        </property>
+    </bean>
 
     <!-- JSP View Resolver 설정 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <property name="suffix" value=".jsp" />
+    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
+          p:viewClass="org.springframework.web.servlet.view.JstlView"
+          p:prefix="/WEB-INF/jsp/toy/" p:suffix=".jsp"
+          p:contentType="text/html; charset=UTF-8"/>
+
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" id="viewResolver" p:order="0" />
+
+    <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" id="jsonView">
+        <property name="contentType" value="application/json;charset=UTF-8"></property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" id="apiView">
+        <property name="contentType" value="text/plain;charset=UTF-8"></property>
     </bean>
 
     <!-- From external Spring docs style -->
@@ -30,22 +105,38 @@
           class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
 
-    <!-- 예외 처리 기본 뷰 설정 -->
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="defaultErrorView" value="com/error" />
-        <property name="exceptionAttribute" value="exception" />
+    <!-- For Pagination Tag -->
+    <bean id="imageRenderer" class="toy.com.egov.EgovImgPaginationRenderer"/>
+    <bean id="paginationManager" class="org.egovframe.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+        <property name="rendererType">
+            <map>
+                <entry key="image" value-ref="imageRenderer"/>
+            </map>
+        </property>
     </bean>
-
 
     <!-- 다국어 메시지 처리 -->
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>
-                <value>classpath:messages.message</value>
+                <value>classpath:egovframework/message/message-common</value>
+                <!-- if needed -->
+                <!-- <value>classpath:egovframework/message/message-board</value> -->
             </list>
         </property>
         <property name="defaultEncoding" value="UTF-8" />
+        <!-- dev for 10sec, 운영에서는 더 크게(예: 3600초) -->
+        <property name="cacheSeconds" value="10" />
     </bean>
+
+
+    <!-- JSR-303 Validator : 추후 @Valid + Bean Validation(Jakarta/JSR-303)까지 쓰고 싶을 때 주석해제-->
+    <!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        &lt;!&ndash; 위에서 정의한 messageSource 활용 &ndash;&gt;
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
+    &lt;!&ndash; annotation-driven에 validator 연결 &ndash;&gt;
+    <mvc:annotation-driven validator="validator" />-->
 
 
 
@@ -59,6 +150,15 @@
             <mvc:exclude-mapping path="/admin/logout.ac"/>
             <mvc:exclude-mapping path="/admin/actionLogin.doax"/>
             <bean class="toy.com.interceptor.AdminAuthInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+
+    <!-- 사용자(회원) 권한 체크 인터셉터 / 관련기능 구현후 주석제거 -->
+    <!--<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/mypage/**"/>						&lt;!&ndash; 마이페이지 &ndash;&gt;
+
+            <bean class="toy.com.interceptor.UserAuthInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>-->
 

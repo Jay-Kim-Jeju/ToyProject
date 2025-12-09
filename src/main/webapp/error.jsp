@@ -29,8 +29,6 @@
     <div class="error-wrap">
         <img class="icon" src="${pageContext.request.contextPath}/images/com/error.png" alt="error">
 
-        <!-- <h2 class="error-msg">오류 입니다.</h2> -->
-
         <h2 class="error-msg">
             <c:if test="${empty param.errCode}">Error</c:if>
             <c:if test="${param.errCode=='SESSION_OUT'}">세션이 만료 되었습니다.</c:if>
@@ -46,7 +44,6 @@
             <c:if test="${param.errCode=='ERROR_SERVER'}">서버에 문제가 발생했습니다.</c:if>
         </h2>
 
-        <!-- <p class="error-text">같은 증상이 반복되는 경우 관리자에게 문의해 주세요!</p> -->
         <p class="error-text">잘못된 접근입니다. 관리자에게 문의 해주세요.</p>
 
         <div class="button">

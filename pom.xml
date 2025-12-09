@@ -138,6 +138,32 @@
             <version>${security.version}</version>
         </dependency>
 
+        <!-- JSON support for MappingJackson2HttpMessageConverter & MappingJackson2JsonView -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.15.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.15.1</version>
+        </dependency>
+
+
 
         <!-- lombok 관련 -->
         <dependency>
@@ -146,6 +172,23 @@
             <version>1.18.26</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Hibernate Validator -->
+        <!-- Bean Validation / Hibernate Validator (추천 조합) -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.2.5.Final</version>
+        </dependency>
+
+        <!-- 필요시 명시(보통은 생략 가능하지만, 버전 명시하고 싶으면 추가) -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+
+
 
     </dependencies>
 
