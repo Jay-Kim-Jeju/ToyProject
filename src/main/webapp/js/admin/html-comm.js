@@ -122,7 +122,7 @@ $(function () {
 
            $( ".datepicker" ).datepicker({
         		showOn: "both",
-        		buttonImage: "/images/comm/jquery/calendar.png",
+        		buttonImage: "/images/com/jquery/calendar.png",
         		buttonImageOnly: true
         	});
 	}

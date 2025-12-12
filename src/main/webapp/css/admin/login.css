@@ -1,0 +1,99 @@
+@charset "utf-8";
+
+
+
+/* --------------------------------------------------------- header ------------------------------------------------------------------ */
+body {
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	background-size: cover;
+	overflow: hidden;
+	height: 100vh;
+}
+
+#wrapper {
+	position: absolute;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+#header h1 {text-align: center;}
+
+#main {
+	height: auto;
+	min-height: 0 !important;
+}
+/* --------------------------------------------------------- //header ----------------------------------------------------------------- */
+
+
+
+/* --------------------------------------------------------- login -------------------------------------------------------------------- */
+.login-wrap {width: 340px; min-height: 320px; margin: auto;}
+.login-wrap .copy {font-size: 12px; text-align: center; margin-top: 28px;}
+
+.login-box {
+	border-radius: 6px; padding: 40px 40px 15px;
+	background-color: rgba(255,255,255,0.80);
+	box-shadow: 0px 4px 10px rgba(0,0,0,0.10); overflow: hidden;
+}
+.login-box h2 {text-align: center; font-size: 24px; font-weight: 500; color: #161c2f; margin-bottom: 28px;}
+.login-box h2::before {
+	display: inline-block; vertical-align: top; margin : 4px 8px 0 0;
+	content: url("/images/admin/login/title-icon.png");
+}
+.login-box .int-box {margin-bottom: 6px;}
+.login-box .int-box label {display: none;}
+.login-box .int-box input {
+	width: 100%; height: 40px; font-size: 16px;
+	border-color: #bac0d6;
+}
+
+/* Input Placeholder */
+.login-box .int-box ::placeholder {color: #bac0d6 !important; background-repeat: no-repeat; background-position: left center; padding-left: 28px;}
+.login-box .int-box ::-webkit-input-placeholder {color: #bac0d6 !important; background-repeat: no-repeat; background-position: left center; padding-left: 28px;}
+.login-box .int-box ::-moz-placeholder {color: #bac0d6 !important;} /* Firefox 19+ */
+.login-box .int-box :-ms-input-placeholder {color: #bac0d6 !important; background-repeat: no-repeat; background-position: left 10px center; padding-left: 38px;} /* IE */
+.login-box .int-box :-moz-placeholder {color: #bac0d6 !important; background-repeat: no-repeat; background-position: left center; padding-left: 28px;} /* Firefox 18- */
+
+.login-box .int-box .userID::placeholder {background-image: url("/images/admin/login/id-icon.png");}
+.login-box .int-box .userID::-webkit-input-placeholder {background-image: url("/images/admin/login/id-icon.png");}
+.login-box .int-box .userID::-moz-placeholder {} /* Firefox 19+ */
+.login-box .int-box .userID:-ms-input-placeholder {background-image: url("/images/admin/login/id-icon.png");} /* IE */
+.login-box .int-box .userID:-moz-placeholder {background-image: url("/images/admin/login/id-icon.png");} /* Firefox 18- */
+
+.login-box .int-box .userPW::placeholder {background-image: url("/images/admin/login/password-icon.png");}
+.login-box .int-box .userPW::-webkit-input-placeholder {background-image: url("/images/admin/login/password-icon.png");}
+.login-box .int-box .userPW::-moz-placeholder {} /* Firefox 19+ */
+.login-box .int-box .userPW:-ms-input-placeholder {background-image: url("/images/admin/login/password-icon.png");} /* IE */
+.login-box .int-box .userPW:-moz-placeholder {background-image: url("/images/admin/login/password-icon.png");} /* Firefox 18- */
+/* //Input Placeholder */
+
+.login-box .int-check {margin-top: 5px;}
+.login-box .int-check label {font-size: 12px; color: #5f5f60;}
+.login-box .login-btn a,
+.login-box .login-btn button {
+	display: block;
+	border: none; background-color: #161c2f; 
+	font-size: 16px; font-weight: 500; color: #fff; 
+	width: 100%; line-height: 45px; margin-top: 10px; padding-right: 8px; border-radius: 3px;
+	text-align: center;
+}
+.login-box .login-btn a::before,
+.login-box .login-btn button::before {
+	display: inline-block; vertical-align: top; margin-right: 5px;
+	content: url("/images/admin/login/btn-icon.png");
+}
+/* --------------------------------------------------------- //login ------------------------------------------------------------------- */
+
+
+
+/* --------------------------------------------------------- footer -------------------------------------------------------------------- */
+#footer {text-align: center; margin-bottom: 20px;}
+#footer p {font-size: 12px;}
+/* --------------------------------------------------------- //footer ------------------------------------------------------------------ */
+
+

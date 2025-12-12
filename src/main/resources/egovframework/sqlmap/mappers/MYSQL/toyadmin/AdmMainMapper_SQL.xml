@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="toy.admin.main.dao.AdmMainDAO">
+
+    <select id="selectAdminUserLogin" resultType="SessionAdminVO">
+        SELECT T_M.MNGR_UID					/* 관리자ID */
+        , T_M.PWD_ENCPT					/* 비밀번호 */
+        , T_M.MNGR_NM					/* 관리자이름 */
+        , T_M.EML_ADRES					/* 이메일 */
+        , T_M.LAST_LGN_DT			/* 최종로그인일시 */
+        , T_M.LGN_FAILR_NUMTM			/* 로그인 실패 횟수 */
+        , T_AG.AUTHOR_GROUP_UUID AS AUTHOR_CD /* 권한 코드 */
+        , T_AG.AUTHOR_DC				/* 권한 설명 */
+        FROM TMNGR T_M
+        LEFT OUTER JOIN TAUTH T_A
+        ON T_A.MNGR_UID = T_M.MNGR_UID
+        LEFT OUTER JOIN TAUTH_GRP T_AG
+        ON T_AG.AUTHOR_GROUP_UUID = T_A.AUTHOR_GROUP_UUID
+        WHERE T_M.USE_YN  = 'Y'
+        AND T_M.MNGR_UID = #{mngrUid}
+        <if test="authorGroupUuid != null and authorGroupUuid != ''">
+            AND T_AG.AUTHOR_GROUP_UUID = #{authorGroupUuid}
+        </if>
+    </select>
+
+    <!-- 권한그룹 조회 -->
+    <select id="selectAdminUserAuthList" resultType="String">
+        SELECT AUTH.AUTHOR_GROUP_UUID	/* 권한그룹 ID */
+        FROM TAUTH AUTH
+        WHERE AUTH.MNGR_UID = #{mngrUid}
+        <if test="authorGroupUuid != null and authorGroupUuid != ''">
+            AND AUTH.AUTHOR_GROUP_UUID = #{authorGroupUuid}
+        </if>
+    </select>
+
+    <!-- 최종 로그인 시간 & 로그인 실패 횟수 변경 -->
+    <update id="updateLastLogin">
+        UPDATE TMNGR
+        SET LAST_LGN_DT = NOW()
+          , LGN_FAILR_NUMTM = 0
+        WHERE MNGR_UID = #{mngrUid}
+    </update>
+
+    <!-- 로그인 실패 횟수 변경 -->
+    <update id="updateLoginFailrCo">
+        UPDATE TMNGR
+        SET LGN_FAILR_NUMTM = IFNULL(LGN_FAILR_NUMTM, 0) + 1
+        WHERE MNGR_UID = #{mngrUid}
+    </update>
+</mapper>

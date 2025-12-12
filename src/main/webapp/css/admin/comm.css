@@ -224,13 +224,13 @@ ol.decimal > li {
 
 
 /* Check List */
-.check li {
+/*.check li {
     font-size: 15px; line-height: 26px;
     background: url("/images/list/check.png") no-repeat left 6px;
     padding-left: 28px;
     position: relative;
     margin-top: 5px;
-}
+}*/
 .check li:first-child,
 .check.line2 li:first-child {margin-top: 0;}
 
@@ -247,11 +247,11 @@ ul.warning li {
     margin-top: 6px;
 }
 ul.warning li:first-child {margin-top: 0;}
-ul.warning li::before {
+/*ul.warning li::before {
     content: url("/images/list/warning.png");
     display: inline-block;
     position: absolute; left: 0; top: 1px;
-}
+}*/
 ul.warning.lineB {
     border-bottom: 1px solid #e7e8e9;
     padding: 0 20px 20px;
@@ -420,13 +420,13 @@ table caption {width: 0px; height: 0px; font-size: 0; line-height: 0; overflow: 
 
 
 /* Table > slash(사선) */
-table .backslash {
+/*table .backslash {
     background-image: url("/images/adm/table/backslash.png");
     background-size: 100% 100%;
     text-align: left !important;
     padding: 5px 10px !important;
     line-height: 20px;
-}
+}*/
 table .slash div,
 table .backslash div {text-align: right; font-weight: 700; color: #2b1c1c;}
 
@@ -1189,14 +1189,14 @@ label.st1 .txt {font-size: 14px; line-height: 21px; cursor: pointer;}
     visibility: hidden; position: absolute;
 }
 .lb-allim input[type="checkbox"] + label,
-.lb-allim input[type="radio"] + label {
+/*.lb-allim input[type="radio"] + label {
     display: inline-block;
     width: 50px; height: 28px;
     background: url("/images/icon/btn/allim.png") no-repeat;
     background-size: 50px auto;
     background-position: 0 0;
     cursor: pointer;
-}
+}*/
 .lb-allim input[type="checkbox"]:checked + label,
 .lb-allim input[type="radio"]:checked + label {
     background-position: 0 -28px;
@@ -1603,7 +1603,7 @@ figure.basic figcaption {font-size: 0.812rem; color: #161c2f; margin-top: 5px;}
     position: absolute; top: 0; right: 0; bottom: 0; left: 0;
     display: block;
     width: 70px; height: 70px;
-    background: url("/images/comm/loading2.gif");
+    background: url("/images/com/loading.gif");
     background-size: 70px;
     margin: auto;
 }

@@ -109,7 +109,7 @@
         </div>
         <nav class="flex wp100 px-10">
             <a href="/" class="site wp100" target="_blank"><i class="material-icons-outlined">home</i><span class="text">사이트열기</span></a>
-            <a href="<c:url value='' />" class="logout wp100">
+            <a href="<c:url value='/toy/admin/logout.ac' />" class="logout wp100">
                 <i class="material-icons-outlined">logout</i><span class="text">로그아웃</span>
             </a>
         </nav>

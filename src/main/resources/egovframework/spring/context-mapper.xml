@@ -17,7 +17,7 @@
     <!-- MapperConfigurer setup for MyBatis Database Layer with @Mapper("deptMapper") in DeptMapper Interface -->
     <bean class="org.egovframe.rte.psl.dataaccess.mapper.MapperConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSession"/>
-        <property name="basePackage" value="toy.**.impl" />
+        <property name="basePackage" value="toy.**.dao" />
     </bean>
 
 </beans>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ include file="/WEB-INF/jsp/toy/admin/top.jsp" %>
+<%@ include file="/WEB-INF/jsp/toy/admin/include/top.jsp" %>
 
 <!-- jsgrid css -->
 <!--  -->
@@ -13,7 +13,7 @@
 <div id="wrapper">
 
 <%-- 공통 헤더/사이드 메뉴 --%>
-<jsp:include page="/WEB-INF/jsp/toy/admin/adminHeader.jsp" flush="false">
+<jsp:include page="/WEB-INF/jsp/toy/admin/include/adminHeader.jsp" flush="false">
     <jsp:param value="home_menu" name="admin_menu"/>
 </jsp:include>
 

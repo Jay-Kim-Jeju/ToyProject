@@ -142,16 +142,16 @@
 
     <!-- 관리자 인터셉터: 인증 등 필요한 요청만 필터링
     / 로그인구현후 주석제거-->
-    <!--<mvc:interceptors>
+    <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/admin/**"/>
-            &lt;!&ndash; 로그인 관련 요청은 제외 &ndash;&gt;
-            <mvc:exclude-mapping path="/admin/login.ac"/>
-            <mvc:exclude-mapping path="/admin/logout.ac"/>
-            <mvc:exclude-mapping path="/admin/actionLogin.doax"/>
+            <mvc:mapping path="/toy/admin/**"/>
+            <!-- 로그인 관련 요청은 제외 -->
+            <mvc:exclude-mapping path="/toy/admin/login.ac"/>
+            <mvc:exclude-mapping path="/toy/admin/logout.ac"/>
+            <mvc:exclude-mapping path="/toy/admin/loginAction.doax"/>
             <bean class="toy.com.interceptor.AdminAuthInterceptor" />
         </mvc:interceptor>
-    </mvc:interceptors>-->
+    </mvc:interceptors>
 
     <!-- 사용자(회원) 권한 체크 인터셉터 / 관련기능 구현후 주석제거 -->
     <!--<mvc:interceptors>
