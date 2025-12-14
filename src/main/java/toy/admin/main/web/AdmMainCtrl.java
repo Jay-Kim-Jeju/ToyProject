@@ -1,12 +1,9 @@
 package toy.admin.main.web;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -21,20 +18,18 @@ import java.util.Map;
 //import toy.com.egov.EgovPropertiesUtils;
 //import toy.com.util.EgovStringUtil;
 //import toy.com.vo.common.SessionAdminVO;
-//import toy.com.vo.system.MngrVO;
+//import toy.com.vo.system.mngr.MngrVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import toy.admin.main.service.AdmMainService;
 import toy.admin.test.service.AdmTestService;
-import toy.admin.test.service.impl.AdmTestServiceImpl;
 import toy.com.egov.EgovPropertiesUtils;
-import toy.com.util.CmUtil;
 import toy.com.util.EgovStringUtil;
 import toy.com.vo.TestVO;
 import toy.com.vo.common.AdminLoginResult;
 import toy.com.vo.common.SessionAdminVO;
-import toy.com.vo.system.MngrVO;
+import toy.com.vo.system.mngr.MngrVO;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 

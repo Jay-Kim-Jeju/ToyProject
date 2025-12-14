@@ -1,9 +1,11 @@
-package toy.com.vo.system;
+package toy.com.vo.system.auth;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import toy.com.vo.common.PagingDefaultVO;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class AuthGrpVO extends PagingDefaultVO {
 
     private String authorGroupUuid;

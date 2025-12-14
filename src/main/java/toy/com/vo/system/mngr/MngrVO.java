@@ -1,9 +1,11 @@
-package toy.com.vo.system;
+package toy.com.vo.system.mngr;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import toy.com.vo.common.PagingDefaultVO;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class MngrVO extends PagingDefaultVO {
 
     private String mngrUid;

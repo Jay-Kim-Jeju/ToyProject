@@ -2,7 +2,7 @@ package toy.admin.main.dao;
 
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 import toy.com.vo.common.SessionAdminVO;
-import toy.com.vo.system.MngrVO;
+import toy.com.vo.system.mngr.MngrVO;
 
 import java.util.List;
 

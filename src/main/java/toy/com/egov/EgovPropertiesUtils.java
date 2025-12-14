@@ -143,8 +143,8 @@ public class EgovPropertiesUtils {
         return value;
     }
 
-    public static ArrayList loadPropertyFile(String property) {
-        ArrayList keyList = new ArrayList();
+    public static List<Map<String, String>> loadPropertyFile(String property) {
+        List<Map<String, String>> keyList = new ArrayList<>();
         String src = property.replace('\\', FILE_SEPARATOR).replace('/', FILE_SEPARATOR);
         FileInputStream fis = null;
 
@@ -154,32 +154,25 @@ public class EgovPropertiesUtils {
                 Properties props = new Properties();
                 fis = new FileInputStream(src);
                 props.load(new BufferedInputStream(fis));
-                fis.close();
-                Enumeration plist = props.propertyNames();
-                if (plist != null) {
-                    while(plist.hasMoreElements()) {
-                        Map map = new HashMap();
-                        String key = (String)plist.nextElement();
-                        map.put(key, props.getProperty(key));
-                        keyList.add(map);
-                    }
+
+                for (String key : props.stringPropertyNames()) {
+                    Map<String, String> map = new HashMap<>();
+                    map.put(key, props.getProperty(key));
+                    keyList.add(map);
                 }
             }
         } catch (IOException ex) {
             debug(ex);
         } finally {
-            try {
-                if (fis != null) {
-                    fis.close();
+            if (fis != null) {
+                try { fis.close(); } catch (IOException ex) {
+                    Logger.getLogger(EgovPropertiesUtils.class).debug("IGNORED: " + ex.getMessage());
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(EgovPropertiesUtils.class).debug("IGNORED: " + ex.getMessage());
             }
-
         }
-
         return keyList;
     }
+
 
     private static void debug(Object obj) {
         if (obj instanceof Exception) {

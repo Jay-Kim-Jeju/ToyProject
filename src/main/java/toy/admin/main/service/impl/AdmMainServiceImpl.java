@@ -11,7 +11,7 @@ import toy.com.egov.EgovPropertiesUtils;
 import toy.com.util.CmUtil;
 import toy.com.vo.common.AdminLoginResult;
 import toy.com.vo.common.SessionAdminVO;
-import toy.com.vo.system.MngrVO;
+import toy.com.vo.system.mngr.MngrVO;
 
 import javax.annotation.Resource;
 import java.util.List;
