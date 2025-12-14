@@ -27,7 +27,7 @@
 
   <%@ include file="/WEB-INF/jsp/toy/com/include/csrfMetaTags.jsp" %>
 
-  <title>관리자 로그인</title>
+  <title><spring:message code="admin.login.title" /></title>
 
   <!-- css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/import.css?jsCssVer=${jsCssVer}">
@@ -42,17 +42,24 @@
   <script type="text/javascript">
     let returnURL = "";
 
+    // i18n messages for JavaScript alerts
+    const MSG_ENTER_ID = "<spring:message code='admin.login.alert.enterId' javaScriptEscape='true' />";
+    const MSG_ENTER_PW = "<spring:message code='admin.login.alert.enterPassword' javaScriptEscape='true' />";
+    const MSG_ERR_510  = "<spring:message code='admin.login.error.510' javaScriptEscape='true' />";
+    const MSG_ERR_403  = "<spring:message code='admin.login.error.403' javaScriptEscape='true' />";
+    const MSG_ERR_SYS  = "<spring:message code='admin.login.error.system' javaScriptEscape='true' />";
+
     /**
      * 로그인
      */
     function fn_login(){
       if($("#mngrUid").val() == ""){
-        alert("아이디를 입력하세요.");
+        alert(MSG_ENTER_ID); // CHANGED: i18n
         $("#mngrUid").focus();
         return false;
       }
       if($("#pwdEncpt").val() == ""){
-        alert("비밀번호를 입력하세요");
+        alert(MSG_ENTER_ID); // CHANGED: i18n
         $("#pwdEncpt").focus();
         return false;
       }
@@ -73,20 +80,21 @@
           }
           //로그인 실패이면
           else {
+            // NOTE: server message can be i18n'ed later by returning messageCode instead of message text
             alert(data.message);
           }
         },
         error: function(request, status, error) {
           if (request.status == 510) {
-            alert("에러가 발생했습니다. 로그인세션이 만료되었습니다.");
+            alert(MSG_ERR_510);
             location.replace("/toy/admin/login.ac");
             return false;
           } else if (request.status == 403) {
-            alert("접근 권한이 없습니다.");
+            alert(MSG_ERR_403);
             return false;
           }
 
-          alert("시스템 오류\n관리자에게 문의해주세요.");
+          alert(MSG_ERR_SYS);
         }
       });
 
@@ -107,16 +115,18 @@
       <div class="login-box">
         <form id="login_form" name="login_form" onSubmit="return fn_login();" method="post">
           <input type="hidden" name="returnURL" value="${returnURL }" />
-          <h2>관리자 로그인</h2>
+
+          <h2><spring:message code="admin.login.heading" /></h2>
+
           <div class="int-box">
-            <label for="userID">아이디</label>
-            <input type="text" class="userID" id="mngrUid" name="mngrUid" value="${userVO.mngrUid}" placeholder="아이디">
+            <label for="mngrUid"><spring:message code="admin.login.label.id" /></label>
+            <input type="text" class="userID" id="mngrUid" name="mngrUid" value="${userVO.mngrUid}" placeholder="<spring:message code='admin.login.placeholder.id' />">
           </div>
           <div class="int-box">
-            <label for="userPW">패스워드</label>
-            <input type="password" class="userPW" id="pwdEncpt" name="pwdEncpt" placeholder="패스워드">
+            <label for="pwdEncpt"><spring:message code="admin.login.label.password" /></label>
+            <input type="password" class="userPW" id="pwdEncpt" name="pwdEncpt" placeholder="<spring:message code='admin.login.placeholder.password' />">
           </div>
-          <div class="login-btn"><button type="submit">로그인</button></div>
+          <div class="login-btn"><button type="submit"><spring:message code="admin.login.button.login" /></button></div>
         </form>
 
         <p class="copy">Copyright(c) 2025 Jay. All rights reserved.</p>

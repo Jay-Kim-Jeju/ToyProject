@@ -33,49 +33,47 @@
             <ul id="depth1" class="depth1">
 
                 <li id="cctv_menu">
-                    <a href="<c:url value="" />" >CCTV</a>
+                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.cctv" /></a> <%-- CHANGED: i18n --%>
                 </li>
                 <li id="place_menu">
-                    <a href="<c:url value="" />">장소 관리</a>
+                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.place" /></a> <%-- CHANGED: i18n --%>
                 </li>
                 <li id="today_menu">
-                    <a href="<c:url value="" />">오늘제주 관리</a>
+                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.today" /></a> <%-- CHANGED: i18n --%>
                 </li>
                 <li id="rcmm_menu">
-                    <a href="<c:url value="" />">추천장소 관리</a>
+                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.rcmm" /></a> <%-- CHANGED: i18n --%>
                 </li>
-
                 <li id="jejunews_menu">
-                    <a href="<c:url value="" />">제주소식</a>
+                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.jejunews" /></a> <%-- CHANGED: i18n --%>
                 </li>
 
                 <li id="influencer_menu">
-                    <a href="<c:url value='' />" class="drop">인플루언서 관리</a>
+                    <a href="<c:url value='' />" class="drop"><spring:message code="admin.header.menu.influencer" /></a> <%-- CHANGED: i18n --%>
                     <ul class="depth2">
-                        <li><a href="<c:url value='' />">인플루언서 관리</a></li>
-                        <li><a href="<c:url value='' />">상품관리</a></li>
-                        <li><a href="<c:url value='' />">주문관리</a></li>
+                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.influencer.manage" /></a></li> <%-- CHANGED: i18n --%>
+                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.influencer.goods" /></a></li> <%-- CHANGED: i18n --%>
+                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.influencer.order" /></a></li> <%-- CHANGED: i18n --%>
                     </ul>
                 </li>
 
                 <li id="excclc_menu">
-                    <a href="<c:url value="" />" class="drop">정산</a>
+                    <a href="<c:url value='' />" class="drop"><spring:message code="admin.header.menu.excclc" /></a> <%-- CHANGED: i18n --%>
                 </li>
 
                 <li id="member_menu">
-                    <a href="<c:url value='' />">회원관리</a>
+                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.member" /></a> <%-- CHANGED: i18n --%>
                 </li>
 
 
-
                 <li id="system_menu">
-                    <a href="<c:url value="" />" class="drop">시스템설정</a>
+                    <a href="<c:url value='' />" class="drop"><spring:message code="admin.header.menu.system" /></a> <%-- CHANGED: i18n --%>
                     <ul class="depth2">
-                        <li><a href="<c:url value="" />">관리자관리</a></li>
-                        <li><a href="<c:url value="" />">권한관리</a></li>
-                        <li><a href="<c:url value="" />">코드관리</a></li>
-                        <li><a href="<c:url value="" />">접속 허용 IP</a></li>-
-                        <li><a href="<c:url value="" />">로그조회</a></li>
+                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.mngr" /></a></li>
+                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.auth" /></a></li>
+                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.code" /></a></li>
+                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.allowIp" /></a></li>
+                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.log" /></a></li>
                     </ul>
                 </li>
 
@@ -99,18 +97,26 @@
             <div class="profile">
                 <a href="javascript:window.open('<c:url value="" />','detailMber', 'width=1000,height=440');">
                     <div class="photo" style="background-image: url('${pageContext.request.contextPath}/images/admin/frame/profile.png')"></div>
-                    <span class="setting"><i class="material-icons-outlined">settings</i>계정관리</span>
+                    <span class="setting"><i class="material-icons-outlined">settings</i><spring:message code="admin.header.profile.account" />
+</span>
                 </a>
             </div>
             <ul class="user-info">
                 <li class="user">${sessionScope.sessionAdminVO.mngrNm} [${sessionScope.sessionAdminVO.authorDc}]</li>
-                <li>로그인 : ${sessionScope.sessionAdminVO.lastLgnDt}</li>
+                <li><spring:message code="admin.header.lastLogin" /> : ${sessionScope.sessionAdminVO.lastLgnDt}</li>
             </ul>
         </div>
         <nav class="flex wp100 px-10">
-            <a href="/" class="site wp100" target="_blank"><i class="material-icons-outlined">home</i><span class="text">사이트열기</span></a>
+            <a href="/" class="site wp100" target="_blank"><i class="material-icons-outlined">home</i>
+                <span class="text">
+                    <spring:message code="admin.header.openSite" />
+                </span>
+            </a>
             <a href="<c:url value='/toy/admin/logout.ac' />" class="logout wp100">
-                <i class="material-icons-outlined">logout</i><span class="text">로그아웃</span>
+                <i class="material-icons-outlined">logout</i>
+                <span class="text">
+                    <spring:message code="admin.header.logout" />
+                </span>
             </a>
         </nav>
 

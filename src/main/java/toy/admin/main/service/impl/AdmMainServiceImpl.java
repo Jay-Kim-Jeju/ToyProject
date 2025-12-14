@@ -28,40 +28,43 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
     public AdminLoginResult adminLogin(MngrVO mngrVO) throws Exception {
         AdminLoginResult result = new AdminLoginResult();
 
-        // 1. 관리자 계정 조회
+        // 1) Load account (TMNGR) and optionally auth info (JOIN)
         SessionAdminVO sessionUserVO = admMainDAO.selectAdminUserLogin(mngrVO);
 
         if (sessionUserVO == null) {
-            // 아이디가 없거나, USE_YN != 'Y' 인 경우
+            // Account Not Found or inactive(USE_YN != 'Y')
             // 실패 카운트 증가 시도 (존재하지 않는 ID면 영향 없음)
             admMainDAO.updateLoginFailrCo(mngrVO.getMngrUid());
 
             result.setSuccess(false);
+            result.setLocked(false);
             result.setReasonCode("ID_PW_MISMATCH");
-            result.setFailCount(0);
+            result.setMessageCode("admin.login.fail.mismatchOrNoAuth"); // CHANGED
+            //result.setFailCount(0);
             return result;
         }
 
-        // 2. 현재 실패 카운트 파싱
+        // 2. Parse fail count
         int failCnt = 0;
         try {
             String failStr = sessionUserVO.getLgnFailrNumtm();
-            if (failStr != null && failStr.trim().length() > 0) {
+            if (failStr != null && !failStr.trim().isEmpty()) {
                 failCnt = Integer.parseInt(failStr);
             }
         } catch (NumberFormatException e) {
             failCnt = 0; // parse 실패하면 0으로 가정
         }
 
-        // 3. 잠금 여부 체크 (5회 이상 실패)
+        // 3. Lock check
         if (failCnt >= 5) {
             result.setSuccess(false);
             result.setLocked(true);
             result.setReasonCode("LOCKED");
+            result.setMessageCode("admin.login.fail.locked"); // CHANGED
             return result;
         }
 
-        // 4. 비밀번호 검증
+        // 4. Password verification
         String encryptPw = CmUtil.encryptPassword(
                 mngrVO.getPwdEncpt(),
                 EgovPropertiesUtils.getProperty("DB.ENCRYPTION.KEY")
@@ -69,30 +72,49 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
         LOG_DEBUG.debug("encrypted password: {}", encryptPw);
 
         if (!encryptPw.equals(sessionUserVO.getPwdEncpt())) {
-            // 비밀번호 불일치 → 실패 카운트 증가
+            // increase fail count in DB
             admMainDAO.updateLoginFailrCo(mngrVO.getMngrUid());
 
+            // If this attempt reaches the lock threshold, return LOCKED immediately
+            int nextFailCnt = failCnt + 1;
+            if (nextFailCnt >= 5) {
+                result.setSuccess(false);
+                result.setLocked(true);
+                result.setReasonCode("LOCKED");
+                result.setMessageCode("admin.login.fail.locked");
+                return result;
+            }
+
             result.setSuccess(false);
+            result.setLocked(false);
             result.setReasonCode("ID_PW_MISMATCH");
-            // failCnt + 1 이지만 DB 에서 실제 값이 관리되므로 여기서는 그대로 두어도 괜찮음
+            result.setMessageCode("admin.login.fail.mismatch");
             return result;
         }
 
-        // 5. 로그인 성공 처리
-        List<String> authList = admMainDAO.selectAdminUserAuthList(mngrVO);
-        if (authList == null || authList.isEmpty()) {
-            authList.add("LOGIN");
-        }
-        sessionUserVO.setAuth(authList);
+        // 5) Authorization check (required when authorGroupUuid is provided)
+        boolean requiresAuthGroup = (mngrVO.getAuthorGroupUuid() != null && !mngrVO.getAuthorGroupUuid().trim().isEmpty());
 
-        // 최종 로그인 시간 & 실패 횟수 초기화
+        List<String> authList = admMainDAO.selectAdminUserAuthList(mngrVO);
+
+        if (requiresAuthGroup && (authList == null || authList.isEmpty())) {
+            // Password is correct, but user has no required auth group
+            result.setSuccess(false);
+            result.setLocked(false);
+            result.setReasonCode("ID_PW_OR_NO_AUTH");
+            result.setMessageCode("admin.login.fail.mismatchOrNoAuth");
+            return result;
+        }
+
+
+        // 6) Success: reset fail count and update last login time
         admMainDAO.updateLastLogin(mngrVO.getMngrUid());
 
         result.setSuccess(true);
         result.setLocked(false);
         result.setReasonCode("SUCCESS");
+        result.setMessageCode("admin.login.success");
         result.setSessionUser(sessionUserVO);
-
 
         return result;
     }

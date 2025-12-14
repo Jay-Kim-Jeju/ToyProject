@@ -35,6 +35,8 @@ import toy.com.vo.TestVO;
 import toy.com.vo.common.AdminLoginResult;
 import toy.com.vo.common.SessionAdminVO;
 import toy.com.vo.system.MngrVO;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 @RequiredArgsConstructor
 @Controller
@@ -45,6 +47,9 @@ public class AdmMainCtrl {
     //private final CommonService commonService;
     private static final Logger LOG_DEBUG = LoggerFactory.getLogger(AdmMainCtrl.class);
     private final AdmTestService admTestService;
+
+    @Resource(name = "messageSource")
+    private MessageSource messageSource;
 
     @RequestMapping({"/toy/admin/login.ac"})
     public String toyAdmLogin(ModelMap model, HttpServletRequest request) throws Exception {
@@ -62,7 +67,7 @@ public class AdmMainCtrl {
 
         String returnURL = request.getParameter("returnURL");
         if (returnURL == null || returnURL.isEmpty()) {
-            returnURL = "/toy/main.ac"; // or 원하는 기본 페이지
+            returnURL = "/toy/admin/main.ac"; // or 원하는 기본 페이지
         }
 
         model.addAttribute("returnURL", returnURL);
@@ -75,46 +80,46 @@ public class AdmMainCtrl {
     public ModelAndView toyAdmLoginAction(@ModelAttribute("userVO") MngrVO mngrVO, HttpServletRequest request) throws Exception {
 
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result", "N");
-        resultMap.put("message", "로그인에 실패했습니다.");
 
-        // 관리자 그룹 고정
+        // Fixed admin group for now
         mngrVO.setAuthorGroupUuid("ADMINISTRATOR");
 
         AdminLoginResult loginResult = admMainService.adminLogin(mngrVO);
 
-        // 1. 로그인 실패 케이스 처리
-        if (!loginResult.isSuccess()) {
-            if (loginResult.isLocked()) {
-                // 잠금 상태
-                resultMap.put("message", "로그인 횟수를 초과했습니다. 관리자에게 문의 바랍니다.");
-            } else {
-                // 일반 실패 (ID/비밀번호 불일치 등)
-                resultMap.put("message", "아이디 또는 비밀번호가 일치하지 않거나, 권한이 없는 계정입니다.");
-            }
-
-            return new ModelAndView("jsonView", resultMap);
-        }
-
-        // 2. 로그인 성공 케이스
-        SessionAdminVO sessionUserVO = loginResult.getSessionUser();
-
-        // 권한 코드에 따라 세션 키 / masterType 분기
-        String sessionStr = "ADMINISTRATOR".equals(sessionUserVO.getAuthorCd())
-                ? "sessionAdminVO" : "sessionOtherVO";
-        String masterType = "ADMINISTRATOR".equals(sessionUserVO.getAuthorCd())
-                ? "master" : "entrps";
-
-        request.getSession().setAttribute(sessionStr, sessionUserVO);
-
-        // 기본 리다이렉트 URL (ToyProject에 맞게 수정 가능)
-        String returnURL = "/toy/main.ac";
+        // Default redirect URL (admin main)
+        String returnURL = "/toy/admin/main.ac";
         if (EgovStringUtil.isNotEmpty(request.getParameter("returnURL"))) {
             returnURL = request.getParameter("returnURL");
         }
 
-        resultMap.put("result", "Y");
-        resultMap.put("message", "환영합니다!");
+        // Resolve localized message by messageCode
+        String messageCode = loginResult.getMessageCode();
+        String message = messageSource.getMessage(
+                messageCode,
+                loginResult.getMessageArgs(),
+                "Login failed.",
+                LocaleContextHolder.getLocale()
+        );
+
+        // Unified response fields
+        resultMap.put("result", loginResult.isSuccess() ? "Y" : "N");
+        resultMap.put("messageCode", messageCode);
+        resultMap.put("message", message);
+
+
+        // 1. Failure case
+        if (!loginResult.isSuccess()) {
+            return new ModelAndView("jsonView", resultMap);
+        }
+
+        // 2. Success Case
+        SessionAdminVO sessionUserVO = loginResult.getSessionUser();
+        // Use a single session key to match interceptor & header usage
+        request.getSession().setAttribute("sessionAdminVO", sessionUserVO);
+
+        String masterType = "ADMINISTRATOR".equals(sessionUserVO.getAuthorCd()) ? "master" : "entrps";
+
+
         resultMap.put("masterType", masterType);
         resultMap.put("returnURL", returnURL);
 
@@ -134,9 +139,9 @@ public class AdmMainCtrl {
 
 
 
-    @RequestMapping({"/toy/main.ac"})
+    @RequestMapping({"/toy/admin/main.ac"})
     public ModelAndView main(HttpServletRequest request) throws Exception {
-        LOG_DEBUG.debug("/toy/main.ac");
+        LOG_DEBUG.debug("/toy/admin/main.ac");
 
         // 로그인기능 구현할떄 구현예정
         //SessionAdminVO sessionUserVO = (SessionAdminVO)request.getSession().getAttribute("sessionAdminVO");

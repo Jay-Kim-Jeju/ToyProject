@@ -4,23 +4,24 @@
 
     <select id="selectAdminUserLogin" resultType="SessionAdminVO">
         SELECT T_M.MNGR_UID					/* 관리자ID */
-        , T_M.PWD_ENCPT					/* 비밀번호 */
-        , T_M.MNGR_NM					/* 관리자이름 */
-        , T_M.EML_ADRES					/* 이메일 */
-        , T_M.LAST_LGN_DT			/* 최종로그인일시 */
-        , T_M.LGN_FAILR_NUMTM			/* 로그인 실패 횟수 */
-        , T_AG.AUTHOR_GROUP_UUID AS AUTHOR_CD /* 권한 코드 */
-        , T_AG.AUTHOR_DC				/* 권한 설명 */
+            , T_M.PWD_ENCPT					/* 비밀번호 */
+            , T_M.MNGR_NM					/* 관리자이름 */
+            , T_M.EML_ADRES					/* 이메일 */
+            , T_M.LAST_LGN_DT			/* 최종로그인일시 */
+            , T_M.LGN_FAILR_NUMTM			/* 로그인 실패 횟수 */
+            , T_AG.AUTHOR_GROUP_UUID AS AUTHOR_CD /* 권한 코드 */
+            , T_AG.AUTHOR_DC				/* 권한 설명 */
         FROM TMNGR T_M
-        LEFT OUTER JOIN TAUTH T_A
-        ON T_A.MNGR_UID = T_M.MNGR_UID
-        LEFT OUTER JOIN TAUTH_GRP T_AG
-        ON T_AG.AUTHOR_GROUP_UUID = T_A.AUTHOR_GROUP_UUID
+            LEFT OUTER JOIN TAUTH T_A
+                ON T_A.MNGR_UID = T_M.MNGR_UID
+            LEFT OUTER JOIN TAUTH_GRP T_AG
+                ON T_AG.AUTHOR_GROUP_UUID = T_A.AUTHOR_GROUP_UUID
+            <if test="authorGroupUuid != null and authorGroupUuid != ''">
+                AND T_AG.AUTHOR_GROUP_UUID = #{authorGroupUuid}
+            </if>
         WHERE T_M.USE_YN  = 'Y'
-        AND T_M.MNGR_UID = #{mngrUid}
-        <if test="authorGroupUuid != null and authorGroupUuid != ''">
-            AND T_AG.AUTHOR_GROUP_UUID = #{authorGroupUuid}
-        </if>
+            AND T_M.MNGR_UID = #{mngrUid}
+
     </select>
 
     <!-- 권한그룹 조회 -->

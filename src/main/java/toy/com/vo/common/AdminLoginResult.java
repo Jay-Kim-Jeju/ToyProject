@@ -20,6 +20,12 @@ public class AdminLoginResult implements Serializable {
     // 현재 실패 횟수
     private int failCount;
 
+    // CHANGED: message code for i18n
+    private String messageCode;
+
+    // Optional: message args (if you want placeholders later)
+    private Object[] messageArgs;
+
     // 로그인에 성공했을 때의 세션용 정보
     private SessionAdminVO sessionUser;
 }
