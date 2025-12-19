@@ -106,6 +106,10 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
             return result;
         }
 
+        // Put auth list into session VO for later permission checks.
+        // (Without this, sessionAdminVO.getAuth() stays null.)
+        sessionUserVO.setAuth(authList);
+
 
         // 6) Success: reset fail count and update last login time
         admMainDAO.updateLastLogin(mngrVO.getMngrUid());

@@ -20,7 +20,7 @@ public class AdminAuthInterceptor implements HandlerInterceptor {
                 : null;
 
         if (admin == null) {
-            response.sendRedirect(request.getContextPath() + "/toy/admin/login.ac");
+            response.sendRedirect(request.getContextPath() + "/toy/admin/login.do");
             return false;
         }
 

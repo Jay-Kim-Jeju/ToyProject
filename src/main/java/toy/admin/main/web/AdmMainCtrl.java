@@ -23,6 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import toy.admin.main.service.AdmMainService;
+import toy.admin.system.accesslog.service.AdminAccessLogService;
+import toy.admin.system.accesslog.service.impl.AdminAccessLogServiceImpl;
 import toy.admin.test.service.AdmTestService;
 import toy.com.egov.EgovPropertiesUtils;
 import toy.com.util.EgovStringUtil;
@@ -39,18 +41,20 @@ public class AdmMainCtrl {
 
     @Resource(name = "AdmMainService")
     private final AdmMainService admMainService;
-    //private final CommonService commonService;
-    private static final Logger LOG_DEBUG = LoggerFactory.getLogger(AdmMainCtrl.class);
     private final AdmTestService admTestService;
+    private final AdminAccessLogService adminAccessLogService;
+
+    private static final Logger LOG_DEBUG = LoggerFactory.getLogger(AdmMainCtrl.class);
+
 
     @Resource(name = "messageSource")
     private MessageSource messageSource;
 
-    @RequestMapping({"/toy/admin/login.ac"})
+    @RequestMapping({"/toy/admin/login.do"})
     public String toyAdmLogin(ModelMap model, HttpServletRequest request) throws Exception {
 
         // 세션 전체 invalidate
-        // 새로고침할때마다 login.ac에서 매번 session.invalidate()를 호출해서 CSRF 토큰과 세션이 안 맞는 상태가 되면서 403발생
+        // 새로고침할때마다 login.do에서 매번 session.invalidate()를 호출해서 CSRF 토큰과 세션이 안 맞는 상태가 되면서 403발생
         //request.getSession().invalidate();
 
         // 1) 세션 전체 invalidate 대신, 필요한 값만 제거
@@ -62,7 +66,7 @@ public class AdmMainCtrl {
 
         String returnURL = request.getParameter("returnURL");
         if (returnURL == null || returnURL.isEmpty()) {
-            returnURL = "/toy/admin/main.ac"; // or 원하는 기본 페이지
+            returnURL = "/toy/admin/main.do"; // or 원하는 기본 페이지
         }
 
         model.addAttribute("returnURL", returnURL);
@@ -76,13 +80,13 @@ public class AdmMainCtrl {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        // Fixed admin group for now
+        // Do not force a fixed admin group later
         mngrVO.setAuthorGroupUuid("ADMINISTRATOR");
 
         AdminLoginResult loginResult = admMainService.adminLogin(mngrVO);
 
         // Default redirect URL (admin main)
-        String returnURL = "/toy/admin/main.ac";
+        String returnURL = "/toy/admin/main.do";
         if (EgovStringUtil.isNotEmpty(request.getParameter("returnURL"))) {
             returnURL = request.getParameter("returnURL");
         }
@@ -114,6 +118,8 @@ public class AdmMainCtrl {
 
         String masterType = "ADMINISTRATOR".equals(sessionUserVO.getAuthorCd()) ? "master" : "entrps";
 
+        // Leave Action Trace on SysLog
+        this.adminAccessLogService.insertAdminAccessLog("Admin System > Login", request);
 
         resultMap.put("masterType", masterType);
         resultMap.put("returnURL", returnURL);
@@ -129,17 +135,17 @@ public class AdmMainCtrl {
             LOG_DEBUG.info(e.toString());
         }
 
-        return "redirect:/toy/admin/login.ac";
+        return "redirect:/toy/admin/login.do";
     }
 
 
 
-    @RequestMapping({"/toy/admin/main.ac"})
+    @RequestMapping({"/toy/admin/main.do"})
     public ModelAndView main(HttpServletRequest request) throws Exception {
-        LOG_DEBUG.debug("/toy/admin/main.ac");
+        LOG_DEBUG.debug("/toy/admin/main.do");
 
         // 로그인기능 구현할떄 구현예정
-        //SessionAdminVO sessionUserVO = (SessionAdminVO)request.getSession().getAttribute("sessionAdminVO");
+        SessionAdminVO sessionUserVO = (SessionAdminVO)request.getSession().getAttribute("sessionAdminVO");
 
         //공통레이아웃 적용 확인을 위한 테스트페이지
         // create empty search condition (no filters for now)

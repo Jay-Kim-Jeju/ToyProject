@@ -47,7 +47,7 @@
         <p class="error-text">잘못된 접근입니다. 관리자에게 문의 해주세요.</p>
 
         <div class="button">
-            <a href="${pageContext.request.contextPath}/toy/admin/main.ac">홈으로 이동</a>
+            <a href="${pageContext.request.contextPath}/toy/admin/main.do">홈으로 이동</a>
         </div>
     </div> <!--//error-wrap-->
 

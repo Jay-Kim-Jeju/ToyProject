@@ -87,7 +87,7 @@
         error: function(request, status, error) {
           if (request.status == 510) {
             alert(MSG_ERR_510);
-            location.replace("/toy/admin/login.ac");
+            location.replace("/toy/admin/login.do");
             return false;
           } else if (request.status == 403) {
             alert(MSG_ERR_403);

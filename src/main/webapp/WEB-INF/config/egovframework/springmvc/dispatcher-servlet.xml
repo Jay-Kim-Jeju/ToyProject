@@ -146,7 +146,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/toy/admin/**"/>
             <!-- 로그인 관련 요청은 제외 -->
-            <mvc:exclude-mapping path="/toy/admin/login.ac"/>
+            <mvc:exclude-mapping path="/toy/admin/login.do"/>
             <mvc:exclude-mapping path="/toy/admin/logout.ac"/>
             <mvc:exclude-mapping path="/toy/admin/loginAction.doax"/>
             <bean class="toy.com.interceptor.AdminAuthInterceptor" />

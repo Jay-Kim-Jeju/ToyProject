@@ -22,4 +22,23 @@ public class SessionAdminVO implements Serializable {
     private List<String> authName;
     private String isMemngr;
 
+    public boolean checkAuth(String strAuth) {
+        // Return false when auth list is missing.
+        if (this.auth == null || this.auth.isEmpty() || strAuth == null) {
+            return false;
+        }
+        for (String authorGrpId : this.auth) {
+            if (strAuth.equals(authorGrpId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean getCheckAdmin() {
+
+        // ADMINISTRATOR is treated as a super admin role in this project.
+        return checkAuth("ADMINISTRATOR");
+    }
+
 }

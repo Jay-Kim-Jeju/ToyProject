@@ -52,7 +52,7 @@
         </c:if>
 
         <div class="button">
-            <a href="${pageContext.request.contextPath}/toy/admin/main.ac">
+            <a href="${pageContext.request.contextPath}/toy/admin/main.do">
                 <spring:message code="button.goHome" text="Go to home" />
             </a>
         </div>

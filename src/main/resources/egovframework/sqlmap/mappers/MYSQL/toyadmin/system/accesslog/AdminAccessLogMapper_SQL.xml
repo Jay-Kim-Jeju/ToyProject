@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="toy.admin.system.accesslog.dao.AdminAccessLogDAO">
+
+    <!-- Admin access log WHERE clause -->
+    <sql id="whereSelectAdmAcssLog">
+        <where>
+            <if test="sMngrUid != null and sMngrUid != ''">
+                AND MNGR_UID LIKE CONCAT('%', #{sMngrUid}, '%')  <!-- Admin ID -->
+            </if>
+
+            <if test="sAccessIp != null and sAccessIp != ''">
+                AND ACCESS_IP LIKE CONCAT('%', #{sAccessIp}, '%') <!-- Client IP -->
+            </if>
+
+            <if test="sReqUri != null and sReqUri != ''">
+                AND REQ_URI LIKE CONCAT('%', #{sReqUri}, '%')     <!-- Requested URI -->
+            </if>
+
+            <if test="sActionDesc != null and sActionDesc != ''">
+                AND ACTION_DESC LIKE CONCAT('%', #{sActionDesc}, '%') <!-- Action description -->
+            </if>
+
+            <if test="sStartDt != null and sStartDt != '' and sEndDt != null and sEndDt != ''">
+                AND REG_DT &gt;= STR_TO_DATE(#{sStartDt}, '%Y-%m-%d')
+                AND REG_DT &lt;  DATE_ADD(STR_TO_DATE(#{sEndDt}, '%Y-%m-%d'), INTERVAL 1 DAY) <!-- Date range -->
+            </if>
+        </where>
+    </sql>
+
+    <!-- Admin > System Settings > Access Log > List -->
+    <select id="selectAdminAccessLogList"
+            parameterType="AdminAccessLogSearchVO"
+            resultType="AdminAccessLogVO">
+        SELECT
+        LOG_UUID    AS logUuid
+        , MNGR_UID    AS mngrUid
+        , ACCESS_IP   AS accessIp
+        , REQ_URI     AS reqUri
+        , ACTION_DESC AS actionDesc
+        , MEMO        AS memo
+        , REG_DT      AS regDt
+        FROM
+        TADM_ACCESS_LOG
+        <include refid="whereSelectAdmAcssLog" />
+        ORDER BY
+        REG_DT DESC
+        LIMIT #{firstIndex}, #{recordCountPerPage}
+    </select>
+
+    <!-- Admin > System Settings > Access Log > Count -->
+    <select id="selectAdminAccessLogCount"
+            parameterType="toy.com.vo.system.accesslog.AdminAccessLogSearchVO"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM TADM_ACCESS_LOG
+        <include refid="whereSelectAdmAcssLog" />
+    </select>
+
+    <!-- Insert access log row -->
+    <insert id="insertAdminAccessLog"
+            parameterType="AdminAccessLogVO">
+        INSERT INTO TADM_ACCESS_LOG (
+                                      LOG_UUID
+                                    , MNGR_UID
+                                    , ACCESS_IP
+                                    , REQ_URI
+                                    , ACTION_DESC
+                                    , MEMO
+                                    , REG_DT
+        ) VALUES (
+                   #{logUuid}
+                 , #{mngrUid}
+                 , #{accessIp}
+                 , #{reqUri}
+                 , #{actionDesc}
+                 , #{memo}
+                 , NOW()
+                 )
+    </insert>
+
+</mapper>

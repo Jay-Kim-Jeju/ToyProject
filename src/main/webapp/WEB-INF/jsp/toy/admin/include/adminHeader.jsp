@@ -67,13 +67,13 @@
 
 
                 <li id="system_menu">
-                    <a href="<c:url value='' />" class="drop"><spring:message code="admin.header.menu.system" /></a> <%-- CHANGED: i18n --%>
+                    <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" class="drop"><spring:message code="admin.header.menu.system" /></a> <%-- CHANGED: i18n --%>
                     <ul class="depth2">
                         <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.mngr" /></a></li>
                         <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.auth" /></a></li>
                         <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.code" /></a></li>
                         <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.allowIp" /></a></li>
-                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.log" /></a></li>
+                        <li><a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />"><spring:message code="admin.header.menu.system.log" /></a></li>
                     </ul>
                 </li>
 
@@ -204,7 +204,7 @@
                     <a href="<c:url value="" />" id="system_popup_menu"><i class="material-icons-outlined">apps</i>팝업관리</a>
                 </li>
                 <li>
-                    <a href="<c:url value="" />" id="system_mngrLog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a>
+                    <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accessLog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a>
                 </li>
             </c:if>
 
