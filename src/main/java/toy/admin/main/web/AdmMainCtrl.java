@@ -75,7 +75,7 @@ public class AdmMainCtrl {
         return "admin/adminLogin";
     }
 
-    @RequestMapping({"/toy/admin/loginAction.doax"})
+    @RequestMapping({"/toy/admin/loginAction.ac"})
     public ModelAndView toyAdmLoginAction(@ModelAttribute("userVO") MngrVO mngrVO, HttpServletRequest request) throws Exception {
 
         Map<String, Object> resultMap = new HashMap<>();
@@ -119,7 +119,7 @@ public class AdmMainCtrl {
         String masterType = "ADMINISTRATOR".equals(sessionUserVO.getAuthorCd()) ? "master" : "entrps";
 
         // Leave Action Trace on SysLog
-        this.adminAccessLogService.insertAdminAccessLog("Admin System > Login", request);
+        this.adminAccessLogService.insertAdminAccessLog("Admin > Login", request);
 
         resultMap.put("masterType", masterType);
         resultMap.put("returnURL", returnURL);

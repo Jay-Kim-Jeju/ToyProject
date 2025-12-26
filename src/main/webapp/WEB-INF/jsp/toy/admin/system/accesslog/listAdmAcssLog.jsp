@@ -9,8 +9,6 @@
 
 <%@ include file="/WEB-INF/jsp/toy/admin/include/top.jsp" %>
 
-<title> 관리자 > 시스템설정 > 접속이력 </title>
-
 <!-- jsgrid -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/com/jsgrid/jsgrid.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/com/jsgrid/jsgrid-theme.css" />
@@ -123,7 +121,7 @@
 <body>
 <div id="wrapper">
 
-    <%-- 공통 헤더/사이드 메뉴 --%>
+    <%-- Common Header/Side Menue --%>
     <jsp:include page="/WEB-INF/jsp/toy/admin/include/adminHeader.jsp" flush="false">
         <jsp:param value="home_menu" name="admin_menu"/>
     </jsp:include>
@@ -134,7 +132,7 @@
                 <h2 class="depth-title">접속이력조회</h2>
             </div>
 
-            <!-- Change Contents (↓↓콘텐츠 변경↓↓) -->
+            <!-- Change Contents (↓↓↓↓) -->
             <section class="search-form">
                 <div class="form-inline2">
                     <form name="searchForm" id="searchForm" method="get" action="${curURL}" onsubmit="fn_Search(); return false;">

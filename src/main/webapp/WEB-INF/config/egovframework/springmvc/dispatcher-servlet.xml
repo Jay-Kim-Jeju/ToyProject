@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- @Controller, @RequestMapping 이 있는 클래스 스캔 (관리자 전용 경로만 포함) -->
-    <context:component-scan base-package="toy">
+    <context:component-scan base-package="toy" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>-->
@@ -148,7 +148,7 @@
             <!-- 로그인 관련 요청은 제외 -->
             <mvc:exclude-mapping path="/toy/admin/login.do"/>
             <mvc:exclude-mapping path="/toy/admin/logout.ac"/>
-            <mvc:exclude-mapping path="/toy/admin/loginAction.doax"/>
+            <mvc:exclude-mapping path="/toy/admin/loginAction.ac"/>
             <bean class="toy.com.interceptor.AdminAuthInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

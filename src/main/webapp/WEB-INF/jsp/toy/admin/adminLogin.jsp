@@ -66,7 +66,7 @@
 
       $.ajax({
         type: 'POST',
-        url: "/toy/admin/loginAction.doax",
+        url: "/toy/admin/loginAction.ac",
         data: $("#login_form").serialize(),
         beforeSend : function(xhr){
           let token = $("meta[name='_csrf']").attr("content");

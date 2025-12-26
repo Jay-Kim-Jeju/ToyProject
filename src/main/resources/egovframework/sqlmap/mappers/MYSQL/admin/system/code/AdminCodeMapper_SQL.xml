@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="toy.admin.system.code.dao.AdminCodeDAO">
+
+    <!-- Code Group List (Paging + Search) -->
+    <select id="selectCodeGroupList" parameterType="CdGrpVO" resultType="CdGrpVO">
+        SELECT
+        GROUP_CD
+        , CD_GROUP_NM
+        , TRIM(USE_YN) AS USE_YN
+        FROM TCD_GRP
+        WHERE 1=1
+        <if test="groupCd != null and groupCd != ''">
+            AND GROUP_CD LIKE CONCAT('%', #{groupCd}, '%')
+        </if>
+        <if test="cdGroupNm != null and cdGroupNm != ''">
+            AND CD_GROUP_NM LIKE CONCAT('%', #{cdGroupNm}, '%')
+        </if>
+        <if test="useYn != null and useYn != ''">
+            AND USE_YN = #{useYn}
+        </if>
+        ORDER BY GROUP_CD
+        LIMIT #{firstIndex}, #{recordCountPerPage}
+    </select>
+
+    <!-- Code Group List Count -->
+    <select id="selectCdGrpListCnt" parameterType="CdGrpVO" resultType="int">
+        SELECT COUNT(*)
+        FROM TCD_GRP
+        WHERE 1=1
+        <if test="groupCd != null and groupCd != ''">
+            AND GROUP_CD LIKE CONCAT('%', #{groupCd}, '%')
+        </if>
+        <if test="cdGroupNm != null and cdGroupNm != ''">
+            AND CD_GROUP_NM LIKE CONCAT('%', #{cdGroupNm}, '%')
+        </if>
+        <if test="useYn != null and useYn != ''">
+            AND USE_YN = #{useYn}
+        </if>
+    </select>
+
+    <!-- Insert Code Group -->
+    <insert id="insertCdGrp" parameterType="CdGrpVO">
+        INSERT INTO TCD_GRP (
+                              GROUP_CD
+                            , CD_GROUP_NM
+                            , REG_DT
+                            , REG_UID
+                            , USE_YN
+        ) VALUES (
+                   #{groupCd}
+                 , #{cdGroupNm}
+                 , NOW()
+                 , #{regUid}
+                 , 'Y'
+                 )
+    </insert>
+
+    <!-- Update Code Group -->
+    <update id="updateCdGrp" parameterType="CdGrpVO">
+        UPDATE TCD_GRP
+        SET
+            CD_GROUP_NM = #{cdGroupNm}
+          , REG_DT = NOW()
+          , REG_UID = #{regUid}
+          , USE_YN = #{useYn}
+        WHERE GROUP_CD = #{groupCd}
+    </update>
+
+    <!-- Code List by Group (Ordered by creation time) -->
+    <select id="selectCdListByGroup"
+            parameterType="CdVO"
+            resultType="CdVO">
+        SELECT
+            GROUP_CD
+             , CD
+             , CD_NM
+             , USE_YN
+             , ADIT_INFO1
+             , ADIT_INFO2
+             , REG_DT
+             , REG_UID
+        FROM TCD
+        WHERE GROUP_CD = #{groupCd}
+        ORDER BY REG_DT ASC, CD ASC
+    </select>
+
+    <!-- Code List Cnt by Group -->
+    <select id="selectCdListByGroupCnt"
+            parameterType="CdVO"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM TCD
+        WHERE GROUP_CD = #{groupCd}
+    </select>
+
+    <!-- Code Detail -->
+    <select id="selectCd" parameterType="CdVO" resultType="CdVO">
+        SELECT
+            CD.GROUP_CD
+             , CD.CD
+             , CD.CD_NM
+             , CD.ADIT_INFO1
+             , CD.ADIT_INFO2
+             , CD.USE_YN
+             , CD.REG_DT
+             , CD.REG_UID
+             , GRP.CD_GROUP_NM
+        FROM TCD CD
+                 INNER JOIN TCD_GRP GRP ON CD.GROUP_CD = GRP.GROUP_CD
+        WHERE CD.GROUP_CD = #{groupCd}
+          AND CD.CD = #{cd}
+    </select>
+
+    <!-- Insert Code (No manual sort order) -->
+    <insert id="insertCd" parameterType="CdVO">
+        INSERT INTO TCD (
+                          GROUP_CD
+                        , CD
+                        , CD_NM
+                        , ADIT_INFO1
+                        , ADIT_INFO2
+                        , USE_YN
+                        , REG_DT
+                        , REG_UID
+        ) VALUES (
+                   #{groupCd}
+                 , #{cd}
+                 , #{cdNm}
+                 , #{aditInfo1}
+                 , #{aditInfo2}
+                 , 'Y'
+                 , NOW()
+                 , #{regUid}
+                 )
+    </insert>
+
+    <!-- Update Code (No sort order) -->
+    <update id="updateCd" parameterType="CdVO">
+        UPDATE TCD
+        SET
+            CD_NM = #{cdNm}
+          , ADIT_INFO1 = #{aditInfo1}
+          , ADIT_INFO2 = #{aditInfo2}
+          , USE_YN = #{useYn}
+        WHERE GROUP_CD = #{groupCd}
+          AND CD = #{cd}
+    </update>
+
+    <!-- Delete Code -->
+    <delete id="deleteCd" parameterType="CdVO">
+        DELETE FROM TCD
+        WHERE GROUP_CD = #{groupCd}
+          AND CD = #{cd}
+    </delete>
+
+    <!-- Code Name Lookup (groupCd + cd) -->
+    <select id="selectCodeName" parameterType="CdVO" resultType="String">
+        SELECT CD_NM
+        FROM TCD
+        WHERE GROUP_CD = #{groupCd}
+          AND CD = #{cd}
+    </select>
+
+    <!-- Code Info Lookup (groupCd + cd) -->
+    <select id="selectCodeInfo" parameterType="CdVO" resultType="String">
+        SELECT ADIT_INFO2
+        FROM TCD
+        WHERE GROUP_CD = #{groupCd}
+          AND CD = #{cd}
+    </select>
+
+
+</mapper>

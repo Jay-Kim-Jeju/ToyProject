@@ -1,45 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN"> <!-- status="WARN": 로그 설정 자체에 문제 생겼을 때만 출력 -->
-
+<Configuration status="WARN">
     <Appenders>
-        <!-- 콘솔 로그 출력 설정 -->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout
-                    pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{1.}] %m%n" />
-            <!--
-                %d : 날짜/시간
-                %-5p : 로그 레벨 (오른쪽 정렬)
-                [%c{1.}] : 로거 이름 (패키지명은 1단계만 표시)
-                %m : 메시지
-                %n : 줄바꿈
-            -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{1.}] %m%n"/>
         </Console>
     </Appenders>
 
     <Loggers>
 
-        <!-- 특정 패키지 로그 설정: MyBatis SQL 로깅용 -->
-        <Logger name="jdbc" level="DEBUG"/>
-        <Logger name="jdbc.sqltiming" level="DEBUG"/>
+        <!-- MyBatis / log4jdbc (if you use it) -->
+        <Logger name="jdbc" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
         <Logger name="jdbc.resultset" level="OFF"/>
         <Logger name="jdbc.resultsettable" level="INFO"/>
         <Logger name="jdbc.audit" level="OFF"/>
 
-        <!-- toy.admin.* 로그 확인용 -->
+        <!-- Your app -->
         <Logger name="toy.admin" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
 
-        <!-- Spring 관련 로그도 추적하고 싶다면 (선택) -->
-        <Logger name="org.springframework" level="WARN" additivity="false">
-            <AppenderRef ref="Console"/>
-        </Logger>
+        <!-- Spring -->
+        <Logger name="org.springframework" level="WARN"/>
 
-        <!-- 루트 로거 설정: 전체 프로젝트 기본 로그 레벨 -->
+        <!-- Transaction / AOP verification -->
+        <Logger name="org.springframework.transaction" level="DEBUG"/>
+        <Logger name="org.springframework.jdbc.datasource" level="DEBUG"/>
+        <Logger name="org.springframework.aop" level="DEBUG"/>
+
+        <!-- IMPORTANT: Root must exist so logs have somewhere to go -->
         <Root level="DEBUG">
             <AppenderRef ref="Console"/>
         </Root>
 
     </Loggers>
-
 </Configuration>

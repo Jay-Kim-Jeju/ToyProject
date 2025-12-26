@@ -23,35 +23,28 @@ import java.util.Map;
 @RequestMapping("/toy/admin/sys/accesslog")
 public class AdminAccessLogCtrl {
 
-    @Resource(name = "adminAccessLogService")
     private final AdminAccessLogService adminAccessLogService;
 
-    private Map<String, String> menuActiveMap = new HashMap<String, String>() {
-        {
-            this.put("adminMenu1", "system");
-        }
-    };
+    // Base menu map must be immutable; build a new map per request to avoid shared mutable state.
+    private static final Map<String, String> MENU_BASE = Map.of("adminMenu1", "system");
 
     @RequestMapping({"/listAdmAcssLog.do"})
     public String listAdmAcssLog(@ModelAttribute("searchVO") AdminAccessLogSearchVO searchVO,
                                  ModelMap model,
                                  HttpServletRequest request) throws Exception {
 
-        String chkStr = ToyAdminAuthUtils.chkAdminMenuPermission(null);
-        if (EgovStringUtil.isNotEmpty(chkStr)) {
-            return chkStr;
+        this.adminAccessLogService.insertAdminAccessLog("Admin > System > Access_Log List Page", request);
+
+        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        if (EgovStringUtil.isNotEmpty(denyView)) {
+            return denyView;
         }
 
-        else {
-            // These values should match your header/menu logic.
-            menuActiveMap.put("adminMenu2", "accesslog");
-            menuActiveMap.put("adminMenu3", "list");
-
-            // This map is used by the header to highlight active menus.
-            model.addAttribute("menuActiveMap", menuActiveMap);
-
-            return "admin/system/accesslog/listAdmAcssLog";
-        }
+        Map<String, String> menuActiveMap = new HashMap<>(MENU_BASE);
+        menuActiveMap.put("adminMenu2", "accesslog");
+        menuActiveMap.put("adminMenu3", "list");
+        model.addAttribute("menuActiveMap", menuActiveMap);
+        return "admin/system/accesslog/listAdmAcssLog";
 
     }
 
@@ -69,10 +62,11 @@ public class AdminAccessLogCtrl {
         Map<String, Object> resultMap = new HashMap<>();
 
         // This should be replaced with your real permission check util if you have one.
-        String chkStr = ToyAdminAuthUtils.chkAdminMenuPermission(null);
-        if (EgovStringUtil.isNotEmpty(chkStr)) {
+        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", chkStr);
+            resultMap.put("redirectUrl", "/toy/admin/login.do");
+            resultMap.put("errorMessage", "Authentication required.");
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -95,6 +89,7 @@ public class AdminAccessLogCtrl {
         Integer totalCnt = (Integer) dataList.get("totalCnt");
 
         // 이 값이 들어가야 PaginationInfo가 내부적으로 전체 페이지 수, 페이지 리스트 시작/끝 번호 같은 “파생 값들”을 계산가능
+        // Total count must be set so PaginationInfo can calculate derived paging values.
         paginationInfo.setTotalRecordCount(totalCnt == null ? 0 : totalCnt);
 
         resultMap.put("data", dataList.get("resultList"));

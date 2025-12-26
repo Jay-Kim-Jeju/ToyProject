@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="toy/com/common/common/dao/CommonDAO">
+
+    <!-- Common Code  -->
+    <select id="selectCdList" resultType="CdVO">
+        SELECT CD.CD
+             , CD.GROUP_CD
+             , CD.CD_NM
+             , CD.ADIT_INFO1
+             , CD.USE_YN
+        FROM TCD CD
+                 INNER JOIN TCD_GRP CDG
+                            ON CDG.GROUP_CD = CD.GROUP_CD
+        WHERE CDG.USE_YN = 'Y'
+          AND CD.USE_YN  = 'Y'
+        ORDER BY CD.GROUP_CD ASC, CD.CD ASC
+    </select>
+
+</mapper>
