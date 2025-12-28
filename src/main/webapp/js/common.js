@@ -1,11 +1,13 @@
 /****************************************************************
  * common.js
  *
+ *
  * 	gfn_startLodingBar			==> 전체 로딩바 시작
  * 	gfn_finishLodingBar			==> 전체 로딩바 종료
  *	adddash						==> 날짜 하이픈 자동 삽입
  *	fn_AjaxError				==> Ajax 에러 처리
  *	fn_AjaxErrorAdmin			==> Ajax 에러 처리(admin)
+ *  beforeSend : function(xhr)	==> Global Ajax CSRF Injection(ajaxSetup)
  *	fn_checkNumber				==> 숫자만 입력 가능
  *	fn_checkNumerBlur			==> 해당 object 숫자인치 체크
  *	isNumber					==> 수치형 자료인가 검사
@@ -96,6 +98,41 @@ function fn_AjaxError(request, status, error, loginPath){
 
     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 }
+
+/**
+ * Global CSRF header injection for all jQuery AJAX requests.
+ * Works even if individual $.ajax() defines its own beforeSend.
+ *
+ * Requires meta tags:
+ *  - <meta name="_csrf" content="..."/>
+ *  - <meta name="_csrf_header" content="..."/>
+ */
+(function (window, $) {
+    "use strict";
+
+    function getCsrfMeta() {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        return { token: token, header: header };
+    }
+
+    $(function () {
+        if (!$ || !$.ajaxPrefilter) return;
+
+        var csrf = getCsrfMeta();
+        if (!csrf.token || !csrf.header) return;
+
+        $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+            jqXHR.setRequestHeader(csrf.header, csrf.token);
+        });
+    });
+
+    window.ToyCsrf = {
+        get: getCsrfMeta
+    };
+
+})(window, window.jQuery);
+
 
 /**
  * Ajax 에러 처리(admin)

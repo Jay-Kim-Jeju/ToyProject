@@ -48,10 +48,8 @@
                         type: "POST",
                         url: "${CONTEXT_PATH }/toy/admin/sys/code/grp/list.doax",
                         data: filter,
-                        beforeSend : function(xhr){
-                            var token = $("meta[name='_csrf']").attr("content");
-                            var header = $("meta[name='_csrf_header']").attr("content");
-                            xhr.setRequestHeader(header, token);
+                        beforeSend: function (xhr) {
+                            // Your custom logic only (loading spinner etc.)
                         },
                         dataType: "json"
                     }).done(function(response) {
@@ -100,10 +98,8 @@
                         type: 'POST',
                         url: "${CONTEXT_PATH }/toy/admin/sys/code/grp/insert.doax",
                         data: data,
-                        beforeSend : function(xhr){
-                            var token = $("meta[name='_csrf']").attr("content");
-                            var header = $("meta[name='_csrf_header']").attr("content");
-                            xhr.setRequestHeader(header, token);
+                        beforeSend: function (xhr) {
+                            // Your custom logic only (loading spinner etc.)
                         },
                         success: function(res) {
                             if (res && res.redirectUrl) { window.location.href = res.redirectUrl; return; }
@@ -135,10 +131,8 @@
                         type: 'POST',
                         url: "${CONTEXT_PATH }/toy/admin/sys/code/grp/update.doax",
                         data: payload,
-                        beforeSend : function(xhr){
-                            var token = $("meta[name='_csrf']").attr("content");
-                            var header = $("meta[name='_csrf_header']").attr("content");
-                            xhr.setRequestHeader(header, token);
+                        beforeSend: function (xhr) {
+                            // Your custom logic only (loading spinner etc.)
                         },
                         success: function(res) {
                             if (res && res.redirectUrl) { window.location.href = res.redirectUrl; return; }
@@ -290,10 +284,8 @@
                         type: 'POST',
                         url: "${CONTEXT_PATH }/toy/admin/sys/code/cd/insert.doax?groupCd=" + groupCd,
                         data: data,
-                        beforeSend : function(xhr){
-                            var token = $("meta[name='_csrf']").attr("content");
-                            var header = $("meta[name='_csrf_header']").attr("content");
-                            xhr.setRequestHeader(header, token);
+                        beforeSend: function (xhr) {
+                            // Your custom logic only (loading spinner etc.)
                         },
                         success: function(res) {
                             if (res && res.redirectUrl) { window.location.href = res.redirectUrl; return; }
