@@ -61,10 +61,10 @@
     <update id="updateCdGrp" parameterType="CdGrpVO">
         UPDATE TCD_GRP
         SET
-            CD_GROUP_NM = #{cdGroupNm}
-          , REG_DT = NOW()
-          , REG_UID = #{regUid}
-          , USE_YN = #{useYn}
+            CD_GROUP_NM = #{cdGroupNm},
+            USE_YN = #{useYn},
+            UPD_DT = NOW(),
+            UPD_UID = #{updUid}
         WHERE GROUP_CD = #{groupCd}
     </update>
 
@@ -106,6 +106,8 @@
              , CD.USE_YN
              , CD.REG_DT
              , CD.REG_UID
+             , CD.UPD_DT
+             , CD.UPD_UID
              , GRP.CD_GROUP_NM
         FROM TCD CD
                  INNER JOIN TCD_GRP GRP ON CD.GROUP_CD = GRP.GROUP_CD
@@ -144,6 +146,8 @@
           , ADIT_INFO1 = #{aditInfo1}
           , ADIT_INFO2 = #{aditInfo2}
           , USE_YN = #{useYn}
+          , UPD_DT = NOW()
+          , UPD_UID = #{updUid}
         WHERE GROUP_CD = #{groupCd}
           AND CD = #{cd}
     </update>

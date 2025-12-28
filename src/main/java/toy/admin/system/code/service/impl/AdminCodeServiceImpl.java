@@ -52,7 +52,7 @@ public class AdminCodeServiceImpl implements AdminCodeService {
 
     @Override
     public int updateCdGrp(CdGrpVO codeGrpVO) throws Exception {
-        codeGrpVO.setRegUid(EgovUserDetailsHelper.getAdminUid());
+        codeGrpVO.setUpdUid(EgovUserDetailsHelper.getAdminUid());
         try{
             return adminCodeDAO.updateCdGrp(codeGrpVO);
         } catch (DataIntegrityViolationException e) {
@@ -93,7 +93,7 @@ public class AdminCodeServiceImpl implements AdminCodeService {
 
     @Override
     public int updateCd(CdVO codeVO) throws Exception {
-        codeVO.setRegUid(EgovUserDetailsHelper.getAdminUid());
+        codeVO.setUpdUid(EgovUserDetailsHelper.getAdminUid());
         try {
             return adminCodeDAO.updateCd(codeVO);
         } catch (DataIntegrityViolationException e) {

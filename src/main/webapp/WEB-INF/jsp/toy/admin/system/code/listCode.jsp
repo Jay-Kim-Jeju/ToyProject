@@ -119,7 +119,11 @@
                 },
                 // Updating GroupCode
                 updateItem: function(data) {
-                    console.log("updateItem data from jsGrid =", data);
+                    //console.log("updateItem data from jsGrid =", data);
+                    if(data.groupCd == "" || data.cdGroupNm ==""){
+                        alert("코드그룹아이디, 그룹명은 필수입력값입니다.");
+                        return;
+                    }
 
                     if(!confirm("정말로 수정하시겠습니까?")) return;
                     let payload = {
@@ -350,7 +354,7 @@
         var url = "${CONTEXT_PATH }/toy/admin/sys/code/cd/detail.do"
             + "?groupCd=" + encodeURIComponent(groupCd)
             + "&cd=" + encodeURIComponent(cd);
-        window.open(url, "dtlcd", "resizable=yes,scrollbars=yes,width=800,height=250");
+        window.open(url, "dtlcd", "resizable=yes,scrollbars=yes,width=800,height=320");
     }
 
     //코드 삭제

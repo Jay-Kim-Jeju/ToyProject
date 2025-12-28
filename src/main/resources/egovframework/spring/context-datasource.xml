@@ -15,12 +15,6 @@
         <property name="validationQuery" value="select 1 from dual"></property>
     </bean>
 
-    <!-- 프로퍼티 파일의 위치 지정 -->
-    <context:property-placeholder order="1" ignore-unresolvable="true" location="classpath:/egovframework/egovProps/globals.properties" />
-    <context:property-placeholder order="2" ignore-unresolvable="true" location="classpath:/prop.properties" />
-    <!-- enable autowire -->
-    <context:annotation-config />
-
 
 
 </beans>

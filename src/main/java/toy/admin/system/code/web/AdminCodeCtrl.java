@@ -4,11 +4,10 @@ package toy.admin.system.code.web;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
-import org.springframework.aop.support.AopUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,11 +20,13 @@ import toy.com.util.PagingParamUtil;
 import toy.com.util.ToyAdminAuthUtils;
 import toy.com.vo.system.code.CdGrpVO;
 import toy.com.vo.system.code.CdVO;
+import toy.com.validation.group.ValidationGroups;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -36,6 +37,9 @@ public class AdminCodeCtrl {
     private final AdminCodeService adminCodeService;
     private final AdminAccessLogService adminAccessLogService;
     private final CommonService commonService;
+
+    /*@Autowired
+    private Validator javaxValidator;*/
 
     private void refreshCommonCodeSafely() {
         try {
@@ -80,21 +84,27 @@ public class AdminCodeCtrl {
     }
 
     @RequestMapping(value = "/cd/detail.do", method = RequestMethod.GET)
-    public ModelAndView viewCodeDetailPopup(@ModelAttribute("CdVO") CdVO codeVO,
-                                            HttpServletRequest request) throws Exception {
+    public ModelAndView viewCodeDetailPopup(@Validated(ValidationGroups.Key.class) @ModelAttribute("CdVO") CdVO codeVO,
+                                            BindingResult bindingResult, HttpServletRequest request) throws Exception {
         adminAccessLogService.insertAdminAccessLog("Admin > System > Code > Code Detail Popup", request);
 
-
+        //auth check
         String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
         if (EgovStringUtil.isNotEmpty(denyView)) {
             // Popup is an HTML view request -> redirect is the natural flow
             return new ModelAndView(denyView); // "redirect:/toy/admin/login.do"
         }
 
-        CdVO detail = adminCodeService.selectCd(codeVO);
+        //validation check
         ModelAndView mv = new ModelAndView("admin/system/code/detailPopCode");
+        if (bindingResult.hasErrors()) {
+            mv.addObject("result", "N");
+            mv.addObject("errorMessage", firstErrorMessage(bindingResult));
+            return mv;
+        }
 
         //null check
+        CdVO detail = adminCodeService.selectCd(codeVO);
         if (detail == null) {
             mv.addObject("result", "None");
             mv.addObject("errorMessage", "Code does not exist.");
@@ -155,7 +165,7 @@ public class AdminCodeCtrl {
 
     // Insert Code Group
     @RequestMapping(value = "/grp/insert.doax", method = RequestMethod.POST)
-    public ModelAndView ajaxInsertCdGrp(@ModelAttribute("CdGrpVO") CdGrpVO vo,
+    public ModelAndView ajaxInsertCdGrp(@Validated(ValidationGroups.Create.class) @ModelAttribute("CdGrpVO") CdGrpVO vo,
                                         BindingResult bindingResult,
                                         HttpServletRequest request) throws Exception {
         adminAccessLogService.insertAdminAccessLog("Admin > System > Code > GroupCode Insert", request);
@@ -170,7 +180,6 @@ public class AdminCodeCtrl {
             return new ModelAndView("jsonView", resultMap);
         }
 
-        validateCdGrpRequired(vo, bindingResult);
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
@@ -198,12 +207,14 @@ public class AdminCodeCtrl {
 
     // Update Code Group
     @RequestMapping(value = "/grp/update.doax", method = RequestMethod.POST)
-    public ModelAndView ajaxUpdateCdGrp(@ModelAttribute("CdGrpVO") CdGrpVO vo,
+    public ModelAndView ajaxUpdateCdGrp(@Validated(ValidationGroups.Update.class) @ModelAttribute("CdGrpVO") CdGrpVO vo,
                                         BindingResult bindingResult,
                                         HttpServletRequest request) throws Exception {
         adminAccessLogService.insertAdminAccessLog("Admin > System > Code > GroupCode Update", request);
 
         Map<String, Object> resultMap = new HashMap<>();
+
+
 
         String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
         if (EgovStringUtil.isNotEmpty(denyView)) {
@@ -213,7 +224,6 @@ public class AdminCodeCtrl {
             return new ModelAndView("jsonView", resultMap);
         }
 
-        validateCdGrpRequired(vo, bindingResult);
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
@@ -222,6 +232,14 @@ public class AdminCodeCtrl {
         }
 
         normalizeUseYn(vo);
+
+
+        /*
+        check validation apply
+        Set<ConstraintViolation<CdGrpVO>> v = javaxValidator.validate(vo, ValidationGroups.Update.class);
+        log.info("BeanValidation violations size={}", v.size());
+        log.info("bindingResult errorCount={}", bindingResult.getErrorCount());
+        */
 
         int affected = adminCodeService.updateCdGrp(vo);
         if (affected > 0) {
@@ -243,7 +261,8 @@ public class AdminCodeCtrl {
 
     // Code List by Group (optionally paging-ready)
     @RequestMapping(value = "/cd/list.doax", method = RequestMethod.POST)
-    public ModelAndView ajaxSelectCdListByGroup(@ModelAttribute("CdVO") CdVO searchVO,
+    public ModelAndView ajaxSelectCdListByGroup(@Validated(ValidationGroups.GroupKey.class) @ModelAttribute("CdVO") CdVO searchVO,
+                                                BindingResult bindingResult,
                                                 HttpServletRequest request) throws Exception {
         adminAccessLogService.insertAdminAccessLog("Admin > System > Code > Code List", request);
 
@@ -257,9 +276,9 @@ public class AdminCodeCtrl {
             return new ModelAndView("jsonView", resultMap);
         }
 
-        if (EgovStringUtil.isEmpty(searchVO.getGroupCd())) {
+        if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", "groupCd is required.");
+            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -287,7 +306,7 @@ public class AdminCodeCtrl {
 
     // Insert Code
     @RequestMapping(value = "/cd/insert.doax", method = RequestMethod.POST)
-    public ModelAndView ajaxInsertCd(@ModelAttribute("CdVO") CdVO vo,
+    public ModelAndView ajaxInsertCd(@Validated(ValidationGroups.Create.class) @ModelAttribute("CdVO") CdVO vo,
                                      BindingResult bindingResult,
                                      HttpServletRequest request) throws Exception {
         adminAccessLogService.insertAdminAccessLog("Admin > System > Code > Code Insert", request);
@@ -302,7 +321,6 @@ public class AdminCodeCtrl {
             return new ModelAndView("jsonView", resultMap);
         }
 
-        validateCdRequired(vo, bindingResult);
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
@@ -331,7 +349,7 @@ public class AdminCodeCtrl {
 
     // Update Code (No sort order logic)
     @RequestMapping(value = "/cd/update.doax", method = RequestMethod.POST)
-    public ModelAndView ajaxUpdateCd(@ModelAttribute("CdVO") CdVO vo,
+    public ModelAndView ajaxUpdateCd( @Validated(ValidationGroups.Update.class) @ModelAttribute("CdVO") CdVO vo,
                                      BindingResult bindingResult,
                                      HttpServletRequest request) throws Exception {
         adminAccessLogService.insertAdminAccessLog("Admin > System > Code > Code Update", request);
@@ -346,7 +364,6 @@ public class AdminCodeCtrl {
             return new ModelAndView("jsonView", resultMap);
         }
 
-        validateCdRequired(vo, bindingResult);
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
@@ -377,7 +394,7 @@ public class AdminCodeCtrl {
 
     // Delete Code (No sort order logic)
     @RequestMapping(value = "/cd/delete.doax", method = RequestMethod.POST)
-    public ModelAndView ajaxDeleteCd(@ModelAttribute("CdVO") CdVO vo,
+    public ModelAndView ajaxDeleteCd(@Validated(ValidationGroups.Delete.class) @ModelAttribute("CdVO") CdVO vo,
                                      BindingResult bindingResult,
                                      HttpServletRequest request) throws Exception {
         adminAccessLogService.insertAdminAccessLog("Admin > System > Code > Code Delete", request);
@@ -390,13 +407,6 @@ public class AdminCodeCtrl {
             resultMap.put("redirectUrl", "/toy/admin/login.do");
             resultMap.put("errorMessage", "Authentication required.");
             return new ModelAndView("jsonView", resultMap);
-        }
-
-        if (EgovStringUtil.isEmpty(vo.getGroupCd())) {
-            bindingResult.addError(new FieldError("CdVO", "groupCd", "groupCd is required."));
-        }
-        if (EgovStringUtil.isEmpty(vo.getCd())) {
-            bindingResult.addError(new FieldError("CdVO", "cd", "cd is required."));
         }
 
         if (bindingResult.hasErrors()) {
@@ -467,28 +477,6 @@ public class AdminCodeCtrl {
         }
     }
 
-    private void validateCdGrpRequired(CdGrpVO vo, BindingResult bindingResult) {
-        // Minimal required validations (keep it controller-level like ).
-        if (EgovStringUtil.isEmpty(vo.getGroupCd())) {
-            bindingResult.addError(new FieldError("CdGrpVO", "groupCd", "groupCd is required."));
-        }
-        if (EgovStringUtil.isEmpty(vo.getCdGroupNm())) {
-            bindingResult.addError(new FieldError("CdGrpVO", "cdGroupNm", "cdGroupNm is required."));
-        }
-    }
-
-    private void validateCdRequired(CdVO vo, BindingResult bindingResult) {
-        if (EgovStringUtil.isEmpty(vo.getGroupCd())) {
-            bindingResult.addError(new FieldError("CdVO", "groupCd", "groupCd is required."));
-        }
-        if (EgovStringUtil.isEmpty(vo.getCd())) {
-            bindingResult.addError(new FieldError("CdVO", "cd", "cd is required."));
-        }
-        if (EgovStringUtil.isEmpty(vo.getCdNm())) {
-            bindingResult.addError(new FieldError("CdVO", "cdNm", "cdNm is required."));
-        }
-    }
-
     private String firstErrorMessage(BindingResult bindingResult) {
         // Return only the first error message to keep the response simple for UI.
         if (bindingResult == null || !bindingResult.hasErrors()) {
@@ -496,5 +484,7 @@ public class AdminCodeCtrl {
         }
         return bindingResult.getAllErrors().get(0).getDefaultMessage();
     }
+
+    // Controller-level manual validations removed (replaced by Bean Validation groups)
 
 }

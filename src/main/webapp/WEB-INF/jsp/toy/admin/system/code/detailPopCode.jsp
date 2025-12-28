@@ -18,9 +18,22 @@
 
     });
 
+    function fn_validateUpdateCdForm(){
+        // Minimal client validation (server-side Bean Validation is the source of truth)
+        var cdNm = $.trim($("#cdNm").val());
+        if (!cdNm) {
+            alert("코드 명은 필수입력값입니다.");
+            $("#cdNm").focus();
+            return false;
+        }
+        return true;
+    }
+
     //수정
     function fn_updateCd(){
-
+        if (!fn_validateUpdateCdForm()) {
+            return;
+        }
 
         if(!confirm("코드를 수정하시겠습니까?")) {
             return;
@@ -53,6 +66,13 @@
                         window.opener.location.reload();
                     }
                     window.close();
+                    return;
+                }
+                if (res.result === "N") {
+                    // Bean Validation / parameter validation failed
+                    alert(res.errorMessage || "Validation failed.");
+                    //  focus likely field
+                    $("#cdNm").focus();
                     return;
                 }
                 if (res.result === "None") {
@@ -114,7 +134,7 @@
                 <th>코드 아이디</th>
                 <td>${code.cd}</td>
                 <th><img src="${pageContext.request.contextPath}/images/admin/icon/check.png" alt="체크"> 코드 명</th>
-                <td><input type="text" name="cdNm" value="${code.cdNm}" style="width:300px;"/></td>
+                <td><input type="text" id="cdNm" name="cdNm" value="${code.cdNm}" style="width:300px;"/></td>
             </tr>
             <tr>
                 <th>코드정보1</th>
@@ -146,8 +166,36 @@
                     </label>
                 </td>
 
+
                 <th>생성일시(아이디)</th>
                 <td>${code.regDt} (${code.regUid})</td>
+            </tr>
+
+            <tr>
+                <th>최근수정여부</th>
+                <td>
+                    <c:choose>
+                        <c:when test="${not empty code.updDt or not empty code.updUid}">
+                            수정됨
+                        </c:when>
+                        <c:otherwise>
+                            미수정
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+                <th>최근수정일시(아이디)</th>
+                <td>
+                    <c:choose>
+                        <c:when test="${not empty code.updDt or not empty code.updUid}">
+                            ${code.updDt} (${code.updUid})
+                        </c:when>
+                        <c:otherwise>
+                            -
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+
+            </tr>
             </tbody>
         </table>
     </form>

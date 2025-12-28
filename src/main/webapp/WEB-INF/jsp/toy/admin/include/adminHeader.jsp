@@ -25,7 +25,7 @@
 <header id="header">
     <div class="gnb-wrapper">
         <h1 class="logo">
-            <a href="">
+            <a href="/toy/admin/main.do">
                     <img src="${pageContext.request.contextPath}/images/admin/frame/logo.png" alt="logo">
             </a>
         </h1>
@@ -201,52 +201,13 @@
                     <a href="<c:url value="/toy/admin/sys/code/grp/list.do" />" id="system_code_menu"><i class="material-icons-outlined">apps</i>코드관리</a>
                 </li>
                 <li>
-                    <a href="<c:url value="" />" id="system_popup_menu"><i class="material-icons-outlined">apps</i>팝업관리</a>
+                    <a href="" id=""><i class="material-icons-outlined">apps</i>접속허용IP 관리</a>
                 </li>
                 <li>
                     <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accessLog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a>
                 </li>
             </c:if>
 
-            <%--<c:if test="${menuActiveMap.adminMenu1 eq 'config'}">	&lt;%&ndash; 환경설정 : 2depth 메뉴 &ndash;%&gt;
-               <li>
-                   <a href="<c:url value="/toy/config/detailLogo.ac" />" id="config_logo_menu"><i class="material-icons-outlined">apps</i>로고설정</a>
-               </li>
-               <li>
-                   <a href="<c:url value="/toy/config/detailOperation.ac" />" id="config_operation_menu"><i class="material-icons-outlined">apps</i>운영설정</a>
-               </li>
-               <li>
-                   <a href="<c:url value="/toy/config/listFee.ac" />" id="config_fee_menu"><i class="material-icons-outlined">apps</i>수수료관리</a>
-               </li>
-             </c:if>--%>
-
-
-
-
-            <%--<c:if test="${menuActiveMap.adminMenu1 eq 'stats'}">	&lt;%&ndash; 통계 : 2depth 메뉴 &ndash;%&gt;
-              <li>
-                  <a href="<c:url value="/toy/stats/clientStats/listClientStats.ac" />" id="stats_clientStats_menu"><i class="material-icons-outlined">apps</i>고객통계</a>
-              </li>
-              <li>
-                  <a href="<c:url value="/toy/stats/useStats/listUseStats.ac" />" id="stats_useStats_menu"><i class="material-icons-outlined">apps</i>고객이용통계</a>
-              </li>
-              <li>
-                  <a href="<c:url value="/toy/stats/compStats/listCompStats.ac" />" id="stats_compStats_menu"><i class="material-icons-outlined">apps</i>입점업체통계</a>
-              </li>
-              <li>
-                  <a href="<c:url value="/toy/stats/saleStats/listSaleStats.ac" />" id="stats_saleStats_menu"><i class="material-icons-outlined">apps</i>매출통계</a>
-              </li>
-              <li>
-                  <a href="<c:url value="/toy/statis/listVisitLog.ac" />" id="stats_visitLog_menu" class="drop"><i class="material-icons-outlined">apps</i>방문통계</a>
-                  <div class="depth3">
-                      <strong>접속통계</strong>
-                      <ul>
-                          <li id="stats_visitLog_normal_menu"><a href="/toy/statis/listVisitLog.ac">일반통계</a></li>
-                          <li id="stats_visitLog_device_menu"><a href="/toy/statis/listVisitLogDevice.ac">기기별통계</a></li>
-                      </ul>
-                  </div>
-              </li>
-            </c:if>--%>
 
         </ul>
     </nav>

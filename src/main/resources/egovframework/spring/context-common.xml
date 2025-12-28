@@ -4,27 +4,23 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
+    <context:annotation-config />
     <context:component-scan base-package="toy">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
-    <!--<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <!-- MessageSource for i18n + Bean Validation messages (single source of truth in Root Context) -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>
-                <value>classpath:/egovframework/message/message-common</value>
-                <value>classpath:/egovframework/rte/fdl/property/messages/properties</value>
+                <!-- TODO: Copy the exact basenames from your dispatcher-servlet.xml messageSource -->
+                <value>classpath:egovframework/message/message-common</value>
             </list>
         </property>
-        <property name="cacheSeconds">
-            <value>60</value>
-        </property>
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="cacheSeconds" value="60" />
+        <property name="useCodeAsDefaultMessage" value="true" />
     </bean>
-
-    <bean id="EgovMessageSource" class="minimta.com.egov.EgovMessageSource">
-        <property name="reloadableResourceBundleMessageSource">
-            <ref bean="messageSource" />
-        </property>
-    </bean>-->
 
     <bean id="leaveaTrace" class="org.egovframe.rte.fdl.cmmn.trace.LeaveaTrace">
         <property name="traceHandlerServices">

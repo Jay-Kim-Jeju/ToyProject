@@ -3,19 +3,42 @@ package toy.com.vo.system.code;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import toy.com.vo.common.PagingDefaultVO;
+import toy.com.validation.group.ValidationGroups;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class CdGrpVO extends PagingDefaultVO {
 
     @EqualsAndHashCode.Include
+    @NotBlank(message = "groupCd is required.", groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     private String groupCd;
+
+    @NotBlank(message = "cdGroupNm is required.", groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     private String cdGroupNm;
+
+    @NotBlank(message = "useYn is required.", groups = {ValidationGroups.Update.class})
     private String useYn;
     private String regDt;
     private String regUid;
+    private String updDt;
+    private String updUid;
 
+    public String getUpdDt() {
+        return updDt;
+    }
 
+    public void setUpdDt(String updDt) {
+        this.updDt = updDt;
+    }
+
+    public String getUpdUid() {
+        return updUid;
+    }
+
+    public void setUpdUid(String updUid) {
+        this.updUid = updUid;
+    }
 
     public String getRegUid() {
         return regUid;
@@ -56,6 +79,8 @@ public class CdGrpVO extends PagingDefaultVO {
     public void setGroupCd(String groupCd) {
         this.groupCd = groupCd;
     }
+
+
 
     @Override
     public String toString() {
