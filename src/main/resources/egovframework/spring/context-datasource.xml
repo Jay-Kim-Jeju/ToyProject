@@ -12,7 +12,7 @@
         <property name="url" value="${jdbc.url}"></property>
         <property name="username" value="${jdbc.username}"></property>
         <property name="password" value="${jdbc.password}"></property>
-        <property name="validationQuery" value="select 1 from dual"></property>
+        <property name="validationQuery" value="SELECT 1"></property>
     </bean>
 
 

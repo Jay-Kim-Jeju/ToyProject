@@ -56,8 +56,25 @@
         <property name="defaultLocale" value="ko" />
     </bean>
 
+    <!-- Enable @ExceptionHandler / @ControllerAdvice -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonConverter" />
+            </list>
+        </property>
+        <property name="order" value="0" />
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver">
+        <property name="order" value="1" />
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver">
+        <property name="order" value="2" />
+    </bean>
+
     <!-- 예외 처리 뷰 설정 -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="order" value="3" />
         <property name="defaultErrorView" value="com/error/egovError"/>
         <property name="exceptionMappings">
             <props>

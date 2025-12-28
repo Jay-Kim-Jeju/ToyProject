@@ -13,8 +13,7 @@
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>
-                <!-- TODO: Copy the exact basenames from your dispatcher-servlet.xml messageSource -->
-                <value>classpath:egovframework/message/message-common</value>
+                <value>classpath:/egovframework/message/message-common</value>
             </list>
         </property>
         <property name="defaultEncoding" value="UTF-8" />
