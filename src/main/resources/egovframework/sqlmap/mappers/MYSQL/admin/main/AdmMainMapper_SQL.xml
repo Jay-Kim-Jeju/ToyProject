@@ -3,34 +3,34 @@
 <mapper namespace="toy.admin.main.dao.AdmMainDAO">
 
     <select id="selectAdminUserLogin" resultType="SessionAdminVO">
-        SELECT T_M.MNGR_UID					/* 관리자ID */
-            , T_M.PWD_ENCPT					/* 비밀번호 */
-            , T_M.MNGR_NM					/* 관리자이름 */
-            , T_M.EML_ADRES					/* 이메일 */
-            , T_M.LAST_LGN_DT			/* 최종로그인일시 */
-            , T_M.LGN_FAILR_NUMTM			/* 로그인 실패 횟수 */
-            , T_AG.AUTHOR_GROUP_UUID AS AUTHOR_CD /* 권한 코드 */
-            , T_AG.AUTHOR_DC				/* 권한 설명 */
+        SELECT T_M.MNGR_UID                 /* Manager ID */
+        , T_M.PWD_ENCPT                /* Encrypted password */
+        , T_M.MNGR_NM                  /* Manager name */
+        , T_M.EML_ADRES                /* Email */
+        , T_M.LAST_LGN_DT              /* Last login datetime */
+        , T_M.LGN_FAILR_NUMTM          /* Login failure count */
+        , T_A.AUTH_UUID AS AUTHOR_CD  /* Authorization code */
+        , T_A.AUTHOR_DC               /* Authorization description */
         FROM TMNGR T_M
-            LEFT OUTER JOIN TAUTH T_A
-                ON T_A.MNGR_UID = T_M.MNGR_UID
-            LEFT OUTER JOIN TAUTH_GRP T_AG
-                ON T_AG.AUTHOR_GROUP_UUID = T_A.AUTHOR_GROUP_UUID
-            <if test="authorGroupUuid != null and authorGroupUuid != ''">
-                AND T_AG.AUTHOR_GROUP_UUID = #{authorGroupUuid}
-            </if>
-        WHERE T_M.USE_YN  = 'Y'
-            AND T_M.MNGR_UID = #{mngrUid}
-
+        LEFT OUTER JOIN TAUTH_MNGR T_A_M
+        ON T_A_M.MNGR_UID = T_M.MNGR_UID
+        LEFT OUTER JOIN TAUTH T_A
+        ON T_A.AUTH_UUID = T_A_M.AUTH_UUID
+        WHERE T_M.USE_YN = 'Y'
+        AND T_M.MNGR_UID = #{mngrUid}
+        <if test="authUuid != null and authUuid != ''">
+            AND T_A.AUTH_UUID = #{authUuid}
+        </if>
     </select>
+
 
     <!-- 권한그룹 조회 -->
     <select id="selectAdminUserAuthList" resultType="String">
-        SELECT AUTH.AUTHOR_GROUP_UUID	/* 권한그룹 ID */
-        FROM TAUTH AUTH
-        WHERE AUTH.MNGR_UID = #{mngrUid}
-        <if test="authorGroupUuid != null and authorGroupUuid != ''">
-            AND AUTH.AUTHOR_GROUP_UUID = #{authorGroupUuid}
+        SELECT AUTH_UUID	/* 권한그룹 ID */
+        FROM TAUTH_MNGR
+        WHERE MNGR_UID = #{mngrUid}
+        <if test="authUuid != null and authUuid != ''">
+            AND AUTH_UUID = #{authUuid}
         </if>
     </select>
 

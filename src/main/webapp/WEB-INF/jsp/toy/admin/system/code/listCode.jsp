@@ -245,12 +245,8 @@
                         type: 'POST',
                         url: "${CONTEXT_PATH }/toy/admin/sys/code/cd/list.doax?groupCd=" + groupCd,
                         data: data,
-                        beforeSend : function(xhr){
-                            var token = $("meta[name='_csrf']").attr("content");
-                            var header = $("meta[name='_csrf_header']").attr("content");
-                            xhr.setRequestHeader(header, token);
-
-                            $("#cdCntId").removeClass('hide');
+                        beforeSend: function (xhr) {
+                            // Your custom logic only (loading spinner etc.)
                         },
                         dataType: "json"
                     }).done(function(response) {
@@ -362,10 +358,8 @@
             type: 'POST',
             url: "<c:url value='${CONTEXT_PATH }/toy/admin/sys/code/cd/delete.doax' />",
             data: $("#delete_form").serialize(),
-            beforeSend : function(xhr){
-                var token = $("meta[name='_csrf']").attr("content");
-                var header = $("meta[name='_csrf_header']").attr("content");
-                xhr.setRequestHeader(header, token);
+            beforeSend: function (xhr) {
+                // Your custom logic only (loading spinner etc.)
             },
 
             success: function(data) {

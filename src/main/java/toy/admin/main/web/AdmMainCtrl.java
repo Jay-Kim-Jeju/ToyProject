@@ -81,7 +81,7 @@ public class AdmMainCtrl {
         Map<String, Object> resultMap = new HashMap<>();
 
         // Do not force a fixed admin group later
-        mngrVO.setAuthorGroupUuid("ADMINISTRATOR");
+        mngrVO.setAuthUuid("ADMINISTRATOR");
 
         AdminLoginResult loginResult = admMainService.adminLogin(mngrVO);
 

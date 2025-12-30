@@ -92,8 +92,8 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
             return result;
         }
 
-        // 5) Authorization check (required when authorGroupUuid is provided)
-        boolean requiresAuthGroup = (mngrVO.getAuthorGroupUuid() != null && !mngrVO.getAuthorGroupUuid().trim().isEmpty());
+        // 5) Authorization check (required when authUuid is provided)
+        boolean requiresAuthGroup = (mngrVO.getAuthUuid() != null && !mngrVO.getAuthUuid().trim().isEmpty());
 
         List<String> authList = admMainDAO.selectAdminUserAuthList(mngrVO);
 

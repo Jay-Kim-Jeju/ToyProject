@@ -44,10 +44,8 @@
             url: "${CONTEXT_PATH}/toy/admin/sys/code/cd/update.doax",
             data: $("#frmCd").serialize(),
             dataType: "json",
-            beforeSend : function(xhr){
-                var token = $("meta[name='_csrf']").attr("content");
-                var header = $("meta[name='_csrf_header']").attr("content");
-                xhr.setRequestHeader(header, token);
+            beforeSend: function (xhr) {
+                // Your custom logic only (loading spinner etc.)
             },
             success: function(res) {
                 // If auth failed, server returns redirectUrl for AJAX calls.

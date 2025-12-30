@@ -38,6 +38,7 @@
   <script src="${pageContext.request.contextPath}/js/com/jquery-ui-1.12.1.js"></script>
   <script src="${pageContext.request.contextPath}/js/admin/html-func.js?jsCssVer=${jsCssVer}"></script>
   <script src="${pageContext.request.contextPath}/js/admin/html-comm.js?jsCssVer=${jsCssVer}" ></script>
+  <script src="${pageContext.request.contextPath}/js/common.js?jsCssVer=${jsCssVer}" ></script>
 
   <script type="text/javascript">
     let returnURL = "";
@@ -68,10 +69,8 @@
         type: 'POST',
         url: "/toy/admin/loginAction.ac",
         data: $("#login_form").serialize(),
-        beforeSend : function(xhr){
-          let token = $("meta[name='_csrf']").attr("content");
-          let header = $("meta[name='_csrf_header']").attr("content");
-          xhr.setRequestHeader(header, token);
+        beforeSend: function (xhr) {
+          // Your custom logic only (loading spinner etc.)
         },
         success: function(data) {
           //로그인 성공이면

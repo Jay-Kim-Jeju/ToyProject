@@ -22,5 +22,5 @@ public class MngrVO extends PagingDefaultVO {
     private String mdfcnDt;
     private String chgPwd;
     private String encryptionKey;
-    private String authorGroupUuid;
+    private String authUuid;
 }
