@@ -10,6 +10,11 @@
 <%@ include file="/WEB-INF/jsp/toy/com/include/taglib.jsp" %>
 
 
+<%-- For Auth Check --%>
+<c:set var="authList" value="${sessionScope.sessionAdminVO.auth}" />
+<c:set var="canSeeAllMenus" value="${authList ne null and (authList.contains('ADMINISTRATOR') or authList.contains('GUEST'))}" />
+
+
 <script type="text/javascript">
     $(function (){
         $("#" + "${menuActiveMap.adminMenu1}_menu").addClass("active");
@@ -65,17 +70,19 @@
                     <a href="<c:url value='' />"><spring:message code="admin.header.menu.member" /></a> <%-- CHANGED: i18n --%>
                 </li>
 
-
-                <li id="system_menu">
-                    <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" class="drop"><spring:message code="admin.header.menu.system" /></a> <%-- CHANGED: i18n --%>
-                    <ul class="depth2">
-                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.mngr" /></a></li>
-                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.auth" /></a></li>
-                        <li><a href="<c:url value='/toy/admin/sys/code/grp/list.do' />"><spring:message code="admin.header.menu.system.code" /></a></li>
-                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.allowIp" /></a></li>
-                        <li><a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />"><spring:message code="admin.header.menu.system.log" /></a></li>
-                    </ul>
-                </li>
+                <%-- Auth Check --%>
+                <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('system'))}">
+                    <li id="system_menu">
+                        <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" class="drop"><spring:message code="admin.header.menu.system" /></a> <%-- CHANGED: i18n --%>
+                        <ul class="depth2">
+                            <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.mngr" /></a></li>
+                            <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.auth" /></a></li>
+                            <li><a href="<c:url value='/toy/admin/sys/code/grp/list.do' />"><spring:message code="admin.header.menu.system.code" /></a></li>
+                            <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.allowIp" /></a></li>
+                            <li><a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />"><spring:message code="admin.header.menu.system.log" /></a></li>
+                        </ul>
+                    </li>
+                </c:if>
 
                 <%--<li id="config_menu">
                     <a href="<c:url value='/toy/config/detailLogo.ac' />" class="drop">환경설정</a>
@@ -102,7 +109,7 @@
                 </a>
             </div>
             <ul class="user-info">
-                <li class="user">${sessionScope.sessionAdminVO.mngrNm} [${sessionScope.sessionAdminVO.authorDc}]</li>
+                <li class="user">${sessionScope.sessionAdminVO.mngrNm} [${sessionScope.sessionAdminVO.displayRoleName}]</li>
                 <li><spring:message code="admin.header.lastLogin" /> : ${sessionScope.sessionAdminVO.lastLgnDt}</li>
             </ul>
         </div>
@@ -166,7 +173,7 @@
                 </li>
             </c:if>
 
-            <c:if test="${menuActiveMap.adminMenu1 eq 'client'}">	<%-- 고객관리 : 2depth 메뉴 --%>
+            <c:if test="${menuActiveMap.adminMenu1 eq 'client'}">	<%-- 고객관리 : 1depth 메뉴 --%>
                 <li>
                     <a href="<c:url value='' />" id="client_user_menu"><i class="material-icons-outlined">people</i>사용자관리</a>
                 </li>
@@ -190,23 +197,28 @@
                 </li>
             </c:if>
 
-            <c:if test="${menuActiveMap.adminMenu1 eq 'system'}">	<%-- 시스템설정 : 2depth 메뉴 --%>
-                <li>
-                    <a href="<c:url value="" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>
-                </li>
-                <li>
-                    <a href="<c:url value="" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i>권한관리</a>
-                </li>
-                <li>
-                    <a href="<c:url value="/toy/admin/sys/code/grp/list.do" />" id="system_code_menu"><i class="material-icons-outlined">apps</i>코드관리</a>
-                </li>
-                <li>
-                    <a href="" id=""><i class="material-icons-outlined">apps</i>접속허용IP 관리</a>
-                </li>
-                <li>
-                    <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accessLog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a>
-                </li>
+            <%-- Auth Check --%>
+            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('system'))}">
+                <c:if test="${menuActiveMap.adminMenu1 eq 'system'}">	<%-- 시스템설정 : 1depth 메뉴 --%>
+                    <li>
+                        <a href="<c:url value="" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>
+                    </li>
+                    <li>
+                        <a href="<c:url value="" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i>권한관리</a>
+                    </li>
+                    <li>
+                        <a href="<c:url value="/toy/admin/sys/code/grp/list.do" />" id="system_code_menu"><i class="material-icons-outlined">apps</i>코드관리</a>
+                    </li>
+                    <li>
+                        <a href="" id=""><i class="material-icons-outlined">apps</i>접속허용IP 관리</a>
+                    </li>
+                    <li>
+                        <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accessLog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a>
+                    </li>
+                </c:if>
             </c:if>
+
+
 
 
         </ul>

@@ -15,8 +15,7 @@ public class SessionAdminVO implements Serializable {
     private String telno;
     private String lastLgnDt;
     private String lgnFailrNumtm;
-    private String authorCd;
-    private String authorDc;
+    private String displayRoleName;
     private List<String> auth;
     private List<String> manageSiteList;
     private List<String> authName;

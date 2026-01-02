@@ -27,6 +27,7 @@ public class AdminAccessLogCtrl {
 
     // Base menu map must be immutable; build a new map per request to avoid shared mutable state.
     private static final Map<String, String> MENU_BASE = Map.of("adminMenu1", "system");
+    private static final String MENU_ROLE = "system";
 
     @RequestMapping({"/listAdmAcssLog.do"})
     public String listAdmAcssLog(@ModelAttribute("searchVO") AdminAccessLogSearchVO searchVO,
@@ -35,7 +36,7 @@ public class AdminAccessLogCtrl {
 
         this.adminAccessLogService.insertAdminAccessLog("Admin > System > Access_Log List Page", request);
 
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             return denyView;
         }
@@ -61,12 +62,18 @@ public class AdminAccessLogCtrl {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        // This should be replaced with your real permission check util if you have one.
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
             resultMap.put("redirectUrl", "/toy/admin/login.do");
             resultMap.put("errorMessage", "Authentication required.");
+            return new ModelAndView("jsonView", resultMap);
+        }
+
+        // GUEST policy: allow entering the menu, but return an empty list.
+        if (ToyAdminAuthUtils.isGuest()) {
+            resultMap.put("data", java.util.Collections.emptyList());
+            resultMap.put("itemsCount", 0);
             return new ModelAndView("jsonView", resultMap);
         }
 

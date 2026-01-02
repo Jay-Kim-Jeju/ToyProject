@@ -9,6 +9,7 @@ import toy.admin.main.dao.AdmMainDAO;
 import toy.admin.main.service.AdmMainService;
 import toy.com.egov.EgovPropertiesUtils;
 import toy.com.util.CmUtil;
+import toy.com.util.ToyAdminAuthUtils;
 import toy.com.vo.common.AdminLoginResult;
 import toy.com.vo.common.SessionAdminVO;
 import toy.com.vo.system.mngr.MngrVO;
@@ -28,13 +29,13 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
     public AdminLoginResult adminLogin(MngrVO mngrVO) throws Exception {
         AdminLoginResult result = new AdminLoginResult();
 
-        // 1) Load account (TMNGR) and optionally auth info (JOIN)
+        // 1) Load account (TMNGR) only (no auth join here)
         SessionAdminVO sessionUserVO = admMainDAO.selectAdminUserLogin(mngrVO);
 
         if (sessionUserVO == null) {
-            // Account Not Found or inactive(USE_YN != 'Y')
-            // 실패 카운트 증가 시도 (존재하지 않는 ID면 영향 없음)
-            admMainDAO.updateLoginFailrCo(mngrVO.getMngrUid());
+            // Account not found or inactive (USE_YN != 'Y')
+            // Increase fail count attempt (no effect if the ID does not exist)
+            admMainDAO.updateLoginFailCo(mngrVO.getMngrUid());
 
             result.setSuccess(false);
             result.setLocked(false);
@@ -73,7 +74,7 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
 
         if (!encryptPw.equals(sessionUserVO.getPwdEncpt())) {
             // increase fail count in DB
-            admMainDAO.updateLoginFailrCo(mngrVO.getMngrUid());
+            admMainDAO.updateLoginFailCo(mngrVO.getMngrUid());
 
             // If this attempt reaches the lock threshold, return LOCKED immediately
             int nextFailCnt = failCnt + 1;
@@ -92,24 +93,36 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
             return result;
         }
 
-        // 5) Authorization check (required when authUuid is provided)
-        boolean requiresAuthGroup = (mngrVO.getAuthUuid() != null && !mngrVO.getAuthUuid().trim().isEmpty());
+        // 5) Authorization: fetch ALL auths and optionally verify a required authUuid
+        String requiredAuthUuid = (mngrVO.getAuthUuid() == null) ? "" : mngrVO.getAuthUuid().trim();
 
-        List<String> authList = admMainDAO.selectAdminUserAuthList(mngrVO);
+        MngrVO authQueryVO = new MngrVO();
+        authQueryVO.setMngrUid(mngrVO.getMngrUid());
+        authQueryVO.setAuthUuid(null); // IMPORTANT: fetch all roles
 
-        if (requiresAuthGroup && (authList == null || authList.isEmpty())) {
-            // Password is correct, but user has no required auth group
+        List<String> authListAll = admMainDAO.selectAdminUserAuthList(authQueryVO);
+
+        boolean requiresAuth = !requiredAuthUuid.isEmpty();
+        boolean hasRequiredAuth = !requiresAuth || (authListAll != null && authListAll.contains(requiredAuthUuid));
+
+        if (!hasRequiredAuth) {
+            // Password is correct, but the required auth is missing
             result.setSuccess(false);
             result.setLocked(false);
             result.setReasonCode("ID_PW_OR_NO_AUTH");
             result.setMessageCode("admin.login.fail.mismatchOrNoAuth");
             return result;
         }
-
-        // Put auth list into session VO for later permission checks.
-        // (Without this, sessionAdminVO.getAuth() stays null.)
-        sessionUserVO.setAuth(authList);
-
+        // Put full auth list into session VO for later permission checks
+        sessionUserVO.setAuth(authListAll);
+        // Set a display-only role label for header UI.
+        if (ToyAdminAuthUtils.isAdmin()) {
+            sessionUserVO.setDisplayRoleName("Administrator");
+        } else if (ToyAdminAuthUtils.isGuest()) {
+            sessionUserVO.setDisplayRoleName("Guest");
+        } else if (authListAll != null && !authListAll.isEmpty()) {
+            sessionUserVO.setDisplayRoleName(authListAll.get(0)); // simple label (or fetch description later)
+        }
 
         // 6) Success: reset fail count and update last login time
         admMainDAO.updateLastLogin(mngrVO.getMngrUid());
@@ -123,8 +136,8 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
         return result;
     }
 
-    public void updateLoginFailrCo(String mngrId) {
-        this.admMainDAO.updateLoginFailrCo(mngrId);
+    public void updateLoginFailCo(String mngrId) {
+        this.admMainDAO.updateLoginFailCo(mngrId);
     }
 
 }

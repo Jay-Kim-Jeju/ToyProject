@@ -80,7 +80,8 @@ public class AdmMainCtrl {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        // Do not force a fixed admin group later
+        // Do not force a fixed role. Allow any registered role to login.
+        // (Optionally, you can require at least one role in service layer.)
         mngrVO.setAuthUuid("ADMINISTRATOR");
 
         AdminLoginResult loginResult = admMainService.adminLogin(mngrVO);
@@ -116,7 +117,8 @@ public class AdmMainCtrl {
         // Use a single session key to match interceptor & header usage
         request.getSession().setAttribute("sessionAdminVO", sessionUserVO);
 
-        String masterType = "ADMINISTRATOR".equals(sessionUserVO.getAuthorCd()) ? "master" : "entrps";
+        boolean isAdmin = (sessionUserVO.getAuth() != null && sessionUserVO.getAuth().contains("ADMINISTRATOR"));
+        String masterType = isAdmin ? "master" : "entrps";
 
         // Leave Action Trace on SysLog
         this.adminAccessLogService.insertAdminAccessLog("Admin > Login", request);

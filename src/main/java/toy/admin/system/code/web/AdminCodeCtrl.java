@@ -52,6 +52,9 @@ public class AdminCodeCtrl {
 
     // Base menu map must be immutable; build a new map per request to avoid shared mutable state.
     private static final Map<String, String> MENU_BASE = Map.of("adminMenu1", "system");
+    private static final String MENU_ROLE = "system";
+
+
 
     /* =========================
      * View Pages (.do)
@@ -68,7 +71,7 @@ public class AdminCodeCtrl {
                 AopUtils.isJdkDynamicProxy(adminCodeService),
                 adminCodeService.getClass());*/
 
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             return denyView;
         }
@@ -89,7 +92,7 @@ public class AdminCodeCtrl {
         adminAccessLogService.insertAdminAccessLog("Admin > System > Code > Code Detail Popup", request);
 
         //auth check
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             // Popup is an HTML view request -> redirect is the natural flow
             return new ModelAndView(denyView); // "redirect:/toy/admin/login.do"
@@ -126,7 +129,7 @@ public class AdminCodeCtrl {
         adminAccessLogService.insertAdminAccessLog("Admin > System > Code > GroupCode List", request);
         Map<String, Object> resultMap = new HashMap<>();
 
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
             resultMap.put("redirectUrl", "/toy/admin/login.do");
@@ -164,7 +167,7 @@ public class AdminCodeCtrl {
     }
 
     // Insert Code Group
-    @RequestMapping(value = "/grp/insert.doax", method = RequestMethod.POST)
+    @RequestMapping(value = "/grp/insert.ac", method = RequestMethod.POST)
     public ModelAndView ajaxInsertCdGrp(@Validated(ValidationGroups.Create.class) @ModelAttribute("CdGrpVO") CdGrpVO vo,
                                         BindingResult bindingResult,
                                         HttpServletRequest request) throws Exception {
@@ -172,7 +175,7 @@ public class AdminCodeCtrl {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminCrudPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
             resultMap.put("redirectUrl", "/toy/admin/login.do");
@@ -206,7 +209,7 @@ public class AdminCodeCtrl {
     }
 
     // Update Code Group
-    @RequestMapping(value = "/grp/update.doax", method = RequestMethod.POST)
+    @RequestMapping(value = "/grp/update.ac", method = RequestMethod.POST)
     public ModelAndView ajaxUpdateCdGrp(@Validated(ValidationGroups.Update.class) @ModelAttribute("CdGrpVO") CdGrpVO vo,
                                         BindingResult bindingResult,
                                         HttpServletRequest request) throws Exception {
@@ -216,7 +219,7 @@ public class AdminCodeCtrl {
 
 
 
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminCrudPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
             resultMap.put("redirectUrl", "/toy/admin/login.do");
@@ -268,7 +271,7 @@ public class AdminCodeCtrl {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
             resultMap.put("redirectUrl", "/toy/admin/login.do");
@@ -305,7 +308,7 @@ public class AdminCodeCtrl {
     }
 
     // Insert Code
-    @RequestMapping(value = "/cd/insert.doax", method = RequestMethod.POST)
+    @RequestMapping(value = "/cd/insert.ac", method = RequestMethod.POST)
     public ModelAndView ajaxInsertCd(@Validated(ValidationGroups.Create.class) @ModelAttribute("CdVO") CdVO vo,
                                      BindingResult bindingResult,
                                      HttpServletRequest request) throws Exception {
@@ -313,7 +316,7 @@ public class AdminCodeCtrl {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminCrudPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
             resultMap.put("redirectUrl", "/toy/admin/login.do");
@@ -348,7 +351,7 @@ public class AdminCodeCtrl {
     }
 
     // Update Code (No sort order logic)
-    @RequestMapping(value = "/cd/update.doax", method = RequestMethod.POST)
+    @RequestMapping(value = "/cd/update.ac", method = RequestMethod.POST)
     public ModelAndView ajaxUpdateCd( @Validated(ValidationGroups.Update.class) @ModelAttribute("CdVO") CdVO vo,
                                      BindingResult bindingResult,
                                      HttpServletRequest request) throws Exception {
@@ -356,7 +359,7 @@ public class AdminCodeCtrl {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminCrudPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
             resultMap.put("redirectUrl", "/toy/admin/login.do");
@@ -393,7 +396,7 @@ public class AdminCodeCtrl {
     }
 
     // Delete Code (No sort order logic)
-    @RequestMapping(value = "/cd/delete.doax", method = RequestMethod.POST)
+    @RequestMapping(value = "/cd/delete.ac", method = RequestMethod.POST)
     public ModelAndView ajaxDeleteCd(@Validated(ValidationGroups.Delete.class) @ModelAttribute("CdVO") CdVO vo,
                                      BindingResult bindingResult,
                                      HttpServletRequest request) throws Exception {
@@ -401,7 +404,7 @@ public class AdminCodeCtrl {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(new String[] { "ADMINISTRATOR" });
+        String denyView = ToyAdminAuthUtils.chkAdminCrudPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
             resultMap.put("redirectUrl", "/toy/admin/login.do");

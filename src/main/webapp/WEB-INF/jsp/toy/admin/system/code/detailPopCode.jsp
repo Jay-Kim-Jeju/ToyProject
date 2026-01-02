@@ -41,7 +41,7 @@
 
         $.ajax({
             type: 'POST',
-            url: "${CONTEXT_PATH}/toy/admin/sys/code/cd/update.doax",
+            url: "${CONTEXT_PATH}/toy/admin/sys/code/cd/update.ac",
             data: $("#frmCd").serialize(),
             dataType: "json",
             beforeSend: function (xhr) {

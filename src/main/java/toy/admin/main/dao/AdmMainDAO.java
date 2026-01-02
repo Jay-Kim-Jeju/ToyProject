@@ -1,5 +1,6 @@
 package toy.admin.main.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 import toy.com.vo.common.SessionAdminVO;
 import toy.com.vo.system.mngr.MngrVO;
@@ -11,9 +12,9 @@ public interface AdmMainDAO {
 
     SessionAdminVO selectAdminUserLogin(MngrVO mngrVO);
 
-    List<String> selectAdminUserAuthList(MngrVO var1);
+    List<String> selectAdminUserAuthList(MngrVO mngrVO);
 
-    void updateLastLogin(String var1);
+    void updateLastLogin(String mngrUid);
 
-    void updateLoginFailrCo(String var1);
+    void updateLoginFailCo(String mngrUid);
 }

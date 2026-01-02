@@ -96,7 +96,7 @@
                     if(!confirm("코드그룹을 등록하시겠습니까?")) return;
                     $.ajax({
                         type: 'POST',
-                        url: "${CONTEXT_PATH }/toy/admin/sys/code/grp/insert.doax",
+                        url: "${CONTEXT_PATH }/toy/admin/sys/code/grp/insert.ac",
                         data: data,
                         beforeSend: function (xhr) {
                             // Your custom logic only (loading spinner etc.)
@@ -129,7 +129,7 @@
                     };
                     $.ajax({
                         type: 'POST',
-                        url: "${CONTEXT_PATH }/toy/admin/sys/code/grp/update.doax",
+                        url: "${CONTEXT_PATH }/toy/admin/sys/code/grp/update.ac",
                         data: payload,
                         beforeSend: function (xhr) {
                             // Your custom logic only (loading spinner etc.)
@@ -278,7 +278,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: "${CONTEXT_PATH }/toy/admin/sys/code/cd/insert.doax?groupCd=" + groupCd,
+                        url: "${CONTEXT_PATH }/toy/admin/sys/code/cd/insert.ac?groupCd=" + groupCd,
                         data: data,
                         beforeSend: function (xhr) {
                             // Your custom logic only (loading spinner etc.)
@@ -356,7 +356,7 @@
         $("#delete_form input[name='aditInfo1']").val(aditInfo1);
         $.ajax({
             type: 'POST',
-            url: "<c:url value='${CONTEXT_PATH }/toy/admin/sys/code/cd/delete.doax' />",
+            url: "<c:url value='${CONTEXT_PATH }/toy/admin/sys/code/cd/delete.ac' />",
             data: $("#delete_form").serialize(),
             beforeSend: function (xhr) {
                 // Your custom logic only (loading spinner etc.)
