@@ -403,10 +403,12 @@
     }
 
 </script>
+</head>
+<body>
 <div id="wrapper">
     <%-- Common Header/Side Menu --%>
     <jsp:include page="/WEB-INF/jsp/toy/admin/include/adminHeader.jsp" flush="false">
-        <jsp:param value="home_menu" name="admin_menu"/>
+        <jsp:param value="system_menu" name="admin_menu"/>
     </jsp:include>
     <main id="main">
         <section class="contents-wrap">
@@ -454,11 +456,6 @@
         </section>
     </main>
 </div>
-
-</head>
-
-<body>
-
 </body>
-
+</htmp>
 

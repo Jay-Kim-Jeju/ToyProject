@@ -123,7 +123,7 @@
 
     <%-- Common Header/Side Menue --%>
     <jsp:include page="/WEB-INF/jsp/toy/admin/include/adminHeader.jsp" flush="false">
-        <jsp:param value="home_menu" name="admin_menu"/>
+        <jsp:param value="system_menu" name="admin_menu"/>
     </jsp:include>
 
     <main id="main">

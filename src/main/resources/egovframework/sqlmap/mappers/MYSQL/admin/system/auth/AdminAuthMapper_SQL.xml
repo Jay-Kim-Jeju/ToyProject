@@ -3,6 +3,219 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="toy.admin.system.auth.dao.AdminAuthDAO">
+    <!-- =========================
+             Common WHERE (Popup: managers not assigned to a specific auth)
+             ========================= -->
+    <sql id="selectAdminAuthUnassignedMngrWhere">
+        <where>
+            <!-- Managers who do NOT have the selected auth role -->
+            NOT EXISTS (
+            SELECT 1
+            FROM TAUTH_MNGR TAM
+            WHERE TAM.MNGR_UID = TM.MNGR_UID
+            AND TAM.AUTH_UUID = #{authUuid}
+            )
 
+            <if test="mngrUid != null and mngrUid != ''">
+                AND TM.MNGR_UID LIKE CONCAT('%', #{mngrUid}, '%')  <!-- Manager ID -->
+            </if>
+
+            <if test="mngrNm != null and mngrNm != ''">
+                AND TM.MNGR_NM LIKE CONCAT('%', #{mngrNm}, '%')    <!-- Manager name -->
+            </if>
+
+            <if test="emlAdres != null and emlAdres != ''">
+                AND TM.EML_ADRES LIKE CONCAT('%', #{emlAdres}, '%') <!-- Email -->
+            </if>
+
+            <if test="telno != null and telno != ''">
+                AND TM.TELNO LIKE CONCAT('%', #{telno}, '%')   <!-- Phone -->
+            </if>
+
+            <if test="useYn != null and useYn != ''">
+                AND TM.USE_YN = #{useYn}                           <!-- Active flag -->
+            </if>
+        </where>
+    </sql>
+
+    <!-- =========================
+         Auth Role (TAUTH) - List / Count / Detail
+         ========================= -->
+
+    <!-- Auth role list (paged) -->
+    <select id="selectAdminAuthRoleList" resultType="AuthVO">
+        SELECT
+        ROW_NUMBER() OVER (ORDER BY TA.REG_DT DESC) AS RN,
+        TA.AUTH_UUID,
+        TA.AUTHOR_DC,
+        TRIM(TA.USE_YN) AS USE_YN,
+        TA.REG_DT,
+        TA.REG_UID
+        FROM TAUTH TA
+        WHERE 1=1
+        <if test="authUuid != null and authUuid != ''">
+            AND TA.AUTH_UUID LIKE CONCAT('%', #{authUuid}, '%')
+        </if>
+        <if test="authorDc != null and authorDc != ''">
+            AND TA.AUTHOR_DC LIKE CONCAT('%', #{authorDc}, '%')
+        </if>
+        <if test="useYn != null and useYn != ''">
+            AND TA.USE_YN = #{useYn}
+        </if>
+        ORDER BY TA.REG_DT
+        <if test="firstIndex != null and recordCountPerPage != null">
+            LIMIT #{firstIndex}, #{recordCountPerPage}
+        </if>
+    </select>
+
+    <!-- Auth role count -->
+    <select id="selectAdminAuthRoleListCnt" resultType="int">
+        SELECT COUNT(*)
+        FROM TAUTH TA
+        WHERE 1=1
+        <if test="authUuid != null and authUuid != ''">
+            AND TA.AUTH_UUID LIKE CONCAT('%', #{authUuid}, '%')
+        </if>
+        <if test="authorDc != null and authorDc != ''">
+            AND TA.AUTHOR_DC LIKE CONCAT('%', #{authorDc}, '%')
+        </if>
+        <if test="useYn != null and useYn != ''">
+            AND TA.USE_YN = #{useYn}
+        </if>
+    </select>
+
+    <!-- Auth role detail -->
+    <select id="selectAdminAuthRoleDetail" resultType="AuthVO">
+        SELECT
+            TA.AUTH_UUID,
+            TA.AUTHOR_DC,
+            TRIM(TA.USE_YN) AS USE_YN,
+            TA.REG_DT,
+            TA.REG_UID
+        FROM TAUTH TA
+        WHERE TA.AUTH_UUID = #{authUuid}
+    </select>
+
+    <!-- Insert auth role -->
+    <insert id="insertAdminAuthRole">
+        INSERT INTO TAUTH (
+            AUTH_UUID,
+            AUTHOR_DC,
+            USE_YN,
+            REG_DT,
+            REG_UID
+        ) VALUES (
+                     #{authUuid},
+                     #{authorDc},
+                     'Y',
+                     NOW(),
+                     #{regUid}
+                 )
+    </insert>
+
+    <!-- Update auth role -->
+    <update id="updateAdminAuthRole">
+        UPDATE TAUTH
+        SET AUTHOR_DC = #{authorDc},
+            USE_YN    = #{useYn}
+        WHERE AUTH_UUID = #{authUuid}
+    </update>
+
+    <!-- Disable auth role (soft delete) -->
+    <update id="disableAdminAuthRole">
+        UPDATE TAUTH
+        SET USE_YN = 'N'
+        WHERE AUTH_UUID = #{authUuid}
+    </update>
+
+    <!-- =========================
+         Auth Assignment (TAUTH_MNGR) - List / Count / Insert / Delete
+         ========================= -->
+
+    <!-- Managers assigned to a role (paged) -->
+    <select id="selectAdminAuthAssignedMngrList" resultType="MngrVO">
+        SELECT
+        TM.MNGR_UID,
+        TM.MNGR_NM,
+        TM.EML_ADRES,
+        TM.TELNO,
+        TRIM(TM.USE_YN) AS USE_YN
+        FROM TAUTH_MNGR TAM
+        INNER JOIN TMNGR TM
+        ON TM.MNGR_UID = TAM.MNGR_UID
+        WHERE TAM.AUTH_UUID = #{authUuid}
+        <if test="mngrUid != null and mngrUid != ''">
+            AND TM.MNGR_UID LIKE CONCAT('%', #{mngrUid}, '%')
+        </if>
+        <if test="mngrNm != null and mngrNm != ''">
+            AND TM.MNGR_NM LIKE CONCAT('%', #{mngrNm}, '%')
+        </if>
+        <if test="useYn != null and useYn != ''">
+            AND TM.USE_YN = #{useYn}
+        </if>
+        ORDER BY TM.MNGR_UID ASC
+        <if test="firstIndex != null and recordCountPerPage != null">
+            LIMIT #{firstIndex}, #{recordCountPerPage}
+        </if>
+    </select>
+
+    <!-- Assigned managers count -->
+    <select id="selectAdminAuthAssignedMngrListCnt" resultType="int">
+        SELECT COUNT(*)
+        FROM TAUTH_MNGR TAM
+        INNER JOIN TMNGR TM
+        ON TM.MNGR_UID = TAM.MNGR_UID
+        WHERE TAM.AUTH_UUID = #{authUuid}
+        <if test="mngrUid != null and mngrUid != ''">
+            AND TM.MNGR_UID LIKE CONCAT('%', #{mngrUid}, '%')
+        </if>
+        <if test="mngrNm != null and mngrNm != ''">
+            AND TM.MNGR_NM LIKE CONCAT('%', #{mngrNm}, '%')
+        </if>
+        <if test="useYn != null and useYn != ''">
+            AND TM.USE_YN = #{useYn}
+        </if>
+    </select>
+
+    <!-- Popup: managers NOT assigned to the role (paged) -->
+    <select id="selectAdminAuthUnassignedMngrList" resultType="MngrVO">
+        SELECT
+        TM.MNGR_UID,
+        TM.MNGR_NM,
+        TM.EML_ADRES,
+        TM.TELNO,
+        TRIM(TM.USE_YN) AS USE_YN
+        FROM TMNGR TM
+        <include refid="selectAdminAuthUnassignedMngrWhere" />
+        ORDER BY TM.MNGR_UID ASC
+        <if test="firstIndex != null and recordCountPerPage != null">
+            LIMIT #{firstIndex}, #{recordCountPerPage}
+        </if>
+    </select>
+
+    <!-- Popup: unassigned managers count -->
+    <select id="selectAdminAuthUnassignedMngrListCnt" resultType="int">
+        SELECT COUNT(*)
+        FROM TMNGR TM
+        <include refid="selectAdminAuthUnassignedMngrWhere" />
+    </select>
+
+    <!-- Assign role to manager -->
+    <insert id="insertAdminAuthMngr">
+        INSERT INTO TAUTH_MNGR (
+            AUTH_UUID,
+            MNGR_UID
+        ) VALUES (
+                     #{authUuid},
+                     #{mngrUid}
+                 )
+    </insert>
+
+    <!-- Remove role from manager -->
+    <delete id="deleteAdminAuthMngr">
+        DELETE FROM TAUTH_MNGR
+        WHERE AUTH_UUID = #{authUuid}
+          AND MNGR_UID  = #{mngrUid}
+    </delete>
 
 </mapper>

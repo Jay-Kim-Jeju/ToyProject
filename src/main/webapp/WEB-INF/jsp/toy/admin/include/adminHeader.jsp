@@ -76,7 +76,7 @@
                         <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" class="drop"><spring:message code="admin.header.menu.system" /></a> <%-- CHANGED: i18n --%>
                         <ul class="depth2">
                             <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.mngr" /></a></li>
-                            <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.auth" /></a></li>
+                            <li><a href="<c:url value='/toy/admin/sys/auth/role/list.do' />"><spring:message code="admin.header.menu.system.auth" /></a></li>
                             <li><a href="<c:url value='/toy/admin/sys/code/grp/list.do' />"><spring:message code="admin.header.menu.system.code" /></a></li>
                             <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.allowIp" /></a></li>
                             <li><a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />"><spring:message code="admin.header.menu.system.log" /></a></li>
@@ -204,7 +204,7 @@
                         <a href="<c:url value="" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>
                     </li>
                     <li>
-                        <a href="<c:url value="" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i>권한관리</a>
+                        <a href="<c:url value="/toy/admin/sys/auth/role/list.do" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i>권한관리</a>
                     </li>
                     <li>
                         <a href="<c:url value="/toy/admin/sys/code/grp/list.do" />" id="system_code_menu"><i class="material-icons-outlined">apps</i>코드관리</a>
