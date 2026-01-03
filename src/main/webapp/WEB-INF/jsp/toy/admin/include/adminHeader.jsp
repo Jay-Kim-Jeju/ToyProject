@@ -37,41 +37,21 @@
         <nav class="gnb">
             <ul id="depth1" class="depth1">
 
-                <li id="cctv_menu">
-                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.cctv" /></a> <%-- CHANGED: i18n --%>
-                </li>
-                <li id="place_menu">
-                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.place" /></a> <%-- CHANGED: i18n --%>
-                </li>
-                <li id="today_menu">
-                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.today" /></a> <%-- CHANGED: i18n --%>
-                </li>
-                <li id="rcmm_menu">
-                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.rcmm" /></a> <%-- CHANGED: i18n --%>
-                </li>
-                <li id="jejunews_menu">
-                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.jejunews" /></a> <%-- CHANGED: i18n --%>
-                </li>
+                <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('MENU1'))}"> <%-- Auth Check --%>
+                    <li id="">
+                        <a href="<c:url value='' />">MENU1</a> <%-- CHANGED: i18n --%>
+                    </li>
+                </c:if>
 
-                <li id="influencer_menu">
-                    <a href="<c:url value='' />" class="drop"><spring:message code="admin.header.menu.influencer" /></a> <%-- CHANGED: i18n --%>
-                    <ul class="depth2">
-                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.influencer.manage" /></a></li> <%-- CHANGED: i18n --%>
-                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.influencer.goods" /></a></li> <%-- CHANGED: i18n --%>
-                        <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.influencer.order" /></a></li> <%-- CHANGED: i18n --%>
-                    </ul>
-                </li>
 
-                <li id="excclc_menu">
-                    <a href="<c:url value='' />" class="drop"><spring:message code="admin.header.menu.excclc" /></a> <%-- CHANGED: i18n --%>
-                </li>
+                <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('MENU2'))}"> <%-- Auth Check --%>
+                    <li id="">
+                        <a href="<c:url value='' />">MENU2</a> <%-- CHANGED: i18n --%>
+                    </li>
+                </c:if>
 
-                <li id="member_menu">
-                    <a href="<c:url value='' />"><spring:message code="admin.header.menu.member" /></a> <%-- CHANGED: i18n --%>
-                </li>
 
-                <%-- Auth Check --%>
-                <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('system'))}">
+                <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('system'))}"> <%-- Auth Check --%>
                     <li id="system_menu">
                         <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" class="drop"><spring:message code="admin.header.menu.system" /></a> <%-- CHANGED: i18n --%>
                         <ul class="depth2">
@@ -83,13 +63,6 @@
                         </ul>
                     </li>
                 </c:if>
-
-                <%--<li id="config_menu">
-                    <a href="<c:url value='/toy/config/detailLogo.ac' />" class="drop">환경설정</a>
-                    <ul class="depth2">
-                        <li><a href="<c:url value='/toy/config/detailLogo.ac' />">로고설정</a></li>
-                    </ul>
-                </li>--%>
 
             </ul>
         </nav>
@@ -131,89 +104,40 @@
     <nav class="gnb" id="side-menu">
         <ul class="depth2">
 
-            <c:if test="${menuActiveMap.adminMenu1 eq 'cctv'}">	<%-- 날씨Live : 2depth 메뉴 --%>
-                <li>
-                    <a href="<c:url value="" />" id="cctv_cctv_menu"><i class="material-icons-outlined">video_camera_front</i>CCTV 관리</a>
-                </li>
+
+            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('menu1'))}"> <%-- Auth Check --%>
+                <c:if test="${menuActiveMap.adminMenu1 eq 'menu1'}">	<%-- menu1 : 1depth 메뉴 --%>
+                    <li>
+                        <a href="<c:url value="" />" id="menu1_menu1_menu"><i class="material-icons-outlined">video_camera_front</i>menu1</a>
+                    </li>
+                </c:if>
             </c:if>
 
-            <c:if test="${menuActiveMap.adminMenu1 eq 'rcmm'}">	<%-- 추천장소 관리 : 2depth 메뉴 --%>
-                <li>
-                    <a href="<c:url value="" />" id="rcmm_place_menu"><i class="material-icons-outlined">place</i>추천장소 관리</a>
-                </li>
+            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('menu2'))}"> <%-- Auth Check --%>
+                <c:if test="${menuActiveMap.adminMenu1 eq 'menu2'}">	<%-- menu2 : 1depth 메뉴 --%>
+                    <li>
+                        <a href="<c:url value="" />" id="menu2_menu2_menu"><i class="material-icons-outlined">video_camera_front</i>menu2</a>
+                    </li>
+                </c:if>
             </c:if>
 
-            <c:if test="${menuActiveMap.adminMenu1 eq 'today'}">	<%-- 오늘제주 관리 : 2depth 메뉴 --%>
-                <li>
-                    <a href="<c:url value="" />" id="today_mngr_menu"><i class="material-icons-outlined">wb_sunny</i>오늘제주 관리</a>
-                </li>
-            </c:if>
 
-            <c:if test="${menuActiveMap.adminMenu1 eq 'place'}">	<%-- 장소 관리 : 2depth 메뉴 --%>
-                <li>
-                    <a href="<c:url value="" />" id="place_mngr_menu"><i class="material-icons-outlined">place</i>장소관리</a>
-                </li>
-            </c:if>
-
-            <c:if test="${menuActiveMap.adminMenu1 eq 'jejunews'}">	<%-- 제주소식 : 2depth 메뉴 --%>
-                <li>
-                    <a href="<c:url value="" />" id="jeju_news_menu"><i class="material-icons-outlined">feed</i>제주소식</a>
-                </li>
-            </c:if>
-
-            <c:if test="${menuActiveMap.adminMenu1 eq 'influencer'}">	<%-- 인플루언서 관리 : 2depth 메뉴 --%>
-                <li>
-                    <a href="<c:url value='' />" id="influencer_manage_menu"><i class="material-icons-outlined">settings</i>인플루언서 관리</a>
-                </li>
-                <li>
-                    <a href="<c:url value='' />" id="influencer_goods_menu"><i class="material-icons-outlined">inventory_2</i>상품관리</a>
-                </li>
-                <li>
-                    <a href="<c:url value='' />" id="influencer_sale_menu"><i class="material-icons-outlined">assignment</i>주문관리</a>
-                </li>
-            </c:if>
-
-            <c:if test="${menuActiveMap.adminMenu1 eq 'client'}">	<%-- 고객관리 : 1depth 메뉴 --%>
-                <li>
-                    <a href="<c:url value='' />" id="client_user_menu"><i class="material-icons-outlined">people</i>사용자관리</a>
-                </li>
-                <li>
-                    <a href="<c:url value='' />" id="client_dropUser_menu"><i class="material-icons-outlined">person_remove</i>탈퇴사용자</a>
-                </li>
-            </c:if>
-
-            <c:if test="${menuActiveMap.adminMenu1 eq 'excclc'}">	<%--정산 : 2depth 메뉴--%>
-                <li>
-                    <a href="<c:url value="" />" id="excclc_excclc_menu" <%--class="drop"--%>><i class="material-icons-outlined">request_quote</i>정산</a>
-                    <div class="depth3">
-                        <strong>정산</strong>
-
-                            <%--<ul>
-                                <li id="excclc_excclc_calendar_menu"><a href="<c:url value="/toy/excclc/listExcclcCalendar.ac" />">달력 보기</a></li>
-                                <li id="excclc_excclc_list_menu"><a href="<c:url value="/toy/excclc/listExcclc.ac" />">목록 보기</a></li>
-                            </ul>--%>
-
-                    </div>
-                </li>
-            </c:if>
-
-            <%-- Auth Check --%>
-            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('system'))}">
+            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('system'))}"> <%-- Auth Check --%>
                 <c:if test="${menuActiveMap.adminMenu1 eq 'system'}">	<%-- 시스템설정 : 1depth 메뉴 --%>
                     <li>
-                        <a href="<c:url value="" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>
+                        <a href="<c:url value="" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>                                              <%-- └─ 관리자 : 2depth 메뉴 --%>
                     </li>
                     <li>
-                        <a href="<c:url value="/toy/admin/sys/auth/role/list.do" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i>권한관리</a>
+                        <a href="<c:url value="/toy/admin/sys/auth/role/list.do" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i>권한관리</a>  <%-- └─ 권한 : 2depth 메뉴 --%>
                     </li>
                     <li>
-                        <a href="<c:url value="/toy/admin/sys/code/grp/list.do" />" id="system_code_menu"><i class="material-icons-outlined">apps</i>코드관리</a>
+                        <a href="<c:url value="/toy/admin/sys/code/grp/list.do" />" id="system_code_menu"><i class="material-icons-outlined">apps</i>코드관리</a>   <%-- └─ 코드 : 2depth 메뉴 --%>
                     </li>
                     <li>
                         <a href="" id=""><i class="material-icons-outlined">apps</i>접속허용IP 관리</a>
-                    </li>
+                    </li>                                                       <%-- └─ 접속허용IP : 2depth 메뉴 --%>
                     <li>
-                        <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accessLog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a>
+                        <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accessLog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a> <%-- └─ 접속이력조회 : 2depth 메뉴 --%>
                     </li>
                 </c:if>
             </c:if>
