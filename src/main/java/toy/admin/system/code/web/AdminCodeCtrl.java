@@ -79,7 +79,6 @@ public class AdminCodeCtrl {
 
         Map<String, String> menuActiveMap = new HashMap<>(MENU_BASE);
         menuActiveMap.put("adminMenu2", "code");
-        menuActiveMap.put("adminMenu3", "list");
         model.addAttribute("menuActiveMap", menuActiveMap);
 
         return "admin/system/code/listCode";

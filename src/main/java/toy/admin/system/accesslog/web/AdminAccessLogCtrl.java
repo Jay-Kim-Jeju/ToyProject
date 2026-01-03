@@ -43,7 +43,6 @@ public class AdminAccessLogCtrl {
 
         Map<String, String> menuActiveMap = new HashMap<>(MENU_BASE);
         menuActiveMap.put("adminMenu2", "accesslog");
-        menuActiveMap.put("adminMenu3", "list");
         model.addAttribute("menuActiveMap", menuActiveMap);
         return "admin/system/accesslog/listAdmAcssLog";
 

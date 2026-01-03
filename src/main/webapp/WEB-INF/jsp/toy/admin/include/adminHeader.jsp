@@ -137,7 +137,7 @@
                         <a href="" id=""><i class="material-icons-outlined">apps</i>접속허용IP 관리</a>
                     </li>                                                       <%-- └─ 접속허용IP : 2depth 메뉴 --%>
                     <li>
-                        <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accessLog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a> <%-- └─ 접속이력조회 : 2depth 메뉴 --%>
+                        <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accesslog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a> <%-- └─ 접속이력조회 : 2depth 메뉴 --%>
                     </li>
                 </c:if>
             </c:if>

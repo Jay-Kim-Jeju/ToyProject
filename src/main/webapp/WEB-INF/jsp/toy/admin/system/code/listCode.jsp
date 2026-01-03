@@ -407,9 +407,7 @@
 <body>
 <div id="wrapper">
     <%-- Common Header/Side Menu --%>
-    <jsp:include page="/WEB-INF/jsp/toy/admin/include/adminHeader.jsp" flush="false">
-        <jsp:param value="system_menu" name="admin_menu"/>
-    </jsp:include>
+    <jsp:include page="/WEB-INF/jsp/toy/admin/include/adminHeader.jsp" flush="false" />
     <main id="main">
         <section class="contents-wrap">
             <div class="title-area">

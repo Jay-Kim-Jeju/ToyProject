@@ -58,7 +58,6 @@ public class AdminAuthCtrl {
 
         Map<String, String> menuActiveMap = new HashMap<>(MENU_BASE);
         menuActiveMap.put("adminMenu2", "auth");
-        menuActiveMap.put("adminMenu3", "list");
         model.addAttribute("menuActiveMap", menuActiveMap);
 
         return "admin/system/auth/listAuth";
