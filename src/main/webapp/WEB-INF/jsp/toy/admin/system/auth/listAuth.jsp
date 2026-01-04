@@ -501,7 +501,6 @@
         <%-- Common Header/Side Menu --%>
         <jsp:include page="/WEB-INF/jsp/toy/admin/include/adminHeader.jsp" flush="false" />
 
-
         <main id="main">
         <section class="contents-wrap">
             <div class="title-area">

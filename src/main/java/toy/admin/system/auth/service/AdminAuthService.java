@@ -1,5 +1,6 @@
 package toy.admin.system.auth.service;
 
+import toy.com.util.CmConstants;
 import toy.com.vo.system.auth.AdminAuthBatchResult;
 import toy.com.vo.system.auth.AuthVO;
 import toy.com.vo.system.mngr.MngrVO;
@@ -8,12 +9,6 @@ import java.util.List;
 
 public interface AdminAuthService {
 
-    // Result codes (align with AdminCodeService style)
-    int RESULT_OK = 1;
-    int RESULT_FAIL = 0;
-    int RESULT_DUPLE = -1;
-    int RESULT_INVALID = -2;
-    int RESULT_FORBIDDEN = -3;
 
     /* =========================
      * Auth Role (TAUTH)

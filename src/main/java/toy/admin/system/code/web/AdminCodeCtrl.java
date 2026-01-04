@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import toy.admin.system.accesslog.service.AdminAccessLogService;
 import toy.admin.system.code.service.AdminCodeService;
 import toy.com.common.common.service.CommonService;
+import toy.com.util.CmConstants;
 import toy.com.util.EgovStringUtil;
 import toy.com.util.PagingParamUtil;
 import toy.com.util.ToyAdminAuthUtils;
@@ -193,10 +194,10 @@ public class AdminCodeCtrl {
         if (affected > 0) {
             resultMap.put("result", "Y");
             resultMap.put("errorMessage", "");
-        } else if (affected == AdminCodeService.RESULT_DUPLE) {
+        } else if (affected == CmConstants.RESULT_DUPLE) {
             resultMap.put("result", "Duple");
             resultMap.put("errorMessage", "Duplicate group code.");
-        } else if (affected == AdminCodeService.RESULT_INVALID) {
+        } else if (affected == CmConstants.RESULT_INVALID) {
             resultMap.put("result", "Invalid");
             resultMap.put("errorMessage", "Invalid data (constraint violation).");
         } else {
@@ -247,7 +248,7 @@ public class AdminCodeCtrl {
         if (affected > 0) {
             resultMap.put("result", "Y");
             resultMap.put("errorMessage", "");
-        } else if (affected == AdminCodeService.RESULT_INVALID) {
+        } else if (affected == CmConstants.RESULT_INVALID) {
             resultMap.put("result", "Invalid");
             resultMap.put("errorMessage", "Invalid data (constraint violation).");
         } else if (affected == 0) {
@@ -335,10 +336,10 @@ public class AdminCodeCtrl {
             resultMap.put("result", "Y");
             resultMap.put("errorMessage", "");
             refreshCommonCodeSafely();
-        } else if (affected == AdminCodeService.RESULT_DUPLE) {
+        } else if (affected == CmConstants.RESULT_DUPLE) {
             resultMap.put("result", "Duple");
             resultMap.put("errorMessage", "Duplicate code in the same group.");
-        } else if (affected == AdminCodeService.RESULT_INVALID) {
+        } else if (affected == CmConstants.RESULT_INVALID) {
             resultMap.put("result", "Invalid");
             resultMap.put("errorMessage", "Invalid data (constraint violation).");
         } else {
@@ -381,7 +382,7 @@ public class AdminCodeCtrl {
             resultMap.put("result", "Y");
             resultMap.put("errorMessage", "");
             refreshCommonCodeSafely();
-        } else if (affected == AdminCodeService.RESULT_INVALID) {
+        } else if (affected == CmConstants.RESULT_INVALID) {
             resultMap.put("result", "Invalid");
             resultMap.put("errorMessage", "Invalid data (constraint violation).");
         } else if (affected == 0) {
@@ -423,7 +424,7 @@ public class AdminCodeCtrl {
             resultMap.put("result", "Y");
             resultMap.put("errorMessage", "");
             refreshCommonCodeSafely();
-        } else if (affected == AdminCodeService.RESULT_INVALID) {
+        } else if (affected == CmConstants.RESULT_INVALID) {
             resultMap.put("result", "Invalid");
             resultMap.put("errorMessage", "Cannot delete (constraint violation).");
         } else if (affected == 0) {

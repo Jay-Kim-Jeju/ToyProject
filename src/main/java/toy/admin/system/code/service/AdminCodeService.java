@@ -1,6 +1,7 @@
 package toy.admin.system.code.service;
 
 import org.springframework.ui.ModelMap;
+import toy.com.util.CmConstants;
 import toy.com.vo.system.code.CdGrpVO;
 import toy.com.vo.system.code.CdVO;
 
@@ -9,9 +10,6 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface AdminCodeService {
-
-    int RESULT_DUPLE = -1;
-    int RESULT_INVALID = -2;
 
     /* =========================
      * Code Group

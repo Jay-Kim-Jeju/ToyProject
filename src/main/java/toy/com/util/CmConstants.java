@@ -7,4 +7,12 @@ public class CmConstants {
     public static final String ADMIN_LOGIN_URL = "/toy/login.do";
     public static final String MANAGE_LOGIN_URL = "/toy/login.do";
     public static final String ADMIN_LOGIN_SESSION = "sessionAdminVO";
+
+    // Result codes (service layer standard)
+    public static final int RESULT_OK = 1;
+    public static final int RESULT_FAIL = 0;
+    public static final int RESULT_DUPLE = -1;
+    public static final int RESULT_INVALID = -2;
+    public static final int RESULT_FORBIDDEN = -3;
+
 }

@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import toy.admin.system.accesslog.service.AdminAccessLogService;
 import toy.admin.system.auth.service.AdminAuthService;
+import toy.com.util.CmConstants;
 import toy.com.util.EgovStringUtil;
 import toy.com.util.PagingParamUtil;
 import toy.com.util.ToyAdminAuthUtils;
@@ -230,10 +231,10 @@ public class AdminAuthCtrl {
         if (affected > 0) {
             resultMap.put("result", "Y");
             resultMap.put("errorMessage", "");
-        } else if (affected == AdminAuthService.RESULT_DUPLE) {
+        } else if (affected == CmConstants.RESULT_DUPLE) {
             resultMap.put("result", "Duple");
             resultMap.put("errorMessage", "Duplicate auth role ID.");
-        } else if (affected == AdminAuthService.RESULT_INVALID) {
+        } else if (affected == CmConstants.RESULT_INVALID) {
             resultMap.put("result", "Invalid");
             resultMap.put("errorMessage", "Invalid data (constraint violation).");
         } else {
@@ -277,7 +278,7 @@ public class AdminAuthCtrl {
         if (affected > 0) {
             resultMap.put("result", "Y");
             resultMap.put("errorMessage", "");
-        } else if (affected == AdminAuthService.RESULT_INVALID) {
+        } else if (affected == CmConstants.RESULT_INVALID) {
             resultMap.put("result", "Invalid");
             resultMap.put("errorMessage", "Invalid data (constraint violation).");
         } else if (affected == 0) {
@@ -323,7 +324,7 @@ public class AdminAuthCtrl {
         if (affected > 0) {
             resultMap.put("result", "Y");
             resultMap.put("errorMessage", "");
-        } else if (affected == AdminAuthService.RESULT_INVALID) {
+        } else if (affected == CmConstants.RESULT_INVALID) {
             resultMap.put("result", "Invalid");
             resultMap.put("errorMessage", "Invalid data (constraint violation).");
         } else if (affected == 0) {

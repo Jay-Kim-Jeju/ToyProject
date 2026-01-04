@@ -12,6 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import toy.admin.system.code.dao.AdminCodeDAO;
 import toy.admin.system.code.service.AdminCodeService;
 import toy.com.egov.EgovUserDetailsHelper;
+import toy.com.util.CmConstants;
 import toy.com.vo.system.code.CdGrpVO;
 import toy.com.vo.system.code.CdVO;
 
@@ -42,10 +43,13 @@ public class AdminCodeServiceImpl implements AdminCodeService {
             return adminCodeDAO.insertCdGrp(codeGrpVO);
         } catch (DuplicateKeyException e) {
             // Duplicate GROUP_CD (PK)
-            return RESULT_DUPLE;
+            return CmConstants.RESULT_DUPLE;
         } catch (DataIntegrityViolationException e) {
             log.warn("insertCdGrp constraint violation. groupCd={}", codeGrpVO.getGroupCd(), e);
-            return RESULT_INVALID;
+            return CmConstants.RESULT_INVALID;
+        } catch (Exception e) {
+            log.error("insertCdGrp failed. groupCd={}", codeGrpVO.getGroupCd(), e);
+            return CmConstants.RESULT_FAIL;
         }
 
     }
@@ -57,7 +61,10 @@ public class AdminCodeServiceImpl implements AdminCodeService {
             return adminCodeDAO.updateCdGrp(codeGrpVO);
         } catch (DataIntegrityViolationException e) {
             log.warn("updateCdGrp constraint violation. groupCd={}", codeGrpVO.getGroupCd(), e);
-            return  RESULT_INVALID;
+            return CmConstants.RESULT_INVALID;
+        } catch (Exception e) {
+            log.error("updateCdGrp failed. groupCd={}", codeGrpVO.getGroupCd(), e);
+            return CmConstants.RESULT_FAIL;
         }
     }
 
@@ -79,10 +86,13 @@ public class AdminCodeServiceImpl implements AdminCodeService {
             return adminCodeDAO.insertCd(codeVO);
         } catch (DuplicateKeyException e) {
             // Duplicate (GROUP_CD, CD)
-            return RESULT_DUPLE;
+            return CmConstants.RESULT_DUPLE;
         } catch (DataIntegrityViolationException e) {
             log.warn("insertCd constraint violation. groupCd={}, cd={}", codeVO.getGroupCd(), codeVO.getCd(), e);
-            return RESULT_INVALID;
+            return CmConstants.RESULT_INVALID;
+        } catch (Exception e) {
+            log.error("insertCd failed. groupCd={}, cd={}", codeVO.getGroupCd(), codeVO.getCd(), e);
+            return CmConstants.RESULT_FAIL;
         }
     }
 
@@ -98,7 +108,10 @@ public class AdminCodeServiceImpl implements AdminCodeService {
             return adminCodeDAO.updateCd(codeVO);
         } catch (DataIntegrityViolationException e) {
             log.warn("updateCd constraint violation. groupCd={}, cd={}", codeVO.getGroupCd(), codeVO.getCd(), e);
-            return RESULT_INVALID;
+            return CmConstants.RESULT_INVALID;
+        } catch (Exception e) {
+            log.error("updateCd failed. groupCd={}, cd={}", codeVO.getGroupCd(), codeVO.getCd(), e);
+            return CmConstants.RESULT_FAIL;
         }
     }
 
@@ -109,7 +122,10 @@ public class AdminCodeServiceImpl implements AdminCodeService {
         } catch (DataIntegrityViolationException e) {
             // FK constraint, etc.
             log.warn("deleteCd constraint violation. groupCd={}, cd={}", codeVO.getGroupCd(), codeVO.getCd(), e);
-            return RESULT_INVALID;
+            return CmConstants.RESULT_INVALID;
+        } catch (Exception e) {
+            log.error("deleteCd failed. groupCd={}, cd={}", codeVO.getGroupCd(), codeVO.getCd(), e);
+            return CmConstants.RESULT_FAIL;
         }
 
     }
