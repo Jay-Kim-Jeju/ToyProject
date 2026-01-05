@@ -42,7 +42,7 @@ public class AdminAuthCtrl {
 
     // Base menu map must be immutable; build a new map per request to avoid shared mutable state.
     private static final Map<String, String> MENU_BASE = Map.of("adminMenu1", "system");
-    private static final String MENU_ROLE = "system";
+    private static final String MENU_ROLE = "SYSTEM";
 
     /* =========================
      * View Pages (.do)

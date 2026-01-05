@@ -15,4 +15,10 @@ public class CmConstants {
     public static final int RESULT_INVALID = -2;
     public static final int RESULT_FORBIDDEN = -3;
 
+    // Admin logout reasons
+    public static final String LOGOUT_REASON_FORBIDDEN = "FORBIDDEN";
+    public static final String LOGOUT_REASON_REVOKED = "REVOKED";
+    public static final String LOGOUT_REASON_DISABLED = "DISABLED";
+    public static final String LOGOUT_REASON_EXPIRED = "EXPIRED";
+
 }

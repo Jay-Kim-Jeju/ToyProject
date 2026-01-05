@@ -1,11 +1,17 @@
 package toy.com.util;
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 import toy.com.egov.EgovUserDetailsHelper;
 import toy.com.vo.common.SessionAdminVO;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ToyAdminAuthUtils {
 
@@ -18,8 +24,14 @@ public class ToyAdminAuthUtils {
 
 
     private static List<String> getSessionAuthList() {
-        SessionAdminVO sessionAdminVO = (SessionAdminVO) EgovUserDetailsHelper.getAuthenticatedAdmin();
+        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (attrs == null) {
+            return null;
+        }
+        HttpSession session = attrs.getRequest().getSession(false);
+        SessionAdminVO sessionAdminVO = (session != null) ? (SessionAdminVO) session.getAttribute("sessionAdminVO") : null;
         return (sessionAdminVO != null) ? sessionAdminVO.getAuth() : null;
+        // TODO: If you migrate admin auth to Spring Security later, switch this back to SecurityContext-based lookup.
     }
 
 
@@ -35,8 +47,13 @@ public class ToyAdminAuthUtils {
             return authList.contains(ROLE_ADMIN);
         }
 
+        Set<String> normalizedAuth = authList.stream()
+                .filter(Objects::nonNull)
+                .map(String::trim)
+                .map(String::toUpperCase)
+                .collect(Collectors.toSet());
         for (String r : roles) {
-            if (r != null && authList.contains(r)) {
+            if (r != null && normalizedAuth.contains(r.trim().toUpperCase())) {
                 return true;
             }
         }
@@ -72,7 +89,7 @@ public class ToyAdminAuthUtils {
                 : authGroups;
 
         boolean ok = hasAnyRole(targetGroups);
-        return ok ? null : "redirect:/toy/admin/login.do";
+        return ok ? null : "redirect:/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN;
     }
 
     public static String chkAdminCrudPermission(String menuRole) {
@@ -83,11 +100,11 @@ public class ToyAdminAuthUtils {
 
         // Guest cannot do any mutation
         if (isGuest()) {
-            return "redirect:/toy/admin/login.do";
+            return "redirect:/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN;
         }
 
         // Non-admin must have the menu role
         boolean ok = hasAnyRole(menuRole);
-        return ok ? null : "redirect:/toy/admin/login.do";
+        return ok ? null : "redirect:/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN;
     }
 }

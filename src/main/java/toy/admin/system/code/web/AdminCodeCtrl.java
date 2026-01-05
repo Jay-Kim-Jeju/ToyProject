@@ -53,7 +53,7 @@ public class AdminCodeCtrl {
 
     // Base menu map must be immutable; build a new map per request to avoid shared mutable state.
     private static final Map<String, String> MENU_BASE = Map.of("adminMenu1", "system");
-    private static final String MENU_ROLE = "system";
+    private static final String MENU_ROLE = "SYSTEM";
 
 
 
@@ -65,12 +65,6 @@ public class AdminCodeCtrl {
     public String viewCodeGroupPage(HttpServletRequest request, ModelMap model) throws Exception {
         adminAccessLogService.insertAdminAccessLog("Admin > System > Code > GroupCode List Page", request);
 
-        //chek Aop Proxy log applying
-        /*log.debug("isAopProxy={}, isCglibProxy={}, isJdkProxy={}, class={}",
-                AopUtils.isAopProxy(adminCodeService),
-                AopUtils.isCglibProxy(adminCodeService),
-                AopUtils.isJdkDynamicProxy(adminCodeService),
-                adminCodeService.getClass());*/
 
         String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
@@ -84,6 +78,12 @@ public class AdminCodeCtrl {
 
         return "admin/system/code/listCode";
 
+        //chek Aop Proxy log applying
+        /*log.debug("isAopProxy={}, isCglibProxy={}, isJdkProxy={}, class={}",
+                AopUtils.isAopProxy(adminCodeService),
+                AopUtils.isCglibProxy(adminCodeService),
+                AopUtils.isJdkDynamicProxy(adminCodeService),
+                adminCodeService.getClass());*/
     }
 
     @RequestMapping(value = "/cd/detail.do", method = RequestMethod.GET)

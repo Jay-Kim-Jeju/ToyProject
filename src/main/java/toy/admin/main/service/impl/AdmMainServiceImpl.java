@@ -93,8 +93,8 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
             return result;
         }
 
-        // 5) Authorization: fetch ALL auths and optionally verify a required authUuid
-        String requiredAuthUuid = (mngrVO.getAuthUuid() == null) ? "" : mngrVO.getAuthUuid().trim();
+        // 5) Authorization: fetch ALL auths for session
+        // TODO: If you ever need "login requires a specific role", implement it server-side (whitelist) and NOT from client input.
 
         MngrVO authQueryVO = new MngrVO();
         authQueryVO.setMngrUid(mngrVO.getMngrUid());
@@ -102,26 +102,18 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
 
         List<String> authListAll = admMainDAO.selectAdminUserAuthList(authQueryVO);
 
-        boolean requiresAuth = !requiredAuthUuid.isEmpty();
-        boolean hasRequiredAuth = !requiresAuth || (authListAll != null && authListAll.contains(requiredAuthUuid));
 
-        if (!hasRequiredAuth) {
-            // Password is correct, but the required auth is missing
-            result.setSuccess(false);
-            result.setLocked(false);
-            result.setReasonCode("ID_PW_OR_NO_AUTH");
-            result.setMessageCode("admin.login.fail.mismatchOrNoAuth");
-            return result;
-        }
         // Put full auth list into session VO for later permission checks
         sessionUserVO.setAuth(authListAll);
-        // Set a display-only role label for header UI.
-        if (ToyAdminAuthUtils.isAdmin()) {
+
+
+        // Set a display-only role label for header UI (do not depend on session-based utils during login)
+        if (authListAll != null && authListAll.contains("ADMINISTRATOR")) {
             sessionUserVO.setDisplayRoleName("Administrator");
-        } else if (ToyAdminAuthUtils.isGuest()) {
+        } else if (authListAll != null && authListAll.contains("GUEST")) {
             sessionUserVO.setDisplayRoleName("Guest");
         } else if (authListAll != null && !authListAll.isEmpty()) {
-            sessionUserVO.setDisplayRoleName(authListAll.get(0)); // simple label (or fetch description later)
+            sessionUserVO.setDisplayRoleName(formatDisplayRoleName(authListAll));
         }
 
         // 6) Success: reset fail count and update last login time
@@ -138,6 +130,18 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
 
     public void updateLoginFailCo(String mngrId) {
         this.admMainDAO.updateLoginFailCo(mngrId);
+    }
+    
+    private String formatDisplayRoleName(List<String> authListAll) {
+        // Display: "<firstRole>" or "<firstRole> (and N more)"
+        String first = authListAll.get(0);
+        long distinctCount = authListAll.stream()
+                .filter(v -> v != null && !v.trim().isEmpty())
+                .map(String::trim)
+                .distinct()
+                .count();
+        long more = Math.max(0, distinctCount - 1);
+        return (more == 0) ? first : (first + " (and " + more + " more)");
     }
 
 }

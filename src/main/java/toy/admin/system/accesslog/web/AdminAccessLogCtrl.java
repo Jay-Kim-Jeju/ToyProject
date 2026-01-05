@@ -27,7 +27,7 @@ public class AdminAccessLogCtrl {
 
     // Base menu map must be immutable; build a new map per request to avoid shared mutable state.
     private static final Map<String, String> MENU_BASE = Map.of("adminMenu1", "system");
-    private static final String MENU_ROLE = "system";
+    private static final String MENU_ROLE = "SYSTEM";
 
     @RequestMapping({"/listAdmAcssLog.do"})
     public String listAdmAcssLog(@ModelAttribute("searchVO") AdminAccessLogSearchVO searchVO,
@@ -52,12 +52,6 @@ public class AdminAccessLogCtrl {
     public ModelAndView selectAdmAcssLogList(@ModelAttribute("searchVO") AdminAccessLogSearchVO searchVO,
                                              HttpServletRequest request) throws Exception {
 
-        /*
-            1. 현재 페이지/페이지당 건수 세팅
-            2. offset 계산(= firstIndex)
-            3. list 조회 + count 조회
-            4. count 결과를 totalRecordCount에 넣음(파생 값 계산 가능 상태)
-        */
 
         Map<String, Object> resultMap = new HashMap<>();
 

@@ -51,7 +51,7 @@
                 </c:if>
 
 
-                <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('system'))}"> <%-- Auth Check --%>
+                <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('SYSTEM'))}"> <%-- Auth Check --%>
                     <li id="system_menu">
                         <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" class="drop"><spring:message code="admin.header.menu.system" /></a> <%-- CHANGED: i18n --%>
                         <ul class="depth2">
@@ -122,7 +122,7 @@
             </c:if>
 
 
-            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('system'))}"> <%-- Auth Check --%>
+            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('SYSTEM'))}"> <%-- Auth Check --%>
                 <c:if test="${menuActiveMap.adminMenu1 eq 'system'}">	<%-- 시스템설정 : 1depth 메뉴 --%>
                     <li>
                         <a href="<c:url value="" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>                                              <%-- └─ 관리자 : 2depth 메뉴 --%>

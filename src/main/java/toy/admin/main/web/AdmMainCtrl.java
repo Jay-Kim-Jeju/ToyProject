@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -24,9 +25,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import toy.admin.main.service.AdmMainService;
 import toy.admin.system.accesslog.service.AdminAccessLogService;
-import toy.admin.system.accesslog.service.impl.AdminAccessLogServiceImpl;
 import toy.admin.test.service.AdmTestService;
 import toy.com.egov.EgovPropertiesUtils;
+import toy.com.util.AdminLogoutMessageHelper;
 import toy.com.util.EgovStringUtil;
 import toy.com.vo.TestVO;
 import toy.com.vo.common.AdminLoginResult;
@@ -46,6 +47,8 @@ public class AdmMainCtrl {
 
     private static final Logger LOG_DEBUG = LoggerFactory.getLogger(AdmMainCtrl.class);
 
+    @Resource(name = "adminLogoutReasonHelper")
+    private AdminLogoutMessageHelper adminLogoutMessageHelper;
 
     @Resource(name = "messageSource")
     private MessageSource messageSource;
@@ -72,6 +75,13 @@ public class AdmMainCtrl {
         model.addAttribute("returnURL", returnURL);
         model.addAttribute("isLocal", EgovPropertiesUtils.getOptionalProp("IS_LOCAL"));
 
+        String reason = request.getParameter("reason");
+        String logoutMessage = adminLogoutMessageHelper.resolveLogoutMessage(reason, request.getLocale());
+        if (logoutMessage != null) {
+            model.addAttribute("logoutMessage", logoutMessage);
+        }
+        // TODO: Logout reasons may expand (i18n, session revocation, allow-IP sync). Centralize reason codes/message keys if it grows.
+
         return "admin/adminLogin";
     }
 
@@ -80,9 +90,9 @@ public class AdmMainCtrl {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        // Do not force a fixed role. Allow any registered role to login.
-        // (Optionally, you can require at least one role in service layer.)
-        mngrVO.setAuthUuid("ADMINISTRATOR");
+        // Do not trust client-provided role filters. Login should not be restricted by a fixed role here.
+        // The service should load the user's actual roles from DB.
+        mngrVO.setAuthUuid(null);
 
         AdminLoginResult loginResult = admMainService.adminLogin(mngrVO);
 
@@ -113,11 +123,11 @@ public class AdmMainCtrl {
         }
 
         // 2. Success Case
-        SessionAdminVO sessionUserVO = loginResult.getSessionUser();
+        SessionAdminVO sessionAdminVO = loginResult.getSessionUser();
         // Use a single session key to match interceptor & header usage
-        request.getSession().setAttribute("sessionAdminVO", sessionUserVO);
+        request.getSession().setAttribute("sessionAdminVO", sessionAdminVO);
 
-        boolean isAdmin = (sessionUserVO.getAuth() != null && sessionUserVO.getAuth().contains("ADMINISTRATOR"));
+        boolean isAdmin = (sessionAdminVO.getAuth() != null && sessionAdminVO.getAuth().contains("ADMINISTRATOR"));
         String masterType = isAdmin ? "master" : "entrps";
 
         // Leave Action Trace on SysLog
@@ -130,14 +140,21 @@ public class AdmMainCtrl {
     }
 
     @RequestMapping({"/toy/admin/logout.ac"})
-    public String toyAdminLogout(HttpServletRequest request, HttpServletResponse response) {
+    public String toyAdminLogout(HttpServletRequest request, HttpServletResponse response,                                  @RequestParam(value = "reason", required = false) String reason) {
         try {
-            request.getSession().invalidate();
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.invalidate();
+            }
         } catch (Exception e) {
             LOG_DEBUG.info(e.toString());
         }
 
-        return "redirect:/toy/admin/login.do";
+        if (reason == null || reason.trim().isEmpty()) {
+            return "redirect:/toy/admin/login.do";
+        }
+
+        return "redirect:/toy/admin/login.do?reason=" + reason.trim();
     }
 
 

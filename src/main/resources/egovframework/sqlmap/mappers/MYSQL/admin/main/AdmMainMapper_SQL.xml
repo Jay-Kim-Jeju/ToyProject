@@ -27,6 +27,7 @@
         <if test="authUuid != null and authUuid != ''">
             AND TAM.AUTH_UUID = #{authUuid}
         </if>
+        ORDER BY TAM.AUTH_UUID ASC
     </select>
 
     <!-- 최종 로그인 시간 & 로그인 실패 횟수 변경 -->

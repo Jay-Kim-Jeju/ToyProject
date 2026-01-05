@@ -41,6 +41,21 @@
   <script src="${pageContext.request.contextPath}/js/common.js?jsCssVer=${jsCssVer}" ></script>
 
   <script type="text/javascript">
+
+    // Show logout message once (if any).
+    $(function () {
+      var msg = $("#logoutMessage").val();
+      if (msg) {
+        alert(msg);
+        // Prevent repeated alert on refresh by removing the query parameter.
+        if (window.history && window.history.replaceState) {
+          var url = new URL(window.location.href);
+          url.searchParams.delete("reason");
+          window.history.replaceState({}, document.title, url.toString());
+        }
+      }
+    });
+
     let returnURL = "";
 
     // i18n messages for JavaScript alerts
@@ -60,7 +75,7 @@
         return false;
       }
       if($("#pwdEncpt").val() == ""){
-        alert(MSG_ENTER_ID); // CHANGED: i18n
+        alert(MSG_ENTER_PW); // CHANGED: i18n
         $("#pwdEncpt").focus();
         return false;
       }
@@ -103,6 +118,9 @@
   </script>
 </head>
 <body style="background-image: url('${pageContext.request.contextPath}/images/admin/login/bg-img2.jpg')">
+<c:if test="${not empty logoutMessage}">
+  <input type="hidden" id="logoutMessage" value="<c:out value='${logoutMessage}'/>" />
+</c:if>
 <div id="wrapper">
   <header id="header">
     <h1><img src="${pageContext.request.contextPath}/images/admin/login/logo.png" alt="logo"></h1>
