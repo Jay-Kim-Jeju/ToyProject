@@ -102,6 +102,16 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
 
         List<String> authListAll = admMainDAO.selectAdminUserAuthList(authQueryVO);
 
+        // If the account has no active roles, do not allow login.
+        if (authListAll == null || authListAll.isEmpty()) {
+            result.setSuccess(false);
+            result.setLocked(false);
+            result.setReasonCode("NO_AUTH");
+            // Reuse an existing i18n key to avoid adding new message keys right now.
+            result.setMessageCode("admin.login.fail.noAuth");
+            return result;
+        }
+
 
         // Put full auth list into session VO for later permission checks
         sessionUserVO.setAuth(authListAll);
@@ -131,7 +141,7 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
     public void updateLoginFailCo(String mngrId) {
         this.admMainDAO.updateLoginFailCo(mngrId);
     }
-    
+
     private String formatDisplayRoleName(List<String> authListAll) {
         // Display: "<firstRole>" or "<firstRole> (and N more)"
         String first = authListAll.get(0);
