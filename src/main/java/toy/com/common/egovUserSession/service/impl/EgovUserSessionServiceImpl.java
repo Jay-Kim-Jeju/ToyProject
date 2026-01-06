@@ -12,12 +12,11 @@ public class EgovUserSessionServiceImpl implements EgovUserSessionService {
 
     @Override
     public Object getAuthenticatedAdmin() {
-        return RequestContextHolder.getRequestAttributes().getAttribute("sessionAdminVO", 1);
-    }
+        return RequestContextHolder.getRequestAttributes().getAttribute("sessionAdminVO", RequestAttributes.SCOPE_SESSION);    }
 
     @Override
     public Object getAuthenticatedNoMbr() {
-        return RequestContextHolder.getRequestAttributes().getAttribute("noMbrSession", 1);
+        return RequestContextHolder.getRequestAttributes().getAttribute("noMbrSession", RequestAttributes.SCOPE_SESSION);
     }
 
     @Override
@@ -25,15 +24,16 @@ public class EgovUserSessionServiceImpl implements EgovUserSessionService {
         if (RequestContextHolder.getRequestAttributes() == null) {
             return false;
         } else {
-            return RequestContextHolder.getRequestAttributes().getAttribute("userSession", 1) == null ? false : true;
-        }    }
+            return RequestContextHolder.getRequestAttributes().getAttribute("userSession", RequestAttributes.SCOPE_SESSION) != null;
+        }
+    }
 
     @Override
     public Boolean isAuthenticatedNoMbr() {
         if (RequestContextHolder.getRequestAttributes() == null) {
             return false;
         } else {
-            return RequestContextHolder.getRequestAttributes().getAttribute("noMbrSession", 1) == null ? false : true;
+            return RequestContextHolder.getRequestAttributes().getAttribute("noMbrSession", RequestAttributes.SCOPE_SESSION) != null;
         }
     }
 
@@ -41,20 +41,21 @@ public class EgovUserSessionServiceImpl implements EgovUserSessionService {
     public Boolean isAdminAuthenticated() {
         if (RequestContextHolder.getRequestAttributes() == null) {
             return false;
-        } else if (RequestContextHolder.getRequestAttributes().getAttribute("sessionAdminVO", 1) == null) {
+        } else if (RequestContextHolder.getRequestAttributes().getAttribute("sessionAdminVO", RequestAttributes.SCOPE_SESSION) == null) {
             return false;
         } else {
-            SessionAdminVO sessionAdminVO = (SessionAdminVO)RequestContextHolder.getRequestAttributes().getAttribute("sessionAdminVO", 1);
-            return sessionAdminVO != null && sessionAdminVO.getCheckAdmin() ? true : false;
+            SessionAdminVO sessionAdminVO = (SessionAdminVO) RequestContextHolder.getRequestAttributes()
+                    .getAttribute("sessionAdminVO", RequestAttributes.SCOPE_SESSION);
+            return sessionAdminVO != null && sessionAdminVO.getCheckAdmin();
         }
     }
 
     @Override
     public String getAdminUid() {
 
-        // If there is no request context, treat as guest.
+        // If there is no request context or session, treat as anonymous.
         if (RequestContextHolder.getRequestAttributes() == null) {
-            return "guest";
+            return "anonymous";
         } else {
             SessionAdminVO sessionAdminVO = (SessionAdminVO)RequestContextHolder
                     .getRequestAttributes()
@@ -62,11 +63,11 @@ public class EgovUserSessionServiceImpl implements EgovUserSessionService {
 
 
             if (sessionAdminVO == null ) {
-                return "guest";
+                return "anonymous";
             } else {
 
                 // Return manager UID from admin session.
-                String adminUid = "guest";
+                String adminUid = "anonymous";
                 if (sessionAdminVO != null  && EgovStringUtil.isNotEmpty(sessionAdminVO.getMngrUid())) {
                     adminUid = sessionAdminVO.getMngrUid();
                 }

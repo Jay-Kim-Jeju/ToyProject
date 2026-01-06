@@ -96,13 +96,6 @@ public class AdminAuthCtrl {
             return denyJson(resultMap);
         }
 
-        // GUEST policy: allow entering menu, but return empty data for list pages.
-        if (ToyAdminAuthUtils.isGuest()) {
-            resultMap.put("data", List.of());
-            resultMap.put("itemsCount", 0);
-            return new ModelAndView("jsonView", resultMap);
-        }
-
         PagingParamUtil.applyPagingDefaults(searchVO);
 
         PaginationInfo paginationInfo = new PaginationInfo();
@@ -137,11 +130,6 @@ public class AdminAuthCtrl {
             return denyJson(resultMap);
         }
 
-        if (ToyAdminAuthUtils.isGuest()) {
-            resultMap.put("data", List.of());
-            resultMap.put("itemsCount", 0);
-            return new ModelAndView("jsonView", resultMap);
-        }
 
         PagingParamUtil.applyPagingDefaults(searchVO);
 
@@ -175,11 +163,6 @@ public class AdminAuthCtrl {
             return denyJson(resultMap);
         }
 
-        if (ToyAdminAuthUtils.isGuest()) {
-            resultMap.put("data", List.of());
-            resultMap.put("itemsCount", 0);
-            return new ModelAndView("jsonView", resultMap);
-        }
 
         PagingParamUtil.applyPagingDefaults(searchVO);
 
@@ -266,10 +249,10 @@ public class AdminAuthCtrl {
 
         normalizeUseYn(vo);
 
-        // Block disabling default roles via update path (useYn toggle in edit row).
-        if (isDefaultRole(vo.getAuthUuid()) && "N".equals(vo.getUseYn())) {
+        // Block disabling the administrator role via update path (useYn toggle in edit row).
+        if ("ADMINISTRATOR".equalsIgnoreCase(vo.getAuthUuid()) && "N".equalsIgnoreCase(vo.getUseYn())) {
             resultMap.put("result", "Forbidden");
-            resultMap.put("errorMessage", "Default roles cannot be disabled.");
+            resultMap.put("errorMessage", "ADMINISTRATOR role cannot be disabled");
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -312,8 +295,8 @@ public class AdminAuthCtrl {
         }
 
 
-        // Prevent disabling system default roles to avoid breaking global auth behavior.
-        if ("ADMINISTRATOR".equals(vo.getAuthUuid()) || "GUEST".equals(vo.getAuthUuid())) {
+        // Prevent disabling the admin role to avoid breaking global auth behavior.
+        if ("ADMINISTRATOR".equals(vo.getAuthUuid())) {
             resultMap.put("result", "Forbidden");
             resultMap.put("errorMessage", "Default roles cannot be disabled.");
             return new ModelAndView("jsonView", resultMap);
@@ -421,8 +404,8 @@ public class AdminAuthCtrl {
 
     private ModelAndView denyJson(Map<String, Object> resultMap) {
         resultMap.put("result", "N");
-        resultMap.put("redirectUrl", "/toy/admin/login.do");
-        resultMap.put("errorMessage", "Authentication required.");
+        resultMap.put("redirectUrl", "/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN);
+        resultMap.put("errorMessage", "Permission denied.");
         return new ModelAndView("jsonView", resultMap);
     }
 
@@ -489,7 +472,4 @@ public class AdminAuthCtrl {
     }
 
 
-    private boolean isDefaultRole(String authUuid) {
-        return "ADMINISTRATOR".equals(authUuid) || "GUEST".equals(authUuid);
-    }
 }

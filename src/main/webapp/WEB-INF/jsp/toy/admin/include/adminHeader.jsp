@@ -12,7 +12,7 @@
 
 <%-- For Auth Check --%>
 <c:set var="authList" value="${sessionScope.sessionAdminVO.auth}" />
-<c:set var="canSeeAllMenus" value="${authList ne null and (authList.contains('ADMINISTRATOR') or authList.contains('GUEST'))}" />
+<c:set var="canSeeAllMenus" value="${authList ne null and authList.contains('ADMINISTRATOR')}" />
 
 
 <script type="text/javascript">
@@ -105,7 +105,7 @@
         <ul class="depth2">
 
 
-            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('menu1'))}"> <%-- Auth Check --%>
+            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('MENU1'))}"> <%-- Auth Check --%>
                 <c:if test="${menuActiveMap.adminMenu1 eq 'menu1'}">	<%-- menu1 : 1depth 메뉴 --%>
                     <li>
                         <a href="<c:url value="" />" id="menu1_menu1_menu"><i class="material-icons-outlined">video_camera_front</i>menu1</a>
@@ -113,7 +113,7 @@
                 </c:if>
             </c:if>
 
-            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('menu2'))}"> <%-- Auth Check --%>
+            <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('MENU2'))}"> <%-- Auth Check --%>
                 <c:if test="${menuActiveMap.adminMenu1 eq 'menu2'}">	<%-- menu2 : 1depth 메뉴 --%>
                     <li>
                         <a href="<c:url value="" />" id="menu2_menu2_menu"><i class="material-icons-outlined">video_camera_front</i>menu2</a>

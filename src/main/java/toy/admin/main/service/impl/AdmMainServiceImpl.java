@@ -9,13 +9,16 @@ import toy.admin.main.dao.AdmMainDAO;
 import toy.admin.main.service.AdmMainService;
 import toy.com.egov.EgovPropertiesUtils;
 import toy.com.util.CmUtil;
-import toy.com.util.ToyAdminAuthUtils;
 import toy.com.vo.common.AdminLoginResult;
 import toy.com.vo.common.SessionAdminVO;
 import toy.com.vo.system.mngr.MngrVO;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service("AdmMainService")
 @RequiredArgsConstructor
@@ -100,14 +103,14 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
         authQueryVO.setMngrUid(mngrVO.getMngrUid());
         authQueryVO.setAuthUuid(null); // IMPORTANT: fetch all roles
 
-        List<String> authListAll = admMainDAO.selectAdminUserAuthList(authQueryVO);
+        List<String> authListAllRaw = admMainDAO.selectAdminUserAuthList(authQueryVO);
+        List<String> authListAll = normalizeAuthList(authListAllRaw);
 
         // If the account has no active roles, do not allow login.
         if (authListAll == null || authListAll.isEmpty()) {
             result.setSuccess(false);
             result.setLocked(false);
             result.setReasonCode("NO_AUTH");
-            // Reuse an existing i18n key to avoid adding new message keys right now.
             result.setMessageCode("admin.login.fail.noAuth");
             return result;
         }
@@ -118,11 +121,9 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
 
 
         // Set a display-only role label for header UI (do not depend on session-based utils during login)
-        if (authListAll != null && authListAll.contains("ADMINISTRATOR")) {
+        if (authListAll.contains("ADMINISTRATOR")) {
             sessionUserVO.setDisplayRoleName("Administrator");
-        } else if (authListAll != null && authListAll.contains("GUEST")) {
-            sessionUserVO.setDisplayRoleName("Guest");
-        } else if (authListAll != null && !authListAll.isEmpty()) {
+        } else if (!authListAll.isEmpty()) {
             sessionUserVO.setDisplayRoleName(formatDisplayRoleName(authListAll));
         }
 
@@ -148,10 +149,25 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
         long distinctCount = authListAll.stream()
                 .filter(v -> v != null && !v.trim().isEmpty())
                 .map(String::trim)
+                .map(String::toUpperCase)
                 .distinct()
                 .count();
         long more = Math.max(0, distinctCount - 1);
         return (more == 0) ? first : (first + " (and " + more + " more)");
+    }
+
+    private List<String> normalizeAuthList(List<String> raw) {
+        if (raw == null) {
+            return new ArrayList<>();
+        }
+        // Normalize: trim + uppercase + distinct (preserve order)
+        return raw.stream()
+                .filter(Objects::nonNull)
+                .map(String::trim)
+                .filter(v -> !v.isEmpty())
+                .map(String::toUpperCase)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
 }

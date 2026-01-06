@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import toy.admin.system.accesslog.service.AdminAccessLogService;
+import toy.com.util.CmConstants;
 import toy.com.util.EgovStringUtil;
 import toy.com.util.PagingParamUtil;
 import toy.com.util.ToyAdminAuthUtils;
@@ -58,17 +59,11 @@ public class AdminAccessLogCtrl {
         String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
-            resultMap.put("redirectUrl", "/toy/admin/login.do");
-            resultMap.put("errorMessage", "Authentication required.");
+            resultMap.put("redirectUrl", "/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN);
+            resultMap.put("errorMessage", "Permission denied.");
             return new ModelAndView("jsonView", resultMap);
         }
 
-        // GUEST policy: allow entering the menu, but return an empty list.
-        if (ToyAdminAuthUtils.isGuest()) {
-            resultMap.put("data", java.util.Collections.emptyList());
-            resultMap.put("itemsCount", 0);
-            return new ModelAndView("jsonView", resultMap);
-        }
 
         // Permission check passed, now normalize inputs.
         PagingParamUtil.applyPagingDefaults(searchVO);

@@ -95,7 +95,7 @@ public class AdminCodeCtrl {
         String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             // Popup is an HTML view request -> redirect is the natural flow
-            return new ModelAndView(denyView); // "redirect:/toy/admin/login.do"
+            return new ModelAndView(denyView); // e.g. "redirect:/toy/admin/logout.ac?reason=FORBIDDEN"
         }
 
         //validation check
@@ -132,8 +132,8 @@ public class AdminCodeCtrl {
         String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
-            resultMap.put("redirectUrl", "/toy/admin/login.do");
-            resultMap.put("errorMessage", "Authentication required.");
+            resultMap.put("redirectUrl", "/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN);
+            resultMap.put("errorMessage", "Permission denied.");
             return new ModelAndView("jsonView", resultMap);
         }
         else{
@@ -178,8 +178,8 @@ public class AdminCodeCtrl {
         String denyView = ToyAdminAuthUtils.chkAdminCrudPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
-            resultMap.put("redirectUrl", "/toy/admin/login.do");
-            resultMap.put("errorMessage", "Authentication required.");
+            resultMap.put("redirectUrl", "/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN);
+            resultMap.put("errorMessage", "Permission denied.");
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -222,8 +222,8 @@ public class AdminCodeCtrl {
         String denyView = ToyAdminAuthUtils.chkAdminCrudPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
-            resultMap.put("redirectUrl", "/toy/admin/login.do");
-            resultMap.put("errorMessage", "Authentication required.");
+            resultMap.put("redirectUrl", "/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN);
+            resultMap.put("errorMessage", "Permission denied.");
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -274,8 +274,8 @@ public class AdminCodeCtrl {
         String denyView = ToyAdminAuthUtils.chkAdminMenuPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
-            resultMap.put("redirectUrl", "/toy/admin/login.do");
-            resultMap.put("errorMessage", "Authentication required.");
+            resultMap.put("redirectUrl", "/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN);
+            resultMap.put("errorMessage", "Permission denied.");
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -319,8 +319,8 @@ public class AdminCodeCtrl {
         String denyView = ToyAdminAuthUtils.chkAdminCrudPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
-            resultMap.put("redirectUrl", "/toy/admin/login.do");
-            resultMap.put("errorMessage", "Authentication required.");
+            resultMap.put("redirectUrl", "/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN);
+            resultMap.put("errorMessage", "Permission denied.");
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -362,8 +362,8 @@ public class AdminCodeCtrl {
         String denyView = ToyAdminAuthUtils.chkAdminCrudPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
-            resultMap.put("redirectUrl", "/toy/admin/login.do");
-            resultMap.put("errorMessage", "Authentication required.");
+            resultMap.put("redirectUrl", "/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN);
+            resultMap.put("errorMessage", "Permission denied.");
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -407,8 +407,8 @@ public class AdminCodeCtrl {
         String denyView = ToyAdminAuthUtils.chkAdminCrudPermission(MENU_ROLE);
         if (EgovStringUtil.isNotEmpty(denyView)) {
             resultMap.put("result", "N");
-            resultMap.put("redirectUrl", "/toy/admin/login.do");
-            resultMap.put("errorMessage", "Authentication required.");
+            resultMap.put("redirectUrl", "/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN);
+            resultMap.put("errorMessage", "Permission denied.");
             return new ModelAndView("jsonView", resultMap);
         }
 

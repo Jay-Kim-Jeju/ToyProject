@@ -23,7 +23,6 @@
 
     // Default roles must not be disabled to prevent breaking global auth behavior.
     var ROLE_ADMIN = "ADMINISTRATOR";
-    var ROLE_GUEST = "GUEST";
 
     // Selected authUuid (used for right grid + popup)
     var publicAuthUuid = "";
@@ -131,13 +130,12 @@
                         return;
                     }
 
-                    var isDefaultRole = (data && (data.authUuid === ROLE_ADMIN || data.authUuid === ROLE_GUEST));
                     var payload = {
                         authUuid: data.authUuid,
                         authorDc: data.authorDc,
                         // Always send Y/N (jsGrid checkbox can be boolean true/false).
-                        // Default roles must stay enabled.
-                        useYn: isDefaultRole ? "Y" : (data.useYn ? "Y" : "N")
+                        // Administrator role must stay enabled.
+                        useYn: (data && data.authUuid === ROLE_ADMIN) ? "Y" : (data.useYn ? "Y" : "N")
                     };
                     console.log("useYn typeof=", typeof data.useYn, "value=", data.useYn);
 
@@ -178,7 +176,7 @@
                     editTemplate: function(value, item) {
                         // Render checkbox and disable it for default roles.
                         var $cb = $("<input>").attr("type", "checkbox").prop("checked", value === true || value === "Y");
-                        if (item && (item.authUuid === ROLE_ADMIN || item.authUuid === ROLE_GUEST)) {
+                        if (item && item.authUuid === ROLE_ADMIN) {
                             $cb.prop("checked", true);
                             $cb.prop("disabled", true);
                         }
@@ -261,11 +259,11 @@
                                 e.stopPropagation();
                             });
 
-                        var isDefaultRole = (item && (item.authUuid === ROLE_ADMIN || item.authUuid === ROLE_GUEST));
-
-                        // Disable action for default roles (UI guard).
+                        // Disable action for administrator role (UI guard).
                         var disableBtn;
-                        if (isDefaultRole) {
+
+                        var isAdminRole = (item && item.authUuid === ROLE_ADMIN);
+                        if (isAdminRole) {
                             disableBtn = $("<a>").addClass("btn gray sm")
                                 .append("<i class=\"material-icons-outlined\">lock</i>")
                                 .append(" 비활성화")
@@ -297,7 +295,7 @@
         }
 
         // Client-side guard (server also blocks in controller).
-        if (authUuid === ROLE_ADMIN || authUuid === ROLE_GUEST) {
+        if (authUuid === ROLE_ADMIN) {
             alert("기본 권한은 비활성화할 수 없습니다.");
             return;
         }
@@ -547,4 +545,4 @@
     </main>
 </div>
 </body>
-</htmp>
+</html>

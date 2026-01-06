@@ -2,9 +2,6 @@ package toy.com.util;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.ModelAndViewDefiningException;
-import toy.com.egov.EgovUserDetailsHelper;
 import toy.com.vo.common.SessionAdminVO;
 
 import javax.servlet.http.HttpSession;
@@ -20,7 +17,6 @@ public class ToyAdminAuthUtils {
     }
 
     private static final String ROLE_ADMIN = "ADMINISTRATOR";
-    private static final String ROLE_GUEST = "GUEST";
 
 
     private static List<String> getSessionAuthList() {
@@ -31,7 +27,7 @@ public class ToyAdminAuthUtils {
         HttpSession session = attrs.getRequest().getSession(false);
         SessionAdminVO sessionAdminVO = (session != null) ? (SessionAdminVO) session.getAttribute("sessionAdminVO") : null;
         return (sessionAdminVO != null) ? sessionAdminVO.getAuth() : null;
-        // TODO: If you migrate admin auth to Spring Security later, switch this back to SecurityContext-based lookup.
+        // Note: If you migrate admin auth to Spring Security later, switch this back to SecurityContext-based lookup.
     }
 
 
@@ -64,9 +60,6 @@ public class ToyAdminAuthUtils {
         return hasAnyRole(ROLE_ADMIN);
     }
 
-    public static boolean isGuest() {
-        return hasAnyRole(ROLE_GUEST);
-    }
 
 
     public static String chkAdminMenuPermission(String auth) {
@@ -75,11 +68,6 @@ public class ToyAdminAuthUtils {
     public static String chkAdminMenuPermission(String[] authGroups) {
         // Admin can enter any menu
         if (isAdmin()) {
-            return null;
-        }
-
-        // GUEST can enter any menu (policy)
-        if (isGuest()) {
             return null;
         }
 
@@ -98,10 +86,6 @@ public class ToyAdminAuthUtils {
             return null;
         }
 
-        // Guest cannot do any mutation
-        if (isGuest()) {
-            return "redirect:/toy/admin/logout.ac?reason=" + CmConstants.LOGOUT_REASON_FORBIDDEN;
-        }
 
         // Non-admin must have the menu role
         boolean ok = hasAnyRole(menuRole);
