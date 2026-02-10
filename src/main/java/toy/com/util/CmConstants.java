@@ -6,7 +6,11 @@ public class CmConstants {
 
     public static final String ADMIN_LOGIN_URL = "/toy/login.do";
     public static final String MANAGE_LOGIN_URL = "/toy/login.do";
-    public static final String ADMIN_LOGIN_SESSION = "sessionAdminVO";
+    public static final String SESSION_ADMIN_KEY  = "sessionAdminVO";
+
+    // Core roles (system safety)
+    public static final String ROLE_ADMINISTRATOR = "ADMINISTRATOR";
+    public static final String ROLE_SYSTEM = "SYSTEM";
 
     // Result codes (service layer standard)
     public static final int RESULT_OK = 1;

@@ -16,8 +16,6 @@ public class ToyAdminAuthUtils {
         // This is a utility class; do not instantiate.
     }
 
-    private static final String ROLE_ADMIN = "ADMINISTRATOR";
-
 
     private static List<String> getSessionAuthList() {
         ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -25,7 +23,9 @@ public class ToyAdminAuthUtils {
             return null;
         }
         HttpSession session = attrs.getRequest().getSession(false);
-        SessionAdminVO sessionAdminVO = (session != null) ? (SessionAdminVO) session.getAttribute("sessionAdminVO") : null;
+        SessionAdminVO sessionAdminVO = (session != null)
+                ? (SessionAdminVO) session.getAttribute(CmConstants.SESSION_ADMIN_KEY)
+                : null;
         return (sessionAdminVO != null) ? sessionAdminVO.getAuth() : null;
         // Note: If you migrate admin auth to Spring Security later, switch this back to SecurityContext-based lookup.
     }
@@ -40,7 +40,7 @@ public class ToyAdminAuthUtils {
 
         // Defensive default: if roles are not provided, allow only ADMINISTRATOR.
         if (roles == null || roles.length == 0) {
-            return authList.contains(ROLE_ADMIN);
+            return authList.contains(CmConstants.ROLE_ADMINISTRATOR);
         }
 
         Set<String> normalizedAuth = authList.stream()
@@ -57,9 +57,8 @@ public class ToyAdminAuthUtils {
     }
 
     public static boolean isAdmin() {
-        return hasAnyRole(ROLE_ADMIN);
+        return hasAnyRole(CmConstants.ROLE_ADMINISTRATOR);
     }
-
 
 
     public static String chkAdminMenuPermission(String auth) {
@@ -73,7 +72,7 @@ public class ToyAdminAuthUtils {
 
         // If authGroups is null/empty, default to ADMINISTRATOR only (defensive).
         String[] targetGroups = (authGroups == null || authGroups.length == 0)
-                ? new String[] { ROLE_ADMIN }
+                ? new String[] { CmConstants.ROLE_ADMINISTRATOR }
                 : authGroups;
 
         boolean ok = hasAnyRole(targetGroups);

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import="toy.com.util.CmConstants" %>
 
 <%@ include file="/WEB-INF/jsp/toy/admin/include/top.jsp" %>
 
@@ -21,11 +22,16 @@
         fn_setAuthRoleJsGrid();
     });
 
-    // Default roles must not be disabled to prevent breaking global auth behavior.
-    var ROLE_ADMIN = "ADMINISTRATOR";
+    // Administrator role must not be disabled to prevent breaking global auth behavior.
+    var ROLE_ADMIN = "<%=CmConstants.ROLE_ADMINISTRATOR%>";
 
     // Selected authUuid (used for right grid + popup)
     var publicAuthUuid = "";
+
+    function normalizeAuthUuid(v) {
+        // Normalize role IDs for safe comparisons and consistent requests.
+        return (v == null) ? "" : String(v).trim().toUpperCase();
+    }
 
     function fn_setAuthRoleJsGrid() {
         $("#authRoleGrid").jsGrid({
@@ -92,6 +98,7 @@
                 },
 
                 insertItem: function(data) {
+                    data.authUuid = normalizeAuthUuid(data.authUuid);
                     if (!data.authUuid || !data.authorDc) {
                         alert("권한 아이디와 권한 설명은 필수입력값입니다.");
                         return;
@@ -122,6 +129,7 @@
                 },
 
                 updateItem: function(data) {
+                    var authUuidNorm = normalizeAuthUuid(data.authUuid);
                     if (!data.authUuid || !data.authorDc) {
                         alert("권한 아이디와 권한 설명은 필수입력값입니다.");
                         return;
@@ -131,11 +139,11 @@
                     }
 
                     var payload = {
-                        authUuid: data.authUuid,
+                        authUuid: authUuidNorm,
                         authorDc: data.authorDc,
                         // Always send Y/N (jsGrid checkbox can be boolean true/false).
                         // Administrator role must stay enabled.
-                        useYn: (data && data.authUuid === ROLE_ADMIN) ? "Y" : (data.useYn ? "Y" : "N")
+                        useYn: (authUuidNorm === ROLE_ADMIN) ? "Y" : (data.useYn ? "Y" : "N")
                     };
                     console.log("useYn typeof=", typeof data.useYn, "value=", data.useYn);
 
@@ -162,7 +170,7 @@
             },
 
             rowClick: function(args) {
-                publicAuthUuid = args.item.authUuid || "";
+                publicAuthUuid = normalizeAuthUuid(args.item.authUuid || "");
                 fn_setAssignedMngrJsGrid(publicAuthUuid);
 
                 $(".jsgrid-pick-row").removeClass("jsgrid-pick-row");
@@ -176,7 +184,7 @@
                     editTemplate: function(value, item) {
                         // Render checkbox and disable it for default roles.
                         var $cb = $("<input>").attr("type", "checkbox").prop("checked", value === true || value === "Y");
-                        if (item && item.authUuid === ROLE_ADMIN) {
+                        if (item && normalizeAuthUuid(item.authUuid) === ROLE_ADMIN) {
                             $cb.prop("checked", true);
                             $cb.prop("disabled", true);
                         }
@@ -262,7 +270,7 @@
                         // Disable action for administrator role (UI guard).
                         var disableBtn;
 
-                        var isAdminRole = (item && item.authUuid === ROLE_ADMIN);
+                        var isAdminRole = (item && normalizeAuthUuid(item.authUuid) === ROLE_ADMIN);
                         if (isAdminRole) {
                             disableBtn = $("<a>").addClass("btn gray sm")
                                 .append("<i class=\"material-icons-outlined\">lock</i>")
@@ -289,6 +297,7 @@
     }
 
     function fn_disableAuthRole(authUuid) {
+        authUuid = normalizeAuthUuid(authUuid);
         if (!authUuid) {
             alert("권한 아이디가 없습니다.");
             return;
@@ -351,6 +360,7 @@
     }
 
     function fn_setAssignedMngrJsGrid(authUuid) {
+        authUuid = normalizeAuthUuid(authUuid);
         if (!authUuid) {
             $("#assignedBox").hide();
             $("#assignedGrid").empty();

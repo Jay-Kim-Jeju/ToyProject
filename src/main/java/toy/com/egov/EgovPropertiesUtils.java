@@ -181,6 +181,19 @@ public class EgovPropertiesUtils {
 
     }
 
+    public static boolean isLocal() {
+        return "Y".equalsIgnoreCase(getOptionalProp("IS_LOCAL"));
+    }
+    public static String getOptionalPropOrDefault(String keyName, String defaultValue) {
+        String v = getOptionalProp(keyName);
+        if (v == null || v.trim().isEmpty() || "99".equals(v)) {
+            return defaultValue;
+        }
+        return v.trim();
+    }
+
+
+
     public static String getOptionalProp(String keyName) {
         String value = " EXCEPTION OCCURRED";
         value = "99";

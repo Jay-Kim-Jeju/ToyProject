@@ -22,10 +22,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import toy.admin.system.accesslog.service.AdminAccessLogService;
 import toy.admin.system.auth.service.AdminAuthService;
-import toy.com.util.CmConstants;
-import toy.com.util.EgovStringUtil;
-import toy.com.util.PagingParamUtil;
-import toy.com.util.ToyAdminAuthUtils;
+import toy.com.util.*;
 import toy.com.validation.group.ValidationGroups;
 import toy.com.vo.system.auth.AdminAuthBatchResult;
 import toy.com.vo.system.auth.AuthVO;
@@ -205,7 +202,7 @@ public class AdminAuthCtrl {
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
+            resultMap.put("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -243,7 +240,7 @@ public class AdminAuthCtrl {
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
+            resultMap.put("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -290,7 +287,7 @@ public class AdminAuthCtrl {
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
+            resultMap.put("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -378,7 +375,7 @@ public class AdminAuthCtrl {
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
+            resultMap.put("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -443,14 +440,6 @@ public class AdminAuthCtrl {
         } else {
             vo.setUseYn(null);
         }
-    }
-
-    private String firstErrorMessage(BindingResult bindingResult) {
-        // Return only the first error message to keep the response simple for UI.
-        if (bindingResult == null || !bindingResult.hasErrors()) {
-            return "";
-        }
-        return bindingResult.getAllErrors().get(0).getDefaultMessage();
     }
 
     private String buildBatchMessage(AdminAuthBatchResult batch) {

@@ -10,7 +10,6 @@
 
 
 <script src="${pageContext.request.contextPath}/js/common.js?jsCssVer=${jsCssVer}" ></script>
-<script src="${pageContext.request.contextPath}/js/comm/json2.js" ></script>
 
 
 <script type="text/javascript">

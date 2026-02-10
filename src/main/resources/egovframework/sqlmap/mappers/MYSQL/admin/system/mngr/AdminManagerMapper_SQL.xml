@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="toy.admin.system.mngr.dao.AdminManagerDAO">
+    <sql id="selectMngrListWhere">
+        <where>
+            1=1
+            <if test="mngrUid != null and mngrUid != ''">
+                AND T.MNGR_UID LIKE CONCAT('%', #{mngrUid}, '%')
+            </if>
+
+            <if test="mngrNm != null and mngrNm != ''">
+                AND T.MNGR_NM LIKE CONCAT('%', #{mngrNm}, '%')
+            </if>
+
+            <!-- New policy: if useYn is empty => show ALL. if useYn exists => filter by Y or N -->
+            <if test="useYn != null and useYn != ''">
+                AND T.USE_YN = #{useYn}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 관리자 목록 조회 (권한 적용 여부 + 활성 권한 수 포함) -->
+    <select id="selectMngrList" resultType="toy.com.vo.system.mngr.MngrVO" parameterType="toy.com.vo.system.mngr.MngrVO">
+        SELECT
+        ROW_NUMBER() OVER(
+            ORDER BY
+            CASE WHEN T.USE_YN = 'Y' THEN 0 ELSE 1 END ASC,
+            CASE WHEN IFNULL(A.ACTIVE_AUTH_CNT, 0) > 0 THEN 0 ELSE 1 END ASC,
+            T.REG_DT DESC
+        ) AS RN
+        , T.MNGR_UID
+        , T.MNGR_NM
+        , T.EML_ADRES
+        , T.TELNO
+        , T.LAST_LGN_DT
+        , T.USE_YN
+        , T.REG_DT
+        , IFNULL(A.ACTIVE_AUTH_CNT, 0) AS ACTIVE_AUTH_CNT
+        , CASE WHEN IFNULL(A.ACTIVE_AUTH_CNT, 0) > 0 THEN 'Y' ELSE 'N' END AS AUTH_APPLIED_YN
+        FROM TMNGR T
+        LEFT JOIN (
+        SELECT
+        TAM.MNGR_UID
+        , COUNT(DISTINCT TAM.AUTH_UUID) AS ACTIVE_AUTH_CNT
+        FROM TAUTH_MNGR TAM
+        INNER JOIN TAUTH TA
+        ON TA.AUTH_UUID = TAM.AUTH_UUID
+        AND TA.USE_YN = 'Y'
+        GROUP BY TAM.MNGR_UID
+        ) A
+        ON A.MNGR_UID = T.MNGR_UID
+
+        <include refid="selectMngrListWhere" />
+
+        <!-- Ordering policy:
+         1) USE_YN='Y' first
+         2) Among active, AUTH_APPLIED_YN='Y' first
+         3) Newest first
+         -->
+        ORDER BY
+            CASE WHEN T.USE_YN = 'Y' THEN 0 ELSE 1 END ASC,
+            CASE WHEN IFNULL(A.ACTIVE_AUTH_CNT, 0) > 0 THEN 0 ELSE 1 END ASC,
+            T.REG_DT DESC
+
+        LIMIT #{firstIndex}, #{recordCountPerPage}
+    </select>
+
+    <!-- 관리자 목록 카운트 -->
+    <select id="selectMngrListCount" resultType="int" parameterType="toy.com.vo.system.mngr.MngrVO">
+        SELECT COUNT(*)
+        FROM TMNGR T
+        <include refid="selectMngrListWhere" />
+    </select>
+
+    <!-- 관리자 단건 조회 -->
+    <!-- Manager detail (includes auth applied status + active auth count) -->
+    <select id="selectMngr"
+            resultType="toy.com.vo.system.mngr.MngrVO"
+            parameterType="toy.com.vo.system.mngr.MngrVO">
+        SELECT
+            T.MNGR_UID
+             , T.MNGR_NM
+             , T.EML_ADRES
+             , T.TELNO
+             , T.LGN_FAILR_NUMTM
+             , T.LAST_LGN_DT
+             , T.USE_YN
+             , T.REG_DT
+             , T.REG_UID
+             , T.MDFCN_UID
+             , T.MDFCN_DT
+             , IFNULL(A.ACTIVE_AUTH_CNT, 0) AS ACTIVE_AUTH_CNT
+             , CASE WHEN IFNULL(A.ACTIVE_AUTH_CNT, 0) > 0 THEN 'Y' ELSE 'N' END AS AUTH_APPLIED_YN
+        FROM TMNGR T
+                 LEFT JOIN (
+            SELECT
+                TAM.MNGR_UID
+                 , COUNT(DISTINCT TAM.AUTH_UUID) AS ACTIVE_AUTH_CNT
+            FROM TAUTH_MNGR TAM
+                     INNER JOIN TAUTH TA
+                                ON TA.AUTH_UUID = TAM.AUTH_UUID
+                                    AND TA.USE_YN = 'Y'
+            GROUP BY TAM.MNGR_UID
+        ) A
+                           ON A.MNGR_UID = T.MNGR_UID
+        WHERE T.MNGR_UID = #{mngrUid}
+    </select>
+
+
+    <!-- 관리자 등록 -->
+    <insert id="insertMngr" parameterType="toy.com.vo.system.mngr.MngrVO">
+        INSERT INTO TMNGR (
+                            MNGR_UID
+                          , PWD_ENCPT
+                          , MNGR_NM
+                          , EML_ADRES
+                          , TELNO
+                          , REG_DT
+                          , REG_UID
+                          , USE_YN
+        ) VALUES (
+                   #{mngrUid}
+                 , #{pwdEncpt}
+                 , #{mngrNm}
+                 , #{emlAdres}
+                 , #{telno}
+                 , NOW()
+                 , #{regUid}
+                 , IFNULL(#{useYn}, 'Y')
+                 )
+    </insert>
+
+    <!-- 관리자 정보 수정 -->
+    <update id="updateMngr" parameterType="toy.com.vo.system.mngr.MngrVO">
+        UPDATE TMNGR
+        SET
+            MNGR_NM   = #{mngrNm}
+          , EML_ADRES = #{emlAdres}
+          , TELNO = #{telno}
+          , USE_YN    = #{useYn}
+          , MDFCN_DT  = NOW()
+          , MDFCN_UID = #{mdfcnUid}
+        WHERE MNGR_UID = #{mngrUid}
+    </update>
+
+    <!-- 소프트삭제 (USE_YN='N') -->
+    <update id="softDeleteMngr" parameterType="toy.com.vo.system.mngr.MngrVO">
+        UPDATE TMNGR
+        SET
+            USE_YN    = 'N'
+          , MDFCN_DT  = NOW()
+          , MDFCN_UID = #{mdfcnUid}
+        WHERE MNGR_UID = #{mngrUid}
+    </update>
+
+
+    <!-- 비밀번호 변경 -->
+    <update id="updateMngrChangePassword" parameterType="toy.com.vo.system.mngr.MngrVO">
+        UPDATE TMNGR
+        SET
+            PWD_ENCPT = #{pwdEncpt}
+          , MDFCN_DT  = NOW()
+          , MDFCN_UID = #{mdfcnUid}
+        WHERE MNGR_UID = #{mngrUid}
+    </update>
+
+    <!-- 중복 아이디 확인 -->
+    <select id="selectMngrByUserId" resultType="toy.com.vo.system.mngr.MngrVO" parameterType="toy.com.vo.system.mngr.MngrVO">
+        SELECT
+            MNGR_UID
+             , USE_YN
+        FROM TMNGR
+        WHERE MNGR_UID = #{mngrUid}
+    </select>
+</mapper>

@@ -749,17 +749,21 @@ function gfn_chkImgByIdMsg(id, Msg) {
     return true;
 }
 
-// 비밀번호 규칙 : 영문 대/소문자, 숫자, 특수문자 조합 10자리 이상
+// Password policy:
+// - At least 8 characters
+// - Must include: uppercase, lowercase, digit, special character (each at least one)
+// - No spaces
 function gfn_checkPassword(str){
-    var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{10,}$/; // a-z A-Z 0-9 특수문자 중에 10자리 이상
+    // Special chars allowed: $`~!@$!%*#^?&()\-_=+
+    var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,}$/;
 
     if (gfn_chkSpace(str) == false) {
-        alert("비밀번호에 공백을 사용할 수 없습니다.");
+        alert("Password cannot contain spaces.");
         return false;
     }
 
-    if(reg.test(str) == false) {
-        alert("비밀번호는 영문대문자+영문소문자+숫자+특수문자 조합으로 10자리 이상이어야합니다.");
+    if (reg.test(str) == false) {
+        alert("Password must be at least 8 characters and include uppercase, lowercase, number, and special character.");
         return false;
     }
 

@@ -56,6 +56,31 @@ table tr td .loding-content {border-width: 0; min-height: 400px; padding: 100px 
 .msg-wrap .btn-center .btn {min-width: 100px !important; line-height: 45px !important;}
 
 
+/* Disabled state for <a class="btn"> */
+a.btn.btn-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Verified badge */
+.badge-verified {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+    background: #16a34a;
+    color: #ffffff;
+}
+
+.badge-muted {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+    background: #e5e7eb;
+    color: #374151;
+}
+
 
 /* Loading Bar */
 .loading-bar {

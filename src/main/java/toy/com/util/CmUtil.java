@@ -31,6 +31,55 @@ import org.json.JSONArray;
 public class CmUtil {
     private static final Logger LOG_DEBUG = LoggerFactory.getLogger(CmUtil.class);
 
+    public static String generateRandomPassword() {
+        final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        final String lower = "abcdefghijklmnopqrstuvwxyz";
+        final String digit = "0123456789";
+        final String special = "!@#$%^&*()-_=+[]{};:,.?/";
+        final String all = upper + lower + digit + special;
+        java.security.SecureRandom random = new java.security.SecureRandom();
+        char[] pwd = new char[8];
+        pwd[0] = upper.charAt(random.nextInt(upper.length()));
+        pwd[1] = lower.charAt(random.nextInt(lower.length()));
+        pwd[2] = digit.charAt(random.nextInt(digit.length()));
+        pwd[3] = special.charAt(random.nextInt(special.length()));
+        for (int i = 4; i < pwd.length; i++) {
+            pwd[i] = all.charAt(random.nextInt(all.length()));
+        }
+        // Shuffle (Fisher-Yates)
+        for (int i = pwd.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            char tmp = pwd[i];
+            pwd[i] = pwd[j];
+            pwd[j] = tmp;
+        }
+        return new String(pwd);
+    }
+
+
+    public static boolean isPasswordValid(String rawPwd) {
+        if (rawPwd == null) {
+            return false;
+        }
+        String pwd = rawPwd.trim();
+        if (pwd.isEmpty()) {
+            return false;
+        }
+        // Disallow whitespace inside password
+        if (pwd.matches(".*\\s+.*")) {
+            return false;
+        }
+        // Minimum length
+        if (pwd.length() < 8) {
+            return false;
+        }
+        boolean hasUpper = pwd.matches(".*[A-Z].*");
+        boolean hasLower = pwd.matches(".*[a-z].*");
+        boolean hasDigit = pwd.matches(".*\\d.*");
+        boolean hasSpecial = pwd.matches(".*[^A-Za-z0-9].*");
+        return hasUpper && hasLower && hasDigit && hasSpecial;
+    }
+
     public static String encryptPassword(String password, String id) throws Exception {
         if (password == null) {
             return "";

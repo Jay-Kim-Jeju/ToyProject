@@ -15,10 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import toy.admin.system.accesslog.service.AdminAccessLogService;
 import toy.admin.system.code.service.AdminCodeService;
 import toy.com.common.common.service.CommonService;
-import toy.com.util.CmConstants;
-import toy.com.util.EgovStringUtil;
-import toy.com.util.PagingParamUtil;
-import toy.com.util.ToyAdminAuthUtils;
+import toy.com.util.*;
 import toy.com.vo.system.code.CdGrpVO;
 import toy.com.vo.system.code.CdVO;
 import toy.com.validation.group.ValidationGroups;
@@ -102,7 +99,7 @@ public class AdminCodeCtrl {
         ModelAndView mv = new ModelAndView("admin/system/code/detailPopCode");
         if (bindingResult.hasErrors()) {
             mv.addObject("result", "N");
-            mv.addObject("errorMessage", firstErrorMessage(bindingResult));
+            mv.addObject("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return mv;
         }
 
@@ -186,7 +183,7 @@ public class AdminCodeCtrl {
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
+            resultMap.put("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -230,7 +227,7 @@ public class AdminCodeCtrl {
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
+            resultMap.put("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -281,7 +278,7 @@ public class AdminCodeCtrl {
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
+            resultMap.put("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -327,7 +324,7 @@ public class AdminCodeCtrl {
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
+            resultMap.put("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -370,7 +367,7 @@ public class AdminCodeCtrl {
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
+            resultMap.put("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -414,7 +411,7 @@ public class AdminCodeCtrl {
 
         if (bindingResult.hasErrors()) {
             resultMap.put("result", "N");
-            resultMap.put("errorMessage", firstErrorMessage(bindingResult));
+            resultMap.put("errorMessage", BindingResultUtil.firstErrorMessage(bindingResult));
             return new ModelAndView("jsonView", resultMap);
         }
 
@@ -480,13 +477,6 @@ public class AdminCodeCtrl {
         }
     }
 
-    private String firstErrorMessage(BindingResult bindingResult) {
-        // Return only the first error message to keep the response simple for UI.
-        if (bindingResult == null || !bindingResult.hasErrors()) {
-            return "";
-        }
-        return bindingResult.getAllErrors().get(0).getDefaultMessage();
-    }
 
     // Controller-level manual validations removed (replaced by Bean Validation groups)
 

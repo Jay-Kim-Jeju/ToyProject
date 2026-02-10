@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="toy.admin.my.dao.AdmMyMngrDAO">
+
+    <!-- My Account - Detail -->
+    <select id="selectMyMngrDetail" parameterType="string" resultType="toy.com.vo.system.mngr.MngrVO">
+        SELECT
+            MNGR_UID
+             , MNGR_NM
+             , EML_ADRES
+             , TELNO
+             , LAST_LGN_DT
+             , USE_YN
+             , REG_DT
+             , REG_UID
+             , MDFCN_DT
+             , MDFCN_UID
+        FROM TMNGR
+        WHERE MNGR_UID = #{mngrUid}
+    </select>
+
+    <!-- My Account - Password (encrypted) -->
+    <select id="selectMyPwdEncpt" parameterType="string" resultType="string">
+        SELECT PWD_ENCPT
+        FROM TMNGR
+        WHERE MNGR_UID = #{mngrUid}
+          AND USE_YN = 'Y'
+    </select>
+
+    <!-- My Account - Update info (no useYn) -->
+    <update id="updateMyMngrInfo" parameterType="toy.com.vo.system.mngr.MngrVO">
+        UPDATE TMNGR
+        SET
+            MNGR_NM   = #{mngrNm}
+          , EML_ADRES = #{emlAdres}
+          , MDFCN_DT  = NOW()
+          , MDFCN_UID = #{mdfcnUid}
+        WHERE MNGR_UID = #{mngrUid}
+          AND USE_YN = 'Y'
+    </update>
+
+    <!-- My Account - Change password -->
+    <update id="updateMyPassword" parameterType="map">
+        UPDATE TMNGR
+        SET
+            PWD_ENCPT = #{pwdEncpt}
+          , MDFCN_DT  = NOW()
+          , MDFCN_UID = #{mdfcnUid}
+        WHERE MNGR_UID = #{mngrUid}
+          AND USE_YN = 'Y'
+    </update>
+</mapper>

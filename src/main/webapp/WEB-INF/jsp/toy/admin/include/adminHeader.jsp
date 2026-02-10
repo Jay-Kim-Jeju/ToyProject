@@ -55,7 +55,7 @@
                     <li id="system_menu">
                         <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" class="drop"><spring:message code="admin.header.menu.system" /></a> <%-- CHANGED: i18n --%>
                         <ul class="depth2">
-                            <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.mngr" /></a></li>
+                            <li><a href="<c:url value='/toy/admin/sys/mngr/list.do' />"><spring:message code="admin.header.menu.system.mngr" /></a></li>
                             <li><a href="<c:url value='/toy/admin/sys/auth/role/list.do' />"><spring:message code="admin.header.menu.system.auth" /></a></li>
                             <li><a href="<c:url value='/toy/admin/sys/code/grp/list.do' />"><spring:message code="admin.header.menu.system.code" /></a></li>
                             <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.allowIp" /></a></li>
@@ -75,7 +75,7 @@
     <div class="global">
         <div class="login-info">
             <div class="profile">
-                <a href="javascript:window.open('<c:url value="" />','detailMber', 'width=1000,height=440');">
+                <a href="javascript:window.open('<c:url value="/toy/admin/my/detailPopMngr.do" />','myDetailPopMngr', 'width=570,height=320');">
                     <div class="photo" style="background-image: url('${pageContext.request.contextPath}/images/admin/frame/profile.png')"></div>
                     <span class="setting"><i class="material-icons-outlined">settings</i><spring:message code="admin.header.profile.account" />
 </span>
@@ -87,7 +87,8 @@
             </ul>
         </div>
         <nav class="flex wp100 px-10">
-            <a href="/" class="site wp100" target="_blank"><i class="material-icons-outlined">home</i>
+            <a href="/" class="site wp100" target="_blank">
+                <i class="material-icons-outlined">home</i>
                 <span class="text">
                     <spring:message code="admin.header.openSite" />
                 </span>
@@ -125,7 +126,7 @@
             <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('SYSTEM'))}"> <%-- Auth Check --%>
                 <c:if test="${menuActiveMap.adminMenu1 eq 'system'}">	<%-- 시스템설정 : 1depth 메뉴 --%>
                     <li>
-                        <a href="<c:url value="" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>                                              <%-- └─ 관리자 : 2depth 메뉴 --%>
+                        <a href="<c:url value="/toy/admin/sys/mngr/list.do" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>                                              <%-- └─ 관리자 : 2depth 메뉴 --%>
                     </li>
                     <li>
                         <a href="<c:url value="/toy/admin/sys/auth/role/list.do" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i>권한관리</a>  <%-- └─ 권한 : 2depth 메뉴 --%>
