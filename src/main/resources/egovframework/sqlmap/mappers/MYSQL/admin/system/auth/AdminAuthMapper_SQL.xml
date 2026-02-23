@@ -218,4 +218,29 @@
           AND MNGR_UID  = #{mngrUid}
     </delete>
 
+    <!-- =========================
+    Auth Guard (Minimal) - Digest for forced logout on auth change         ========================= -->
+    <select id="selectAdminAuthGuard" parameterType="string" resultType="AdminAuthGuardVO">
+        SELECT
+            TM.MNGR_UID AS mngrUid,
+            TRIM(TM.USE_YN) AS mngrUseYn,
+            COALESCE(
+                        MD5(GROUP_CONCAT(DISTINCT TA.AUTH_UUID ORDER BY TA.AUTH_UUID SEPARATOR ',')),
+                        ''
+            ) AS authDigest,
+            COALESCE(
+                        GROUP_CONCAT(DISTINCT TA.AUTH_UUID ORDER BY TA.AUTH_UUID SEPARATOR ','),
+                        ''
+            ) AS debugAuthConcat,
+            COUNT(DISTINCT TA.AUTH_UUID) AS authCnt
+        FROM TMNGR TM
+        LEFT JOIN TAUTH_MNGR TAM
+            ON TAM.MNGR_UID = TM.MNGR_UID
+        LEFT JOIN TAUTH TA
+            ON TA.AUTH_UUID = TAM.AUTH_UUID
+            AND TA.USE_YN = 'Y'
+        WHERE TM.MNGR_UID = #{mngrUid}
+        GROUP BY TM.MNGR_UID, TM.USE_YN
+    </select>
+
 </mapper>

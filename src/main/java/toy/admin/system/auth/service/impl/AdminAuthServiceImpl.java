@@ -10,6 +10,7 @@ import toy.admin.system.auth.service.AdminAuthService;
 import toy.com.egov.EgovUserDetailsHelper;
 import toy.com.util.CmConstants;
 import toy.com.vo.system.auth.AdminAuthBatchResult;
+import toy.com.vo.system.auth.AdminAuthGuardVO;
 import toy.com.vo.system.auth.AuthVO;
 import toy.com.vo.system.mngr.MngrVO;
 
@@ -86,6 +87,15 @@ public class AdminAuthServiceImpl implements AdminAuthService {
             return CmConstants.RESULT_FAIL;
         }
     }
+
+    /* =========================
+     * Auth Guard (Session Revalidation)
+     * ========================= */
+    @Override
+    public AdminAuthGuardVO selectAdminAuthGuard(String mngrUid) throws Exception {
+        return admAuthDAO.selectAdminAuthGuard(mngrUid);
+    }
+
 
     /* =========================
      * Auth Assignment (TAUTH_MNGR)

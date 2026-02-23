@@ -8,6 +8,10 @@ public class CmConstants {
     public static final String MANAGE_LOGIN_URL = "/toy/login.do";
     public static final String SESSION_ADMIN_KEY  = "sessionAdminVO";
 
+    // Auth Guard session keys (do not store inside SessionAdminVO)
+    public static final String SESSION_AUTH_GUARD_DIGEST = "adminAuthGuardDigest";
+    public static final String SESSION_AUTH_GUARD_LAST_CHK_AT = "adminAuthGuardLastChkAt";
+
     // Core roles (system safety)
     public static final String ROLE_ADMINISTRATOR = "ADMINISTRATOR";
     public static final String ROLE_SYSTEM = "SYSTEM";
@@ -19,10 +23,13 @@ public class CmConstants {
     public static final int RESULT_INVALID = -2;
     public static final int RESULT_FORBIDDEN = -3;
 
+    // Auth guard TTL for *.do (view) requests
+    public static final long AUTH_GUARD_TTL_VIEW_MS = 10L * 1000L;
+
     // Admin logout reasons
     public static final String LOGOUT_REASON_FORBIDDEN = "FORBIDDEN";
     public static final String LOGOUT_REASON_REVOKED = "REVOKED";
     public static final String LOGOUT_REASON_DISABLED = "DISABLED";
     public static final String LOGOUT_REASON_EXPIRED = "EXPIRED";
-
+    public static final String LOGOUT_REASON_AUTH_CHANGED = "AUTH_CHANGED";
 }

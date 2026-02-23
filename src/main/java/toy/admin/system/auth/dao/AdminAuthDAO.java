@@ -2,8 +2,10 @@ package toy.admin.system.auth.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
+import toy.com.vo.system.auth.AdminAuthGuardVO;
 import toy.com.vo.system.auth.AuthVO;
 import toy.com.vo.system.mngr.MngrVO;
+
 
 import java.util.List;
 
@@ -46,4 +48,9 @@ public interface AdminAuthDAO {
 
     int deleteAdminAuthMngr(@Param("authUuid") String authUuid,
                             @Param("mngrUid") String mngrUid);
+
+    /* =========================
+     * Auth Guard (session revocation) - Auth change detection
+     * ========================= */
+    AdminAuthGuardVO selectAdminAuthGuard(@Param("mngrUid") String mngrUid);
 }

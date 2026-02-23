@@ -87,6 +87,10 @@ function adddash(gap, a1, a2) {
  * @param error
  */
 function fn_AjaxError(request, status, error, loginPath){
+    if (fn_HandleAdminAuthRedirect(request, loginPath)) {
+        return;
+    }
+
     if (request.status == "510"){
         alert(msgMap.get('string.errorOccurredLoginSessionExpired'));	/*에러가 발생했습니다. 로그인세션이 만료되었습니다.*/
         location.replace(loginPath);
@@ -97,6 +101,44 @@ function fn_AjaxError(request, status, error, loginPath){
     // alert("시스템 오류\n관리자에게 문의해주세요." );
 
     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+}
+
+function fn_HandleAdminAuthRedirect(request, loginPath) {
+    if (!request) {
+        return false;
+    }
+
+    var statusCode = Number(request.status || 0);
+    if (statusCode !== 401 && statusCode !== 403) {
+        return false;
+    }
+
+    var res = null;
+    if (request.responseJSON && typeof request.responseJSON === "object") {
+        res = request.responseJSON;
+    } else if (request.responseText) {
+        try {
+            res = JSON.parse(request.responseText);
+        } catch (e) {
+            res = null;
+        }
+    }
+
+    if (!res || !res.redirectUrl) {
+        return false;
+    }
+
+    var reason = ((res.reason || "") + "").toUpperCase();
+    if (reason === "LOGIN_REQUIRED") {
+        alert("로그인 세션이 만료되었거나 로그인이 필요합니다.");
+    } else if (reason === "AUTH_CHANGED") {
+        alert("권한 정보가 변경되어 다시 로그인합니다.");
+    } else if (reason === "FORBIDDEN") {
+        alert("해당 기능에 대한 권한이 없습니다.");
+    }
+
+    location.replace(res.redirectUrl || loginPath);
+    return true;
 }
 
 /**
@@ -141,6 +183,10 @@ function fn_AjaxError(request, status, error, loginPath){
  * @param error
  */
 function fn_AjaxErrorAdmin(request, status, error){
+    if (fn_HandleAdminAuthRedirect(request)) {
+        return;
+    }
+
     if(request.status == "500"){
         alert("로그인 정보가 없습니다. 로그인 후 진행하시기 바랍니다.");
         //location.reload(true);
@@ -1070,5 +1116,4 @@ function fn_chkOS(){
 
     return hw;
 }
-
 

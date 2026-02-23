@@ -1,6 +1,7 @@
 package toy.admin.system.auth.service;
 
 import toy.com.util.CmConstants;
+import toy.com.vo.system.auth.AdminAuthGuardVO;
 import toy.com.vo.system.auth.AdminAuthBatchResult;
 import toy.com.vo.system.auth.AuthVO;
 import toy.com.vo.system.mngr.MngrVO;
@@ -41,4 +42,9 @@ public interface AdminAuthService {
     int deleteAdminAuthMngr(String authUuid, String mngrUid) throws Exception;
 
     AdminAuthBatchResult insertAdminAuthMngrList(String authUuid, List<String> mngrUidList) throws Exception;
+
+    /* =========================
+     * Auth Guard (Session Revalidation)
+     * ========================= */
+    AdminAuthGuardVO selectAdminAuthGuard(String mngrUid) throws Exception;
 }
