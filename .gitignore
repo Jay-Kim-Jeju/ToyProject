@@ -47,3 +47,6 @@ build/
 # 설정파일 백업
 *.bak
 *.swp
+
+# IntelliJ run configurations
+.run/
