@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import toy.admin.main.dao.AdmMainDAO;
 import toy.admin.main.service.AdmMainService;
+import toy.admin.system.allow.service.AdminAllowIpService;
 import toy.com.egov.EgovPropertiesUtils;
 import toy.com.util.CmUtil;
 import toy.com.vo.common.AdminLoginResult;
@@ -28,8 +29,9 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
 
     @Resource(name = "AdmMainDAO")
     private final AdmMainDAO admMainDAO;
+    private final AdminAllowIpService adminAllowIpService;
 
-    public AdminLoginResult adminLogin(MngrVO mngrVO) throws Exception {
+    public AdminLoginResult adminLogin(MngrVO mngrVO, String accessIp) throws Exception {
         AdminLoginResult result = new AdminLoginResult();
 
         // 1) Load account (TMNGR) only (no auth join here)
@@ -112,6 +114,20 @@ public class AdmMainServiceImpl extends EgovAbstractServiceImpl implements AdmMa
             result.setLocked(false);
             result.setReasonCode("NO_AUTH");
             result.setMessageCode("admin.login.fail.noAuth");
+            return result;
+        }
+
+        // 5-1) Allow IP policy check (phase-1 policy)
+        // Rule: if a manager has effective allow-IP rows, only matching IP can log in.
+        //       if no allow-IP rows exist, login is allowed.
+        boolean allowIpOk = adminAllowIpService.isAllowedLoginIp(sessionUserVO.getMngrUid(), accessIp);
+        if (!allowIpOk) {
+            LOG_DEBUG.info("Admin login blocked by allow-ip policy. mngrUid={}, accessIp={}",
+                    sessionUserVO.getMngrUid(), accessIp);
+            result.setSuccess(false);
+            result.setLocked(false);
+            result.setReasonCode("ALLOW_IP_DENIED");
+            result.setMessageCode("admin.login.fail.allowIpDenied");
             return result;
         }
 

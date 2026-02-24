@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="toy.admin.system.allow.dao.AdminAllowIpDAO">
+
+    <!-- =========================
+         Common WHERE (List/Search)
+         ========================= -->
+    <sql id="whereSelectAdminAllowIp">
+        <where>
+            1=1
+            <if test="allowIp != null and allowIp != ''">
+                AND A.ALLOW_IP LIKE CONCAT('%', #{allowIp}, '%')
+            </if>
+            <if test="mngrUid != null and mngrUid != ''">
+                AND A.MNGR_UID LIKE CONCAT('%', #{mngrUid}, '%')
+            </if>
+            <if test="useYn != null and useYn != ''">
+                AND A.USE_YN = #{useYn}
+            </if>
+        </where>
+    </sql>
+
+    <!-- =========================
+         List / Count / Detail
+         ========================= -->
+    <select id="selectAdminAllowIpList"
+            parameterType="toy.com.vo.system.allow.AdminAllowIpVO"
+            resultType="toy.com.vo.system.allow.AdminAllowIpVO">
+        SELECT
+              A.ALLOW_IP_UUID AS allowIpUuid
+            , A.MNGR_UID      AS mngrUid
+            , A.ALLOW_IP      AS allowIp
+            , A.CIDR_PREFIX   AS cidrPrefix
+            , TRIM(A.USE_YN)  AS useYn
+            , A.START_DT      AS startDt
+            , A.END_DT        AS endDt
+            , A.MEMO          AS memo
+            , A.REG_DT        AS regDt
+            , A.REG_UID       AS regUid
+            , A.MDFCN_DT      AS mdfcnDt
+            , A.MDFCN_UID     AS mdfcnUid
+        FROM TADM_ALLOW_IP A
+        <include refid="whereSelectAdminAllowIp" />
+        ORDER BY A.REG_DT DESC
+        LIMIT #{firstIndex}, #{recordCountPerPage}
+    </select>
+
+    <select id="selectAdminAllowIpListCnt"
+            parameterType="toy.com.vo.system.allow.AdminAllowIpVO"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM TADM_ALLOW_IP A
+        <include refid="whereSelectAdminAllowIp" />
+    </select>
+
+    <select id="selectAdminAllowIpDetail"
+            parameterType="string"
+            resultType="toy.com.vo.system.allow.AdminAllowIpVO">
+        SELECT
+              A.ALLOW_IP_UUID AS allowIpUuid
+            , A.MNGR_UID      AS mngrUid
+            , A.ALLOW_IP      AS allowIp
+            , A.CIDR_PREFIX   AS cidrPrefix
+            , TRIM(A.USE_YN)  AS useYn
+            , A.START_DT      AS startDt
+            , A.END_DT        AS endDt
+            , A.MEMO          AS memo
+            , A.REG_DT        AS regDt
+            , A.REG_UID       AS regUid
+            , A.MDFCN_DT      AS mdfcnDt
+            , A.MDFCN_UID     AS mdfcnUid
+        FROM TADM_ALLOW_IP A
+        WHERE A.ALLOW_IP_UUID = #{allowIpUuid}
+    </select>
+
+    <!-- =========================
+         Create / Update / Soft Delete
+         ========================= -->
+    <insert id="insertAdminAllowIp"
+            parameterType="toy.com.vo.system.allow.AdminAllowIpVO">
+        INSERT INTO TADM_ALLOW_IP (
+              ALLOW_IP_UUID
+            , MNGR_UID
+            , ALLOW_IP
+            , CIDR_PREFIX
+            , USE_YN
+            , START_DT
+            , END_DT
+            , MEMO
+            , REG_DT
+            , REG_UID
+        ) VALUES (
+              #{allowIpUuid}
+            , #{mngrUid}
+            , #{allowIp}
+            , #{cidrPrefix}
+            , IFNULL(#{useYn}, 'Y')
+            , <choose>
+                <when test="startDt != null and startDt != ''">
+                    STR_TO_DATE(#{startDt}, '%Y-%m-%d %H:%i:%s')
+                </when>
+                <otherwise>NULL</otherwise>
+              </choose>
+            , <choose>
+                <when test="endDt != null and endDt != ''">
+                    STR_TO_DATE(#{endDt}, '%Y-%m-%d %H:%i:%s')
+                </when>
+                <otherwise>NULL</otherwise>
+              </choose>
+            , #{memo}
+            , NOW()
+            , #{regUid}
+        )
+    </insert>
+
+    <!--
+      ALLOW_IP/CIDR_PREFIX는 변경 금지 정책.
+      대상 관리자(MNGR_UID), 메타 정보만 수정 가능.
+    -->
+    <update id="updateAdminAllowIpMeta"
+            parameterType="toy.com.vo.system.allow.AdminAllowIpVO">
+        UPDATE TADM_ALLOW_IP
+        SET
+              MNGR_UID = #{mngrUid}
+            , USE_YN = #{useYn}
+            , START_DT = <choose>
+                <when test="startDt != null and startDt != ''">
+                    STR_TO_DATE(#{startDt}, '%Y-%m-%d %H:%i:%s')
+                </when>
+                <otherwise>NULL</otherwise>
+              </choose>
+            , END_DT = <choose>
+                <when test="endDt != null and endDt != ''">
+                    STR_TO_DATE(#{endDt}, '%Y-%m-%d %H:%i:%s')
+                </when>
+                <otherwise>NULL</otherwise>
+              </choose>
+            , MEMO = #{memo}
+            , MDFCN_DT = NOW()
+            , MDFCN_UID = #{mdfcnUid}
+        WHERE ALLOW_IP_UUID = #{allowIpUuid}
+    </update>
+
+    <update id="softDeleteAdminAllowIp"
+            parameterType="toy.com.vo.system.allow.AdminAllowIpVO">
+        UPDATE TADM_ALLOW_IP
+        SET
+              USE_YN = 'N'
+            , MDFCN_DT = NOW()
+            , MDFCN_UID = #{mdfcnUid}
+        WHERE ALLOW_IP_UUID = #{allowIpUuid}
+    </update>
+
+    <!-- =========================
+         Validation / Duplicate checks
+         ========================= -->
+    <select id="selectExistsMngrUid"
+            parameterType="string"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM TMNGR
+        WHERE MNGR_UID = #{mngrUid}
+    </select>
+
+    <!-- 활성 데이터 기준 중복 검사 (등록/수정 시) -->
+    <select id="selectActiveDuplicateAllowIpCount"
+            parameterType="toy.com.vo.system.allow.AdminAllowIpVO"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM TADM_ALLOW_IP A
+        WHERE A.MNGR_UID = #{mngrUid}
+          AND A.ALLOW_IP = #{allowIp}
+          AND IFNULL(A.CIDR_PREFIX, -1) = IFNULL(#{cidrPrefix}, -1)
+          AND A.USE_YN = 'Y'
+          <if test="allowIpUuid != null and allowIpUuid != ''">
+              AND A.ALLOW_IP_UUID &lt;&gt; #{allowIpUuid}
+          </if>
+    </select>
+
+    <!-- 동일 Tuple의 모든 상태 조회 (soft delete 이후 재등록 정책 점검용) -->
+    <select id="selectAnyDuplicateAllowIpCount"
+            parameterType="toy.com.vo.system.allow.AdminAllowIpVO"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM TADM_ALLOW_IP A
+        WHERE A.MNGR_UID = #{mngrUid}
+          AND A.ALLOW_IP = #{allowIp}
+          AND IFNULL(A.CIDR_PREFIX, -1) = IFNULL(#{cidrPrefix}, -1)
+          <if test="allowIpUuid != null and allowIpUuid != ''">
+              AND A.ALLOW_IP_UUID &lt;&gt; #{allowIpUuid}
+          </if>
+    </select>
+
+    <!-- =========================
+         Login allow checks (service/interceptor helper)
+         정책: 유효 등록이 있을 때만 강제
+         ========================= -->
+    <select id="selectEffectiveAllowIpCountByMngrUid"
+            parameterType="string"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM TADM_ALLOW_IP A
+        WHERE A.MNGR_UID = #{mngrUid}
+          AND A.USE_YN = 'Y'
+          AND (A.START_DT IS NULL OR A.START_DT &lt;= NOW())
+          AND (A.END_DT IS NULL OR A.END_DT &gt;= NOW())
+    </select>
+
+    <select id="selectEffectiveAllowIpMatchCount"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM TADM_ALLOW_IP A
+        WHERE A.MNGR_UID = #{mngrUid}
+          AND A.ALLOW_IP = #{accessIp}
+          AND A.USE_YN = 'Y'
+          AND (A.START_DT IS NULL OR A.START_DT &lt;= NOW())
+          AND (A.END_DT IS NULL OR A.END_DT &gt;= NOW())
+    </select>
+
+</mapper>

@@ -58,7 +58,7 @@
                             <li><a href="<c:url value='/toy/admin/sys/mngr/list.do' />"><spring:message code="admin.header.menu.system.mngr" /></a></li>
                             <li><a href="<c:url value='/toy/admin/sys/auth/role/list.do' />"><spring:message code="admin.header.menu.system.auth" /></a></li>
                             <li><a href="<c:url value='/toy/admin/sys/code/grp/list.do' />"><spring:message code="admin.header.menu.system.code" /></a></li>
-                            <li><a href="<c:url value='' />"><spring:message code="admin.header.menu.system.allowIp" /></a></li>
+                            <li><a href="<c:url value="/toy/admin/sys/allow/list.do" />"><spring:message code="admin.header.menu.system.allowIp" /></a></li>
                             <li><a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />"><spring:message code="admin.header.menu.system.log" /></a></li>
                         </ul>
                     </li>
@@ -135,7 +135,7 @@
                         <a href="<c:url value="/toy/admin/sys/code/grp/list.do" />" id="system_code_menu"><i class="material-icons-outlined">apps</i>코드관리</a>   <%-- └─ 코드 : 2depth 메뉴 --%>
                     </li>
                     <li>
-                        <a href="" id=""><i class="material-icons-outlined">apps</i>접속허용IP 관리</a>
+                        <a href="<c:url value="/toy/admin/sys/allow/list.do" />" id="system_auth_menu"><i class="material-icons-outlined">apps</i>접속허용IP 관리</a>
                     </li>                                                       <%-- └─ 접속허용IP : 2depth 메뉴 --%>
                     <li>
                         <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accesslog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a> <%-- └─ 접속이력조회 : 2depth 메뉴 --%>

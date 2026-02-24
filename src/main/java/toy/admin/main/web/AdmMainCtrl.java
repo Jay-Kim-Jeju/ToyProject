@@ -94,7 +94,8 @@ public class AdmMainCtrl {
         // The service should load the user's actual roles from DB.
         mngrVO.setAuthUuid(null);
 
-        AdminLoginResult loginResult = admMainService.adminLogin(mngrVO);
+        String accessIp = resolveClientIp(request);
+        AdminLoginResult loginResult = admMainService.adminLogin(mngrVO, accessIp);
 
         // Default redirect URL (admin main)
         String returnURL = "/toy/admin/main.do";
@@ -155,6 +156,30 @@ public class AdmMainCtrl {
         }
 
         return "redirect:/toy/admin/login.do?reason=" + reason.trim();
+    }
+
+    // Prefer proxy headers when present; fallback to servlet remote address.
+    private String resolveClientIp(HttpServletRequest request) {
+        if (request == null) {
+            return "";
+        }
+
+        String xff = request.getHeader("X-Forwarded-For");
+        if (EgovStringUtil.isNotEmpty(xff)) {
+            // XFF can contain a chain. The left-most IP is the original client in common setups.
+            String first = xff.split(",")[0];
+            if (first != null && !first.trim().isEmpty() && !"unknown".equalsIgnoreCase(first.trim())) {
+                return first.trim();
+            }
+        }
+
+        String xRealIp = request.getHeader("X-Real-IP");
+        if (EgovStringUtil.isNotEmpty(xRealIp) && !"unknown".equalsIgnoreCase(xRealIp.trim())) {
+            return xRealIp.trim();
+        }
+
+        String remoteAddr = request.getRemoteAddr();
+        return (remoteAddr == null) ? "" : remoteAddr.trim();
     }
 
 
