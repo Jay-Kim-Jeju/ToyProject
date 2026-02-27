@@ -1,9 +1,7 @@
-<%--
+﻿<%--
   Created by IntelliJ IDEA.
   User: bigbe
   Date: 2026-01-02
-  Time: 오후 4:04
-  To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/toy/admin/include/top.jsp" %>
@@ -16,50 +14,48 @@
 <script src="${pageContext.request.contextPath}/js/common.js?jsCssVer=${jsCssVer}" ></script>
 
 <script type="text/javascript">
+    var selectedMngrUids = [];
+    var I18N_AUTH_ASSIGN_POP = {
+        authRequired: "<spring:message code='admin.common.authRequired' javaScriptEscape='true' />",
+        noData: "<spring:message code='admin.common.grid.noResults' javaScriptEscape='true' />",
+        loadFailed: "<spring:message code='admin.system.auth.assignPop.alert.loadFailed' javaScriptEscape='true' />",
+        selectRequired: "<spring:message code='admin.system.auth.assignPop.alert.selectRequired' javaScriptEscape='true' />",
+        confirmAssign: "<spring:message code='admin.system.auth.assignPop.confirm.assign' javaScriptEscape='true' />",
+        assigned: "<spring:message code='admin.system.auth.assignPop.alert.assigned' javaScriptEscape='true' />",
+        invalidData: "<spring:message code='admin.common.invalidData' javaScriptEscape='true' />",
+        assignFailed: "<spring:message code='admin.system.auth.assignPop.alert.assignFailed' javaScriptEscape='true' />"
+    };
+
     $(function () {
         fn_setUnassignedMngrJsGrid();
     });
 
-    // Store selected manager IDs only (service expects List<String>).
-    var selectedMngrUids = [];
-
     function selectItem(item) {
-        if (!item || !item.mngrUid) {
-            return;
-        }
+        if (!item || !item.mngrUid) return;
         selectedMngrUids.push(item.mngrUid);
     }
 
     function unselectItem(item) {
-        if (!item || !item.mngrUid) {
-            return;
-        }
-        selectedMngrUids = $.grep(selectedMngrUids, function(v) {
-            return v !== item.mngrUid;
-        });
+        if (!item || !item.mngrUid) return;
+        selectedMngrUids = $.grep(selectedMngrUids, function(v) { return v !== item.mngrUid; });
     }
 
     function fn_setUnassignedMngrJsGrid() {
         $("#jsGrid").jsGrid({
             width: "100%",
             height: "auto",
-
             filtering: true,
             autoload: true,
             sorting: false,
-
             paging: true,
             pageLoading: true,
             pageSize: 10,
             pageIndex: 1,
             pageButtonCount: 10,
             pagerContainer: "#externalPager",
-
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
-
-                    // Reset selection on each load to avoid stale selection across pages.
                     selectedMngrUids = [];
 
                     $.ajax({
@@ -67,12 +63,10 @@
                         url: "${CONTEXT_PATH}/toy/admin/sys/auth/mngr/unassigned/list.doax?authUuid=${param.authUuid}",
                         data: filter,
                         dataType: "json",
-                        beforeSend: function (xhr) {
-                            // Your custom logic only (loading spinner etc.)
-                        }
+                        beforeSend: function (xhr) {}
                     }).done(function(res) {
                         if (res && res.redirectUrl) {
-                            alert(res.errorMessage || "Authentication required.");
+                            alert(res.errorMessage || I18N_AUTH_ASSIGN_POP.authRequired);
                             if (window.opener) { window.opener.location.href = res.redirectUrl; }
                             window.close();
                             return;
@@ -81,10 +75,9 @@
                         if (!res || !res.data || res.data.length === 0) {
                             $("#jsGrid").jsGrid({
                                 autoload: false,
-                                noDataContent: '<div class="not-content"><span class="icon"></span><div class="text">검색 결과가 없습니다.</div></div>'
+                                noDataContent: '<div class="not-content"><span class="icon"></span><div class="text">' + I18N_AUTH_ASSIGN_POP.noData + '</div></div>'
                             });
 
-                            // Restore filter inputs for better UX.
                             $('.jsgrid-filter-row').find('td').eq(1).find('input').val(filter.mngrUid || "");
                             $('.jsgrid-filter-row').find('td').eq(2).find('input').val(filter.mngrNm || "");
                         }
@@ -93,14 +86,13 @@
                         d.resolve(res);
                     }).fail(function(xhr) {
                         console.error("unassigned/list.doax failed", xhr.status, xhr.responseText);
-                        alert("Failed to load managers. Please check server logs.");
+                        alert(I18N_AUTH_ASSIGN_POP.loadFailed);
                         d.resolve({ data: [], itemsCount: 0 });
                     });
 
                     return d.promise();
                 }
             },
-
             fields: [
                 {
                     itemTemplate: function(_, item) {
@@ -115,21 +107,21 @@
                     filtering: false,
                     sorting: false
                 },
-                { name: "mngrUid", title: "아이디", type: "text", width: 110, align: "center" },
-                { name: "mngrNm", title: "이름", type: "text", width: 120, align: "left" },
-                { name: "emlAdres", title: "이메일", type: "text", width: 170, align: "left", filtering: false },
-                { name: "telno", title: "전화번호", type: "text", width: 120, align: "center", filtering: false },
-                { name: "useYn", title: "사용여부", type: "checkbox", width: 70, align: "center", filtering: false }
+                { name: "mngrUid", title: "<spring:message code='admin.system.mngr.common.field.id' javaScriptEscape='true' />", type: "text", width: 110, align: "center" },
+                { name: "mngrNm", title: "<spring:message code='admin.system.mngr.common.field.name' javaScriptEscape='true' />", type: "text", width: 120, align: "left" },
+                { name: "emlAdres", title: "<spring:message code='admin.system.mngr.common.field.email' javaScriptEscape='true' />", type: "text", width: 170, align: "left", filtering: false },
+                { name: "telno", title: "<spring:message code='admin.system.mngr.common.field.phone' javaScriptEscape='true' />", type: "text", width: 120, align: "center", filtering: false },
+                { name: "useYn", title: "<spring:message code='admin.system.mngr.common.field.useYn' javaScriptEscape='true' />", type: "checkbox", width: 70, align: "center", filtering: false }
             ]
         });
     }
 
     function fn_assignSelectedManagers() {
         if (!selectedMngrUids || selectedMngrUids.length === 0) {
-            alert("선택된 관리자가 없습니다.");
+            alert(I18N_AUTH_ASSIGN_POP.selectRequired);
             return;
         }
-        if (!confirm("선택한 관리자를 권한에 추가하시겠습니까?")) {
+        if (!confirm(I18N_AUTH_ASSIGN_POP.confirmAssign)) {
             return;
         }
 
@@ -139,20 +131,17 @@
             data: JSON.stringify(selectedMngrUids),
             contentType: "application/json; charset=UTF-8",
             dataType: "json",
-            beforeSend: function(xhr) {
-                // Your custom logic only (loading spinner etc.)
-            },
+            beforeSend: function(xhr) {},
             success: function(res) {
                 if (res && res.redirectUrl) {
-                    alert(res.errorMessage || "Authentication required.");
+                    alert(res.errorMessage || I18N_AUTH_ASSIGN_POP.authRequired);
                     if (window.opener) { window.opener.location.href = res.redirectUrl; }
                     window.close();
                     return;
                 }
 
                 if (res.result === "Y") {
-                    // errorMessage contains a friendly batch summary message.
-                    alert(res.errorMessage || "정상적으로 추가되었습니다.");
+                    alert(res.errorMessage || I18N_AUTH_ASSIGN_POP.assigned);
 
                     if (window.opener && window.opener.fn_assignedMngrRefresh) {
                         window.opener.fn_assignedMngrRefresh();
@@ -164,11 +153,11 @@
                 }
 
                 if (res.result === "Invalid") {
-                    alert(res.errorMessage || "Invalid data.");
+                    alert(res.errorMessage || I18N_AUTH_ASSIGN_POP.invalidData);
                     return;
                 }
 
-                alert(res.errorMessage || "Assign failed.");
+                alert(res.errorMessage || I18N_AUTH_ASSIGN_POP.assignFailed);
             },
             error: function(request, status, error) {
                 fn_AjaxError(request, status, error, "${CONTEXT_PATH}/toy/admin/login.do");
@@ -181,9 +170,9 @@
 <body>
 <div class="win-popup">
     <div class="flex justify baseline title2-area">
-        <h3 class="title2">관리자 추가</h3>
+        <h3 class="title2"><spring:message code="admin.system.auth.assignPop.title" /></h3>
         <div class="title-justify">
-            <h3 class="title2">검색결과 <small>[총 <strong id="unAuthMngrCount" class="text-blue">0</strong>건]</small></h3>
+            <h3 class="title2"><spring:message code="admin.common.searchResult" /><small>[<spring:message code="admin.common.total" /> <strong id="unAuthMngrCount" class="text-blue">0</strong><spring:message code="admin.common.countUnit" />]</small></h3>
         </div>
     </div>
 
@@ -191,8 +180,8 @@
     <div id="externalPager" style="margin: 10px 0; font-size: 14px; color: #262626; font-weight: 300;"></div>
 
     <div class="btn-right st1 mb-0">
-        <a class="btn blue" href="javascript:fn_assignSelectedManagers();"><i class="material-icons-outlined">add</i> 등 록</a>
-        <a class="btn gray" href="javascript:window.close();"><i class="material-icons-outlined">close</i> 닫 기</a>
+        <a class="btn blue" href="javascript:fn_assignSelectedManagers();"><i class="material-icons-outlined">add</i> <spring:message code="admin.common.button.add" /></a>
+        <a class="btn gray" href="javascript:window.close();"><i class="material-icons-outlined">close</i> <spring:message code="admin.common.button.close" /></a>
     </div>
 </div>
 </body>

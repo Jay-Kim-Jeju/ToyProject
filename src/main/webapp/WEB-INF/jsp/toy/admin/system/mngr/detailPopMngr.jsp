@@ -1,9 +1,7 @@
-<%--
+﻿<%--
   Created by IntelliJ IDEA.
   User: bigbe
   Date: 2026-01-13
-  Time: 오전 4:26
-  To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/toy/admin/include/top.jsp" %>
@@ -22,10 +20,10 @@
 <body>
 <div class="win-popup">
     <div class="flex justify baseline title2-area">
-        <h3 class="title2">Manager Detail</h3>
+        <h3 class="title2"><spring:message code="admin.system.mngr.detail.title" /></h3>
         <p class="top-caption">
             <i class="required"></i>
-            <strong class="txt">Required fields</strong>
+            <strong class="txt"><spring:message code="admin.common.requiredFields" /></strong>
         </p>
     </div>
 
@@ -39,33 +37,33 @@
             </colgroup>
             <tbody>
             <tr>
-                <th><div class="tit">ID</div></th>
+                <th><div class="tit"><spring:message code="admin.system.mngr.common.field.id" /></div></th>
                 <td>${detail.mngrUid}</td>
             </tr>
 
             <tr>
-                <th><div class="tit required" data-field="mngrNm">Name</div></th>
+                <th><div class="tit required" data-field="mngrNm"><spring:message code="admin.system.mngr.common.field.name" /></div></th>
                 <td>
                     <input type="text" id="mngrNm" name="mngrNm" class="wp100" value="${detail.mngrNm}" />
                 </td>
             </tr>
 
             <tr>
-                <th><div class="tit">Email</div></th>
+                <th><div class="tit"><spring:message code="admin.system.mngr.common.field.email" /></div></th>
                 <td>
                     <input type="text" id="emlAdres" name="emlAdres" class="wp100 email" value="${detail.emlAdres}" />
                 </td>
             </tr>
 
             <tr>
-                <th><div class="tit required" data-field="telno">Phone</div></th>
+                <th><div class="tit required" data-field="telno"><spring:message code="admin.system.mngr.common.field.phone" /></div></th>
                 <td>
                     <input type="text" id="telno" name="telno" class="wp100 tel" value="${detail.telno}" />
                 </td>
             </tr>
 
             <tr>
-                <th><div class="tit required" data-field="useYn">Use</div></th>
+                <th><div class="tit required" data-field="useYn"><spring:message code="admin.system.mngr.common.field.useYn" /></div></th>
                 <td>
                     <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
                         <label style="display:flex; align-items:center; gap:6px;">
@@ -83,23 +81,23 @@
             </tr>
 
             <tr>
-                <th><div class="tit">Password Status</div></th>
+                <th><div class="tit"><spring:message code="admin.system.mngr.detail.field.passwordStatus" /></div></th>
                 <td>
                     <span id="pwResetStatus">-</span>
                 </td>
             </tr>
 
             <tr>
-                <th><div class="tit">Auth Applied</div></th>
+                <th><div class="tit"><spring:message code="admin.system.mngr.detail.field.authApplied" /></div></th>
                 <td>
                     <c:choose>
                         <c:when test="${detail.authAppliedYn eq 'Y'}">
-                            <span class="text-blue">Applied</span>
+                            <span class="text-blue"><spring:message code="admin.common.status.applied" /></span>
                         </c:when>
                         <c:otherwise>
-                            <span class="text-red">Not applied</span>
+                            <span class="text-red"><spring:message code="admin.common.status.notApplied" /></span>
                             <div style="margin-top:6px; font-size:12px;">
-                                Permissions are not assigned. Please assign permissions in Auth Management.
+                                <spring:message code="admin.system.mngr.detail.help.authNotAssigned" />
                             </div>
                         </c:otherwise>
                     </c:choose>
@@ -107,12 +105,12 @@
             </tr>
 
             <tr>
-                <th><div class="tit">Last Login</div></th>
+                <th><div class="tit"><spring:message code="admin.system.mngr.detail.field.lastLogin" /></div></th>
                 <td>${detail.lastLgnDt}</td>
             </tr>
 
             <tr>
-                <th><div class="tit">Registered</div></th>
+                <th><div class="tit"><spring:message code="admin.system.mngr.detail.field.registered" /></div></th>
                 <td>${detail.regDt}</td>
             </tr>
 
@@ -122,18 +120,17 @@
 
     <div class="btn-right st1 mb-0">
         <a id="btnResetPw" class="btn gray" href="javascript:fn_resetPassword();">
-            <i class="material-icons-outlined">refresh</i> Reset Password
+            <i class="material-icons-outlined">refresh</i> <spring:message code="admin.system.mngr.detail.button.resetPassword" />
         </a>
 
         <a id="btnSave" class="btn blue" href="javascript:fn_updateMngr();">
-            <i class="material-icons-outlined">save</i> Save
+            <i class="material-icons-outlined">save</i> <spring:message code="admin.common.button.save" />
         </a>
 
         <a class="btn gray" href="javascript:window.close();">
-            <i class="material-icons-outlined">close</i> Close
+            <i class="material-icons-outlined">close</i> <spring:message code="admin.common.button.close" />
         </a>
     </div>
 </div>
 </body>
 </html>
-

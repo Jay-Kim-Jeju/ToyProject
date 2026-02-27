@@ -1,8 +1,8 @@
-<%--
+﻿<%--
   Created by IntelliJ IDEA.
   User: bigbe
   Date: 2025-12-03
-  Time: 오전 12:37
+  Time: ?ㅼ쟾 12:37
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
@@ -26,7 +26,7 @@
     });
 </script>
 
-<%--Header 영역--%>
+<%--Header ?곸뿭--%>
 <header id="header">
     <div class="gnb-wrapper">
         <h1 class="logo">
@@ -68,7 +68,7 @@
         </nav>
     </div>
 </header>
-<%--//Header 영역--%>
+<%--//Header ?곸뿭--%>
 
 <%-- Side Navi --%>
 <aside id="side-wrapper" class="open">
@@ -107,7 +107,7 @@
 
 
             <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('MENU1'))}"> <%-- Auth Check --%>
-                <c:if test="${menuActiveMap.adminMenu1 eq 'menu1'}">	<%-- menu1 : 1depth 메뉴 --%>
+                <c:if test="${menuActiveMap.adminMenu1 eq 'menu1'}">	<%-- menu1 : 1depth 硫붾돱 --%>
                     <li>
                         <a href="<c:url value="" />" id="menu1_menu1_menu"><i class="material-icons-outlined">video_camera_front</i>menu1</a>
                     </li>
@@ -115,7 +115,7 @@
             </c:if>
 
             <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('MENU2'))}"> <%-- Auth Check --%>
-                <c:if test="${menuActiveMap.adminMenu1 eq 'menu2'}">	<%-- menu2 : 1depth 메뉴 --%>
+                <c:if test="${menuActiveMap.adminMenu1 eq 'menu2'}">	<%-- menu2 : 1depth 硫붾돱 --%>
                     <li>
                         <a href="<c:url value="" />" id="menu2_menu2_menu"><i class="material-icons-outlined">video_camera_front</i>menu2</a>
                     </li>
@@ -124,21 +124,21 @@
 
 
             <c:if test="${canSeeAllMenus or (authList ne null and authList.contains('SYSTEM'))}"> <%-- Auth Check --%>
-                <c:if test="${menuActiveMap.adminMenu1 eq 'system'}">	<%-- 시스템설정 : 1depth 메뉴 --%>
+                <c:if test="${menuActiveMap.adminMenu1 eq 'system'}">	<%-- ?쒖뒪?쒖꽕??: 1depth 硫붾돱 --%>
                     <li>
-                        <a href="<c:url value="/toy/admin/sys/mngr/list.do" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i>관리자관리</a>                                              <%-- └─ 관리자 : 2depth 메뉴 --%>
+                        <a href="<c:url value="/toy/admin/sys/mngr/list.do" />" id="system_mngr_menu"><i class="material-icons-outlined">manage_accounts</i><spring:message code="admin.header.menu.system.mngr" /></a>
                     </li>
                     <li>
-                        <a href="<c:url value="/toy/admin/sys/auth/role/list.do" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i>권한관리</a>  <%-- └─ 권한 : 2depth 메뉴 --%>
+                        <a href="<c:url value="/toy/admin/sys/auth/role/list.do" />" id="system_auth_menu"><i class="material-icons-outlined">lock</i><spring:message code="admin.header.menu.system.auth" /></a>
                     </li>
                     <li>
-                        <a href="<c:url value="/toy/admin/sys/code/grp/list.do" />" id="system_code_menu"><i class="material-icons-outlined">apps</i>코드관리</a>   <%-- └─ 코드 : 2depth 메뉴 --%>
+                        <a href="<c:url value="/toy/admin/sys/code/grp/list.do" />" id="system_code_menu"><i class="material-icons-outlined">apps</i><spring:message code="admin.header.menu.system.code" /></a>
                     </li>
                     <li>
-                        <a href="<c:url value="/toy/admin/sys/allow/list.do" />" id="system_auth_menu"><i class="material-icons-outlined">apps</i>접속허용IP 관리</a>
-                    </li>                                                       <%-- └─ 접속허용IP : 2depth 메뉴 --%>
+                        <a href="<c:url value="/toy/admin/sys/allow/list.do" />" id="system_auth_menu"><i class="material-icons-outlined">apps</i><spring:message code="admin.header.menu.system.allowIp" /></a>
+                    </li>                                                       <%-- ?붴? ?묒냽?덉슜IP : 2depth 硫붾돱 --%>
                     <li>
-                        <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accesslog_menu"><i class="material-icons-outlined">list_alt</i>접속이력조회</a> <%-- └─ 접속이력조회 : 2depth 메뉴 --%>
+                        <a href="<c:url value='/toy/admin/sys/accesslog/listAdmAcssLog.do' />" id="system_accesslog_menu"><i class="material-icons-outlined">list_alt</i><spring:message code="admin.header.menu.system.log" /></a>
                     </li>
                 </c:if>
             </c:if>
@@ -148,6 +148,7 @@
 
         </ul>
     </nav>
-    <span class="sideGnb-btn close" id="sideGnb-btn"><button type="button">사이드 메뉴 접기</button></span>
+    <span class="sideGnb-btn close" id="sideGnb-btn"><button type="button"><spring:message code="admin.header.side.toggle" /></button></span>
 </aside>
 <%-- //Side Navi --%>
+

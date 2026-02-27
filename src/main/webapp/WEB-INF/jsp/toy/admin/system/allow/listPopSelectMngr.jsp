@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/toy/admin/include/top.jsp" %>
 
 <!-- jsGrid -->
@@ -9,6 +9,11 @@
 
 <script type="text/javascript">
     var selectedManager = null;
+    var I18N_ALLOW_SELECT_MNGR = {
+        noPermission: "<spring:message code='admin.system.allow.selectMngr.alert.noPermission' javaScriptEscape='true' />",
+        loadFailed: "<spring:message code='admin.system.allow.selectMngr.alert.loadFailed' javaScriptEscape='true' />",
+        selectRequired: "<spring:message code='admin.system.allow.selectMngr.alert.selectRequired' javaScriptEscape='true' />"
+    };
 
     $(function () {
         fn_setSelectMngrJsGrid();
@@ -18,11 +23,9 @@
         $("#jsGrid").jsGrid({
             width: "100%",
             height: "auto",
-
             filtering: true,
             autoload: true,
             sorting: false,
-
             paging: true,
             pageLoading: true,
             pageSize: 10,
@@ -47,7 +50,7 @@
                         dataType: "json"
                     }).done(function(res) {
                         if (res && res.redirectUrl) {
-                            alert(res.errorMessage || "권한이 없습니다.");
+                            alert(res.errorMessage || I18N_ALLOW_SELECT_MNGR.noPermission);
                             if (window.opener) {
                                 window.opener.location.href = res.redirectUrl;
                             }
@@ -59,7 +62,7 @@
                         d.resolve(res || { data: [], itemsCount: 0 });
                     }).fail(function(xhr) {
                         console.error("allow/mngr/select/list.doax failed", xhr.status, xhr.responseText);
-                        alert("관리자 목록 조회에 실패했습니다.");
+                        alert(I18N_ALLOW_SELECT_MNGR.loadFailed);
                         d.resolve({ data: [], itemsCount: 0 });
                     });
 
@@ -68,18 +71,18 @@
             },
 
             fields: [
-                { name: "mngrUid", title: "관리자ID", type: "text", width: 120, align: "center" },
-                { name: "mngrNm", title: "관리자명", type: "text", width: 120, align: "left" },
-                { name: "emlAdres", title: "이메일", type: "text", width: 180, align: "left", filtering: false },
-                { name: "telno", title: "전화번호", type: "text", width: 120, align: "center", filtering: false },
-                { name: "useYn", title: "사용", type: "checkbox", width: 60, align: "center", filtering: false }
+                { name: "mngrUid", title: "<spring:message code='admin.system.mngr.common.field.id' javaScriptEscape='true' />", type: "text", width: 120, align: "center" },
+                { name: "mngrNm", title: "<spring:message code='admin.system.mngr.common.field.name' javaScriptEscape='true' />", type: "text", width: 120, align: "left" },
+                { name: "emlAdres", title: "<spring:message code='admin.system.mngr.common.field.email' javaScriptEscape='true' />", type: "text", width: 180, align: "left", filtering: false },
+                { name: "telno", title: "<spring:message code='admin.system.mngr.common.field.phone' javaScriptEscape='true' />", type: "text", width: 120, align: "center", filtering: false },
+                { name: "useYn", title: "<spring:message code='admin.system.mngr.common.field.useYn' javaScriptEscape='true' />", type: "checkbox", width: 60, align: "center", filtering: false }
             ]
         });
     }
 
     function fn_selectManager() {
         if (!selectedManager || !selectedManager.mngrUid) {
-            alert("관리자를 선택해주세요.");
+            alert(I18N_ALLOW_SELECT_MNGR.selectRequired);
             return;
         }
 
@@ -93,23 +96,23 @@
 <body>
 <div class="win-popup">
     <div class="flex justify baseline title2-area">
-        <h3 class="title2">허용 대상 관리자 선택</h3>
+        <h3 class="title2"><spring:message code="admin.system.allow.selectMngr.title" /></h3>
         <div class="title-justify">
-            <h3 class="title2">검색결과 <small>[총 <strong id="mngrCount" class="text-blue">0</strong>건]</small></h3>
+            <h3 class="title2"><spring:message code="admin.common.searchResult" /><small>[<spring:message code="admin.common.total" /> <strong id="mngrCount" class="text-blue">0</strong><spring:message code="admin.common.countUnit" />]</small></h3>
         </div>
     </div>
 
-    <div class="text-gray mb-10">활성(Y) 관리자만 조회됩니다. 행을 클릭한 뒤 선택 버튼을 눌러주세요.</div>
+    <div class="text-gray mb-10"><spring:message code="admin.system.allow.selectMngr.help" /></div>
 
     <div id="jsGrid"></div>
     <div id="externalPager" style="margin: 10px 0; font-size: 14px; color: #262626; font-weight: 300;"></div>
 
     <div class="btn-right st1 mb-0">
         <a class="btn blue" href="javascript:fn_selectManager();">
-            <i class="material-icons-outlined">check</i> 선택
+            <i class="material-icons-outlined">check</i> <spring:message code="admin.common.button.select" />
         </a>
         <a class="btn gray" href="javascript:window.close();">
-            <i class="material-icons-outlined">close</i> 닫기
+            <i class="material-icons-outlined">close</i> <spring:message code="admin.common.button.close" />
         </a>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/toy/admin/include/top.jsp" %>
 
 <!-- jsGrid -->
@@ -8,6 +8,18 @@
 <script src="${pageContext.request.contextPath}/js/common.js?jsCssVer=${jsCssVer}" ></script>
 
 <script type="text/javascript">
+    var I18N_ALLOW_LIST = {
+        loadFailed: "<spring:message code='admin.system.allow.list.alert.loadFailed' javaScriptEscape='true' />",
+        requiredParam: "<spring:message code='admin.system.allow.list.alert.requiredParam' javaScriptEscape='true' />",
+        confirmDelete: "<spring:message code='admin.system.allow.list.confirm.delete' javaScriptEscape='true' />",
+        deleted: "<spring:message code='admin.system.allow.list.alert.deleted' javaScriptEscape='true' />",
+        notFound: "<spring:message code='admin.system.allow.list.alert.notFound' javaScriptEscape='true' />",
+        invalidRequest: "<spring:message code='admin.system.allow.list.alert.invalidRequest' javaScriptEscape='true' />",
+        deleteFailed: "<spring:message code='admin.system.allow.list.alert.deleteFailed' javaScriptEscape='true' />",
+        btnEditDisabled: "<spring:message code='admin.system.allow.list.button.editDisabled' javaScriptEscape='true' />",
+        statusDeleted: "<spring:message code='admin.system.allow.list.status.deleted' javaScriptEscape='true' />"
+    };
+
     $(function () {
         fn_setAllowIpJsGrid();
     });
@@ -16,19 +28,16 @@
         $("#allowIpGrid").jsGrid({
             width: "100%",
             height: "auto",
-
             filtering: true,
             autoload: true,
             sorting: false,
             inserting: false,
             editing: false,
-
             paging: true,
             pageLoading: true,
             pageSize: 10,
             pageButtonCount: 10,
             pagerContainer: "#externalPager",
-
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -48,19 +57,18 @@
                         d.resolve(res || { data: [], itemsCount: 0 });
                     }).fail(function(xhr) {
                         console.error("allow/list.doax failed", xhr.status, xhr.responseText);
-                        alert("접속허용IP 목록 조회에 실패했습니다.");
+                        alert(I18N_ALLOW_LIST.loadFailed);
                         d.resolve({ data: [], itemsCount: 0 });
                     });
 
                     return d.promise();
                 }
             },
-
             fields: [
-                { name: "allowIp", title: "접속허용IP", type: "text", width: 140, align: "center" },
-                { name: "mngrUid", title: "등록된 관리자ID", type: "text", width: 120, align: "center" },
-                { name: "useYn", title: "사용여부", type: "checkbox", width: 70, align: "center" },
-                { name: "memo", title: "메모", type: "text", width: 220, align: "left", filtering: false },
+                { name: "allowIp", title: "<spring:message code='admin.system.allow.common.field.allowIp' javaScriptEscape='true' />", type: "text", width: 140, align: "center" },
+                { name: "mngrUid", title: "<spring:message code='admin.system.allow.common.field.mngrUid' javaScriptEscape='true' />", type: "text", width: 120, align: "center" },
+                { name: "useYn", title: "<spring:message code='admin.system.allow.common.field.useYn' javaScriptEscape='true' />", type: "checkbox", width: 70, align: "center" },
+                { name: "memo", title: "<spring:message code='admin.system.allow.common.field.memo' javaScriptEscape='true' />", type: "text", width: 220, align: "left", filtering: false },
                 {
                     type: "control", width: 180,
                     itemTemplate: function(_, item) {
@@ -71,7 +79,7 @@
                         if (isActive) {
                             editBtn = $("<a>").addClass("btn black sm")
                                 .append("<i class=\"material-icons-outlined\">edit</i>")
-                                .append(" 수정")
+                                .append(" <spring:message code='admin.common.button.edit' javaScriptEscape='true' />")
                                 .click(function(e) {
                                     fn_openAllowIpFormPopup(item.allowIpUuid);
                                     e.stopPropagation();
@@ -79,22 +87,21 @@
 
                             delBtn = $("<a>").addClass("btn orange sm")
                                 .append("<i class=\"material-icons-outlined\">delete</i>")
-                                .append(" 삭제")
+                                .append(" <spring:message code='admin.common.button.delete' javaScriptEscape='true' />")
                                 .click(function(e) {
                                     fn_softDeleteAllowIp(item.allowIpUuid);
                                     e.stopPropagation();
                                 });
                         } else {
-                            // Terminal-state policy: soft-deleted rows cannot be edited or re-deleted.
                             editBtn = $("<a>").addClass("btn gray sm")
                                 .css({ "pointer-events": "none", "opacity": "0.7", "cursor": "default" })
                                 .append("<i class=\"material-icons-outlined\">lock</i>")
-                                .append(" 수정불가");
+                                .append(" " + I18N_ALLOW_LIST.btnEditDisabled);
 
                             delBtn = $("<a>").addClass("btn gray sm")
                                 .css({ "pointer-events": "none", "opacity": "0.7", "cursor": "default" })
                                 .append("<i class=\"material-icons-outlined\">block</i>")
-                                .append(" Deleted");
+                                .append(" " + I18N_ALLOW_LIST.statusDeleted);
                         }
 
                         return $("<div>").append(editBtn).append("&nbsp;").append(delBtn);
@@ -102,7 +109,7 @@
                     filterTemplate: function() {
                         var searchBtn = $("<a>").addClass("btn sm")
                             .append("<i class=\"material-icons-outlined\">search</i>")
-                            .append(" Search")
+                            .append(" <spring:message code='admin.common.button.search' javaScriptEscape='true' />")
                             .click(function(e) {
                                 $("#allowIpGrid").jsGrid("search");
                                 e.stopPropagation();
@@ -110,7 +117,7 @@
 
                         var clearBtn = $("<a>").addClass("btn gray sm")
                             .append("<i class=\"material-icons-outlined\">clear</i>")
-                            .append(" Clear")
+                            .append(" <spring:message code='admin.common.button.clear' javaScriptEscape='true' />")
                             .click(function(e) {
                                 $("#allowIpGrid").jsGrid("clearFilter");
                                 e.stopPropagation();
@@ -133,10 +140,10 @@
 
     function fn_softDeleteAllowIp(allowIpUuid) {
         if (!allowIpUuid) {
-            alert("필수 파라미터가 없습니다.");
+            alert(I18N_ALLOW_LIST.requiredParam);
             return;
         }
-        if (!confirm("해당 허용IP를 삭제(비활성화)하시겠습니까?")) {
+        if (!confirm(I18N_ALLOW_LIST.confirmDelete)) {
             return;
         }
 
@@ -151,20 +158,20 @@
                     return;
                 }
                 if (res.result === "Y") {
-                    alert("정상적으로 삭제(비활성화) 처리되었습니다.");
+                    alert(I18N_ALLOW_LIST.deleted);
                     fn_allowIpGridRefresh();
                     return;
                 }
                 if (res.result === "None") {
-                    alert(res.errorMessage || "대상이 존재하지 않습니다.");
+                    alert(res.errorMessage || I18N_ALLOW_LIST.notFound);
                     fn_allowIpGridRefresh();
                     return;
                 }
                 if (res.result === "Invalid") {
-                    alert(res.errorMessage || "잘못된 요청입니다.");
+                    alert(res.errorMessage || I18N_ALLOW_LIST.invalidRequest);
                     return;
                 }
-                alert(res.errorMessage || "삭제 처리에 실패했습니다.");
+                alert(res.errorMessage || I18N_ALLOW_LIST.deleteFailed);
             },
             error: function(request, status, error) {
                 fn_AjaxError(request, status, error, "${CONTEXT_PATH}/toy/admin/login.do");
@@ -172,7 +179,6 @@
         });
     }
 
-    // Popup calls this after insert/update succeeds.
     function fn_allowIpGridRefresh() {
         if ($("#allowIpGrid").data("JSGrid")) {
             $("#allowIpGrid").jsGrid("loadData");
@@ -194,13 +200,13 @@
     <main id="main">
         <section class="contents-wrap">
             <div class="title-area">
-                <h2 class="depth-title">접속허용IP 관리</h2>
+                <h2 class="depth-title"><spring:message code="admin.system.allow.list.title" /></h2>
             </div>
 
             <section class="content-box">
                 <h3 class="title2">
-                    검색결과
-                    <small>[총 <strong id="allowIpCount" class="text-blue">0</strong>건]</small>
+                    <spring:message code="admin.common.searchResult" />
+                    <small>[<spring:message code="admin.common.total" /> <strong id="allowIpCount" class="text-blue">0</strong><spring:message code="admin.common.countUnit" />]</small>
                 </h3>
 
                 <div id="allowIpGrid"></div>
@@ -211,7 +217,7 @@
 
                 <div class="btn-right st1">
                     <a class="btn blue" href="javascript:fn_openAllowIpFormPopup();">
-                        <i class="material-icons-outlined">add</i> 등록
+                        <i class="material-icons-outlined">add</i> <spring:message code="admin.common.button.create" />
                     </a>
                 </div>
             </section>

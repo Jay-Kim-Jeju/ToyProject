@@ -18,7 +18,7 @@
 %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="${pageContext.request.locale.language}">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -116,6 +116,8 @@
     }
 
   </script>
+
+  <%@ include file="/WEB-INF/jsp/toy/com/include/localeSwitcher.jsp" %>
 </head>
 <body style="background-image: url('${pageContext.request.contextPath}/images/admin/login/bg-img2.jpg')">
 <c:if test="${not empty logoutMessage}">

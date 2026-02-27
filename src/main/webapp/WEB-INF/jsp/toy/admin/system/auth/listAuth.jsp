@@ -1,8 +1,8 @@
-<%--
+﻿<%--
   Created by IntelliJ IDEA.
   User: bigbe
   Date: 2026-01-02
-  Time: 오후 4:01
+  Time: ?ㅽ썑 4:01
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
@@ -71,7 +71,7 @@
                         if (!res || !res.data || res.data.length === 0) {
                             $("#authRoleGrid").jsGrid({
                                 autoload: false,
-                                noDataContent: '<div class="not-content"><span class="icon"></span><div class="text">검색 결과가 없습니다.</div></div>'
+                                noDataContent: '<div class="not-content"><span class="icon"></span><div class="text"><spring:message code="admin.common.grid.noResults" /></div></div>'
                             });
 
                             // Restore filter inputs for better UX.
@@ -90,7 +90,7 @@
                         d.resolve(res);
                     }).fail(function(xhr) {
                         console.error("auth/role/list.doax failed", xhr.status, xhr.responseText);
-                        alert("Failed to load auth roles. Please check server logs.");
+                        alert("<spring:message code='admin.system.auth.list.alert.loadRoleFailed' javaScriptEscape='true' />");
                         d.resolve({ data: [], itemsCount: 0 });
                     });
 
@@ -100,10 +100,10 @@
                 insertItem: function(data) {
                     data.authUuid = normalizeAuthUuid(data.authUuid);
                     if (!data.authUuid || !data.authorDc) {
-                        alert("권한 아이디와 권한 설명은 필수입력값입니다.");
+                        alert("<spring:message code='admin.system.auth.list.alert.requiredRoleFields' javaScriptEscape='true' />");
                         return;
                     }
-                    if (!confirm("권한을 등록하시겠습니까?")) {
+                    if (!confirm("<spring:message code='admin.system.auth.list.confirm.insertRole' javaScriptEscape='true' />")) {
                         return;
                     }
 
@@ -117,10 +117,10 @@
                         dataType: "json",
                         success: function(res) {
                             if (res && res.redirectUrl) { window.location.href = res.redirectUrl; return; }
-                            if (res.result === "Y") { alert("정상적으로 등록되었습니다."); fn_setAuthRoleJsGrid(); return; }
-                            if (res.result === "Duple") { alert(res.errorMessage || "Duplicate role."); return; }
-                            if (res.result === "Invalid") { alert(res.errorMessage || "Invalid data."); return; }
-                            alert(res.errorMessage || "Insert failed.");
+                            if (res.result === "Y") { alert("<spring:message code='admin.system.auth.list.alert.insertedRole' javaScriptEscape='true' />"); fn_setAuthRoleJsGrid(); return; }
+                            if (res.result === "Duple") { alert(res.errorMessage || "<spring:message code='admin.system.auth.list.alert.duplicateRole' javaScriptEscape='true' />"); return; }
+                            if (res.result === "Invalid") { alert(res.errorMessage || "<spring:message code='admin.common.invalidData' javaScriptEscape='true' />"); return; }
+                            alert(res.errorMessage || "<spring:message code='admin.system.auth.list.alert.insertFailed' javaScriptEscape='true' />");
                         },
                         error: function(request, status, error) {
                             fn_AjaxError(request, status, error, "${CONTEXT_PATH}/toy/admin/login.do");
@@ -131,10 +131,10 @@
                 updateItem: function(data) {
                     var authUuidNorm = normalizeAuthUuid(data.authUuid);
                     if (!data.authUuid || !data.authorDc) {
-                        alert("권한 아이디와 권한 설명은 필수입력값입니다.");
+                        alert("<spring:message code='admin.system.auth.list.alert.requiredRoleFields' javaScriptEscape='true' />");
                         return;
                     }
-                    if (!confirm("정말로 수정하시겠습니까?")) {
+                    if (!confirm("<spring:message code='admin.system.auth.list.confirm.updateRole' javaScriptEscape='true' />")) {
                         return;
                     }
 
@@ -157,10 +157,10 @@
                         dataType: "json",
                         success: function(res) {
                             if (res && res.redirectUrl) { window.location.href = res.redirectUrl; return; }
-                            if (res.result === "Y") { alert("정상적으로 수정되었습니다."); fn_setAuthRoleJsGrid(); return; }
-                            if (res.result === "None") { alert(res.errorMessage || "Role does not exist."); fn_setAuthRoleJsGrid(); return; }
-                            if (res.result === "Invalid") { alert(res.errorMessage || "Invalid data."); return; }
-                            alert(res.errorMessage || "Update failed.");
+                            if (res.result === "Y") { alert("<spring:message code='admin.system.auth.list.alert.updatedRole' javaScriptEscape='true' />"); fn_setAuthRoleJsGrid(); return; }
+                            if (res.result === "None") { alert(res.errorMessage || "<spring:message code='admin.system.auth.list.alert.roleNotFound' javaScriptEscape='true' />"); fn_setAuthRoleJsGrid(); return; }
+                            if (res.result === "Invalid") { alert(res.errorMessage || "<spring:message code='admin.common.invalidData' javaScriptEscape='true' />"); return; }
+                            alert(res.errorMessage || "<spring:message code='admin.system.auth.list.alert.updateFailed' javaScriptEscape='true' />");
                         },
                         error: function(request, status, error) {
                             fn_AjaxError(request, status, error, "${CONTEXT_PATH}/toy/admin/login.do");
@@ -178,9 +178,9 @@
             },
 
             fields: [
-                { name: "authUuid", title: "권한 아이디", type: "text", width: 120, align: "left", editing: false },
-                { name: "authorDc", title: "권한 설명", type: "text", width: 160, align: "left", sorting: false },
-                { name: "useYn", title: "사용여부", type: "checkbox", width: 60, align: "center", inserting: false,
+                { name: "authUuid", title: "<spring:message code='admin.system.auth.list.grid.roleId' javaScriptEscape='true' />", type: "text", width: 120, align: "left", editing: false },
+                { name: "authorDc", title: "<spring:message code='admin.system.auth.list.grid.roleName' javaScriptEscape='true' />", type: "text", width: 160, align: "left", sorting: false },
+                { name: "useYn", title: "<spring:message code='admin.system.auth.list.grid.useYn' javaScriptEscape='true' />", type: "checkbox", width: 60, align: "center", inserting: false,
                     editTemplate: function(value, item) {
                         // Render checkbox and disable it for default roles.
                         var $cb = $("<input>").attr("type", "checkbox").prop("checked", value === true || value === "Y");
@@ -201,7 +201,7 @@
                     filterTemplate: function() {
                         var filterBtn = $("<a>").addClass("btn sm")
                             .append("<i class=\"material-icons-outlined\">search</i>")
-                            .append(" 검 색")
+                            .append(" <spring:message code='admin.common.button.search' javaScriptEscape='true' />")
                             .click(function(e) {
                                 $("#authRoleGrid").jsGrid("search");
                                 e.stopPropagation();
@@ -209,7 +209,7 @@
 
                         var clearBtn = $("<a>").addClass("btn gray sm")
                             .append("<i class=\"material-icons-outlined\">clear</i>")
-                            .append(" 초기화")
+                            .append(" <spring:message code='admin.common.button.clear' javaScriptEscape='true' />")
                             .click(function(e) {
                                 $("#authRoleGrid").jsGrid("clearFilter");
                                 e.stopPropagation();
@@ -221,7 +221,7 @@
                     insertTemplate: function(_, item) {
                         var insertBtn = $("<a>").addClass("btn blue sm")
                             .append("<i class=\"material-icons-outlined\">add</i>")
-                            .append(" 등 록")
+                            .append(" <spring:message code='admin.common.button.add' javaScriptEscape='true' />")
                             .click(function(e) {
                                 $("#authRoleGrid").jsGrid("insertItem", item);
                                 e.stopPropagation();
@@ -229,7 +229,7 @@
 
                         var clearBtn = $("<a>").addClass("btn gray sm")
                             .append("<i class=\"material-icons-outlined\">clear</i>")
-                            .append(" 취 소")
+                            .append(" <spring:message code='admin.common.button.cancel' javaScriptEscape='true' />")
                             .click(function(e) {
                                 $("#authRoleGrid").jsGrid("clearInsert");
                                 e.stopPropagation();
@@ -241,7 +241,7 @@
                     editTemplate: function(_, item) {
                         var saveBtn = $("<a>").addClass("btn blue sm")
                             .append("<i class=\"material-icons-outlined\">check</i>")
-                            .append(" 저 장")
+                            .append(" <spring:message code='admin.common.button.save' javaScriptEscape='true' />")
                             .click(function(e) {
                                 $("#authRoleGrid").jsGrid("updateItem");
                                 e.stopPropagation();
@@ -249,7 +249,7 @@
 
                         var cancelBtn = $("<a>").addClass("btn gray sm")
                             .append("<i class=\"material-icons-outlined\">clear</i>")
-                            .append(" 취 소")
+                            .append(" <spring:message code='admin.common.button.cancel' javaScriptEscape='true' />")
                             .click(function(e) {
                                 $("#authRoleGrid").jsGrid("cancelEdit");
                                 e.stopPropagation();
@@ -261,7 +261,7 @@
                     itemTemplate: function(_, item) {
                         var editBtn = $("<a>").addClass("btn black sm")
                             .append("<i class=\"material-icons-outlined\">edit</i>")
-                            .append(" 수 정")
+                            .append(" <spring:message code='admin.common.button.edit' javaScriptEscape='true' />")
                             .click(function(e) {
                                 $("#authRoleGrid").jsGrid("editItem", item);
                                 e.stopPropagation();
@@ -274,15 +274,15 @@
                         if (isAdminRole) {
                             disableBtn = $("<a>").addClass("btn gray sm")
                                 .append("<i class=\"material-icons-outlined\">lock</i>")
-                                .append(" 비활성화")
+                                .append(" <spring:message code='admin.common.button.disable' javaScriptEscape='true' />")
                                 .click(function(e) {
-                                    alert("기본 권한은 비활성화할 수 없습니다.");
+                                    alert("<spring:message code='admin.system.auth.list.alert.defaultRoleCannotDisable' javaScriptEscape='true' />");
                                     e.stopPropagation();
                                 });
                         } else {
                             disableBtn = $("<a>").addClass("btn orange sm")
                                 .append("<i class=\"material-icons-outlined\">delete</i>")
-                                .append(" 비활성화")
+                                .append(" <spring:message code='admin.common.button.disable' javaScriptEscape='true' />")
                                 .click(function(e) {
                                     fn_disableAuthRole(item.authUuid);
                                     e.stopPropagation();
@@ -299,17 +299,17 @@
     function fn_disableAuthRole(authUuid) {
         authUuid = normalizeAuthUuid(authUuid);
         if (!authUuid) {
-            alert("권한 아이디가 없습니다.");
+            alert("<spring:message code='admin.system.auth.list.alert.roleIdRequired' javaScriptEscape='true' />");
             return;
         }
 
         // Client-side guard (server also blocks in controller).
         if (authUuid === ROLE_ADMIN) {
-            alert("기본 권한은 비활성화할 수 없습니다.");
+            alert("<spring:message code='admin.system.auth.list.alert.defaultRoleCannotDisable' javaScriptEscape='true' />");
             return;
         }
 
-        if (!confirm("해당 권한을 비활성화하시겠습니까?")) {
+        if (!confirm("<spring:message code='admin.system.auth.list.confirm.disableRole' javaScriptEscape='true' />")) {
             return;
         }
 
@@ -325,7 +325,7 @@
                 if (res && res.redirectUrl) { window.location.href = res.redirectUrl; return; }
 
                 if (res.result === "Y") {
-                    alert("비활성화 처리되었습니다.");
+                    alert("<spring:message code='admin.system.auth.list.alert.disabledRole' javaScriptEscape='true' />");
                     fn_setAuthRoleJsGrid();
 
                     // Refresh right grid if the current selected role was disabled.
@@ -336,22 +336,22 @@
                 }
 
                 if (res.result === "Forbidden") {
-                    alert(res.errorMessage || "Default roles cannot be disabled.");
+                    alert(res.errorMessage || "<spring:message code='admin.system.auth.list.alert.defaultRoleCannotDisable' javaScriptEscape='true' />");
                     return;
                 }
 
                 if (res.result === "None") {
-                    alert(res.errorMessage || "Role does not exist.");
+                    alert(res.errorMessage || "<spring:message code='admin.system.auth.list.alert.roleNotFound' javaScriptEscape='true' />");
                     fn_setAuthRoleJsGrid();
                     return;
                 }
 
                 if (res.result === "Invalid") {
-                    alert(res.errorMessage || "Invalid data.");
+                    alert(res.errorMessage || "<spring:message code='admin.common.invalidData' javaScriptEscape='true' />");
                     return;
                 }
 
-                alert(res.errorMessage || "Disable failed.");
+                alert(res.errorMessage || "<spring:message code='admin.system.auth.list.alert.disableFailed' javaScriptEscape='true' />");
             },
             error: function(request, status, error) {
                 fn_AjaxError(request, status, error, "${CONTEXT_PATH}/toy/admin/login.do");
@@ -405,7 +405,7 @@
                         if (!res || !res.data || res.data.length === 0) {
                             $("#assignedGrid").jsGrid({
                                 autoload: false,
-                                noDataContent: '<div class="not-content"><span class="icon"></span><div class="text">검색 결과가 없습니다.</div></div>'
+                                noDataContent: '<div class="not-content"><span class="icon"></span><div class="text"><spring:message code="admin.common.grid.noResults" /></div></div>'
                             });
                         }
 
@@ -413,7 +413,7 @@
                         d.resolve(res);
                     }).fail(function(xhr) {
                         console.error("assigned/list.doax failed", xhr.status, xhr.responseText);
-                        alert("Failed to load assigned managers. Please check server logs.");
+                        alert("<spring:message code='admin.system.auth.list.alert.loadAssignedManagersFailed' javaScriptEscape='true' />");
                         d.resolve({ data: [], itemsCount: 0 });
                     });
 
@@ -422,17 +422,17 @@
             },
 
             fields: [
-                { name: "mngrUid", title: "아이디", type: "text", width: 110, align: "center" },
-                { name: "mngrNm", title: "이름", type: "text", width: 120, align: "left" },
-                { name: "emlAdres", title: "이메일", type: "text", width: 170, align: "left" },
-                { name: "telno", title: "전화번호", type: "text", width: 120, align: "center" },
-                { name: "useYn", title: "사용여부", type: "checkbox", width: 60, align: "center", sorting: false, filtering: false, inserting: false },
+                { name: "mngrUid", title: "<spring:message code='admin.system.mngr.common.field.id' javaScriptEscape='true' />", type: "text", width: 110, align: "center" },
+                { name: "mngrNm", title: "<spring:message code='admin.system.mngr.common.field.name' javaScriptEscape='true' />", type: "text", width: 120, align: "left" },
+                { name: "emlAdres", title: "<spring:message code='admin.system.mngr.common.field.email' javaScriptEscape='true' />", type: "text", width: 170, align: "left" },
+                { name: "telno", title: "<spring:message code='admin.system.mngr.common.field.phone' javaScriptEscape='true' />", type: "text", width: 120, align: "center" },
+                { name: "useYn", title: "<spring:message code='admin.system.mngr.common.field.useYn' javaScriptEscape='true' />", type: "checkbox", width: 60, align: "center", sorting: false, filtering: false, inserting: false },
 
                 { type: "control", width: 110,
                     itemTemplate: function(_, item) {
                         var delBtn = $("<a>").addClass("btn orange sm")
                             .append("<i class=\"material-icons-outlined\">delete</i>")
-                            .append(" 해제")
+                            .append(" <spring:message code='admin.system.auth.list.button.unassign' javaScriptEscape='true' />")
                             .click(function(e) {
                                 fn_unassignMngr(authUuid, item.mngrUid);
                                 e.stopPropagation();
@@ -447,10 +447,10 @@
 
     function fn_unassignMngr(authUuid, mngrUid) {
         if (!authUuid || !mngrUid) {
-            alert("필수 파라미터가 없습니다.");
+            alert("<spring:message code='admin.system.auth.list.alert.requiredParam' javaScriptEscape='true' />");
             return;
         }
-        if (!confirm("해당 관리자의 권한을 해제하시겠습니까?")) {
+        if (!confirm("<spring:message code='admin.system.auth.list.confirm.unassignManager' javaScriptEscape='true' />")) {
             return;
         }
 
@@ -466,20 +466,20 @@
                 if (res && res.redirectUrl) { window.location.href = res.redirectUrl; return; }
 
                 if (res.result === "Y") {
-                    alert("정상적으로 해제되었습니다.");
+                    alert("<spring:message code='admin.system.auth.list.alert.unassigned' javaScriptEscape='true' />");
                     fn_assignedMngrRefresh();
                     return;
                 }
                 if (res.result === "None") {
-                    alert(res.errorMessage || "Assignment does not exist.");
+                    alert(res.errorMessage || "<spring:message code='admin.system.auth.list.alert.assignmentNotFound' javaScriptEscape='true' />");
                     fn_assignedMngrRefresh();
                     return;
                 }
                 if (res.result === "Invalid") {
-                    alert(res.errorMessage || "Invalid data.");
+                    alert(res.errorMessage || "<spring:message code='admin.common.invalidData' javaScriptEscape='true' />");
                     return;
                 }
-                alert(res.errorMessage || "Unassign failed.");
+                alert(res.errorMessage || "<spring:message code='admin.system.auth.list.alert.unassignFailed' javaScriptEscape='true' />");
             },
             error: function(request, status, error) {
                 fn_AjaxError(request, status, error, "${CONTEXT_PATH}/toy/admin/login.do");
@@ -489,7 +489,7 @@
 
     function fn_openAssignMngrPopup() {
         if (!publicAuthUuid) {
-            alert("권한을 먼저 선택해주세요.");
+            alert("<spring:message code='admin.system.auth.list.alert.selectRoleFirst' javaScriptEscape='true' />");
             return;
         }
         var url = "${CONTEXT_PATH}/toy/admin/sys/auth/mngr/assignPop.do?authUuid=" + encodeURIComponent(publicAuthUuid);
@@ -512,7 +512,7 @@
         <main id="main">
         <section class="contents-wrap">
             <div class="title-area">
-                <h2 class="depth-title">권한 관리</h2>
+                <h2 class="depth-title"><spring:message code="admin.system.auth.list.title" /></h2>
             </div>
 
             <section class="content-box">
@@ -520,7 +520,7 @@
                     <tr style="vertical-align: top;">
                         <td>
                             <h3 class="title2">
-                                검색결과 <small>[총 <strong id="roleCount" class="text-blue">0</strong>건]</small>
+                                <spring:message code="admin.common.searchResult" /><small>[<spring:message code="admin.common.total" /> <strong id="roleCount" class="text-blue">0</strong><spring:message code="admin.common.countUnit" />]</small>
                             </h3>
 
                             <div id="authRoleGrid"></div>
@@ -533,11 +533,11 @@
                         <td style="padding-left: 20px;">
                             <span id="assignedBox" style="display: none;">
                                 <h3 class="title2">
-                                    권한: <strong id="selectedAuthUuid"></strong>
-                                    <small>[총 <strong id="assignedCount" class="text-blue">0</strong>건]</small>
+                                    <spring:message code="admin.system.auth.list.selectedRole" />: <strong id="selectedAuthUuid"></strong>
+                                    <small>[<spring:message code="admin.common.total" /> <strong id="assignedCount" class="text-blue">0</strong><spring:message code="admin.common.countUnit" />]</small>
 
                                     <a class="btn blue ml-0" href="javascript:fn_openAssignMngrPopup();">
-                                        <i class="material-icons-outlined">add</i> 관리자 추가
+                                        <i class="material-icons-outlined">add</i> <spring:message code="admin.system.auth.list.button.addManager" />
                                     </a>
                                 </h3>
 

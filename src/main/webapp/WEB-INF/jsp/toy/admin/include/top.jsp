@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
 <%@ include file="/WEB-INF/jsp/toy/com/include/taglib.jsp" %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="${pageContext.request.locale.language}">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@
   <%-- tags for CSRF--%>
   <%@ include file="/WEB-INF/jsp/toy/com/include/csrfMetaTags.jsp" %>
 
-  <title> TOY_Project 관리자 </title>
+  <title><spring:message code="admin.top.title" /></title>
   <!-- css -->
   <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
   <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/com/favicon.ico">
@@ -40,21 +40,23 @@
     let FLAG_Y = "${Constant.FLAG_Y}";
     let FLAG_N = "${Constant.FLAG_N}";
 
-    // Error message 출력
+    // Error message 異쒕젰
     function fn_alertErrorMsg(response) {
       if (response.errorMessage != undefined) {
         if (response.errorMessage.indexOf("${Constant.ADMIN_LOGIN_URL}") != -1) {
-          alert("접근 권한이 없습니다.");
+          alert("<spring:message code='admin.top.alert.accessDenied' javaScriptEscape='true' />");
           location.href = "${Constant.ADMIN_LOGIN_URL}";
         } else {
           alert(response.errorMessage);
         }
       } else {
-        alert("시스템 오류\n관리자에게 문의해주세요.");
+        alert("<spring:message code='admin.top.alert.systemError' javaScriptEscape='true' />");
       }
 
       return false;
     }
 
   </script>
+
+  <%@ include file="/WEB-INF/jsp/toy/com/include/localeSwitcher.jsp" %>
 
