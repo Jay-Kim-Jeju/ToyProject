@@ -25,11 +25,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import toy.admin.main.service.AdmMainService;
 import toy.admin.system.accesslog.service.AdminAccessLogService;
-import toy.admin.test.service.AdmTestService;
 import toy.com.egov.EgovPropertiesUtils;
 import toy.com.util.AdminLogoutMessageHelper;
 import toy.com.util.EgovStringUtil;
-import toy.com.vo.TestVO;
 import toy.com.vo.common.AdminLoginResult;
 import toy.com.vo.common.SessionAdminVO;
 import toy.com.vo.system.mngr.MngrVO;
@@ -42,7 +40,6 @@ public class AdmMainCtrl {
 
     @Resource(name = "AdmMainService")
     private final AdmMainService admMainService;
-    private final AdmTestService admTestService;
     private final AdminAccessLogService adminAccessLogService;
 
     private static final Logger LOG_DEBUG = LoggerFactory.getLogger(AdmMainCtrl.class);
@@ -82,7 +79,7 @@ public class AdmMainCtrl {
         }
         // TODO: Logout reasons may expand (i18n, session revocation, allow-IP sync). Centralize reason codes/message keys if it grows.
 
-        return "admin/adminLogin";
+        return "admin/main/adminLogin";
     }
 
     @RequestMapping({"/toy/admin/loginAction.ac"})
@@ -185,27 +182,11 @@ public class AdmMainCtrl {
 
 
     @RequestMapping({"/toy/admin/main.do"})
-    public ModelAndView main(HttpServletRequest request) throws Exception {
-        LOG_DEBUG.debug("/toy/admin/main.do");
+    public String main(HttpServletRequest request) throws Exception {
+        LOG_DEBUG.debug("/toy/admin/main.do - redirect to access log");
 
-        // 로그인기능 구현할떄 구현예정
-        SessionAdminVO sessionUserVO = (SessionAdminVO)request.getSession().getAttribute("sessionAdminVO");
-
-        //공통레이아웃 적용 확인을 위한 테스트페이지
-        // create empty search condition (no filters for now)
-        TestVO searchVO = new TestVO();
-        // get member list from DB
-        List<TestVO> memberList = admTestService.selectTestList(searchVO);
-        Map<String, Object> resultMap = new HashMap<>();
-        // put list into model (JSP will use this attribute)
-        resultMap.put("memberList", memberList);
-
-        // ToyProject view name example:
-        // /WEB-INF/jsp/toy/admin/adminHome.jsp
-        return new ModelAndView("admin/adminHome", resultMap);
-
-        // 추후 제대로된 메인페이지 만들면 그쪽으로 리다이렉트 예정
-        //return new ModelAndView("redirect:/toy/listMngr.ac", resultMap);
+        // Redirect to System > Access Log page as default admin main page
+        return "redirect:/toy/admin/sys/accesslog/listAdmAcssLog.do";
     }
 
     // Encrypt Password Test API
