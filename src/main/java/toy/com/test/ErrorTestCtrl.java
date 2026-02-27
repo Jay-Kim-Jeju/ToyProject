@@ -37,21 +37,21 @@ public class ErrorTestCtrl {
     @GetMapping("/missingParam.ac")
     public String missingParam(@RequestParam("id") String id) {
         // Call without 'id' to trigger exception
-        return "admin/system/accesslog/listAdmAcssLog";
+        return "admin/main/adminMain";
     }
 
     // 5) TypeMismatchException: com/error/typeMismatchError.jsp
     @GetMapping("/typeMismatch.ac")
     public String typeMismatch(@RequestParam("page") int page) {
         // Call with page=abc to trigger type mismatch
-        return "admin/system/accesslog/listAdmAcssLog";
+        return "admin/main/adminMain";
     }
 
     // 6) HttpRequestMethodNotSupportedException: com/error/methodNotSupportedError.jsp
     @PostMapping("/postOnly.ac")
     public String postOnly() {
         // Call this URL with GET method to trigger HttpRequestMethodNotSupportedException
-        return "admin/system/accesslog/listAdmAcssLog";
+        return "admin/main/adminMain";
     }
 
     // 7) AccessDeniedException: com/error/accessDenied.jsp

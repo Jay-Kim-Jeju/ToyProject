@@ -183,10 +183,10 @@ public class AdmMainCtrl {
 
     @RequestMapping({"/toy/admin/main.do"})
     public String main(HttpServletRequest request) throws Exception {
-        LOG_DEBUG.debug("/toy/admin/main.do - redirect to access log");
+        LOG_DEBUG.debug("/toy/admin/main.do");
 
-        // Redirect to System > Access Log page as default admin main page
-        return "redirect:/toy/admin/sys/accesslog/listAdmAcssLog.do";
+        // Return admin main page
+        return "admin/main/adminMain";
     }
 
     // Encrypt Password Test API
