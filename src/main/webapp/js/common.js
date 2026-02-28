@@ -2,77 +2,66 @@
  * common.js
  *
  *
- * 	gfn_startLodingBar			==> 전체 로딩바 시작
- * 	gfn_finishLodingBar			==> 전체 로딩바 종료
- *	adddash						==> 날짜 하이픈 자동 삽입
- *	fn_AjaxError				==> Ajax 에러 처리
- *	fn_AjaxErrorAdmin			==> Ajax 에러 처리(admin)
+ * 	gfn_startLodingBar			==> ??泥? 濡??⑸??????
+ * 	gfn_finishLodingBar			==> ??泥? 濡??⑸??醫?猷?
+ *	adddash						==> ??吏? ?????????? ?쎌??
+ *	fn_AjaxError				==> Ajax ???? 泥?由?
+ *	fn_AjaxErrorAdmin			==> Ajax ???? 泥?由?(admin)
  *  beforeSend : function(xhr)	==> Global Ajax CSRF Injection(ajaxSetup)
- *	fn_checkNumber				==> 숫자만 입력 가능
- *	fn_checkNumerBlur			==> 해당 object 숫자인치 체크
- *	isNumber					==> 수치형 자료인가 검사
- *	getCookie					==> cookie 값 가져오기
- *	setCookie					==> cookie 값 설정
- *	deleteCookie				==> cookie 값 삭제
- *	leadingZeros				==> 자릿수 채우기
- *	fn_chkAll					==> checkbox 전체 선택
- *	fn_chkEach					==> checkbox 개별 선택 시
- *	fn_chkForm					==> 폼 값 체크
- *	fn_validMsg					==> validation 메시지 반환
- *	gfn_chkEmail				==> 이메일 양식 검사
- *	gfn_chkSpace				==> 공백이 있는지 검사
- *	gfn_chkSpecial				==> 특수문자 포함 여부 확인
- *	gfn_chkTel					==> 전화번호 검사 ('-' 포함)
- *	gfn_chkTel2					==> 전화번호 검사2 ('-' 제외)
- *	gfn_chkInt					==> 정수검사
- *	gfn_chkBsnmRegNo			==> 사업자 등록번호 검사
- *	gfn_chkTextNullByName		==>	null인지 검사 (name으로)
- *	gfn_chkTextNullByNameMsg	==>	null인지 검사 (name으로)
- *	gfn_chkTextNullById			==> null인지 검사 (ID으로)
- *	gfn_chkTextNullByIdMsg		==> null인지 검사 (ID으로)
- *	gfn_chkTextNullBySelect		==> null인지 검사 by name (select)
- *	gfn_chkTextEmailByName		==> 이메일 검사 by name
- *	gfn_chkTextSpaceByName		==> 공백 검사 by name
- *	gfn_chkTextTelByName		==> 전화번호 검사 by name
- *	gfn_chkTextTelByNameMsg		==> 전화번호 검사 by name
- *	gfn_chkTextTel2ByNameMsg	==> 전화번호 검사2 by name
- *	gfn_chkTextIntByName		==> 정수 검사 by name
- *	gfn_chkCheckBoxByName		==> null인지 검사 by name (check box)
- * 	gfn_chkCheckBoxById			==> null인지 검사 by id (check box)
- * 	gfn_chkCheckBoxByIdMsg		==> null인지 검사 by id (check box)
- * 	gfn_telHyphen				==> 전화번호 하이픈 추가
- * 	gfn_telDynamicHyphen		==> 전화번호 하이픈 동적추가
- * 	gfn_onlyNumber              ==> 숫자 외 제거
- *  gfn_bsnmRegNoHyphen			==> 사업자등록번호 하이픈 추가
- * 	gfn_bsnmRegNoDynamicHyphen	==> 사업자등록번호 하이픈 동적추가
- * 	gfn_commas					==> 세자리 마다 콤마 추가
- * 	gfn_chkImg					==> 이미지 확장자인지 검사
- * 	gfn_chkImgCtrl				==>
+ *	fn_checkNumber				==> ?レ??留????? 媛??? *	fn_checkNumerBlur			==> ?대?? object ?レ???몄? 泥댄??
+ *	isNumber					==> ??移?????猷??멸? 寃??? *	getCookie					==> cookie 媛?媛??몄?ㅺ?? *	setCookie					==> cookie 媛??ㅼ??
+ *	deleteCookie				==> cookie 媛?????
+ *	leadingZeros				==> ??由???梨??곌?? *	fn_chkAll					==> checkbox ??泥? ????
+ *	fn_chkEach					==> checkbox 媛?蹂? ???? ?? *	fn_chkForm					==> ??媛?泥댄??
+ *	fn_validMsg					==> validation 硫???吏? 諛???
+ *	gfn_chkEmail				==> ?대??????? 寃??? *	gfn_chkSpace				==> 怨듬갚??????吏? 寃??? *	gfn_chkSpecial				==> ?뱀??臾몄?? ?ы?? ?щ? ????
+ *	gfn_chkTel					==> ????踰??? 寃???('-' ?ы??)
+ *	gfn_chkTel2					==> ????踰??? 寃??? ('-' ????)
+ *	gfn_chkInt					==> ????寃??? *	gfn_chkBsnmRegNo			==> ?ъ?????깅?踰??? 寃??? *	gfn_chkTextNullByName		==>	null?몄? 寃???(name?쇰?)
+ *	gfn_chkTextNullByNameMsg	==>	null?몄? 寃???(name?쇰?)
+ *	gfn_chkTextNullById			==> null?몄? 寃???(ID?쇰?)
+ *	gfn_chkTextNullByIdMsg		==> null?몄? 寃???(ID?쇰?)
+ *	gfn_chkTextNullBySelect		==> null?몄? 寃???by name (select)
+ *	gfn_chkTextEmailByName		==> ?대???寃???by name
+ *	gfn_chkTextSpaceByName		==> 怨듬갚 寃???by name
+ *	gfn_chkTextTelByName		==> ????踰??? 寃???by name
+ *	gfn_chkTextTelByNameMsg		==> ????踰??? 寃???by name
+ *	gfn_chkTextTel2ByNameMsg	==> ????踰??? 寃??? by name
+ *	gfn_chkTextIntByName		==> ???? 寃???by name
+ *	gfn_chkCheckBoxByName		==> null?몄? 寃???by name (check box)
+ * 	gfn_chkCheckBoxById			==> null?몄? 寃???by id (check box)
+ * 	gfn_chkCheckBoxByIdMsg		==> null?몄? 寃???by id (check box)
+ * 	gfn_telHyphen				==> ????踰??? ??????異???
+ * 	gfn_telDynamicHyphen		==> ????踰??? ??????????異???
+ * 	gfn_onlyNumber              ==> ?レ?? ????嫄?
+ *  gfn_bsnmRegNoHyphen			==> ?ъ?????깅?踰?????????異???
+ * 	gfn_bsnmRegNoDynamicHyphen	==> ?ъ?????깅?踰?????????????異???
+ * 	gfn_commas					==> ?몄??由?留??? 肄ㅻ? 異???
+ * 	gfn_chkImg					==> ?대?吏? ???????몄? 寃??? * 	gfn_chkImgCtrl				==>
  * 	gfn_chkImgByIdMsg			==>
- * 	gfn_checkPassword			==> 비밀번호 규칙 : 영문 대/소문자, 숫자, 특수문자 조합 10자리 이상
- * 	gfn_removeExceptNumber		==> 숫자 외 제거
- * 	gfn_inputNumberFormat		==> 동적 3자리수 콤마
- * 	gfn_dateAddDash				==> yyyyMMdd -> yyyy-MM-dd 로 변경
- *  gfn_changeRcmmGoodsStatus	==> 추천상품 등록/해제
+ * 	gfn_checkPassword			==> 鍮???踰??? 洹?移? : ??臾? ??/??臾??? ?レ??, ?뱀??臾몄?? 議고?? 10??由? ?댁??
+ * 	gfn_removeExceptNumber		==> ?レ?? ????嫄?
+ * 	gfn_inputNumberFormat		==> ???? 3??由???肄ㅻ?
+ * 	gfn_dateAddDash				==> yyyyMMdd -> yyyy-MM-dd 濡?蹂?寃? *  gfn_changeRcmmGoodsStatus	==> 異?泥????? ?깅?/?댁??
  *******************************************************************************************************/
 
-// 로딩화면 시작 -
+// 濡?????硫? ???? -
 function gfn_startLodingBar() {
     var html =
         '<div class="loading-bar">' +
-        '<img src="/images/admin/icon/basic/loading.gif" alt="로딩중">' +
+        '<img src="/images/admin/icon/basic/loading.gif" alt="濡??⑹??>' +
         '</div>';
 
     $('body').append(html);
 }
 
-// 로딩화면 종료 - 
+// 濡?????硫? 醫?猷? - 
 function gfn_finishLodingBar() {
     $('.loading-bar').remove();
 }
 
 
-/* 날짜 하이픈 자동 삽입 */
+/* ??吏? ?????????? ?쎌?? */
 function adddash(gap, a1, a2) {
     if ( event.keyCode != 8 ) {
         if ( gap.value.length==a1 ) gap.value=gap.value+"-";
@@ -81,7 +70,7 @@ function adddash(gap, a1, a2) {
 }
 
 /**
- * Ajax 에러 처리
+ * Ajax ???? 泥?由?
  * @param request
  * @param status
  * @param error
@@ -92,13 +81,12 @@ function fn_AjaxError(request, status, error, loginPath){
     }
 
     if (request.status == "510"){
-        alert(msgMap.get('string.errorOccurredLoginSessionExpired'));	/*에러가 발생했습니다. 로그인세션이 만료되었습니다.*/
+        alert(msgMap.get('string.errorOccurredLoginSessionExpired'));	/*???ш? 諛???????????. 濡?洹??몄?????? 留?猷??????듬????*/
         location.replace(loginPath);
         return;
     }
 
-    // 대부분의 카테고리에서 아래 오류 메시지가 자주 발생되므로 일단 주석 처리함
-    // alert("시스템 오류\n관리자에게 문의해주세요." );
+    // ??遺?遺??? 移댄??怨?由????? ???? ?ㅻ? 硫???吏?媛? ??二? 諛???????濡??쇰?? 二쇱?? 泥?由???    // alert("???????ㅻ?\n愿?由ъ????寃? 臾몄???댁＜?몄??." );
 
     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 }
@@ -130,11 +118,11 @@ function fn_HandleAdminAuthRedirect(request, loginPath) {
 
     var reason = ((res.reason || "") + "").toUpperCase();
     if (reason === "LOGIN_REQUIRED") {
-        alert("로그인 세션이 만료되었거나 로그인이 필요합니다.");
+        alert("濡?洹????몄????留?猷?????嫄곕?? 濡?洹??몄?? ?????⑸????");
     } else if (reason === "AUTH_CHANGED") {
-        alert("권한 정보가 변경되어 다시 로그인합니다.");
+        alert("沅??? ??蹂닿? 蹂?寃쎈?????ㅼ?? 濡?洹??명??????.");
     } else if (reason === "FORBIDDEN") {
-        alert("해당 기능에 대한 권한이 없습니다.");
+        alert("?대?? 湲곕????????沅?????????????.");
     }
 
     location.replace(res.redirectUrl || loginPath);
@@ -177,7 +165,7 @@ function fn_HandleAdminAuthRedirect(request, loginPath) {
 
 
 /**
- * Ajax 에러 처리(admin)
+ * Ajax ???? 泥?由?(admin)
  * @param request
  * @param status
  * @param error
@@ -188,19 +176,18 @@ function fn_AjaxErrorAdmin(request, status, error){
     }
 
     if(request.status == "500"){
-        alert("로그인 정보가 없습니다. 로그인 후 진행하시기 바랍니다.");
+        alert("濡?洹?????蹂닿? ????????. 濡?洹?????吏???????湲?諛???????.");
         //location.reload(true);
     } else {
-        //alert("에러가 발생했습니다!");
+        //alert("???ш? 諛???????????!");
         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
     }
 }
 
 /**
- * 숫자만 입력 가능
- */
+ * ?レ??留????? 媛??? */
 function fn_checkNumber() {
-    //좌우 방향키, 백스페이스, 딜리트, 탭키에 대한 예외
+    //醫??? 諛⑺???? 諛깆???????? ??由??? ??????????????
     if(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39|| event.keyCode == 46 ) return;
 
     if( (event.keyCode < 48 ) || ((event.keyCode > 57) && (event.keyCode < 96)) || (event.keyCode > 105 )) {
@@ -209,19 +196,19 @@ function fn_checkNumber() {
 }
 
 /**
- * 해당 object 숫자인치 체크
+ * ?대?? object ?レ???몄? 泥댄??
  * @param obj
  * @returns {Boolean}
  */
 function fn_checkNumerBlur(obj){
     if(!isNumber(obj.value)){
-        alert("숫자만 입력 가능합니다.");
+        alert("?レ??留????? 媛??ν??????.");
         obj.focus();
         return false;
     }
 }
 
-/* 수치형 자료인가 검사 */
+/* ??移?????猷??멸? 寃???*/
 function isNumber(str){
     var i;
     if (str.length == 0) return true;
@@ -261,8 +248,6 @@ function deleteCookie(cookieName){
     expireDate.setDate(expireDate.getDate() - 1);
     document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
 }
-
-// 자릿수 채우기
 function leadingZeros(n, digits) {
     var zero = '';
     n = n.toString();
@@ -274,15 +259,13 @@ function leadingZeros(n, digits) {
     return zero + n;
 }
 
-// 전체 선택
+// ??泥? ????
 function fn_chkAll(chkObj) {
     if (chkObj.checked)
         $(".chkSel").prop("checked", true);
     else
         $(".chkSel").prop("checked", false);
 }
-
-//개별 선택 시
 function fn_chkEach(chkObj) {
     var chkFlag = true;
     $(".chkSel").each(function() {
@@ -296,68 +279,68 @@ function fn_chkEach(chkObj) {
 }
 
 /***
- * 폼 값 체크 (2025-12-07)
- * note : 폼 타이틀에 'required' 포함되고 data-field="개체명" 설정
- 숫자만 체크 시 input class에 'number' 추가
- 이메일 체크 시 input class에 'email' 추가
- * 예제 : <div class="tit required" data-field="psncpa">정원</div>
+ * ??媛?泥댄?? (2025-12-07)
+ * note : ?????댄???'required' ?ы????怨? data-field="媛?泥대?? ?ㅼ??
+ ?レ??留?泥댄?? ??input class??'number' 異???
+ ?대???泥댄?? ??input class??'email' 異???
+ * ???? : <div class="tit required" data-field="psncpa">????</div>
  *        <input class="width40 number" type="text" name="psncpa">
  ***/
 function fn_chkForm() {
     var msg_str = '';
 
-    // null 또는 공백 체크
+    // null ???? 怨듬갚 泥댄??
     $('.required').each(function() {
-        var obj = $('[name="' + $(this).data('field') + '"]');  // 배열name 을 받지 못해서 수정 - 
+        var obj = $('[name="' + $(this).data('field') + '"]');  // 諛곗??name ??諛??? 紐삵???????? - 
 
-        if (obj.attr('type') == 'text' || obj.attr('type') == 'tel' || obj.attr('type') == 'password' || obj.prop('tagName') == 'TEXTAREA' || obj.attr('type') == 'number' || obj.attr('type') == 'email') {	// text 타입 또는 textarea 타입 이면...
+        if (obj.attr('type') == 'text' || obj.attr('type') == 'tel' || obj.attr('type') == 'password' || obj.prop('tagName') == 'TEXTAREA' || obj.attr('type') == 'number' || obj.attr('type') == 'email') {	// text ???????? textarea ?????대㈃...
             if ($.trim(obj.val()) == '') {
-                msg_str = '"' + $(this).text() + '" 을(를) 입력해 주세요.';
+                msg_str = '"' + $(this).text() + '" ??瑜? ??????二쇱????';
                 obj.focus();
                 return false;
             }
         }
-        else if (obj.prop('tagName') == 'SELECT' && obj.val() == '') {	// select 타입 이면...
-            msg_str = '"' + $(this).text() + '" 을(를) 선택해 주세요.';
+        else if (obj.prop('tagName') == 'SELECT' && obj.val() == '') {	// select ?????대㈃...
+            msg_str = '"' + $(this).text() + '" ??瑜? ??????二쇱????';
             obj.focus();
             return false;
         }
-        else if (obj.attr('type') == 'file' && obj.val() == '' && obj.is(":disabled") == false) {	// file 타입 검사 - 
-            msg_str = '"' + $(this).text() + '" 을(를) 선택해 주세요.';
+        else if (obj.attr('type') == 'file' && obj.val() == '' && obj.is(":disabled") == false) {	// file ????寃???- 
+            msg_str = '"' + $(this).text() + '" ??瑜? ??????二쇱????';
             obj.focus();
             return false;
         }
-        else if (obj.attr('type') == 'radio' && obj.is(':checked') == false) {	// radio 타입 이면...
-            msg_str = '"' + $(this).text() + '" 을(를) 선택해 주세요.';
+        else if (obj.attr('type') == 'radio' && obj.is(':checked') == false) {	// radio ?????대㈃...
+            msg_str = '"' + $(this).text() + '" ??瑜? ??????二쇱????';
             obj.focus();
             return false;
         }
-        else if (obj.attr('type') == 'checkbox' && obj.is(':checked') == false) {	// checkbox 타입 이면...
-            msg_str = '"' + $(this).text() + '" 을(를) 체크해 주세요.';
+        else if (obj.attr('type') == 'checkbox' && obj.is(':checked') == false) {	// checkbox ?????대㈃...
+            msg_str = '"' + $(this).text() + '" ??瑜? 泥댄????二쇱????';
             obj.focus();
             return false;
         }
     });
 
-    // 숫자 체크
-    if (msg_str == '') {	// 출력 메세지가 없으면...
+    // ?レ?? 泥댄??
+    if (msg_str == '') {	// 異??? 硫??몄?媛? ???쇰??..
         $('.number').each(function() {
             if ($(this).val() != '') {
                 var chkVal = $(this).val().replace(/,/g, '');
                 if ($.isNumeric(chkVal) == false) {
-                    msg_str = fn_validMsg($(this), '숫자만 입력해 주세요.');
+                    msg_str = fn_validMsg($(this), '?レ??留???????二쇱????');
                     $(this).focus();
                     return false;
                 } else if ($(this).data('min') != undefined && $(this).data('max') != undefined && (chkVal > $(this).data('max') || chkVal < $(this).data('min'))) {
-                    msg_str = fn_validMsg($(this), $(this).data('min') + ' ~ ' + $(this).data('max') + ' 범위로 입력해 주세요.');
+                    msg_str = fn_validMsg($(this), $(this).data('min') + ' ~ ' + $(this).data('max') + ' 踰???濡???????二쇱????');
                     $(this).focus();
                     return false;
                 } else if ($(this).data('min') != undefined && chkVal < $(this).data('min')) {
-                    msg_str = fn_validMsg($(this), $(this).data('min') + ' 이상으로 입력해 주세요.');
+                    msg_str = fn_validMsg($(this), $(this).data('min') + ' ?댁???쇰? ??????二쇱????');
                     $(this).focus();
                     return false;
                 } else if ($(this).data('max') != undefined && chkVal < $(this).data('max')) {
-                    msg_str = fn_validMsg($(this), $(this).data('max') + ' 이하로 입력해 주세요.');
+                    msg_str = fn_validMsg($(this), $(this).data('max') + ' ?댄??濡???????二쇱????');
                     $(this).focus();
                     return false;
                 }
@@ -365,52 +348,52 @@ function fn_chkForm() {
         });
     }
 
-    // 전화번호 체크
-    if (msg_str == '') {	// 출력 메세지가 없으면...
+    // ????踰??? 泥댄??
+    if (msg_str == '') {	// 異??? 硫??몄?媛? ???쇰??..
         $('.tel').each(function() {
             var telNum = $(this).val()
             if ($(this).val() != '' && gfn_chkTel(telNum) == false) {
-                msg_str = msg_str = fn_validMsg($(this), '형식을 확인해 주세요.\n(ex. 012-3456-7890)');
+                msg_str = msg_str = fn_validMsg($(this), '????????????二쇱????\n(ex. 012-3456-7890)');
                 $(this).focus();
                 return false;
             }
         });
     }
 
-    // 이메일 체크
-    if (msg_str == '') {	// 출력 메세지가 없으면...
+    // ?대???泥댄??
+    if (msg_str == '') {	// 異??? 硫??몄?媛? ???쇰??..
         $('.email').each(function() {
             if ($(this).val() != '' && gfn_chkEmail($(this).val()) == false) {
-                msg_str = msg_str = fn_validMsg($(this), '이메일 형식을 확인해 주세요.\n(ex. abs@abc.com)');
+                msg_str = msg_str = fn_validMsg($(this), '?대???????????????二쇱????\n(ex. abs@abc.com)');
                 $(this).focus();
                 return false;
             }
         });
     }
 
-    // 사업자 등록번호 체크
-    if (msg_str == '') {	// 출력 메세지가 없으면...
+    // ?ъ?????깅?踰??? 泥댄??
+    if (msg_str == '') {	// 異??? 硫??몄?媛? ???쇰??..
         $('.bsnmRegNo').each(function() {
             if ($(this).val() != '' && gfn_chkBsnmRegNo($(this).val()) == false) {
-                msg_str = msg_str = fn_validMsg($(this), '형식을 확인해 주세요.\n(ex. 000-00-00000)');
+                msg_str = msg_str = fn_validMsg($(this), '????????????二쇱????\n(ex. 000-00-00000)');
                 $(this).focus();
                 return false;
             }
         });
     }
 
-    // 규정 체크
-    if (msg_str == '') {	// 출력 메세지가 없으면...
+    // 洹??? 泥댄??
+    if (msg_str == '') {	// 異??? 硫??몄?媛? ???쇰??..
         $('.chkRequiredRule').each(function() {
             if ($(this).prop("checked") == false) {
-                msg_str = $(this).data('title') + '을(를) 확인 후 체크해 주세요.';
+                msg_str = $(this).data('title') + '??瑜? ???? ??泥댄????二쇱????';
                 $("#" + $(this).data('chkid')).attr("tabindex", -1).focus();
                 return false;
             }
         });
     }
 
-    if (msg_str != '') {	// 출력 메세지가 있으면...
+    if (msg_str != '') {	// 異??? 硫??몄?媛? ???쇰??..
         alert(msg_str);
         return false;
     } else {
@@ -418,7 +401,7 @@ function fn_chkForm() {
     }
 }
 
-// validation 메시지 반환
+// validation 硫???吏? 諛???
 function fn_validMsg(obj, msg) {
     var titStr = "";
     var compStr = obj.attr("name");
@@ -436,11 +419,8 @@ function fn_validMsg(obj, msg) {
         }
     });
 
-    return '"' + titStr + '" 은(는) ' + msg;
+    return '"' + titStr + '" ??(?? ' + msg;
 }
-
-
-//이메일 양식 검사
 function gfn_chkEmail(email) {
     var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
     if (exptext.test(email) == false) {
@@ -448,8 +428,6 @@ function gfn_chkEmail(email) {
     }
     return true;
 }
-
-//공백이 있는지 검사
 function gfn_chkSpace(textVal) {
     var blank_pattern = /[\s]/g;
     if (blank_pattern.test(textVal) == true) {
@@ -458,7 +436,7 @@ function gfn_chkSpace(textVal) {
     return true;
 }
 
-//특수문자 포함 여부
+//?뱀??臾몄?? ?ы?? ?щ?
 function gfn_chkSpecial(str) {
     var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
     if (special_pattern.test(str) == true) {
@@ -469,7 +447,7 @@ function gfn_chkSpecial(str) {
 }
 
 
-//전화번호 검사 ('-' 포함)
+//????踰??? 寃???('-' ?ы??)
 function gfn_chkTel(textVal) {
     var mobile_pattern = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-[0-9]{3,4}-[0-9]{4}$/;		// ex) 010-1234-5678
     var tel_pattern = /^(02|0[3-6]{1}[1-5]{1})-?([0-9]{3,4})-?[0-9]{4}$/;					// ex) 02-1234-5678
@@ -478,22 +456,22 @@ function gfn_chkTel(textVal) {
     var rep3_pattern = /^(070|(050[2-8]{0,1})|080|013)-?([0-9]{3,4})-?[0-9]{4}$/;			// ex) 070-1234-5678
 
 
-    if (mobile_pattern.test(textVal)) {			// 핸드폰 체크...
+    if (mobile_pattern.test(textVal)) {			// ?몃????泥댄??...
         return true;
-    } else if (tel_pattern.test(textVal)) {		// 일반전화 체크...
+    } else if (tel_pattern.test(textVal)) {		// ?쇰????? 泥댄??...
         return true;
-    } else if (rep_pattern.test(textVal)) {		// 대표전화1 (ex. 1588-1588) 체크...
+    } else if (rep_pattern.test(textVal)) {		// ???????? (ex. 1588-1588) 泥댄??...
         return true;
-    } else if (rep2_pattern.test(textVal)) { 	// 대표전화2 (ex. 02-1588-1588) 체크...
+    } else if (rep2_pattern.test(textVal)) { 	// ???????? (ex. 02-1588-1588) 泥댄??...
         return true;
-    } else if (rep3_pattern.test(textVal)) {	// 대표전화3 (ex. 070-1234-5678) 체크....
+    } else if (rep3_pattern.test(textVal)) {	// ???????? (ex. 070-1234-5678) 泥댄??....
         return true;
     }
 
     return false;
 }
 
-//전화번호 검사 ('-' 제외)
+//????踰??? 寃???('-' ????)
 function gfn_chkTel2(textVal) {
     var mobile_pattern = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})[0-9]{3,4}[0-9]{4}$/;	// ex) 01012345678
     var tel_pattern = /^(02|0[3-6]{1}[1-5]{1})?([0-9]{3,4})?[0-9]{4}$/;					// ex) 0212345678
@@ -501,22 +479,20 @@ function gfn_chkTel2(textVal) {
     var rep2_pattern = /^(02|0[3-6]{1}[1-5]{1})?(15|16|18)[0-9]{2}?[0-9]{4}$/;			// ex) 0215881588
     var rep3_pattern = /^(070|(050[2-8]{0,1})|080|013)?([0-9]{3,4})?[0-9]{4}$/;			// ex) 07012345678
 
-    if (mobile_pattern.test(textVal)) {			// 핸드폰 체크...
+    if (mobile_pattern.test(textVal)) {			// ?몃????泥댄??...
         return true;
-    } else if (tel_pattern.test(textVal)) {		// 일반전화 체크...
+    } else if (tel_pattern.test(textVal)) {		// ?쇰????? 泥댄??...
         return true;
-    } else if (rep_pattern.test(textVal)) {		// 대표전화1 (ex. 1588-1588) 체크...
+    } else if (rep_pattern.test(textVal)) {		// ???????? (ex. 1588-1588) 泥댄??...
         return true;
-    } else if (rep2_pattern.test(textVal)) { 	// 대표전화2 (ex. 02-1588-1588) 체크...
+    } else if (rep2_pattern.test(textVal)) { 	// ???????? (ex. 02-1588-1588) 泥댄??...
         return true;
-    } else if (rep3_pattern.test(textVal)) {	// 대표전화3 (ex. 070-1234-5678) 체크....
+    } else if (rep3_pattern.test(textVal)) {	// ???????? (ex. 070-1234-5678) 泥댄??....
         return true;
     }
 
     return false;
 }
-
-//정수검사
 function gfn_chkInt(str) {
     var special_pattern = /^[0-9]{1,}$/;
     if (special_pattern.test(str) == true) {
@@ -525,8 +501,6 @@ function gfn_chkInt(str) {
         return false;
     }
 }
-
-// 사업자 등록번호 검사
 function gfn_chkBsnmRegNo(bsnmRegNo) {
     var numberMap = bsnmRegNo.replace(/-/gi, '').split('').map(function (d){
         return parseInt(d, 10);
@@ -548,18 +522,18 @@ function gfn_chkBsnmRegNo(bsnmRegNo) {
     return false;
 }
 
-//null인지 검사 (name으로)
+//null?몄? 寃???(name?쇰?)
 function gfn_chkTextNullByName(name, text) {
-    //return gfn_chkTextNullByNameMsg(name, text + "은(/는) 필수입력값입니다.");
+    //return gfn_chkTextNullByNameMsg(name, text + "??(/?? ???????κ???????.");
     if ($("[name='" + name + "']").val() == "") {
-        alert(text + "은(/는) 필수입력값입니다.");
+        alert(text + "??(/?? ???????κ???????.");
         $("[name='" + name + "']").focus();
         return false;
     }
     return true;
 }
 
-//null인지 검사 (name으로)
+//null?몄? 寃???(name?쇰?)
 function gfn_chkTextNullByNameMsg(name, msg) {
     if ($("[name='" + name + "']").val() == "") {
         alert(msg);
@@ -571,7 +545,7 @@ function gfn_chkTextNullByNameMsg(name, msg) {
 
 function gfn_chkTextNullById(id, text) {
     if ($("#" + id).val() == "") {
-        alert(text + "은(/는) 필수입력값입니다.");
+        alert(text + "??(/?? ???????κ???????.");
         $("#" + id).focus();
         return false;
     }
@@ -589,14 +563,12 @@ function gfn_chkTextNullByIdMsg(id, msg) {
 
 function gfn_chkTextNullBySelect(name, text) {
     if ($("[name='" + name + "']").val() == "") {
-        alert(text + "을(/를) 선택해 주세요.");
+        alert(text + "??/瑜? ??????二쇱????");
         $("[name='" + name + "']").focus();
         return false;
     }
     return true;
 }
-
-//이메일 검사
 function gfn_chkTextEmailByName(name, text) {
     var val = $("[name='" + name + "']").val();
     if(val==''){
@@ -604,14 +576,12 @@ function gfn_chkTextEmailByName(name, text) {
     }
 
     if (gfn_chkEmail(val) == false) {
-        alert(text + " 형식이 올바르지 않습니다.");
+        alert(text + " ???????щ?瑜댁? ????????.");
         $("[name='" + name + "']").focus();
         return false;
     }
     return true;
 }
-
-//공백검사
 function gfn_chkTextSpaceByName(name, text) {
     var val = $("[name='" + name + "']").val();
     if(val==''){
@@ -619,16 +589,14 @@ function gfn_chkTextSpaceByName(name, text) {
     }
 
     if (gfn_chkSpace(val) == false) {
-        alert(text + "은(/는) 공백을 사용할 수 없습니다.");
+        alert(text + "??(/?? 怨듬갚???ъ??????????????.");
         $("[name='" + name + "']").focus();
         return false;
     }
     return true;
 }
-
-//전화번호 검사
 function gfn_chkTextTelByName(name, text) {
-    return gfn_chkTextTelByNameMsg(name, text + "은(/는) 전화번호 형식을 확인해 주세요.\n(ex. 000-0000-0000)");
+    return gfn_chkTextTelByNameMsg(name, text + "??(/?? ????踰??? ????????????二쇱????\n(ex. 000-0000-0000)");
     /*
     var val = $("[name='" + name + "']").val();
     if(val==''){
@@ -636,7 +604,7 @@ function gfn_chkTextTelByName(name, text) {
     }
 
     if (gfn_chkTel(val) == false) {
-        alert(text + "은(/는) 전화번호 형식이 안입니다\n(000-0000-0000 형식)");
+        alert(text + "??(/?? ????踰??? ??????????????\n(000-0000-0000 ????)");
         $("[name='" + name + "']").focus();
         return false;
     }
@@ -672,8 +640,6 @@ function gfn_chkTextTel2ByNameMsg(name, msg) {
     }
     return true;
 }
-
-//정수 검사
 function gfn_chkTextIntByName(name, text) {
     var val = $("[name='" + name + "']").val();
     if(val==''){
@@ -681,7 +647,7 @@ function gfn_chkTextIntByName(name, text) {
     }
 
     if (gfn_chkInt(val) == false) {
-        alert(text + "은(/는) 숫자만 입력 하세요.");
+        alert(text + "??(/?? ?レ??留????? ??????");
         $("[name='" + name + "']").focus();
         return false;
     }
@@ -691,7 +657,7 @@ function gfn_chkTextIntByName(name, text) {
 
 function gfn_chkCheckBoxByName(name, text) {
     if ($("[name='" + name + "']").is(":checked") == false) {
-        alert(text + "은(/는) 필수사항 입니다.");
+        alert(text + "??(/?? ?????ы?? ??????");
         $("[name='" + name + "']").focus();
         return false;
     }
@@ -699,7 +665,7 @@ function gfn_chkCheckBoxByName(name, text) {
 }
 
 function gfn_chkCheckBoxById(id, text) {
-    return gfn_chkCheckBoxByIdMsg(id, text + "은(/는) 필수사항 입니다.");
+    return gfn_chkCheckBoxByIdMsg(id, text + "??(/?? ?????ы?? ??????");
 }
 
 function gfn_chkCheckBoxByIdMsg(id, msg) {
@@ -711,12 +677,12 @@ function gfn_chkCheckBoxByIdMsg(id, msg) {
     return true;
 }
 
-//전화번호 하이픈 추가 - 
+//????踰??? ??????異??? - 
 function gfn_telHyphen(x) {
     return x != '' && x != null ? x.toString().replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") : '';
 }
 
-//전화번호 하이픈 동적추가 - 
+//????踰??? ??????????異??? - 
 function gfn_telDynamicHyphen(th) {
     var telVal = $(th).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-");
     if (telVal.length > 7 && telVal.indexOf("-") == -1) {
@@ -725,30 +691,27 @@ function gfn_telDynamicHyphen(th) {
     $(th).val( telVal );
 }
 
-//숫자 외 제거 - 
+//?レ?? ????嫄? - 
 function gfn_onlyNumber(str) {
     var regex = /[^0-9]/g;
     return str.replace(regex, "");
 }
 
-//사업자 등록번호 하이픈 추가
+//?ъ?????깅?踰??? ??????異???
 function gfn_bsnmRegNoHyphen(x) {
     return x != '' && x != null ? x.toString().replace(/([0-9]{3})([0-9]+)?([0-9]{5})$/,"$1-$2-$3").replace("--", "-") : '';
 }
 
-//사업자 등록번호 하이픈 추가
+//?ъ?????깅?踰??? ??????異???
 function gfn_bsnmRegNoDynamicHyphen(th) {
     $(th).val( $(th).val().replace(/[^0-9]/g, "").replace(/([0-9]{3})([0-9]+)?([0-9]{5})$/,"$1-$2-$3").replace("--", "-") );
 }
 
 
-//세자리 마다 콤마
+//?몄??由?留??? 肄ㅻ?
 function gfn_commas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-
-//이미지 확장자인지 검사
 function gfn_chkImg(filePath) {
     var _fileLen = filePath.length;
     var _lastDot = filePath.lastIndexOf('.');
@@ -772,7 +735,7 @@ function gfn_chkImgCtrl(name, msg){
 
     for (var i in list) {
         if(list[i] == ""){
-            //없으면 통과
+            //???쇰???듦낵
         }else{
             if(gfn_chkImg(list[i]) == false){
                 alert(msg);
@@ -816,17 +779,17 @@ function gfn_checkPassword(str){
     return true;
 }
 
-// 비밀번호 규칙 : 영문 소문자, 숫자, 특수문자 조합 6자리 이상
+// 鍮???踰??? 洹?移? : ??臾? ??臾??? ?レ??, ?뱀??臾몄?? 議고?? 6??由? ?댁??
 function gfn_checkPassword2(str) {
     var reg = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{6,}$/;
 
     if (gfn_chkSpace(str) == false) {
-        alert("비밀번호에 공백을 사용할 수 없습니다.");
+        alert("鍮???踰?????怨듬갚???ъ??????????????.");
         return false;
     }
 
     if (reg.test(str) == false) {
-        alert("비밀번호는 영문 소문자, 숫자, 특수문자 조합으로 6자리 이상이어야 합니다.");
+        alert("鍮???踰???????臾? ??臾??? ?レ??, ?뱀??臾몄?? 議고???쇰? 6??由? ?댁???댁?????⑸????");
         return false;
     }
 
@@ -834,7 +797,7 @@ function gfn_checkPassword2(str) {
 }
 
 
-// 숫자 외 제거
+// ?レ?? ????嫄?
 function gfn_removeExceptNumber(obj) {
     var i = obj;
     var startPosition = i.value.length - i.selectionEnd;
@@ -843,7 +806,7 @@ function gfn_removeExceptNumber(obj) {
     return i.setSelectionRange(len, len);
 }
 
-// 숫자 외 제거 및 3자리수 동적 콤마 - 
+// ?レ?? ????嫄? 諛?3??由??????? 肄ㅻ? - 
 function gfn_inputNumberFormat(obj) {
     var i = obj;
 
@@ -856,11 +819,8 @@ function gfn_inputNumberFormat(obj) {
     return i.setSelectionRange(len, len);
 
 }
-
-
-//날짜(8자리) 년-월-일로 변경
 function gfn_dateAddDash(date) {
-    if (date == undefined || date == null || date == "") {	// 값이 없으면...
+    if (date == undefined || date == null || date == "") {	// 媛??? ???쇰??..
         return "";
     } else {
         return date.substr(0, 4) + "-" + date.substr(4, 2) + "-" + date.substr(6, 2);
@@ -869,10 +829,10 @@ function gfn_dateAddDash(date) {
 
 
 /**
- * JsGrid 날짜 포맷 (20220601 -> 2022-06-01)
- * 사용법:
- *  1. jquery 초기화 함수에서 이 함수 호출
- *  2. JsGrid fields에서 [type:"date"] 으로 입력
+ * JsGrid ??吏? ?щ㎎ (20220601 -> 2022-06-01)
+ * ?ъ?⑸??
+ *  1. jquery 珥?湲????⑥?????? ???⑥?? ?몄?
+ *  2. JsGrid fields???? [type:"date"] ?쇰? ????
  */
 function gfn_initJsGridDateType() {
     var MyDateField = function(config) {
@@ -914,10 +874,10 @@ function gfn_initJsGridDateType() {
 
 
 /**
- * JsGrid 전화번호 포맷 (01012341234 -> 010-1234-1234)
- * 사용법:
- *  1. jquery 초기화 함수에서 이 함수 호출
- *  2. JsGrid fields에서 [type:"phone"] 으로 입력
+ * JsGrid ????踰??? ?щ㎎ (01012341234 -> 010-1234-1234)
+ * ?ъ?⑸??
+ *  1. jquery 珥?湲????⑥?????? ???⑥?? ?몄?
+ *  2. JsGrid fields???? [type:"phone"] ?쇰? ????
  */
 function gfn_initJsGridPhoneType() {
     var MyPhoneField = function(config) {
@@ -940,11 +900,9 @@ function gfn_initJsGridPhoneType() {
 }
 
 /**
- * 전화번호 포맷
- * 기존 전화번호 값을 '-'이 붙은 형태로 변경
- * 모든 동일한 셀렉터 일괄 적용 하도록 처리
- * 사용전 libphonenumber-js.min.js 추가해 주세요
- */
+ * ????踰??? ?щ㎎
+ * 湲곗〈 ????踰??? 媛??? '-'??遺??? ????濡?蹂?寃? * 紐⑤?? ???????????? ?쇨? ???? ????濡?泥?由?
+ * ?ъ????libphonenumber-js.min.js 異?????二쇱???? */
 function gfn_formatPhoneNumber(obj) {
     var target = $(obj);
     if (target.is('input')) {
@@ -959,8 +917,8 @@ function gfn_formatPhoneNumber(obj) {
 }
 
 /**
- * 상품관리 > 추천상품 등록|해제
- * 상품 목록에서 추천상품 여부 checkbox 선택으로 등록|해제 설정
+ * ????愿?由?> 異?泥????? ?깅?|?댁??
+ * ???? 紐⑸????? 異?泥????? ?щ? checkbox ?????쇰? ?깅?|?댁?? ?ㅼ??
  */
 /*
 function gfn_changeRcmmGoodsStatus(chk, goodsUuid, goodsSe){
@@ -970,8 +928,7 @@ function gfn_changeRcmmGoodsStatus(chk, goodsUuid, goodsSe){
 
     console.log(goodsSe);
 
-    // 추천 상품 상태변경
-    var url = CONTEXT_PATH + "/toy/goods/updateGoodsRcmmStatusAjax.doax";
+    // 異?泥? ???? ????蹂?寃?    var url = CONTEXT_PATH + "/toy/goods/updateGoodsRcmmStatusAjax.doax";
 
     $.ajax({
         type: 'GET',
@@ -984,8 +941,8 @@ function gfn_changeRcmmGoodsStatus(chk, goodsUuid, goodsSe){
                 return;
             }
 
-            var statusMsg = (goodsRcmmYn == "Y") ? "으로 설정" : " 설정 해제";
-            alert("추천상품"+statusMsg+" 되었습니다");
+            var statusMsg = (goodsRcmmYn == "Y") ? "?쇰? ?ㅼ??" : " ?ㅼ?? ?댁??";
+            alert("異?泥?????"+statusMsg+" ?????듬????);
         },
         error: fn_AjaxError
     });
@@ -994,20 +951,18 @@ function gfn_changeRcmmGoodsStatus(chk, goodsUuid, goodsSe){
 
 
 /****************************
- * 자동 로그인
- */
+ * ???? 濡?洹??? */
 function fn_autoLogin(userUid){
-    console.log("--fn_autoLogin call");
+        console.log("--fn_autoLogin already logged in");
 
     if(userUid!=''){
-        //로그인 되있으면
-
-        console.log("--fn_autoLogin 이미로그인");
+        //濡?洹????????쇰㈃
+        console.log("--fn_autoLogin already logged in");
         return false;
     }
 
     if(localStorage.getItem("autoLogin_yn") != "Y"){
-        console.log("--fn_autoLogin 자동로그인 체크 안됨");
+        console.log("--fn_autoLogin already logged in");
 
         return false;
     }
@@ -1021,12 +976,12 @@ function fn_autoLogin(userUid){
     var cntnStorageSe = "pc";
 
 
-    var hw = deviceOSCheck();
+    var hw = fn_chkOS();
     if (hw == "and") {
         //tknCertkey = android.getTokenId();
         cntnStorageSe = "and";
     }else if (hw == "ios") {
-        //처리 할꺼!
+        //泥?由? ??爰?!
 
         cntnStorageSe = "ios";
     }
@@ -1048,7 +1003,7 @@ function fn_autoLogin(userUid){
             xhr.setRequestHeader(header, token);
         },
         success: function(data) {
-            //로그인 성공이면
+            //濡?洹????깃났?대㈃
             if(data.result == "Y") {
 
                 //localStorage.setItem("autoLogin_yn", "Y");
@@ -1061,28 +1016,28 @@ function fn_autoLogin(userUid){
 
                 //location.href = data.returnURL;
                 //location.href = $("#returnURL").val();
-                //console.log("자동 로그인 성공");
+                //console.log("???? 濡?洹????깃났");
                 window.location.reload();
 
 
             }
-            //로그인 실패이면
+            //濡?洹????ㅽ???대㈃
             else {
                 //alert(data.message);
-                console.log("자동 로그인 실패");
+                console.log("???? 濡?洹????ㅽ??");
             }
         },
         error: function(request, status, error, loginPath) {
             if (request.status == "510") {
-                alert(msgMap.get('string.errorOccurredLoginSessionExpired'));	/*에러가 발생했습니다. 로그인세션이 만료되었습니다.*/
+                alert(msgMap.get('string.errorOccurredLoginSessionExpired'));	/*???ш? 諛???????????. 濡?洹??몄?????? 留?猷??????듬????*/
                 location.replace(loginPath);
                 return false;
             } else if (request.status == "403") {
-                alert(msgMap.get('string.dontHaveAccess'));	/*접근 권한이 없습니다.*/
+                alert(msgMap.get('string.dontHaveAccess'));	/*??洹? 沅?????????????.*/
                 return false;
             }
 
-            alert(msgMap.get('string.systemErrorPleaseContactAdministrator'));	/*시스템 오류\n관리자에게 문의해주세요.*/
+            alert(msgMap.get('string.systemErrorPleaseContactAdministrator'));	/*???????ㅻ?\n愿?由ъ????寃? 臾몄???댁＜?몄??.*/
         }
     });
 }
@@ -1091,25 +1046,23 @@ function fn_autoLogin(userUid){
 function fn_chkOS(){
 
     var hw = "";
-    var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+    var varUA = navigator.userAgent.toLowerCase(); //userAgent 媛??산린
 
     /*
     if("${Constant.APP_MODE}" == "test"){
-        //테스트 모드
+        //??????紐⑤??
         hw = "";
 
     }else{
 	*/
 
     if ( varUA.indexOf('android') > -1) {
-        //안드로이드
-        hw = "and";
+        //????濡?????        hw = "and";
     } else if ( varUA.indexOf("iphone") > -1||varUA.indexOf("ipad") > -1||varUA.indexOf("ipod") > -1 ) {
         //IOS
         hw = "ios";
     } else {
-        //아이폰, 안드로이드 외
-        hw = "";
+        //?????? ????濡???????        hw = "";
     }
 
     //}

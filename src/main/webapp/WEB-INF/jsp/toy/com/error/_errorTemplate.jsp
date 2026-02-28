@@ -1,49 +1,37 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: bigbe
-  Date: 2025-12-09
-  Time: 오전 4:21
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+﻿<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8" />
     <title>
         <spring:message code="${param.titleCode}" text="Error" />
     </title>
 
-    <!-- Same resources as root error.jsp -->
-    <link rel="icon" href="${pageContext.request.contextPath}/images/com/favicon.ico">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mw/import.css?jsCssVer=${jsCssVer}" />
-
-    <script src="${pageContext.request.contextPath}/js/com/jquery-3.4.1.js"></script>
-    <script src="${pageContext.request.contextPath}/js/com/jquery-ui-1.12.1.js"></script>
-    <script src="${pageContext.request.contextPath}/js/com/swiper-4.5.0.js"></script>
-    <script src="${pageContext.request.contextPath}/js/mw/html-func.js?jsCssVer=${jsCssVer}"></script>
-    <script src="${pageContext.request.contextPath}/js/mw/html-comm.js?jsCssVer=${jsCssVer}"></script>
-
+    <style>
+        body { margin: 0; font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; color: #111827; background: #f8fafc; }
+        #wrapper { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; }
+        .error-wrap { width: 100%; max-width: 560px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 28px; box-sizing: border-box; text-align: center; }
+        .error-msg { margin: 0; font-size: 28px; line-height: 1.4; }
+        .error-text { margin: 16px 0 0; font-size: 18px; line-height: 1.6; color: #4b5563; }
+        .button { margin-top: 28px; }
+        .button a { display: inline-block; padding: 10px 16px; background: #111827; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; }
+    </style>
 </head>
 
 <body>
 <div id="wrapper">
 
     <div class="error-wrap">
-        <img class="icon" src="${pageContext.request.contextPath}/images/com/error.png" alt="error" />
-
         <h2 class="error-msg">
             <spring:message code="${param.titleCode}" text="Error" />
         </h2>
 
         <p class="error-text">
-            <spring:message code="${param.messageCode}"
-                            text="An unexpected error occurred." />
+            <spring:message code="${param.messageCode}" text="An unexpected error occurred." />
             <br/>
-            <spring:message code="error.contact.admin"
-                            text="Please contact the administrator." />
+            <spring:message code="error.contact.admin" text="Please contact the administrator." />
         </p>
 
         <br/>
@@ -56,8 +44,8 @@
                 <spring:message code="button.goHome" text="Go to home" />
             </a>
         </div>
-    </div> <!--// error-wrap -->
+    </div>
 
-</div> <!-- // wrapper -->
+</div>
 </body>
 </html>
