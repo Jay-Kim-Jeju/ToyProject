@@ -50,3 +50,9 @@ build/
 
 # IntelliJ run configurations
 .run/
+/docs/
+
+# AI assistant temporary artifacts
+.output.txt
+dep_tree.txt
+nul
